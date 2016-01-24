@@ -9,14 +9,15 @@
 // it from being updated in the future.
 
 
-package org.usfirst.frc2846.FB2016;
+package org.firebears;
+
+import org.firebears.commands.*;
+import org.firebears.subsystems.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc2846.FB2016.commands.*;
-import org.usfirst.frc2846.FB2016.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the

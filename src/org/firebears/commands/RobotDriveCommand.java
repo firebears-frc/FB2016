@@ -9,10 +9,11 @@
 // it from being updated in the future.
 
 
-package org.usfirst.frc2846.FB2016.commands;
+package org.firebears.commands;
+
+import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc2846.FB2016.Robot;
 
 /**
  *
