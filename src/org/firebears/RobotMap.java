@@ -45,10 +45,10 @@ public class RobotMap {
         chassisFrontLeft = new CANTalon(2);
         LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
         
-        chassisFrontRight = new CANTalon(3);
+        chassisFrontRight = new CANTalon(4);
         LiveWindow.addActuator("Chassis", "FrontRight", chassisFrontRight);
         
-        chassisBackLeft = new CANTalon(4);
+        chassisBackLeft = new CANTalon(3);
         LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
         
         chassisBackRight = new CANTalon(5);
@@ -62,7 +62,7 @@ public class RobotMap {
         chassisRobotDrive.setSensitivity(0.5);
         chassisRobotDrive.setMaxOutput(1.0);
 
-        drawbridgeBusterAngleMotor = new CANTalon(10);
+/*        drawbridgeBusterAngleMotor = new CANTalon(10);
         LiveWindow.addActuator("DrawbridgeBuster", "AngleMotor", drawbridgeBusterAngleMotor);
         
         defenseBusterAngleMotor = new CANTalon(11);
@@ -78,7 +78,7 @@ public class RobotMap {
         LiveWindow.addActuator("BallGetter", "AngleMotor", ballGetterAngleMotor);
         
         shooterShootingMotor = new CANTalon(15);
-        LiveWindow.addActuator("Shooter", "ShootingMotor", shooterShootingMotor);
+        LiveWindow.addActuator("Shooter", "ShootingMotor", shooterShootingMotor);*/
         
     }
 }
