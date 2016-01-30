@@ -43,6 +43,10 @@ public class RobotDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	double y = Robot.oi.getJoystick1().getY();
+    	double x = Robot.oi.getJoystick1().getX();
+    	Robot.chassis.drive(x, y);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
