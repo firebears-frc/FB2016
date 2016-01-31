@@ -43,15 +43,20 @@ public class RobotMap {
     public static void init() {
         
         chassisFrontLeft = new CANTalon(2);
+        chassisFrontLeft.enableBrakeMode(false);
         LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
         
         chassisFrontRight = new CANTalon(4);
+        chassisFrontRight.enableBrakeMode(false);
         LiveWindow.addActuator("Chassis", "FrontRight", chassisFrontRight);
         
         chassisBackLeft = new CANTalon(3);
+        chassisBackLeft.enableBrakeMode(false);
+
         LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
         
         chassisBackRight = new CANTalon(5);
+        chassisBackRight.enableBrakeMode(false);
         LiveWindow.addActuator("Chassis", "BackRight", chassisBackRight);
         
         chassisRobotDrive = new RobotDrive(chassisFrontLeft, chassisBackLeft,
