@@ -13,7 +13,7 @@ Children:
             default: '2'
             name: CAN ID
             validators: &id002 [CANID]
-            value: '0'
+            value: '2'
         Base: CAN Talon
         Name: FrontLeft
       - Children: []
@@ -23,7 +23,7 @@ Children:
             default: '2'
             name: CAN ID
             validators: *id002
-            value: '1'
+            value: '4'
         Base: CAN Talon
         Name: FrontRight
       - Children: []
@@ -33,7 +33,7 @@ Children:
             default: '2'
             name: CAN ID
             validators: *id002
-            value: '2'
+            value: '3'
         Base: CAN Talon
         Name: BackLeft
       - Children: []
@@ -43,7 +43,7 @@ Children:
             default: '2'
             name: CAN ID
             validators: *id002
-            value: '3'
+            value: '5'
         Base: CAN Talon
         Name: BackRight
       Properties:
@@ -112,7 +112,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '4'
+          value: '6'
       Base: CAN Talon
       Name: AngleMotor
     Properties:
@@ -138,7 +138,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '5'
+          value: '7'
       Base: CAN Talon
       Name: AngleMotor
     Properties:
@@ -164,7 +164,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '6'
+          value: '8'
       Base: CAN Talon
       Name: SideMotor
     - Children: []
@@ -174,7 +174,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '7'
+          value: '9'
       Base: CAN Talon
       Name: FrontMotor
     - Children: []
@@ -184,7 +184,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '8'
+          value: '10'
       Base: CAN Talon
       Name: AngleMotor
     Properties:
@@ -210,7 +210,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '9'
+          value: '11'
       Base: CAN Talon
       Name: ShootingMotor
     Properties:
@@ -286,8 +286,8 @@ Children:
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /home/jeron/workspace,
-    extension: null, folder: true, name: Eclipse Workspace, validators: null, value: /home/jeron/bin/Eclipse-Mars/eclipse-workspace}
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /Users/keith/workspace,
+    extension: null, folder: true, name: Eclipse Workspace, validators: null, value: ./}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
   Autonomous command parameters: !!robotbuilder.data.properties.ParametersProperty
@@ -305,8 +305,8 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: /home/jeron/,
-    extension: null, folder: true, name: Wiring file location, validators: null, value: 'C:\Users\Admin\'}
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: /Users/keith/,
+    extension: null, folder: true, name: Wiring file location, validators: null, value: ./}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
 Base: Robot
