@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 /**
- *
+ * Subsystem for retrieving boulders.
  */
 public class BallGetter extends Subsystem {
 

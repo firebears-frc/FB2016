@@ -8,8 +8,8 @@ import org.firebears.Robot;
  */
 public class LightChangeCommand extends Command {
 
-	String stripName;
-	String animationName;
+	private final String stripName;
+	private final String animationName;
 
 	public LightChangeCommand(String stripName, String animationName) {
 		requires(Robot.lights);

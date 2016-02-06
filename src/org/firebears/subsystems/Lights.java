@@ -4,7 +4,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
- *
+ *  Subsystem interface to the lights running on the Raspberry Pi.
+ *  Communicates to the pi through the Network Tables.
  */
 public class Lights extends Subsystem {
 

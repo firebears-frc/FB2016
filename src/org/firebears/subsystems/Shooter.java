@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 /**
- *
+ * Boulder shooter.
  */
 public class Shooter extends Subsystem {
 
