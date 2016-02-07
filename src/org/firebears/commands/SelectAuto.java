@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SelectAuto extends Command {
-	public final LiquidCrystal lcd = RobotMap.lcd;
 	int x = 0;
 
     public SelectAuto() {
@@ -22,11 +21,12 @@ public class SelectAuto extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    public void execute() {
+    	LiquidCrystal lcd = RobotMap.lcd;
     	x = x + 1;
     	if(x == 0){
     		lcd.setCursor(0, 0);
-    		
+
     	}
 		if(x == 1){
 			lcd.setCursor(10, 0);
