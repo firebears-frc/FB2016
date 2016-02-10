@@ -17,7 +17,9 @@ import org.firebears.subsystems.*;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -48,6 +50,8 @@ public class Robot extends IterativeRobot {
 
 	private final SelectAuto selectAuto = new SelectAuto();
 
+	private PIDCommand rotateCommand;
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -72,6 +76,9 @@ public class Robot extends IterativeRobot {
 
 		// TODO: Make it so this can be switched
 		autonomousCommand = new AutonomousCommand(new DrawbridgeCommand());
+		
+		// Smart Dashboard
+		rotateCommand = new RotationCommand(90);
 	}
 
 	/**
@@ -140,6 +147,8 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("accel X", RobotMap.builtInAccelerometer.getX());
 			SmartDashboard.putNumber("accel Y", RobotMap.builtInAccelerometer.getY());
 			SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
+			
+			SmartDashboard.putData("Rotate", rotateCommand);
 		}
 	}
 
