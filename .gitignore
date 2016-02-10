@@ -6,3 +6,5 @@
 *.orig
 *~
 FRCUserProgram.jar
+sysProps.xml
+.DS_Store
