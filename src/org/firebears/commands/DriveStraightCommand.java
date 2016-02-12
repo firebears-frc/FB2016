@@ -3,47 +3,47 @@ package org.firebears.commands;
 import org.firebears.Robot;
 import org.firebears.RobotMap;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 
 /**
- *
+ * Drive straight a certain distance.
  */
 public class DriveStraightCommand extends PIDCommand {
-	double targetDistance = 60;
-	
+	static final double MAX_SPEED = 0.6;
+	final double distance;
+	double targetLocation;
+	double targetAngle;
+
     public DriveStraightCommand(double z) {
     	super(0.1,0,0);
     	requires(Robot.chassis);
-    	targetDistance = z;
+    	distance = z;
     	getPIDController().setAbsoluteTolerance(2);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
-    	double target = targetDistance + RobotMap.encoderLeft.getDistance();
-    	setSetpoint(target);
+    	targetAngle = RobotMap.navXBoard.getAngle();
+    	targetLocation = distance + RobotMap.encoderLeft.getDistance();
+    	setSetpoint(targetLocation);
+    	getPIDController().enable();
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return getPIDController().onTarget();
+    	double currentLocation = returnPIDInput();
+    	return Math.abs(currentLocation - targetLocation) < 2;
+//        return getPIDController().onTarget();
     }
 
-    // Called once after isFinished returns true
     protected void end() {
-		Robot.chassis.drive(0, 0);	
+    	getPIDController().disable();
+		Robot.chassis.drive(0, 0);
     }
-    
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.chassis.drive(0, 0);
+    	end();
     }
 
 	@Override
@@ -53,8 +53,14 @@ public class DriveStraightCommand extends PIDCommand {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		Robot.chassis.drive(0, output * -1);
-		
+		output = Math.max((MAX_SPEED*-1), Math.min(output, MAX_SPEED));
+		double currentAngle = RobotMap.navXBoard.getAngle();
+		double angleDiff = targetAngle - currentAngle;
+		double x = angleDiff * 0.1;
+		x = Math.max(-0.2, Math.min(x, 0.2));
+		double y = -1 * output;
+		Robot.chassis.drive(x, y);
+
 	}
 }
 

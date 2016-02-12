@@ -76,7 +76,7 @@ public class Robot extends IterativeRobot {
 
 		// TODO: Make it so this can be switched
 		autonomousCommand = new AutonomousCommand(new DrawbridgeCommand());
-		
+
 		// Smart Dashboard
 		rotateCommand = new RotationCommand(90);
 	}
@@ -123,15 +123,15 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 
 		if (RobotMap.DEBUG) {
-			CANTalon talon3 = RobotMap.chassisBackLeft;
-			SmartDashboard.putNumber("EncPosition 3", talon3.getEncPosition());
-			SmartDashboard.putNumber("EncVelocity 3", talon3.getEncVelocity());
-			SmartDashboard.putNumber("Temperature 3", talon3.getTemperature());
-
-			CANTalon talon5 = RobotMap.chassisBackRight;
-			SmartDashboard.putNumber("EncPosition 5", talon5.getEncPosition());
-			SmartDashboard.putNumber("EncVelocity 5", talon5.getEncVelocity());
-			SmartDashboard.putNumber("Temperature 5", talon5.getTemperature());
+//			CANTalon talon3 = RobotMap.chassisBackLeft;
+//			SmartDashboard.putNumber("EncPosition 3", talon3.getEncPosition());
+//			SmartDashboard.putNumber("EncVelocity 3", talon3.getEncVelocity());
+//			SmartDashboard.putNumber("Temperature 3", talon3.getTemperature());
+//
+//			CANTalon talon5 = RobotMap.chassisBackRight;
+//			SmartDashboard.putNumber("EncPosition 5", talon5.getEncPosition());
+//			SmartDashboard.putNumber("EncVelocity 5", talon5.getEncVelocity());
+//			SmartDashboard.putNumber("Temperature 5", talon5.getTemperature());
 
 			SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
 			SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
@@ -147,7 +147,7 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("accel X", RobotMap.builtInAccelerometer.getX());
 			SmartDashboard.putNumber("accel Y", RobotMap.builtInAccelerometer.getY());
 			SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
-			
+
 			SmartDashboard.putData("Rotate", rotateCommand);
 		}
 	}
