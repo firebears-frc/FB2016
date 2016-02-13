@@ -21,6 +21,10 @@ public class DriveStraightCommand extends PIDCommand {
     	max_speed = speed;
     	getPIDController().setAbsoluteTolerance(2);
     }
+    
+    public DriveStraightCommand(double z) {
+    	this(z, .6);
+    }
 
     protected void initialize() {
     	targetAngle = RobotMap.navXBoard.getAngle();
