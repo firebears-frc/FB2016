@@ -1,5 +1,7 @@
 package org.firebears.commands.defenses;
 
+import org.firebears.commands.DriveStraightCommand;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -13,9 +15,11 @@ public class LowBarCommand extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
 
+    	addSequential(new DriveStraightCommand(120, .6));
+    	
         // To run multiple commands at the same time,
         // use addParallel()
-        // e.g. addParallel(new Command1());
+        // e.g. addParallel(new Command1());	
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
 
