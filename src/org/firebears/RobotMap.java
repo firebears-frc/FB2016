@@ -62,6 +62,8 @@ public class RobotMap {
 	public static BuiltInAccelerometer builtInAccelerometer;
 
 	public static CameraServer usbCamera;
+	
+	public static double rotation = 0;
 
 	// public static DigitalInput internalDigitalInput1;
 

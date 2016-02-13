@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RampartsCommand extends CommandGroup {
     
     public  RampartsCommand() {
-        addSequential(new DriveStraightCommand(1.,.6));
+    	addSequential(new GetRotation());
+        addSequential(new DriveStraightCommand(120.,.75));
+    	addSequential(new AdjustRotation());
         //      addSequential(new Command2());
         // these will run in order.
 
