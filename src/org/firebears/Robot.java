@@ -49,6 +49,7 @@ public class Robot extends IterativeRobot {
 	public static Lights lights;
 
 	private final SelectAuto selectAuto = new SelectAuto();
+	private final LcdOverLay lcdol = new LcdOverLay();
 
 	private PIDCommand rotateCommand;
 
@@ -91,6 +92,7 @@ public class Robot extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		lcdol.execute();
 		if (Robot.oi.But.valueChanged()) {
 			selectAuto.execute();
 		}
