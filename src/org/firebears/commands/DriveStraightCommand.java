@@ -9,15 +9,16 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
  * Drive straight a certain distance.
  */
 public class DriveStraightCommand extends PIDCommand {
-	static final double MAX_SPEED = 0.6;
+	final double max_speed;
 	final double distance;
 	double targetLocation;
 	double targetAngle;
 
-    public DriveStraightCommand(double z) {
+    public DriveStraightCommand(double z, double speed) {
     	super(0.1,0,0);
     	requires(Robot.chassis);
     	distance = z;
+    	max_speed = speed;
     	getPIDController().setAbsoluteTolerance(2);
     }
 
@@ -53,7 +54,7 @@ public class DriveStraightCommand extends PIDCommand {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		output = Math.max((MAX_SPEED*-1), Math.min(output, MAX_SPEED));
+		output = Math.max((max_speed*-1), Math.min(output, max_speed));
 		double currentAngle = RobotMap.navXBoard.getAngle();
 		double angleDiff = targetAngle - currentAngle;
 		double x = angleDiff * 0.1;

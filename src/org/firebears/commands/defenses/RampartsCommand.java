@@ -1,5 +1,8 @@
 package org.firebears.commands.defenses;
 
+import org.firebears.*;
+import org.firebears.commands.*;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -9,8 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RampartsCommand extends CommandGroup {
     
     public  RampartsCommand() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
+        addSequential(new DriveStraightCommand(1.,.6));
         //      addSequential(new Command2());
         // these will run in order.
 
@@ -25,5 +27,6 @@ public class RampartsCommand extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	requires(Robot.chassis);
     }
 }
