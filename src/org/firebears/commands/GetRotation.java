@@ -1,5 +1,6 @@
 package org.firebears.commands;
 
+import org.firebears.Robot;
 import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class GetRotation extends Command {
 
     public GetRotation() {
-//    		requires(chassis);
+    		requires(Robot.chassis);
     }
 
     // Called just before this Command runs the first time
