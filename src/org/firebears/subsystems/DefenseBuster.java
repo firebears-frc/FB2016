@@ -12,10 +12,10 @@
 package org.firebears.subsystems;
 
 import org.firebears.RobotMap;
-import org.firebears.commands.*;
+
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 
@@ -24,35 +24,39 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class DefenseBuster extends PIDSubsystem {
 
-	final double max_speed = 0.8;
+	/** Minimum value that the setpoint may take, measured in volts. */
+	final double min_value = 1.80;
+
+	/** Maximum value that the setpoint may take, measured in volts. */
+	final double max_value = 3.72;
+
+	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
+	final double max_speed = 1.0;
 
 
     public DefenseBuster() {
-		super(0.1, 0, 0);
-		LiveWindow.addActuator("defenseBuster", "PIDSubsystem Controller", getPIDController());
-//		getPIDController().setInputRange(0.73, 0.90);
+		super(0.5, 0, 0);
+		getPIDController().setInputRange(min_value, max_value);
 		getPIDController().setAbsoluteTolerance(0.01);
-//		getPIDController().enable();
+		setSetpoint(min_value);
+		getPIDController().enable();
+		LiveWindow.addActuator("defenseBuster", "PIDSubsystem Controller", getPIDController());
 	}
 
-
     private CANTalon angleMotor = RobotMap.defenseBusterAngleMotor;
-
-
+    private AnalogInput pot = RobotMap.defenseBusterAnalogInput;
 
     public void initDefaultCommand() {
     }
 
 	@Override
 	protected double returnPIDInput() {
-System.out.println("::: " + RobotMap.defenseBusterAnalogInput.getAverageVoltage());
-		return RobotMap.defenseBusterAnalogInput.getAverageVoltage();
+		return pot.getAverageVoltage();
 	}
 
 	@Override
 	protected void usePIDOutput(double output) {
 		output = Math.max((max_speed*-1), Math.min(output, max_speed));
-System.out.println(":::\t\t" + output);
 		angleMotor.set(output);
 
 	}

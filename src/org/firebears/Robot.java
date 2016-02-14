@@ -151,8 +151,8 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
 
 			SmartDashboard.putData("Rotate", rotateCommand);
-			
-			SmartDashboard.putNumber("defenseBusterPot", RobotMap.defenseBusterAnglePotentiometer.pidGet());
+
+			SmartDashboard.putNumber("defenseBusterInput", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
 		}
 	}
 
