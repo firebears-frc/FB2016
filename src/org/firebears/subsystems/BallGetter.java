@@ -16,25 +16,69 @@ import org.firebears.commands.*;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
-
+import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 
 /**
  * Subsystem for retrieving boulders.
  */
-public class BallGetter extends Subsystem {
+public class BallGetter extends PIDSubsystem {
+	
+	/** Minimum value that the setpoint may take, measured in volts. */
+	final double min_value;
+
+	/** Maximum value that the setpoint may take, measured in volts. */
+	final double max_value;
+
+	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
+	final double max_speed;
 
     private final CANTalon sideMotor = RobotMap.ballGetterSideMotor;
     private final CANTalon frontMotor = RobotMap.ballGetterFrontMotor;
     private final CANTalon angleMotor = RobotMap.ballGetterAngleMotor;
     private final AnalogInput pot = RobotMap.ballGetterAnalogInput;
+    
 
     public BallGetter() {
-    	super();
+    	
+    	
+    	
+    	super(0.5, 0, 0);
+    	
+    	Preferences preferences = Preferences.getInstance();
+        
+        max_speed = preferences.getDouble("BallGetter.max_speed", .75);
+        min_value = preferences.getDouble("BallGetter.max_speed", .877);
+        max_value = preferences.getDouble("BallGetter.max_speed", 3.67);
+        
+        
+		getPIDController().setInputRange(min_value, max_value);
+		getPIDController().setAbsoluteTolerance(0.01);
+		setSetpoint(min_value);
+		getPIDController().enable();
+		LiveWindow.addActuator("BallGetter", "PIDSubsystem Controller", getPIDController());
     }
 
 
-    public void initDefaultCommand() { }
+    public void initDefaultCommand() {
+    	
+    }
+
+
+	@Override
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		return pot.getAverageVoltage();
+	}
+
+
+	@Override
+	protected void usePIDOutput(double output) {
+		output = Math.max((max_speed*-1), Math.min(output, max_speed));
+		angleMotor.set(output);
+	}
 }
 

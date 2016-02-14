@@ -4,7 +4,6 @@ import org.firebears.RobotMap;
 import org.firebears.util.LiquidCrystal;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.can.CANJNI;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

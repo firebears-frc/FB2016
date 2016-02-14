@@ -15,6 +15,7 @@ import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -25,17 +26,24 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class DefenseBuster extends PIDSubsystem {
 
 	/** Minimum value that the setpoint may take, measured in volts. */
-	final double min_value = 1.80;
+	double min_value;
 
 	/** Maximum value that the setpoint may take, measured in volts. */
-	final double max_value = 3.72;
+	double max_value;
 
 	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
-	final double max_speed = 1.0;
+	double max_speed;
 
 
     public DefenseBuster() {
 		super(0.5, 0, 0);
+		
+		Preferences preferences = Preferences.getInstance();
+        
+        max_speed = preferences.getDouble("DefenseBuster.max_speed", 1.0);
+        min_value = preferences.getDouble("DefenseBuster.max_speed", 1.80);
+        max_value = preferences.getDouble("DefenseBuster.max_speed", 3.72);
+		
 		getPIDController().setInputRange(min_value, max_value);
 		getPIDController().setAbsoluteTolerance(0.01);
 		setSetpoint(min_value);

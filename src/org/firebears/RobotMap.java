@@ -157,6 +157,10 @@ public class RobotMap {
 		 * LiveWindow.addActuator("Shooter", "ShootingMotor",
 		 * shooterShootingMotor);
 		 */
+		
+		ballGetterAngleMotor = new CANTalon(12);
+		LiveWindow.addActuator("BallGetter", "AngleMotor",
+		ballGetterAngleMotor);
 
 		// Quadrature encoders read 0.05639 inches per pulse
 		// Talon encoder distance is 0.0245 inches per pulse
