@@ -60,6 +60,9 @@ public class RobotMap {
 	public static AnalogInput defenseBusterAnalogInput;
 	public static AnalogPotentiometer defenseBusterAnglePotentiometer;
 
+	public static AnalogInput ballGetterAnalogInput;
+	public static AnalogPotentiometer ballGetterAnglePotentiometer;
+
 	public static Encoder encoderLeft;
 	public static Encoder encoderRight;
 
@@ -71,7 +74,6 @@ public class RobotMap {
 
 	public static double rotation = 0;
 
-	// public static DigitalInput internalDigitalInput1;
 
 	public static void init() {
 
@@ -95,7 +97,7 @@ public class RobotMap {
 
 		defenseBusterAngleMotor = new CANTalon(11);
 		defenseBusterAngleMotor.enableBrakeMode(true);
-		LiveWindow.addActuator("defenseBuster", "Motor", defenseBusterAngleMotor);
+		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);
 
 
 		chassisRobotDrive = new RobotDrive(chassisBackRight, chassisFrontRight, chassisBackLeft, chassisFrontLeft);
@@ -114,7 +116,11 @@ public class RobotMap {
 
 		defenseBusterAnalogInput = new AnalogInput(0);
 		defenseBusterAnglePotentiometer = new AnalogPotentiometer(defenseBusterAnalogInput);
-		LiveWindow.addActuator("defenseBuster", "Pot", defenseBusterAnalogInput);
+		LiveWindow.addActuator("DefenseBuster", "Pot", defenseBusterAnalogInput);
+
+		ballGetterAnalogInput = new AnalogInput(1);
+		ballGetterAnglePotentiometer = new AnalogPotentiometer(ballGetterAnalogInput);
+		LiveWindow.addActuator("BallGetter", "Pot", ballGetterAnglePotentiometer);
 
 		// button
 		// internalDigitalInput1 = new DigitalInput(0);

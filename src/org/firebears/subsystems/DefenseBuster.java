@@ -40,11 +40,11 @@ public class DefenseBuster extends PIDSubsystem {
 		getPIDController().setAbsoluteTolerance(0.01);
 		setSetpoint(min_value);
 		getPIDController().enable();
-		LiveWindow.addActuator("defenseBuster", "PIDSubsystem Controller", getPIDController());
+		LiveWindow.addActuator("DefenseBuster", "PIDSubsystem Controller", getPIDController());
 	}
 
-    private CANTalon angleMotor = RobotMap.defenseBusterAngleMotor;
-    private AnalogInput pot = RobotMap.defenseBusterAnalogInput;
+    private final CANTalon angleMotor = RobotMap.defenseBusterAngleMotor;
+    private final AnalogInput pot = RobotMap.defenseBusterAnalogInput;
 
     public void initDefaultCommand() {
     }
