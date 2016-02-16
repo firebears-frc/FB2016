@@ -11,10 +11,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class SelectAuto extends Command {
+
 	int x = 0;
-//	AdjustRotation aj = new AdjustRotation();
-//	DriveStraightCommand ds = new DriveStraightCommand(15,2);
-//	RotationCommand rc = new RotationCommand(90);
+
+
+
 	
 
 	public SelectAuto() {
@@ -24,41 +25,41 @@ public class SelectAuto extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	public void execute() {
+		RotationCommand rc = new RotationCommand(90);
+		DriveStraightCommand ds = new DriveStraightCommand(5,.5);
 		LiquidCrystal lcd = RobotMap.lcd;
 		x = x + 1;
 
-		if (x > 3) {
-			x = 0;
-		}
-		if (x == 0) {
-			lcd.setCursor(10, 0);
-			lcd.print("Welcome");
-			lcd.print("   ");
-			
+		if (x > 4) {
+			x = 2;
 		}
 		if (x == 1) {
 			lcd.setCursor(10, 0);
-			lcd.print("Rotate");
-			lcd.print("    ");
-//			Robot.autonomousCommand = rc;
+			lcd.print("Welcome");
+			lcd.print("   ");
 			
 		}
 		if (x == 2) {
 			lcd.setCursor(10, 0);
 			lcd.print("DriveS");
 			lcd.print("    ");
-//			Robot.autonomousCommand = ds;
+			Robot.autonomousCommand = ds;
 		}
 		if (x == 3) {
 			lcd.setCursor(10, 0);
-			lcd.print("Adjust");
+			lcd.print("twopie");
 			lcd.print("    ");
-//			Robot.autonomousCommand = aj;
-			
+		}
+		if (x == 4){
+			lcd.setCursor(10, 0);
+			lcd.print("Rotate");
+			lcd.print("    ");
+			Robot.autonomousCommand = rc;
 		}
 
 		lcd.home();

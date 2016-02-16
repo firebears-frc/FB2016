@@ -20,12 +20,16 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
  * Subsystem for retrieving boulders.
  */
 public class BallGetter extends PIDSubsystem {
+	
+	final double maxget_speed;
 	
 	/** Minimum value that the setpoint may take, measured in volts. */
 	final double min_value;
@@ -50,16 +54,17 @@ public class BallGetter extends PIDSubsystem {
     	
     	Preferences preferences = Preferences.getInstance();
         
-        max_speed = preferences.getDouble("BallGetter.max_speed", .75);
-        min_value = preferences.getDouble("BallGetter.max_speed", .877);
-        max_value = preferences.getDouble("BallGetter.max_speed", 3.67);
-        
+        max_speed = preferences.getDouble("BallGetter.max_speed", .65);
+        min_value = preferences.getDouble("BallGetter.max_speed", 1.450);
+        max_value = preferences.getDouble("BallGetter.max_speed", 3.711);
+        maxget_speed = preferences.getDouble("BallGetter.max_speed", .25);
         
 		getPIDController().setInputRange(min_value, max_value);
 		getPIDController().setAbsoluteTolerance(0.01);
 		setSetpoint(min_value);
 		getPIDController().enable();
 		LiveWindow.addActuator("BallGetter", "PIDSubsystem Controller", getPIDController());
+		LiveWindow.addSensor("BallGetter", "current", RobotMap.ballGetterAngleMotor);
     }
 
 
@@ -79,6 +84,8 @@ public class BallGetter extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		output = Math.max((max_speed*-1), Math.min(output, max_speed));
 		angleMotor.set(output);
+		frontMotor.set(maxget_speed);
+		sideMotor.set(-maxget_speed);
 	}
 }
 
