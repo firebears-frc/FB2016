@@ -1,6 +1,8 @@
 package org.firebears.commands.defenses;
 
+import org.firebears.commands.AdjustRotation;
 import org.firebears.commands.DriveStraightCommand;
+import org.firebears.commands.GetRotation;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -15,9 +17,11 @@ public class MoatCommand extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	
-    	addSequential(new DriveStraightCommand(120, 0.6));
 
+    	addSequential(new GetRotation());
+    	addSequential(new DriveStraightCommand(120, 0.6));
+    	addSequential(new AdjustRotation());
+    	
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

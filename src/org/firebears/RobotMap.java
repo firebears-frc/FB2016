@@ -76,9 +76,7 @@ public class RobotMap {
 
 	public static double rotation = 0;
 
-
 	public static void init() {
-
 
 		chassisFrontLeft = new CANTalon(2);
 		chassisFrontLeft.enableBrakeMode(false);
@@ -100,7 +98,6 @@ public class RobotMap {
 		defenseBusterAngleMotor = new CANTalon(11);
 		defenseBusterAngleMotor.enableBrakeMode(true);
 		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);
-
 
 		chassisRobotDrive = new RobotDrive(chassisBackRight, chassisFrontRight, chassisBackLeft, chassisFrontLeft);
 
@@ -159,19 +156,15 @@ public class RobotMap {
 		 * LiveWindow.addActuator("Shooter", "ShootingMotor",
 		 * shooterShootingMotor);
 		 */
-		
+
 		ballGetterAngleMotor = new CANTalon(12);
-		LiveWindow.addActuator("BallGetter", "AngleMotor",
-		ballGetterAngleMotor);
-		
-		
+		LiveWindow.addActuator("BallGetter", "AngleMotor", ballGetterAngleMotor);
+
 		ballGetterSideMotor = new CANTalon(14);
-		LiveWindow.addActuator("BallGetter", "SideMotor",
-		ballGetterSideMotor);
-		 
+		LiveWindow.addActuator("BallGetter", "SideMotor", ballGetterSideMotor);
+
 		ballGetterFrontMotor = new CANTalon(13);
-		LiveWindow.addActuator("BallGetter", "FrontMotor",
-		ballGetterFrontMotor);
+		LiveWindow.addActuator("BallGetter", "FrontMotor", ballGetterFrontMotor);
 
 		// Quadrature encoders read 0.05639 inches per pulse
 		// Talon encoder distance is 0.0245 inches per pulse

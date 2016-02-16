@@ -26,13 +26,13 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class DefenseBuster extends PIDSubsystem {
 
 	/** Minimum value that the setpoint may take, measured in volts. */
-	double min_value;
+	double MIN_VALUE;
 
 	/** Maximum value that the setpoint may take, measured in volts. */
-	double max_value;
+	double MAX_VALUE;
 
 	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
-	double max_speed;
+	double MAX_SPEED;
 
 
     public DefenseBuster() {
@@ -40,13 +40,13 @@ public class DefenseBuster extends PIDSubsystem {
 		
 		Preferences preferences = Preferences.getInstance();
         
-        max_speed = preferences.getDouble("DefenseBuster.max_speed", 1.0);
-        min_value = preferences.getDouble("DefenseBuster.max_speed", 1.80);
-        max_value = preferences.getDouble("DefenseBuster.max_speed", 3.72);
+        MAX_SPEED = preferences.getDouble("DefenseBuster.max_speed", 1.0);
+        MIN_VALUE = preferences.getDouble("DefenseBuster.max_speed", 1.80);
+        MAX_VALUE = preferences.getDouble("DefenseBuster.max_speed", 3.72);
 		
-		getPIDController().setInputRange(min_value, max_value);
+		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
-		setSetpoint(min_value);
+		setSetpoint(MIN_VALUE);
 		getPIDController().enable();
 		LiveWindow.addActuator("DefenseBuster", "PIDSubsystem Controller", getPIDController());
 	}
@@ -64,7 +64,7 @@ public class DefenseBuster extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		output = Math.max((max_speed*-1), Math.min(output, max_speed));
+		output = Math.max((MAX_SPEED*-1), Math.min(output, MAX_SPEED));
 		angleMotor.set(output);
 
 	}
