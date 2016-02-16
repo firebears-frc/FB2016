@@ -58,10 +58,10 @@ public class BallGetter extends PIDSubsystem {
     	
     	Preferences preferences = Preferences.getInstance();
         
-        MAX_SPEED = preferences.getDouble("BallGetter.max_speed", .65);
-        MIN_VALUE = preferences.getDouble("BallGetter.max_speed", 1.450);
-        MAX_VALUE = preferences.getDouble("BallGetter.max_speed", 3.711);
-        MAXGET_SPEED = preferences.getDouble("BallGetter.max_speed", .75);
+        MAX_SPEED = preferences.getDouble("BallGetter.max_speed", 0.65);
+        MIN_VALUE = preferences.getDouble("BallGetter.min_speed", 1.450);
+        MAX_VALUE = preferences.getDouble("BallGetter.max_value", 3.711);
+        MAXGET_SPEED = preferences.getDouble("BallGetter.maxget_speed", 0.75);
         
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
