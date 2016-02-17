@@ -41,7 +41,7 @@ public class DefenseBuster extends PIDSubsystem {
 		Preferences preferences = Preferences.getInstance();
         
         MAX_SPEED = preferences.getDouble("DefenseBuster.max_speed", 1.0);
-        MIN_VALUE = preferences.getDouble("DefenseBuster.min_speed", 1.80);
+        MIN_VALUE = preferences.getDouble("DefenseBuster.min_value", 1.80);
         MAX_VALUE = preferences.getDouble("DefenseBuster.max_value", 3.72);
 		
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
@@ -66,7 +66,6 @@ public class DefenseBuster extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		output = Math.max((MAX_SPEED*-1), Math.min(output, MAX_SPEED));
 		angleMotor.set(output);
-
 	}
 }
 

@@ -94,7 +94,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		lcdol.execute();
-		if (Robot.oi.autonomousSelecterButton.valueChanged()) {
+		if (Robot.oi.But.valueChanged()) {
 			selectAuto.execute();
 		}
 	}
