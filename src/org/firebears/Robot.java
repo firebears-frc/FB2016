@@ -15,6 +15,7 @@ import org.firebears.commands.defenses.DrawbridgeCommand;
 import org.firebears.subsystems.*;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.CANSpeedController;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Sendable;
@@ -92,7 +93,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		lcdol.execute();
-		if (Robot.oi.But.valueChanged()) {
+		if (Robot.oi.autonomousSelecterButton.valueChanged()) {
 			selectAuto.execute();
 		}
 	}
@@ -153,6 +154,7 @@ public class Robot extends IterativeRobot {
 
 			SmartDashboard.putNumber("defenseBusterInput", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
 			SmartDashboard.putNumber("Ballgetterpot", RobotMap.ballGetterAnalogInput.getAverageVoltage());
+			SmartDashboard.putNumber("Ballcurrent", RobotMap.ballGetterAngleMotor.getOutputCurrent());
 		}
 	}
 
