@@ -8,17 +8,16 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
 package org.firebears.subsystems;
+
+import static org.firebears.RobotMap.getPreferencesDouble;
 
 import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
 
 /**
  *
@@ -34,16 +33,13 @@ public class DefenseBuster extends PIDSubsystem {
 	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
 	double MAX_SPEED;
 
-
-    public DefenseBuster() {
+	public DefenseBuster() {
 		super(0.5, 0, 0);
-		
-		Preferences preferences = Preferences.getInstance();
-        
-        MAX_SPEED = preferences.getDouble("DefenseBuster.max_speed", 1.0);
-        MIN_VALUE = preferences.getDouble("DefenseBuster.min_value", 1.80);
-        MAX_VALUE = preferences.getDouble("DefenseBuster.max_value", 3.72);
-		
+
+		MAX_SPEED = getPreferencesDouble("DefenseBuster.max_speed", 1.0);
+		MIN_VALUE = getPreferencesDouble("DefenseBuster.min_value", 1.80);
+		MAX_VALUE = getPreferencesDouble("DefenseBuster.max_value", 3.72);
+
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
 		setSetpoint(MIN_VALUE);
@@ -51,11 +47,11 @@ public class DefenseBuster extends PIDSubsystem {
 		LiveWindow.addActuator("DefenseBuster", "PIDSubsystem Controller", getPIDController());
 	}
 
-    private final CANTalon angleMotor = RobotMap.defenseBusterAngleMotor;
-    private final AnalogInput pot = RobotMap.defenseBusterAnalogInput;
+	private final CANTalon angleMotor = RobotMap.defenseBusterAngleMotor;
+	private final AnalogInput pot = RobotMap.defenseBusterAnalogInput;
 
-    public void initDefaultCommand() {
-    }
+	public void initDefaultCommand() {
+	}
 
 	@Override
 	protected double returnPIDInput() {
@@ -64,8 +60,7 @@ public class DefenseBuster extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		output = Math.max((MAX_SPEED*-1), Math.min(output, MAX_SPEED));
+		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
 		angleMotor.set(output);
 	}
 }
-
