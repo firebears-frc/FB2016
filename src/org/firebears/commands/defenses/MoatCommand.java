@@ -4,6 +4,7 @@ import org.firebears.Robot;
 import org.firebears.commands.AdjustRotation;
 import org.firebears.commands.DriveStraightCommand;
 import org.firebears.commands.GetRotation;
+import org.firebears.commands.RotationCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -16,8 +17,10 @@ public class MoatCommand extends CommandGroup {
     public  MoatCommand() {
  
     	addSequential(new GetRotation());
-        addSequential(new DriveStraightCommand(120.,.75));
+        addSequential(new DriveStraightCommand(60.,.75));
     	addSequential(new AdjustRotation());
+    	addSequential(new RotationCommand(180));
+    	addSequential(new RotationCommand(180));
      
     	requires(Robot.chassis);
     }

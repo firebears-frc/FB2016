@@ -40,8 +40,8 @@ public class VisionCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	System.out.println("movex: " + NetworkTablesJNI.getDouble(NT_ANGLE) + ",disty: "
-    			+ NetworkTablesJNI.getDouble(NT_DISTANCE));
+//    	System.out.println("movex: " + NetworkTablesJNI.getDouble(NT_ANGLE) + ",disty: "
+//    			+ NetworkTablesJNI.getDouble(NT_DISTANCE));
         return false;
     }
 

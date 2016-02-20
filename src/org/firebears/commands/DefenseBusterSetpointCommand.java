@@ -13,6 +13,7 @@ public class DefenseBusterSetpointCommand extends Command {
 
     public DefenseBusterSetpointCommand(double value) {
         requires(Robot.defenseBuster);
+        requires(Robot.chassis);
         setpoint = value;
     }
 

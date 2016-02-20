@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * Subsystem for retrieving boulders.
  */
 public class BallGetter extends PIDSubsystem {
+	int time = 0;
 
 	final double MAXGET_SPEED;
 
@@ -47,12 +48,13 @@ public class BallGetter extends PIDSubsystem {
 	public final static int OFF = 3;
 
 	public BallGetter() {
+		
 
 		super(1.005, 0, 0);
 
 		MAX_SPEED = getPreferencesDouble("BallGetter.max_speed", 0.65);
 		MIN_VALUE = getPreferencesDouble("BallGetter.min_value", 2.0);
-		MAX_VALUE = getPreferencesDouble("BallGetter.max_value", 3.5);
+		MAX_VALUE = getPreferencesDouble("BallGetter.max_value", 3.42);
 		MAXGET_SPEED = getPreferencesDouble("BallGetter.maxget_speed", 0.75);
 		PARK_VALUE = getPreferencesDouble("BallGetter.park_value", 2.5);
 
@@ -76,6 +78,14 @@ public class BallGetter extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
+//		double maxC = RobotMap.ballGetterAngleMotor.getOutputCurrent();//crappy code for later
+//		if (maxC > 12){
+//			time ++;
+//			
+//		}
+//		if (time > 100){
+//			angleMotor.set(0);
+//		}
 		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
 		angleMotor.set(output);
 	}
@@ -86,13 +96,13 @@ public class BallGetter extends PIDSubsystem {
 
 	public void setMotors(int mode) {
 		if (mode == GRAB) {
-			frontMotor.set(MAXGET_SPEED);
-			sideMotor.set(MAXGET_SPEED);
+			frontMotor.set(-MAXGET_SPEED);
+			sideMotor.set(-MAXGET_SPEED);
 		} else if (mode == OFF) {
 			frontMotor.set(0);
 			sideMotor.set(0);
 		} else if (mode == SPIT) {
-			frontMotor.set(-MAXGET_SPEED);
+			frontMotor.set(MAXGET_SPEED);
 			sideMotor.set(0);
 		}
 	}

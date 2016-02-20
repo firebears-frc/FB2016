@@ -15,6 +15,7 @@ public class DriveStraightCommand extends PIDCommand {
 	final double distance;
 	double targetLocation;
 	double targetAngle;
+	long timeout;
 
     public DriveStraightCommand(double z, double speed) {
     	super(0.1,0,0);
@@ -29,6 +30,7 @@ public class DriveStraightCommand extends PIDCommand {
     }
 
     protected void initialize() {
+    	 timeout = System.currentTimeMillis() + 5000;
     	targetAngle = RobotMap.navXBoard.getAngle();
     	targetLocation = distance + RobotMap.encoderLeft.getDistance();
     	setSetpoint(targetLocation);
@@ -40,7 +42,7 @@ public class DriveStraightCommand extends PIDCommand {
 
     protected boolean isFinished() {
     	double currentLocation = returnPIDInput();
-    	return Math.abs(currentLocation - targetLocation) < 2;
+    	return (Math.abs(currentLocation - targetLocation) < 2)||(System.currentTimeMillis() > timeout);
 //        return getPIDController().onTarget();
     }
 

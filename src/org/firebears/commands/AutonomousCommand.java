@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousCommand extends CommandGroup {
 
     public AutonomousCommand(Command defense_command) {
+    	requires(Robot.chassis);
     	addSequential(defense_command);
     	addSequential(new AimCommand());
         // Add Commands here:

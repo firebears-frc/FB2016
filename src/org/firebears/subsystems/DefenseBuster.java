@@ -39,9 +39,9 @@ public class DefenseBuster extends PIDSubsystem {
 		super(0.5, 0, 0);
 
 		MAX_SPEED = getPreferencesDouble("DefenseBuster.max_speed", 0.7);
-		MIN_VALUE = getPreferencesDouble("DefenseBuster.min_value", 1.6);
-		MAX_VALUE = getPreferencesDouble("DefenseBuster.max_value", 3.9);
-		PARK_VALUE = getPreferencesDouble("DefenseBuster.park_value", 2.6);
+		MIN_VALUE = getPreferencesDouble("DefenseBuster.min_value", 1.775);
+		MAX_VALUE = getPreferencesDouble("DefenseBuster.max_value", 3.911);
+		PARK_VALUE = getPreferencesDouble("DefenseBuster.park_value", 2.726);
 
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
