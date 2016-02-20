@@ -78,13 +78,13 @@ public class OI {
 		// Joystick Buttons
 		shootButton = new JoystickButton(joystick1, 1);
 		ballGetterHighButton = new JoystickButton(joystick1, 6);
-		ballGetterHighButton.whenPressed(new BallGetterSetpointCommand(1.5));
+		ballGetterHighButton.whenPressed(new BallGetterSetpointCommand(2.1));
 		ballGetterLowButton = new JoystickButton(joystick1, 4);
 		ballGetterLowButton.whenPressed(new BallGetterSetpointCommand(3.0));
 		defenseBusterHighButton = new JoystickButton(joystick1, 5);
-		defenseBusterHighButton.whenPressed(new DefenseBusterSetpointCommand(3.0));
+		defenseBusterHighButton.whenPressed(new DefenseBusterSetpointCommand(1.6));
 		defenseBusterLowButton = new JoystickButton(joystick1, 3);
-		defenseBusterLowButton.whenPressed(new DefenseBusterSetpointCommand(1.5));
+		defenseBusterLowButton.whenPressed(new DefenseBusterSetpointCommand(3.9));
 		ballGetterGrabButton = new JoystickButton(joystick1, 7);
 		ballGetterGrabButton.whenPressed(new BallGetterMotorsCommand(1));
 		ballGetterSpitButton = new JoystickButton(joystick1, 9);

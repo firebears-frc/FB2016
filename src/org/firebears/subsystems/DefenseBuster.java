@@ -36,13 +36,13 @@ public class DefenseBuster extends PIDSubsystem {
 	public DefenseBuster() {
 		super(0.5, 0, 0);
 
-		MAX_SPEED = getPreferencesDouble("DefenseBuster.max_speed", 1.0);
-		MIN_VALUE = getPreferencesDouble("DefenseBuster.min_value", 1.80);
-		MAX_VALUE = getPreferencesDouble("DefenseBuster.max_value", 3.72);
+		MAX_SPEED = getPreferencesDouble("DefenseBuster.max_speed", 0.7);
+		MIN_VALUE = getPreferencesDouble("DefenseBuster.min_value", 1.6);
+		MAX_VALUE = getPreferencesDouble("DefenseBuster.max_value", 3.9);
 
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
-		setSetpoint(MIN_VALUE);
+		setSetpoint(2.6);
 		getPIDController().enable();
 		LiveWindow.addActuator("DefenseBuster", "PIDSubsystem Controller", getPIDController());
 	}

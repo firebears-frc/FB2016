@@ -60,7 +60,7 @@ public class SelectAuto extends Command {
 			lcd.setCursor(0, 1);
 			lcd.print("FireBears2846 Robot!");
 			lcd.setCursor(0, 2);
-			lcd.print("Your Jouney Begins");
+			lcd.print("Your Journey Begins");
 			lcd.setCursor(0, 3);
 			lcd.print("Now.");
 			

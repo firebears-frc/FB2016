@@ -49,13 +49,13 @@ public class BallGetter extends PIDSubsystem {
 		super(1.005, 0, 0);
 
 		MAX_SPEED = getPreferencesDouble("BallGetter.max_speed", 0.65);
-		MIN_VALUE = getPreferencesDouble("BallGetter.min_value", 1.450);
-		MAX_VALUE = getPreferencesDouble("BallGetter.max_value", 3.711);
+		MIN_VALUE = getPreferencesDouble("BallGetter.min_value", 2.0);
+		MAX_VALUE = getPreferencesDouble("BallGetter.max_value", 3.5);
 		MAXGET_SPEED = getPreferencesDouble("BallGetter.maxget_speed", 0.75);
 
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
-		setSetpoint(1.75);
+		setSetpoint(2.1);
 		getPIDController().enable();
 		LiveWindow.addActuator("BallGetter", "PIDSubsystem Controller", getPIDController());
 		LiveWindow.addSensor("BallGetter", "current", RobotMap.ballGetterAngleMotor);
@@ -79,13 +79,13 @@ public class BallGetter extends PIDSubsystem {
 
 	public void setMotors(int mode) {
 		if (mode == GRAB) {
-			frontMotor.set(-MAXGET_SPEED);
-			sideMotor.set(-MAXGET_SPEED);
+			frontMotor.set(MAXGET_SPEED);
+			sideMotor.set(MAXGET_SPEED);
 		} else if (mode == OFF) {
 			frontMotor.set(0);
 			sideMotor.set(0);
 		} else if (mode == SPIT) {
-			frontMotor.set(MAXGET_SPEED);
+			frontMotor.set(-MAXGET_SPEED);
 			sideMotor.set(0);
 		}
 	}
