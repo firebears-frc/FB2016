@@ -34,6 +34,8 @@ public class BallGetter extends PIDSubsystem {
 
 	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
 	final double MAX_SPEED;
+	
+	final double PARK_VALUE;
 
 	private final CANTalon sideMotor = RobotMap.ballGetterSideMotor;
 	private final CANTalon frontMotor = RobotMap.ballGetterFrontMotor;
@@ -52,6 +54,7 @@ public class BallGetter extends PIDSubsystem {
 		MIN_VALUE = getPreferencesDouble("BallGetter.min_value", 2.0);
 		MAX_VALUE = getPreferencesDouble("BallGetter.max_value", 3.5);
 		MAXGET_SPEED = getPreferencesDouble("BallGetter.maxget_speed", 0.75);
+		PARK_VALUE = getPreferencesDouble("BallGetter.park_value", 2.5);
 
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
@@ -75,6 +78,10 @@ public class BallGetter extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
 		angleMotor.set(output);
+	}
+	
+	public void park(){
+		setSetpoint(PARK_VALUE);
 	}
 
 	public void setMotors(int mode) {

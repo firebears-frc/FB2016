@@ -82,6 +82,9 @@ public class Robot extends IterativeRobot {
 
 		// Smart Dashboard
 		rotateCommand = new RotationCommand(90);
+		
+		Robot.ballGetter.park();
+		Robot.defenseBuster.park();
 	}
 
 	/**
@@ -107,6 +110,8 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)  {
 			autonomousCommand.start();
 		}
+		Robot.ballGetter.park();
+		Robot.defenseBuster.park();
 	}
 
 	/**
@@ -120,6 +125,8 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)  {
 			autonomousCommand.cancel();
 		}
+		Robot.ballGetter.park();
+		Robot.defenseBuster.park();
 	}
 
 	/**

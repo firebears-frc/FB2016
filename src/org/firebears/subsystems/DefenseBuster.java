@@ -32,6 +32,8 @@ public class DefenseBuster extends PIDSubsystem {
 
 	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
 	double MAX_SPEED;
+	
+	double PARK_VALUE;
 
 	public DefenseBuster() {
 		super(0.5, 0, 0);
@@ -39,6 +41,7 @@ public class DefenseBuster extends PIDSubsystem {
 		MAX_SPEED = getPreferencesDouble("DefenseBuster.max_speed", 0.7);
 		MIN_VALUE = getPreferencesDouble("DefenseBuster.min_value", 1.6);
 		MAX_VALUE = getPreferencesDouble("DefenseBuster.max_value", 3.9);
+		PARK_VALUE = getPreferencesDouble("DefenseBuster.park_value", 2.6);
 
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
@@ -62,5 +65,9 @@ public class DefenseBuster extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
 		angleMotor.set(output);
+	}
+	
+	public void park(){
+		setSetpoint(PARK_VALUE);
 	}
 }
