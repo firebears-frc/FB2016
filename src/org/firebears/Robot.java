@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
 	public static Lights lights;
 	public static Vision vision;
 
-	private final SelectAuto selectAuto = new SelectAuto();
+	private SelectAuto selectAuto;
 	private final LcdOverLay lcdol = new LcdOverLay();
 
 	private PIDCommand rotateCommand;
@@ -77,9 +77,13 @@ public class Robot extends IterativeRobot {
 
 		// TODO: Make it so this can be switched
 		autonomousCommand = new AutonomousCommand(new DrawbridgeCommand());
+		selectAuto = new SelectAuto();
 
 		// Smart Dashboard
 		rotateCommand = new RotationCommand(90);
+		
+		Robot.ballGetter.park();
+		Robot.defenseBuster.park();
 	}
 
 	/**
@@ -87,6 +91,8 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
+		selectAuto.initialize();
+		lcdol.initialize();
 
 	}
 
@@ -103,6 +109,8 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)  {
 			autonomousCommand.start();
 		}
+		Robot.ballGetter.park();
+		Robot.defenseBuster.park();
 	}
 
 	/**
@@ -116,6 +124,8 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)  {
 			autonomousCommand.cancel();
 		}
+		Robot.ballGetter.park();
+		Robot.defenseBuster.park();
 	}
 
 	/**

@@ -20,7 +20,7 @@ public class LcdOverLay extends Command {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    public void initialize() {
     	
     	
     }
