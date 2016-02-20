@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DefenseBusterSetpointCommand extends Command {
 	
-	double setpoint;
+	private double setpoint;
 
     public DefenseBusterSetpointCommand(double value) {
         requires(Robot.defenseBuster);

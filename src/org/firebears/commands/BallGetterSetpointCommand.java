@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class BallGetterSetpointCommand extends Command {
 
-	double setpoint;
+	private double setpoint;
 	
     public BallGetterSetpointCommand(double value) {
         requires(Robot.ballGetter);
