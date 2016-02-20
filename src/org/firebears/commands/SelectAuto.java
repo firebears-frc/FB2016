@@ -14,11 +14,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class SelectAuto extends Command {
-
 	int x = 0;
-
-
-
+	RotationCommand rc = new RotationCommand(90);
+	RotationCommand rc180 = new RotationCommand(180);
+	RotationCommand rc45 = new RotationCommand(45);
+	DriveStraightCommand ds = new DriveStraightCommand(5,.5);
+	RampartsCommand rp = new RampartsCommand();
+	MoatCommand mc = new MoatCommand();
+	LowBarCommand lb = new LowBarCommand();
+	LiquidCrystal lcd = RobotMap.lcd;
+	
+	
 	
 
 	public SelectAuto() {
@@ -27,20 +33,14 @@ public class SelectAuto extends Command {
 	}
 
 	// Called just before this Command runs the first time
-	protected void initialize() {
+	public void initialize() {
+		
+		
 
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	public void execute() {
-		RotationCommand rc = new RotationCommand(90);
-		RotationCommand rc180 = new RotationCommand(180);
-		RotationCommand rc45 = new RotationCommand(45);
-		DriveStraightCommand ds = new DriveStraightCommand(5,.5);
-		RampartsCommand rp = new RampartsCommand();
-		MoatCommand mc = new MoatCommand();
-		LowBarCommand lb = new LowBarCommand();
-		LiquidCrystal lcd = RobotMap.lcd;
 		x = x + 1;
 
 		if (x > 7) {//number of autos + one welcome screen
