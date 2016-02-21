@@ -37,6 +37,16 @@ public class Chassis extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+    
+    
+  //*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
+//    public Chassis()
+//    {
+//    	robotDrive.setMaxOutput(2500);
+//    }
+//    
+  //*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
+    
     public void drive(double x, double y){
     	robotDrive.arcadeDrive(-y, -x);
     }
