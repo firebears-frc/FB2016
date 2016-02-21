@@ -165,6 +165,9 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("defenseBusterInput", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
 			SmartDashboard.putNumber("Ballgetterpot", RobotMap.ballGetterAnalogInput.getAverageVoltage());
 //				SmartDashboard.putNumber("Ballcurrent", RobotMap.ballGetterAngleMotor.getOutputCurrent());
+			
+			double rpm = 1.0/RobotMap.shooterCounter.getPeriod();
+			SmartDashboard.putNumber("RPM", rpm);
 		}
 	}
 
