@@ -59,7 +59,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		RobotMap.init();
-		
+
 		// Initialize Subsystems
 		chassis = new Chassis();
 		drawbridgeBuster = new DrawbridgeBuster();
@@ -81,7 +81,7 @@ public class Robot extends IterativeRobot {
 
 		// Smart Dashboard
 		rotateCommand = new RotationCommand(90);
-		
+
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
 	}
@@ -165,9 +165,8 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("defenseBusterInput", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
 			SmartDashboard.putNumber("Ballgetterpot", RobotMap.ballGetterAnalogInput.getAverageVoltage());
 //				SmartDashboard.putNumber("Ballcurrent", RobotMap.ballGetterAngleMotor.getOutputCurrent());
-			
-			double rpm = 1.0/RobotMap.shooterCounter.getPeriod();
-			SmartDashboard.putNumber("RPM", rpm);
+
+    		SmartDashboard.putNumber("Shooter rate", shooter.getRate());
 		}
 	}
 

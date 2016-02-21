@@ -79,7 +79,7 @@ public class OI {
 
 		// Joystick Buttons
 		shootButton = new JoystickButton(joystick2, 1);
-		shootButton.whileHeld(new ShooterCommand(0.4));
+		shootButton.whileHeld(new ShooterTesterCommand());
 		ballGetterHighButton = new JoystickButton(joystick2, 6);
 		ballGetterHighButton.whenPressed(new BallGetterSetpointCommand(2.1));
 		ballGetterLowButton = new JoystickButton(joystick2, 4);
