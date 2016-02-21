@@ -17,7 +17,7 @@ public class MoatCommand extends CommandGroup {
     public  MoatCommand() {
  
     	addSequential(new GetRotation());
-        addSequential(new DriveStraightCommand(60.,.75));
+        addSequential(new DriveStraightCommand(60,.75));
     	addSequential(new AdjustRotation());
     	addSequential(new RotationCommand(180));
     	addSequential(new RotationCommand(180));

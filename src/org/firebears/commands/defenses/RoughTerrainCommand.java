@@ -12,7 +12,7 @@ public class RoughTerrainCommand extends CommandGroup {
     
     public  RoughTerrainCommand() {
     	addSequential(new GetRotation());
-        addSequential(new DriveStraightCommand(120.,.75));
+        addSequential(new DriveStraightCommand(60.,.75));
     	addSequential(new AdjustRotation());
      
     	requires(Robot.chassis);

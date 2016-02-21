@@ -17,7 +17,7 @@ public class LowBarCommand extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
 
-    	addSequential(new DriveStraightCommand(60, .6));
+    	addSequential(new DriveStraightCommand(60., .6));
     	
         // To run multiple commands at the same time,
         // use addParallel()
