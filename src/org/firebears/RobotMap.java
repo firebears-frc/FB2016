@@ -148,6 +148,12 @@ public class RobotMap {
 		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
 
 		chassisRobotDrive = new RobotDrive(chassisBackRight, chassisFrontRight, chassisBackLeft, chassisFrontLeft);
+		
+		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
+		
+		//chassisRobotDrive.setMaxOutput(2500);
+				
+		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
 
 		lcd = new LiquidCrystal_roboRio(0x27);
 		lcd.begin(20, 4);
