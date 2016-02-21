@@ -37,7 +37,6 @@ public class Shooter extends PIDSubsystem {
 	private final Counter shooterCounter = RobotMap.shooterCounter;
 
 	public void initDefaultCommand() {
-//		 setDefaultCommand(new ShooterTesterCommand());
 	}
 
 	public double getRate() {
@@ -55,13 +54,15 @@ public class Shooter extends PIDSubsystem {
 	}
 
 	public void spinnerStart() {
+		shootingMotor.set(-0.2);
 		setSetpoint(GOAL_SPEED);
 		enable();
 	}
 
 	public void spinnerStop() {
 		setSetpoint(0);
-		enable();
+		disable();
+		shootingMotor.set(0.0);
 	}
 
 	public void servoFire() {
