@@ -13,6 +13,9 @@ public class Lights extends Subsystem {
 
 	public Lights() {
 		table = NetworkTable.getTable("lights");
+		setStrip(STRIP_CHASSIS_LEFT, ANIM_FIRE);
+		setStrip(STRIP_CHASSIS_RIGHT, ANIM_FIRE);
+		setStrip(STRIP_CELEBRATE, ANIM_FIRE);
 	}
 
 	public void initDefaultCommand() {
