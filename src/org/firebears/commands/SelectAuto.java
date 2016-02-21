@@ -3,6 +3,7 @@ package org.firebears.commands;
 
 import org.firebears.Robot;
 import org.firebears.RobotMap;
+import org.firebears.commands.defenses.ChevalDeFriseCommand;
 import org.firebears.commands.defenses.LowBarCommand;
 import org.firebears.commands.defenses.MoatCommand;
 import org.firebears.commands.defenses.RampartsCommand;
@@ -22,6 +23,7 @@ public class SelectAuto extends Command {
 	RampartsCommand rp = new RampartsCommand();
 	MoatCommand mc = new MoatCommand();
 	LowBarCommand lb = new LowBarCommand();
+	ChevalDeFriseCommand cdf = new ChevalDeFriseCommand();
 
 	int x = 0;
 
@@ -48,7 +50,7 @@ public class SelectAuto extends Command {
 		x = x + 1;
 		lcd.home();
 
-		if (x > 7) {//number of autos + one welcome screen
+		if (x > 9) {//number of autos + one welcome screen
 			x = 2;
 		}
 		if (x > 1){
@@ -138,6 +140,30 @@ public class SelectAuto extends Command {
 			lcd.setCursor(0, 3);
 			lcd.print("               ");
 			Robot.autonomousCommand = lb;//command
+		}
+		if (x == 8) {
+			lcd.setCursor(10, 0);
+			lcd.print("Cheval");
+			lcd.print("    ");
+			lcd.setCursor(0, 1);
+			lcd.print("Drives up to the");
+			lcd.setCursor(0, 2);
+			lcd.print("ChevalDeFrise & puts");
+			lcd.setCursor(0, 3);
+			lcd.print("down the arm.  ");
+			Robot.autonomousCommand = cdf;//command
+		}
+		if (x == 9) {
+			lcd.setCursor(10, 0);
+			lcd.print("Nothing");
+			lcd.print("   ");
+			lcd.setCursor(0, 1);
+			lcd.print("Do nothing.         ");
+			lcd.setCursor(0, 2);
+			lcd.print("                    ");
+			lcd.setCursor(0, 3);
+			lcd.print("               ");
+			Robot.autonomousCommand = null;//command
 		}
 //Note: if the lcd goes out of bounds of the lcd it will send an error and disable the INTER ROBOt
 //		lcd.setCursor(0, 1);//Debugging button number

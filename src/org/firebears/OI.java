@@ -81,7 +81,7 @@ public class OI {
 
 		// Joystick Buttons
 		shooterSpinUp = new JoystickButton(joystick1, 5);
-		shooterSpinUp.whenPressed(new ShooterSpinCommand(90));
+		shooterSpinUp.whenPressed(new ShooterSpinCommand(70));
 		shooterSpinDown = new JoystickButton(joystick1, 3);
 		shooterSpinDown.whenPressed(new ShooterSpinCommand(0));
 		shootButton = new JoystickButton(joystick1, 1);
