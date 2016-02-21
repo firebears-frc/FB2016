@@ -167,6 +167,8 @@ public class Robot extends IterativeRobot {
 //				SmartDashboard.putNumber("Ballcurrent", RobotMap.ballGetterAngleMotor.getOutputCurrent());
 
     		SmartDashboard.putNumber("Shooter rate", shooter.getRate());
+    		SmartDashboard.putNumber("Servo angle", RobotMap.shooterServo.getAngle());
+    		SmartDashboard.putNumber("Servo position", RobotMap.shooterServo.getPosition());
 		}
 	}
 

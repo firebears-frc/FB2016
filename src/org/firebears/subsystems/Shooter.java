@@ -17,14 +17,19 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Shooter extends PIDSubsystem {
 
 	/** Goal speed for shooting, as returned by the counter rate. */
-	double GOAL_SPEED;
+	public final double GOAL_SPEED;
+
+	/** Value at which servo fires ball. */
+	public final double SERVO_MAX;
 
 	public Shooter() {
 		super(0.05, 0.0, 0.0);
 		LiveWindow.addActuator("Shooter", "PIDSubsystem Controller", getPIDController());
 		GOAL_SPEED = getPreferencesDouble("Shooter.goal_speed", 90);
-		setSetpoint(0.0);
-		disable();
+		SERVO_MAX = getPreferencesDouble("Shooter.servo_max", 90);
+		getPIDController().setAbsoluteTolerance(5.0);
+		spinnerStop();
+		servoReset();
 	}
 
 	private final CANTalon shootingMotor = RobotMap.shooterShootingMotor;
@@ -32,7 +37,7 @@ public class Shooter extends PIDSubsystem {
 	private final Counter shooterCounter = RobotMap.shooterCounter;
 
 	public void initDefaultCommand() {
-		 setDefaultCommand(new ShooterTesterCommand());
+//		 setDefaultCommand(new ShooterTesterCommand());
 	}
 
 	public double getRate() {
@@ -57,5 +62,13 @@ public class Shooter extends PIDSubsystem {
 	public void spinnerStop() {
 		setSetpoint(0);
 		enable();
+	}
+
+	public void servoFire() {
+		shooterServo.set(SERVO_MAX);
+	}
+
+	public void servoReset() {
+		shooterServo.set(0);
 	}
 }
