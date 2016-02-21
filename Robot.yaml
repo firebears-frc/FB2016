@@ -402,6 +402,16 @@ Children:
           value: '25'
       Base: Quadrature Encoder
       Name: counter
+    - Children: []
+      Properties:
+        Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id009
+          default: '0'
+          name: Input Channel (Analog)
+          validators: *id010
+          value: '2'
+      Base: Analog Input
+      Name: rangeFinder
     Properties:
       Limit Output: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Limit Output, validators: null, value: false}

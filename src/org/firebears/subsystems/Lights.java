@@ -31,24 +31,20 @@ public class Lights extends Subsystem {
 
 
 	// Constants for pixel strips
-	public static final String STRIP_LIFTU = "lift_up";
-	public static final String STRIP_LIFTD = "lift_down";
-	public static final String STRIP_SUPPU = "support_up";
-	public static final String STRIP_SUPPD = "support_down";
-	public static final String STRIP_TROPH = "trophy";
-	public static final String STRIP_INRBT = "inside";
+	public static final String STRIP_CHASSIS_LEFT = "strip_chassis_left";
+	public static final String STRIP_CHASSIS_RIGHT = "strip_chassis_right";
+	public static final String STRIP_CELEBRATE = "strip_celebrate";
 
 	// Constants for  animations
-	public static final String ANIM_PULSE = "PULSING_GREEN_ANIM";
-	public static final String ANIM_MOVE = "MOVING_BLUE_ANIM";
-	public static final String ANIM_FIRE = "FIRE_ANIM";
-	public static final String ANIM_LIFT = "LIFT";
-	public static final String ANIM_CRAZY = "CRAZY";
-	public static final String ANIM_BINARY = "BIN_ANIM";
-	public static final String ANIM_BULB = "BULB";
+	public static final String ANIM_PULSING_GREEN = "ANIM_PULSING_GREEN";
+	public static final String ANIM_MOVING_BLUE = "ANIM_MOVING_BLUE";
+	public static final String ANIM_FIRE = "ANIM_FIRE";
+	public static final String ANIM_CRAZY = "ANIM_CRAZY";
+	public static final String ANIM_BINARY = "ANIM_BINARY";
+	public static final String ANIM_BULB = "ANIM_BULB";
 	public static final String ANIM_CATERPILLAR = "ANIM_CATERPILLAR";
-	public static final String ANIM_SPARK = "SPARK";
-	public static final String ANIM_THEATER = "THEATER";
+	public static final String ANIM_SPARK = "ANIM_SPARK";
+	public static final String ANIM_THEATER = "ANIM_THEATER";
 	public static final String ANIM_EXPLODE = "ANIM_EXPLODE";
 
 }

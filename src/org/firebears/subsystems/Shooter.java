@@ -22,6 +22,9 @@ public class Shooter extends PIDSubsystem {
 	/** Value at which servo fires ball. */
 	public final double SERVO_MAX;
 
+	/** Rangefinder volts per inch. */
+    final double VOLT_DIST_RATIO = 0.00929687; //5.084 Volts / 512 inch range 0.009929687
+
 	public Shooter() {
 		super(0.05, 0.0, 0.0);
 		LiveWindow.addActuator("Shooter", "PIDSubsystem Controller", getPIDController());
@@ -72,4 +75,13 @@ public class Shooter extends PIDSubsystem {
 	public void servoReset() {
 		shooterServo.set(0);
 	}
+
+    private double getRangeFinderVoltage() {
+    	return RobotMap.shooterrangeFinder.getAverageVoltage();
+    }
+
+    public double getRangeFinderDistance() {
+        double distanceInInches = getRangeFinderVoltage() / VOLT_DIST_RATIO;
+        return distanceInInches;
+    }
 }
