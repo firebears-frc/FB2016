@@ -19,7 +19,9 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -28,14 +30,8 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANSpeedController;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -83,14 +79,14 @@ public class RobotMap {
 	public static CameraServer usbCamera;
 
 	public static double rotation = 0;
-	
-	
+
+
 	static double m_P = .1;
 	static double m_I = 0;
 	static double m_D = 0;
-	static double m_ff = 0;        
+	static double m_ff = 0;
 	static int m_izone = 256;
-	static double m_rampRate = 10; 
+	static double m_rampRate = 10;
 	static int m_profile = 0;
 	static int m_CountPerRev = 255;//****Magnetic
 
@@ -117,21 +113,21 @@ public class RobotMap {
 		defenseBusterAngleMotor.enableBrakeMode(true);
 		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);
 		//*/*/*/*/*/END Open Loop /*/*/*/*/*/
-		
-		
-		
-		
+
+
+
+
 		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
 //		chassisFrontRight = new CANTalon(4);
 //		chassisFrontRight.changeControlMode(CANTalon.TalonControlMode.Speed);
-//		chassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????        
-//		chassisFrontRight.reverseSensor(false);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????       
+//		chassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
+//		chassisFrontRight.reverseSensor(false);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
 //		chassisFrontRight.configNominalOutputVoltage(+0.0d, -0.0d);//Forward/reverse threshold
-//		chassisFrontRight.configPeakOutputVoltage(+12.0d, -12.0d); 
-//		chassisFrontRight.setPID(m_P, m_I, m_D, m_ff, m_izone, m_rampRate, m_profile );		
+//		chassisFrontRight.configPeakOutputVoltage(+12.0d, -12.0d);
+//		chassisFrontRight.setPID(m_P, m_I, m_D, m_ff, m_izone, m_rampRate, m_profile );
 //		chassisFrontRight.configEncoderCodesPerRev(m_CountPerRev);//
 //		chassisFrontRight.enableBrakeMode(false);
-//		chassisFrontRight.enable();	
+//		chassisFrontRight.enable();
 //		LiveWindow.addActuator("Chassis", "FrontRight", chassisFrontRight);
 //
 //		chassisBackLeft = new CANTalon(3);
@@ -148,9 +144,9 @@ public class RobotMap {
 //
 //		defenseBusterAngleMotor = new CANTalon(11);
 //		defenseBusterAngleMotor.enableBrakeMode(true);
-//		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);	
+//		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);
 		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
-			
+
 		chassisRobotDrive = new RobotDrive(chassisBackRight, chassisFrontRight, chassisBackLeft, chassisFrontLeft);
 
 		lcd = new LiquidCrystal_roboRio(0x27);
@@ -203,6 +199,7 @@ public class RobotMap {
 		LiveWindow.addActuator("BallGetter", "FrontMotor", ballGetterFrontMotor);
 
 		shooterShootingMotor = new CANTalon(16);
+		shooterShootingMotor.enableBrakeMode(false);
 		LiveWindow.addActuator("Shooter", "ShootingMotor", shooterShootingMotor);
 
 		/*
