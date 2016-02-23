@@ -81,16 +81,17 @@ public class OI {
 
 		// Joystick Buttons
 		shooterSpinUp = new JoystickButton(joystick1, 5);
-		shooterSpinUp.whenPressed(new ShooterSpinCommand(70));
+		shooterSpinUp.whenPressed(new ShooterSpinCommand(80));
 		shooterSpinDown = new JoystickButton(joystick1, 3);
 		shooterSpinDown.whenPressed(new ShooterSpinCommand(0));
 		shootButton = new JoystickButton(joystick1, 1);
 		shootButton.whenPressed(new ShooterFireCommand());
+		
 
 		ballGetterHighButton = new JoystickButton(joystick2, 6);
 		ballGetterHighButton.whenPressed(new BallGetterSetpointCommand(2.1));
 		ballGetterLowButton = new JoystickButton(joystick2, 4);
-		ballGetterLowButton.whenPressed(new BallGetterSetpointCommand(3.33));
+		ballGetterLowButton.whenPressed(new BallGetterSetpointCommand(3.25));
 		defenseBusterHighButton = new JoystickButton(joystick2, 5);
 		defenseBusterHighButton.whenPressed(new DefenseBusterSetpointCommand(2.726));
 		defenseBusterLowButton = new JoystickButton(joystick2, 3);

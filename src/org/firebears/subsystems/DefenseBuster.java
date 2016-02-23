@@ -70,4 +70,10 @@ public class DefenseBuster extends PIDSubsystem {
 	public void park(){
 		setSetpoint(PARK_VALUE);
 	}
+//	public void up(){ for toggle
+//		angleMotor.set(2.726);
+//	}
+//	public void down(){
+//		angleMotor.set(3.911);
+//	}
 }

@@ -90,6 +90,9 @@ public class RobotMap {
 	static double m_rampRate = 10;
 	static int m_profile = 0;
 	static int m_CountPerRev = 255;//****Magnetic
+	public static boolean servoOn = false;
+//	public static boolean defenseBuster = false;
+//	public static boolean ballGetter = false;
 
 	public static void init() {
 

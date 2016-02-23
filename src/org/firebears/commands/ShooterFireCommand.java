@@ -1,6 +1,7 @@
 package org.firebears.commands;
 
 import org.firebears.Robot;
+import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,22 +15,26 @@ public class ShooterFireCommand extends Command {
     }
 
     protected void initialize() {
-    	setTimeout(2);
-    	Robot.shooter.servoFire();
+//    	setTimeout(100);
+    	if(RobotMap.servoOn) {
+    		Robot.shooter.servoReset();
+    		RobotMap.servoOn = false;
+    	}else{
+    		Robot.shooter.servoFire();
+    		RobotMap.servoOn = true;
+    	}
     }
 
     protected void execute() {
     }
 
     protected boolean isFinished() {
-        return isTimedOut();
+        return true;
     }
 
     protected void end() {
-    	Robot.shooter.servoReset();
     }
 
     protected void interrupted() {
-    	Robot.shooter.servoReset();
     }
 }

@@ -1,6 +1,7 @@
 package org.firebears.commands;
 
 import org.firebears.Robot;
+import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,7 +12,7 @@ public class DefenseBusterSetpointCommand extends Command {
 	
 	private double setpoint;
 
-    public DefenseBusterSetpointCommand(double value) {
+    public DefenseBusterSetpointCommand(double value) {//set (double value)for two button command
         requires(Robot.defenseBuster);
         requires(Robot.chassis);
         setpoint = value;
@@ -19,6 +20,7 @@ public class DefenseBusterSetpointCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run

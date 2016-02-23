@@ -78,14 +78,6 @@ public class BallGetter extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-//		double maxC = RobotMap.ballGetterAngleMotor.getOutputCurrent();//crappy code for later
-//		if (maxC > 12){
-//			time ++;
-//			
-//		}
-//		if (time > 100){
-//			angleMotor.set(0);
-//		}
 		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
 		angleMotor.set(output);
 	}
@@ -93,6 +85,12 @@ public class BallGetter extends PIDSubsystem {
 	public void park(){
 		setSetpoint(PARK_VALUE);
 	}
+//	public void up(){//for toggle
+//		angleMotor.set(2.1);
+//	}
+//	public void down(){
+//		angleMotor.set(3.33);
+//	}
 
 	public void setMotors(int mode) {
 		if (mode == GRAB) {
