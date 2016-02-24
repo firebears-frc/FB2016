@@ -21,7 +21,7 @@ public class AimAndShootCommand extends CommandGroup {
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
 
-    	addSequential(command);
+//    	addSequential(command);
     	requires(Robot.chassis);
     	requires(Robot.vision);
     }
