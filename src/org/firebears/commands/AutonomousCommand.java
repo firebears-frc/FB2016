@@ -24,7 +24,7 @@ public class AutonomousCommand extends CommandGroup {
     public AutonomousCommand(Command defense_command) {
     	requires(Robot.chassis);
     	addSequential(defense_command);
-    	addSequential(new AimCommand());
+    	addSequential(new AimAndShootCommand());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

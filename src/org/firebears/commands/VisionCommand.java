@@ -12,19 +12,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTablesJNI;
  */
 public class VisionCommand extends Command {
 
-	final String NT_CALIBRATION = "vision/calibrationMode";
-	final String NT_DISTANCE = "vision/distance";
-	final String NT_ANGLE = "vision/angle";
-	final String NT_FPS = "vision/fps";
-	final String NT_IMG = "vision/image";
-
     public VisionCommand() {
-    	RobotMap.getPreferencesDouble("vision.hue.lo", 20);
-    	RobotMap.getPreferencesDouble("vision.hue.hi", 40);
-    	RobotMap.getPreferencesDouble("vision.sat.lo", 200);
-    	RobotMap.getPreferencesDouble("vision.sat.hi", 255);
-    	RobotMap.getPreferencesDouble("vision.val.lo", 90);
-    	RobotMap.getPreferencesDouble("vision.val.hi", 180);
         requires(Robot.vision);
     }
 

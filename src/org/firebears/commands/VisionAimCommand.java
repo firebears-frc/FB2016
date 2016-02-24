@@ -1,0 +1,58 @@
+package org.firebears.commands;
+
+import org.firebears.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+/**
+ *
+ */
+public class VisionAimCommand extends Command {
+
+	public double AngleTolerance = .1;
+	public double DistanceTolerance = .1;
+	
+    public VisionAimCommand() {
+    	requires(Robot.chassis);
+    	requires(Robot.vision);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	Robot.chassis.drive(
+    			Robot.vision.getAngle(),
+    			Robot.vision.getDistance());
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+    	double angle = Robot.vision.getAngle();
+    	double dist = Robot.vision.getDistance();
+    	
+    	if(angle > -AngleTolerance && angle < AngleTolerance) {
+    		// Angle is in the acceptable range.
+    		if(dist > -DistanceTolerance && dist < DistanceTolerance) {
+    			// Distance is in the acceptable range.
+    			return true;
+    		}else{
+    			return false;
+    		}
+    	}else{
+    		// Angle needs to be adjused
+    		return false;
+    	}
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }
+}

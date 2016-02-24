@@ -1,13 +1,15 @@
 package org.firebears.commands;
 
+import org.firebears.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AimCommand extends CommandGroup {
+public class AimAndShootCommand extends CommandGroup {
     
-    public  AimCommand() {
+    public  AimAndShootCommand() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -19,10 +21,8 @@ public class AimCommand extends CommandGroup {
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
 
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    	addSequential(command);
+    	requires(Robot.chassis);
+    	requires(Robot.vision);
     }
 }
