@@ -1,11 +1,12 @@
 package org.firebears.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
- *  Subsystem interface to the lights running on the Raspberry Pi.
- *  Communicates to the pi through the Network Tables.
+ * Subsystem interface to the lights running on the Raspberry Pi. Communicates
+ * to the pi through the Network Tables.
  */
 public class Lights extends Subsystem {
 
@@ -29,17 +30,43 @@ public class Lights extends Subsystem {
 		table.putNumber(stripName + ".value", value);
 	}
 
+	public void teleopMode() {
+		if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue) {
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_MOVING_BLUE);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_MOVING_BLUE);
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_MOVING_BLUE);
+		} else {
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
+		}
+	}
 
+	public void autonomousMode() {
+		// To do
+	}
 
+	public void disabledMode() {
+		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
+		setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
+		setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
+	}
 
+	public void celebrateMode() {
+		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODE);
+		setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODE);
+		setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODE);
+	}
 
 	// Constants for pixel strips
 	public static final String STRIP_CHASSIS_LEFT = "strip_chassis_left";
 	public static final String STRIP_CHASSIS_RIGHT = "strip_chassis_right";
 	public static final String STRIP_CELEBRATE = "strip_celebrate";
 
-	// Constants for  animations
+	// Constants for animations
 	public static final String ANIM_PULSING_GREEN = "ANIM_PULSING_GREEN";
+	public static final String ANIM_PULSING_RED = "ANIM_PULSING_RED";
+	public static final String ANIM_PULSING_BLUE = "ANIM_PULSING_BLUE";
 	public static final String ANIM_MOVING_BLUE = "ANIM_MOVING_BLUE";
 	public static final String ANIM_FIRE = "ANIM_FIRE";
 	public static final String ANIM_CRAZY = "ANIM_CRAZY";
