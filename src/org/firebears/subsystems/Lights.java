@@ -1,5 +1,6 @@
 package org.firebears.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -28,6 +29,25 @@ public class Lights extends Subsystem {
 	public void setValue(String stripName, double value) {
 		table.putNumber(stripName + ".value", value);
 	}
+		public void teleopMode(){
+			if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue) {
+				setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_MOVING_BLUE);
+				setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_MOVING_BLUE);
+				setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_MOVING_BLUE);
+			} else {
+				setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
+				setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
+				setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
+			}
+		}
+		public void autonomousMode(){
+			// To do
+		}
+		public void disabledMode(){
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
+		}
 
 
 
