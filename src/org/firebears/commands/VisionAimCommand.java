@@ -25,13 +25,13 @@ public class VisionAimCommand extends Command {
     protected void execute() {
     	Robot.chassis.drive(
     			Robot.vision.getAngle(),
-    			Robot.vision.getDistance());
+    			Robot.vision.getRemainingDistance());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	double angle = Robot.vision.getAngle();
-    	double dist = Robot.vision.getDistance();
+    	double dist = Robot.vision.getRemainingDistance();
     	
     	if(angle > -AngleTolerance && angle < AngleTolerance) {
     		// Angle is in the acceptable range.
