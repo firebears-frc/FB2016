@@ -87,6 +87,9 @@ public class Robot extends IterativeRobot {
 		Robot.defenseBuster.park();
 	}
 
+
+
+
 	/**
 	 * This function is called when the disabled button is hit. You can use it
 	 * to reset subsystems before shutting down.
@@ -95,11 +98,10 @@ public class Robot extends IterativeRobot {
 		lights.disabledMode();
 		selectAuto.initialize();
 		lcdol.initialize();
-		lights.setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
-		lights.setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
-		lights.setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
-
 	}
+
+
+
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
@@ -109,9 +111,11 @@ public class Robot extends IterativeRobot {
 		}
 	}
 
+
+
+
 	public void autonomousInit() {
 		lights.autonomousMode();
-		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
@@ -119,12 +123,15 @@ public class Robot extends IterativeRobot {
 		Robot.defenseBuster.park();
 	}
 
-	/**
-	 * This function is called periodically during autonomous
-	 */
+
+
+
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
+
+
+
 
 	public void teleopInit() {
 		lights.teleopMode();
@@ -136,29 +143,13 @@ public class Robot extends IterativeRobot {
 		Robot.defenseBuster.park();
 	}
 
-	/**
-	 * This function is called periodically during operator control
-	 */
+
+
+
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
 		if (RobotMap.DEBUG) {
-			// CANTalon talon3 = RobotMap.chassisBackLeft;
-			// SmartDashboard.putNumber("EncPosition 3",
-			// talon3.getEncPosition());
-			// SmartDashboard.putNumber("EncVelocity 3",
-			// talon3.getEncVelocity());
-			// SmartDashboard.putNumber("Temperature 3",
-			// talon3.getTemperature());
-			//
-			// CANTalon talon5 = RobotMap.chassisBackRight;
-			// SmartDashboard.putNumber("EncPosition 5",
-			// talon5.getEncPosition());
-			// SmartDashboard.putNumber("EncVelocity 5",
-			// talon5.getEncVelocity());
-			// SmartDashboard.putNumber("Temperature 5",
-			// talon5.getTemperature());
-
 			SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
 			SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
 
@@ -187,9 +178,14 @@ public class Robot extends IterativeRobot {
 		}
 	}
 
-	/**
-	 * This function is called periodically during test mode
-	 */
+
+
+
+	public void testInit() { }
+
+
+
+
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
