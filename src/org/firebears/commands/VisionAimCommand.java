@@ -5,7 +5,7 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Command to align the robot to the U shaped target in order to shoot.
  */
 public class VisionAimCommand extends Command {
 

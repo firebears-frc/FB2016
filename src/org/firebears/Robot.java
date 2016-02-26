@@ -85,6 +85,9 @@ public class Robot extends IterativeRobot {
 
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
+		
+		// Set Network Tables for vision
+		vision.init();
 	}
 
 	/**

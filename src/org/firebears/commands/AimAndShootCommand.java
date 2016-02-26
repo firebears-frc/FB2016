@@ -5,23 +5,23 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Aim at the U shaped target and when aligned, shoot a boulder.
  */
 public class AimAndShootCommand extends CommandGroup {
     
     public  AimAndShootCommand() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
 
-    	addSequential(command);
+    	// Aim the robot at the U.
+    	addSequential(new VisionAimCommand());
+    	// Shoot the boulder into the castle.
+    	addSequential(new ShooterFireCommand());
+    	
+    	// Requires
     	requires(Robot.chassis);
     	requires(Robot.vision);
     }
