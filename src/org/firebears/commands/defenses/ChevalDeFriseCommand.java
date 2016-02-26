@@ -6,6 +6,7 @@ import org.firebears.commands.DriveStraightCommand;
 import org.firebears.commands.RotationCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  * The Cheval de Frise is a series of four (4) independently tilting, weighted polycarbonate platforms. 
@@ -18,14 +19,16 @@ public class ChevalDeFriseCommand extends CommandGroup {
     
     public  ChevalDeFriseCommand() {
     	
-    	addSequential(new DriveStraightCommand(60.,.5));
+    	addSequential(new DriveStraightCommand(60.,.8));
+    	addSequential(new WaitCommand(1.25));
     	addSequential(new DefenseBusterSetpointCommand(3.911));
     	addSequential(new DriveStraightCommand(60.,.5));
     	addSequential(new DriveStraightCommand(60.,.7));
     	addSequential(new DefenseBusterSetpointCommand(2.726));
     	addSequential(new DriveStraightCommand(60.,.8));
 //    	addSequential(new DriveStraightCommand(60.,.5));
-//    	addSequential(new RotationCommand(180));
+    	addSequential(new RotationCommand(90));
+    	addSequential(new DriveStraightCommand(60,.5),.5);
     	requires(Robot.chassis);
     }
 }

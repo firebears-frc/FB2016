@@ -80,9 +80,9 @@ public class RobotMap {
 	public static CameraServer usbCamera;
 
 	public static double rotation = 0;
+	public static boolean servoOn = false;
 
-
-	static double m_P = .1;
+	static double m_P = 2.5;
 	static double m_I = 0;
 	static double m_D = 0;
 	static double m_ff = 0;
@@ -90,9 +90,6 @@ public class RobotMap {
 	static double m_rampRate = 10;
 	static int m_profile = 0;
 	static int m_CountPerRev = 255;//****Magnetic
-	public static boolean servoOn = false;
-//	public static boolean defenseBuster = false;
-//	public static boolean ballGetter = false;
 
 	public static void init() {
 

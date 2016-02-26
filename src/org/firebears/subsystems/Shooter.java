@@ -70,10 +70,12 @@ public class Shooter extends PIDSubsystem {
 
 	public void servoFire() {
 		shooterServo.set(SERVO_MAX);
+		RobotMap.servoOn = true;
 	}
 
 	public void servoReset() {
 		shooterServo.set(0);
+		RobotMap.servoOn = false;
 	}
 
     private double getRangeFinderVoltage() {

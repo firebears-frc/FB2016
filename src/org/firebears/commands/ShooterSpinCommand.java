@@ -29,7 +29,8 @@ public class ShooterSpinCommand extends Command {
     }
 
     protected boolean isFinished() {
-        return Robot.shooter.onTarget();
+//        return Robot.shooter.onTarget();
+    	return false;
     }
 
     protected void end() {

@@ -10,18 +10,35 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShooterFireCommand extends Command {
 
-    public ShooterFireCommand() {
+	public static final int SHOOTER_RESET = 0;
+	public static final int SHOOTER_FIRE = 1;
+	public static final int SHOOTER_TOGGLE = 2;
+	public static int shooter_mode;
+	
+    public ShooterFireCommand(int mode) {
         requires(Robot.shooter);
+        shooter_mode = mode;
     }
 
     protected void initialize() {
 //    	setTimeout(100);
-    	if(RobotMap.servoOn) {
-    		Robot.shooter.servoReset();
-    		RobotMap.servoOn = false;
-    	}else{
-    		Robot.shooter.servoFire();
-    		RobotMap.servoOn = true;
+    	switch(shooter_mode) {
+    		case SHOOTER_TOGGLE:
+		    	if(RobotMap.servoOn) {
+		    		Robot.shooter.servoReset();
+		    	}else{
+		    		Robot.shooter.servoFire();
+		    	}
+		    	break;
+    		case SHOOTER_FIRE:
+    			Robot.shooter.servoFire();
+    			break;
+    		case SHOOTER_RESET:
+    			Robot.shooter.servoReset();
+    			break;
+    		default:
+    			Robot.shooter.servoReset();
+    			break;
     	}
     }
 

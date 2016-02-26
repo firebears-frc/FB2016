@@ -16,9 +16,9 @@ import org.firebears.commands.*;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
@@ -34,24 +34,95 @@ public class Chassis extends Subsystem {
     public final CANTalon backLeft = RobotMap.chassisBackLeft;
     public final CANTalon backRight = RobotMap.chassisBackRight;
     private final RobotDrive robotDrive = RobotMap.chassisRobotDrive;
-
+    
+    private int m_state = 0;
+    private double m_fuseAmps = 90.0;
+    private double m_holdOffLim = 1;//sec
+    private double m_durationLim = 2;//sec
+    private double m_setPointMultiplier = 1;
+    private Timer holdOff = new Timer();
+    private Timer duration = new Timer();
+    
+    
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
     
-  //*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
-//    public Chassis()
-//    {
-//    	robotDrive.setMaxOutput(2500);
-//    }
-//    
-  //*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
-    
+
     public void drive(double x, double y){
-    	robotDrive.arcadeDrive(-y, -x);
+    	double mult = fuse();
+    	robotDrive.arcadeDrive(-y * mult, -x * mult);
     }
+    
+    
+    
     public void initDefaultCommand() {
         setDefaultCommand(new RobotDriveCommand());
     }
+    
+    private double fuse()
+    {
+    	//double Amps = frontLeft.getOutputCurrent();
+    	double Amps = frontLeft.getOutputCurrent();
+    	SmartDashboard.putNumber("Amps = ", Amps);
+    	
+switch (m_state) {
+        
+        case 0 :   /* Normal home */
+        	
+    	if(Amps > m_fuseAmps)
+    	{
+    		holdOff.start();
+    		m_state = 1;
+    	}
+    	break;
+    	
+        case 1 ://wait for holdoff timeout
+    	if (holdOff.get() >= m_holdOffLim )  	
+    	{
+    		holdOff.stop();
+    		holdOff.reset();
+    		if(Amps > m_fuseAmps)
+	    	{	    			    		
+	    		m_setPointMultiplier = m_setPointMultiplier * .5 ;
+	    		duration.start();
+	    		m_state = 2;
+	    	}
+	    	else
+	    	{
+	    		m_state = 0; 
+	    	}
+    	}
+    	break;
+        case 2 :
+        	if (duration.get() >= m_durationLim )
+        	{
+        		duration.stop();
+	    		duration.reset();    		
+    	    	if(Amps > m_fuseAmps)
+    	    	{   	    		
+    	    		m_setPointMultiplier = m_setPointMultiplier * .5 ;
+    	    		duration.start();
+    	    	}
+    	    	else
+    	    	{   	    		
+    	    		m_setPointMultiplier = Math.min(m_setPointMultiplier * 2,1d );    	    				
+    	    		if(m_setPointMultiplier == 1)
+    	    		{
+    	    			m_state = 0 ;
+    	    		}
+    	    	else
+    	    	{
+    	    		duration.start();	
+    	    	}
+    	    }   	    	
+        }
+        	break;	       	
+        default :   m_setPointMultiplier = 1d;         
+    }
+    	return m_setPointMultiplier;
+  }
+
+    
 }
 

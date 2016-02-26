@@ -32,13 +32,13 @@ public class Lights extends Subsystem {
 
 	public void teleopMode() {
 		if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue) {
-			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_MOVING_BLUE);
-			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_MOVING_BLUE);
-			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_MOVING_BLUE);
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_PULSING_BLUE);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_PULSING_BLUE);
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_PULSING_BLUE);
 		} else {
-			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
-			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
-			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_PULSING_RED);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_PULSING_RED);
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_PULSING_RED);
 		}
 	}
 
