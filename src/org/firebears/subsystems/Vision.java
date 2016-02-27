@@ -52,10 +52,10 @@ public class Vision extends Subsystem {
 		readSettingsFromPreferences();
 		RobotMap.getPreferencesDouble(PREF_HUE_LO, HUE_LO);
 		RobotMap.getPreferencesDouble(PREF_HUE_HI, HUE_HI);
-		RobotMap.getPreferencesDouble(PREF_HUE_LO, SAT_LO);
-		RobotMap.getPreferencesDouble(PREF_HUE_HI, SAT_HI);
-		RobotMap.getPreferencesDouble(PREF_HUE_LO, VAL_LO);
-		RobotMap.getPreferencesDouble(PREF_HUE_HI, VAL_HI);
+		RobotMap.getPreferencesDouble(PREF_SAT_LO, SAT_LO);
+		RobotMap.getPreferencesDouble(PREF_SAT_HI, SAT_HI);
+		RobotMap.getPreferencesDouble(PREF_VAL_LO, VAL_LO);
+		RobotMap.getPreferencesDouble(PREF_VAL_HI, VAL_HI);
 	}
 	
 	public double getAngle() {

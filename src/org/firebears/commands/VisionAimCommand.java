@@ -3,6 +3,7 @@ package org.firebears.commands;
 import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Command to align the robot to the U shaped target in order to shoot.
@@ -23,6 +24,8 @@ public class VisionAimCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putNumber("Angle", Robot.vision.getAngle());
+    	SmartDashboard.putNumber("Distance Away", Robot.vision.getRemainingDistance());
     	Robot.chassis.drive(
     			Robot.vision.getAngle(),
     			Robot.vision.getRemainingDistance());
