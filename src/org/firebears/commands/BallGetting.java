@@ -1,5 +1,7 @@
 package org.firebears.commands;
 
+import org.firebears.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -14,6 +16,8 @@ public class BallGetting extends CommandGroup {
     	addSequential(new WaitCommand(0.1));
     	addSequential(new ShooterFireCommand(0));
     	addSequential(new BallGetterMotorsCommand(1));
+    	requires(Robot.ballGetter);
+    	requires(Robot.shooter);
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

@@ -90,7 +90,7 @@ public class OI {
 		shootButton.whenPressed(new Fire());
 
 		servoUP = new JoystickButton(joystick1, 2);
-		servoUP.whenPressed(new ShooterFireCommand(2));
+		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_TOGGLE));
 
 
 		ballGetterHighButton = new JoystickButton(joystick2, 6);
@@ -121,6 +121,8 @@ public class OI {
 
 		celebrateButton = new JoystickButton(joystick1, 12);
 		celebrateButton.whileHeld(new CelebrateCommand());
+		
+		
 
 		But = new DigitalButton(0);
 		But.whenActive(new SelectAuto());
