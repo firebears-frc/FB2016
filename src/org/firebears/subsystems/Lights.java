@@ -57,6 +57,10 @@ public class Lights extends Subsystem {
 		setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODE);
 		setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODE);
 	}
+	
+	public void shootMode() {
+		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
+	}
 
 	// Constants for pixel strips
 	public static final String STRIP_CHASSIS_LEFT = "strip_chassis_left";
