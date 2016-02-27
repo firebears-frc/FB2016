@@ -80,6 +80,7 @@ public class BallGetter extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
 		angleMotor.set(output);
+		angleMotor.
 	}
 	
 	public void park(){
