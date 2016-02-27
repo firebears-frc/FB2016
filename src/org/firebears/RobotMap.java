@@ -217,14 +217,14 @@ public class RobotMap {
 		DigitalInput encoderLeftInputA = new DigitalInput(2);
 		DigitalInput encoderLeftInputB = new DigitalInput(3);
 		encoderLeft = new Encoder(encoderLeftInputA, encoderLeftInputB, false, EncodingType.k4X);
-		LiveWindow.addSensor("chassis", "encoder", encoderLeft);
+//		LiveWindow.addSensor("Chassis", "encoder", encoderLeft);
 		encoderLeft.setDistancePerPulse(0.05639);
 		encoderLeft.setPIDSourceType(PIDSourceType.kRate);
 
 		DigitalInput encoderRightInputA = new DigitalInput(4);
 		DigitalInput encoderRightInputB = new DigitalInput(5);
 		encoderRight = new Encoder(encoderRightInputA, encoderRightInputB, true, EncodingType.k4X);
-		LiveWindow.addSensor("chassis", "encoder", encoderRight);
+//		LiveWindow.addSensor("Chassis", "encoder", encoderRight);
 		encoderRight.setDistancePerPulse(0.05639);
 		encoderRight.setPIDSourceType(PIDSourceType.kRate);
 
