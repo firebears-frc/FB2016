@@ -10,22 +10,24 @@
 
 package org.firebears;
 
-import org.firebears.commands.*;
+import org.firebears.commands.AutonomousCommand;
+import org.firebears.commands.LcdOverLay;
+import org.firebears.commands.SelectAuto;
 import org.firebears.commands.defenses.DrawbridgeCommand;
-import org.firebears.subsystems.*;
+import org.firebears.subsystems.BallGetter;
+import org.firebears.subsystems.Chassis;
+import org.firebears.subsystems.DefenseBuster;
+import org.firebears.subsystems.DrawbridgeBuster;
+import org.firebears.subsystems.Lights;
+import org.firebears.subsystems.Shooter;
+import org.firebears.subsystems.Vision;
 
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.CANSpeedController;
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.kauailabs.navx.frc.AHRS;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -152,12 +154,10 @@ public class Robot extends IterativeRobot {
 			CANTalon talon3 = RobotMap.chassisBackLeft;
 			SmartDashboard.putNumber("encoderLeft dist", talon3.getEncPosition());
 			SmartDashboard.putNumber("encoderLeft rate", talon3.getEncVelocity());
-			SmartDashboard.putNumber("encoderLeft temp", talon3.getTemperature());
 
 			CANTalon talon5 = RobotMap.chassisBackRight;
 			SmartDashboard.putNumber("encoderRight dis", talon5.getEncPosition());
 			SmartDashboard.putNumber("encoderRight rate", talon5.getEncVelocity());
-			SmartDashboard.putNumber("encoderRight temp", talon5.getTemperature());
 
 //			SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
 //			SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
@@ -176,8 +176,6 @@ public class Robot extends IterativeRobot {
 
 			SmartDashboard.putNumber("defenseBusterInput", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
 			SmartDashboard.putNumber("Ballgetterpot", RobotMap.ballGetterAnalogInput.getAverageVoltage());
-			// SmartDashboard.putNumber("Ballcurrent",
-			// RobotMap.ballGetterAngleMotor.getOutputCurrent());
 
 			SmartDashboard.putNumber("Shooter rate", shooter.getRate());
 			SmartDashboard.putNumber("Servo angle", RobotMap.shooterServo.getAngle());
