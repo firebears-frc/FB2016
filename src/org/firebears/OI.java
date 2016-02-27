@@ -21,7 +21,6 @@ import org.firebears.subsystems.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.PrintCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -73,25 +72,34 @@ public class OI {
 	JoystickButton shooterSpinDown;
 	JoystickButton servoUP;
 	JoystickButton celebrateButton;
+	JoystickButton aimAndShoot;
+	JoystickButton park;
 
 	public OI() {
-
 		joystick1 = new Joystick(0);
 		joystick2 = new Joystick(1);
 
 		// Joystick Buttons
-		shooterSpinUp = new JoystickButton(joystick1, 5);
-		shooterSpinUp.whenPressed(new ShooterSpinCommand(80));
-
-		shooterSpinDown = new JoystickButton(joystick1, 3);
-		shooterSpinDown.whenPressed(new ShooterSpinCommand(0));
-
 		shootButton = new JoystickButton(joystick1, 1);
 		shootButton.whenPressed(new Fire());
 
 		servoUP = new JoystickButton(joystick1, 2);
 		servoUP.whenPressed(new ShooterFireCommand(2));
-
+		
+		shooterSpinDown = new JoystickButton(joystick1, 3);
+		shooterSpinDown.whenPressed(new ShooterSpinCommand(0));
+		
+		shooterSpinUp = new JoystickButton(joystick1, 5);
+		shooterSpinUp.whenPressed(new ShooterSpinCommand(80));
+		
+		aimAndShoot = new JoystickButton(joystick1, 7);
+		aimAndShoot.whileHeld(new AimAndShootCommand());
+		
+		park = new JoystickButton(joystick1, 8);
+		park.whenPressed(new ParkCommand());
+		
+		celebrateButton = new JoystickButton(joystick1, 12);
+		celebrateButton.whileHeld(new CelebrateCommand());
 
 		ballGetterHighButton = new JoystickButton(joystick2, 6);
 		ballGetterHighButton.whenPressed(new BallStoping());
@@ -118,9 +126,6 @@ public class OI {
 
 		ballGetterOffButton = new JoystickButton(joystick2, 11);
 		ballGetterOffButton.whenPressed(new BallGetterMotorsCommand(3));
-
-		celebrateButton = new JoystickButton(joystick1, 12);
-		celebrateButton.whileHeld(new CelebrateCommand());
 
 		But = new DigitalButton(0);
 		But.whenActive(new SelectAuto());

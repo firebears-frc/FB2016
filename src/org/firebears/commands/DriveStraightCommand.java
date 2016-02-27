@@ -11,8 +11,15 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
  * Drive straight a certain distance.
  */
 public class DriveStraightCommand extends PIDCommand {
+	enum UNTIL {
+		UNTIL_TIMEOUT, // Command will finish after a timeout
+		UNTIL_DISTANCE, // Command will finish after a certain distance
+		UNTIL_HIT_WALL, // Command will finish after distance sensor detects something
+	}
+	
 	final double max_speed;
 	final double distance;
+	final UNTIL untilx;
 	double targetLocation;
 	double targetAngle;
 	long timeout;
@@ -22,11 +29,16 @@ public class DriveStraightCommand extends PIDCommand {
     	requires(Robot.chassis);
     	distance = z;
     	max_speed = speed;
+    	untilx = UNTIL.UNTIL_DISTANCE;
     	getPIDController().setAbsoluteTolerance(2);
     }
     
     public DriveStraightCommand(double z) {
     	this(z, .6);
+    }
+    
+    public DriveStraightCommand(UNTIL until, double speed) {
+    	this(0., speed);
     }
 
     protected void initialize() {
