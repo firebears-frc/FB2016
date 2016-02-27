@@ -23,8 +23,8 @@ public class ChevalDeFriseCommand extends CommandGroup {
     	addSequential(new WaitCommand(1.25));
     	addSequential(new DefenseBusterSetpointCommand(3.911));
     	addSequential(new DriveStraightCommand(60.,.5));
-    	addSequential(new DriveStraightCommand(60.,.7));
     	addSequential(new DefenseBusterSetpointCommand(2.726));
+    	addSequential(new DriveStraightCommand(60.,.7));
     	addSequential(new DriveStraightCommand(60.,.8));
 //    	addSequential(new DriveStraightCommand(60.,.5));
     	addSequential(new RotationCommand(90));

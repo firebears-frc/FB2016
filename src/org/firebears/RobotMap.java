@@ -32,6 +32,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
