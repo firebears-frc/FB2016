@@ -34,7 +34,7 @@ public class Chassis extends Subsystem {
     public final CANTalon backLeft = RobotMap.chassisBackLeft;
     public final CANTalon backRight = RobotMap.chassisBackRight;
     private final RobotDrive robotDrive = RobotMap.chassisRobotDrive;
-    private final SoftFuse talonFuse = new SoftFuse(robotDrive,90,1,2);//Amp limit, holdOff time, duration time
+    private final SoftFuse talonFuse = new SoftFuse(90,1,2);//Amp limit, holdOff time, duration time
     
    
     

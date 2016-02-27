@@ -152,7 +152,7 @@ public class RobotMap {
 
 		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
 
-		//chassisRobotDrive.setMaxOutput(2500);
+		//chassisRobotDrive.setMaxOutput(500);
 
 		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
 
