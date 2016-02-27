@@ -25,15 +25,15 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class DefenseBuster extends PIDSubsystem {
 
 	/** Minimum value that the setpoint may take, measured in volts. */
-	double MIN_VALUE;
+	public double MIN_VALUE;
 
 	/** Maximum value that the setpoint may take, measured in volts. */
-	double MAX_VALUE;
+	public double MAX_VALUE;
 
 	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
-	double MAX_SPEED;
-	
-	double PARK_VALUE;
+	public double MAX_SPEED;
+
+	public double PARK_VALUE;
 
 	public DefenseBuster() {
 		super(0.5, 0, 0);
@@ -66,7 +66,7 @@ public class DefenseBuster extends PIDSubsystem {
 		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
 		angleMotor.set(output);
 	}
-	
+
 	public void park(){
 		setSetpoint(PARK_VALUE);
 	}
