@@ -19,7 +19,7 @@ public class AimAndShootCommand extends CommandGroup {
     	// Aim the robot at the U.
     	addSequential(new VisionAimCommand());
     	// Shoot the boulder into the castle.
-    	addSequential(new ShooterFireCommand(ShooterFireCommand.SHOOTER_FIRE));
+    	addSequential(new Fire());
     	
     	// Requires
     	requires(Robot.chassis);
