@@ -13,7 +13,7 @@ public class ShooterFireCommand extends Command {
 	public static final int SHOOTER_RESET = 0;
 	public static final int SHOOTER_FIRE = 1;
 	public static final int SHOOTER_TOGGLE = 2;
-	public static int shooter_mode;
+	public int shooter_mode;
 	
     public ShooterFireCommand(int mode) {
         requires(Robot.shooter);

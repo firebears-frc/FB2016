@@ -84,7 +84,7 @@ public class OI {
 		shootButton.whenPressed(new Fire());
 
 		servoUP = new JoystickButton(joystick1, 2);
-		servoUP.whenPressed(new ShooterFireCommand(2));
+		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_TOGGLE));
 		
 		shooterSpinDown = new JoystickButton(joystick1, 3);
 		shooterSpinDown.whenPressed(new ShooterSpinCommand(0));
