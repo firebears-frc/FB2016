@@ -52,8 +52,6 @@ public class Robot extends IterativeRobot {
 	private SelectAuto selectAuto;
 	private final LcdOverLay lcdol = new LcdOverLay();
 
-	private PIDCommand rotateCommand;
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -80,12 +78,9 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = new AutonomousCommand(new DrawbridgeCommand());
 		selectAuto = new SelectAuto();
 
-		// Smart Dashboard
-		rotateCommand = new RotationCommand(90);
-
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
-		
+
 		// Set Network Tables for vision
 		vision.init();
 	}
@@ -153,11 +148,22 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 
 		if (RobotMap.DEBUG) {
-			SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
-			SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
 
-			SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
-			SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
+			CANTalon talon3 = RobotMap.chassisBackLeft;
+			SmartDashboard.putNumber("encoderLeft dist", talon3.getEncPosition());
+			SmartDashboard.putNumber("encoderLeft rate", talon3.getEncVelocity());
+			SmartDashboard.putNumber("encoderLeft temp", talon3.getTemperature());
+
+			CANTalon talon5 = RobotMap.chassisBackRight;
+			SmartDashboard.putNumber("encoderRight dis", talon5.getEncPosition());
+			SmartDashboard.putNumber("encoderRight rate", talon5.getEncVelocity());
+			SmartDashboard.putNumber("encoderRight temp", talon5.getTemperature());
+
+//			SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
+//			SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
+//
+//			SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
+//			SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
 
 			if (RobotMap.navXBoard != null) {
 				SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());
@@ -167,8 +173,6 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("accel X", RobotMap.builtInAccelerometer.getX());
 			SmartDashboard.putNumber("accel Y", RobotMap.builtInAccelerometer.getY());
 			SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
-
-			SmartDashboard.putData("Rotate", rotateCommand);
 
 			SmartDashboard.putNumber("defenseBusterInput", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
 			SmartDashboard.putNumber("Ballgetterpot", RobotMap.ballGetterAnalogInput.getAverageVoltage());
