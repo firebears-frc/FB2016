@@ -26,6 +26,7 @@ public class SelectAuto extends Command {
 	ChevalDeFriseCommand cdf = new ChevalDeFriseCommand();
 
 	int x = 0;
+	double rf = Robot.shooter.getRangeFinderDistance();
 
 
 
@@ -35,134 +36,230 @@ public class SelectAuto extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.chassis);
+		
 	}
 
 	// Called just before this Command runs the first time
 	public void initialize() {
+		
 	
 
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	public void execute() {
-		
 		LiquidCrystal lcd = RobotMap.lcd;
 		x = x + 1;
 		lcd.home();
 
-		if (x > 9) {//number of autos + one welcome screen
+		if (x > 10) {//number of autos + one welcome screen
 			x = 2;
 		}
 		if (x > 1){
-			
 			lcd.setCursor(0, 0);
 			lcd.print("Auto Mode:");
 		}
 		if (x == 1) {
+			String row1 = "Welcome to the";
+			String row2 = "FireBears2846 Robot!";
+			String row3 = "Your Journey Begins";
+			String row4 = "Now.";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
+			
 			lcd.setCursor(0, 0);
-			lcd.print("Welcome to the");
+			lcd.print(""+row1);
 			lcd.setCursor(0, 1);
-			lcd.print("FireBears2846 Robot!");
+			lcd.print(""+row2);
 			lcd.setCursor(0, 2);
-			lcd.print("Your Journey Begins");
+			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
-			lcd.print("Now.");
+			lcd.print(""+row4);
 			
 		}
 		if (x == 2) {
+			String row1 = "Rotate45";
+			String row2 = "Rotate the robot    ";
+			String row3 = "45 degrees.         ";
+			String row4 = "               ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
+			
 			lcd.setCursor(10, 0);
-			lcd.print("Rotate45");
+			lcd.print(""+row1);
 			lcd.print("  ");
 			lcd.setCursor(0, 1);
-			lcd.print("Rotate the robot    ");
+			lcd.print(""+row2);
 			lcd.setCursor(0, 2);
-			lcd.print("45 degrees.         ");
+			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
-			lcd.print("               ");
+			lcd.print(""+row4);
 			Robot.autonomousCommand = rc45;
 		}
 		if (x == 3) {
+			String row1 = "Rotate90";
+			String row2 = "Rotate the robot    ";
+			String row3 = "90 degrees.         ";
+			String row4 = "               ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
+			
+			
 			lcd.setCursor(10, 0);
-			lcd.print("Rotate90");
+			lcd.print(""+row1);
 			lcd.print("  ");
 			lcd.setCursor(0, 1);
-			lcd.print("Rotate the robot    ");
+			lcd.print(""+row2);
 			lcd.setCursor(0, 2);
-			lcd.print("90 degrees.         ");
+			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
-			lcd.print("               ");
+			lcd.print(""+row4);
 			Robot.autonomousCommand = rc;
 		}
 		if (x == 4){
+			String row1 = "Rotate180";
+			String row2 = "Rotate the robot    ";
+			String row3 = "180 degrees.        ";
+			String row4 = "               ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
+			
 			lcd.setCursor(10, 0);
-			lcd.print("Rotate180");
+			lcd.print(""+row1);
 			lcd.print(" ");
 			lcd.setCursor(0, 1);
-			lcd.print("Rotate the robot    ");
+			lcd.print(""+row2);
 			lcd.setCursor(0, 2);
-			lcd.print("180 degrees.        ");
+			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
-			lcd.print("               ");
+			lcd.print(""+row4);
 			Robot.autonomousCommand = rc180;
 		}
 		if (x == 5) {
+			String row1 = "RampParts";
+			String row2 = "Drive straight over ";
+			String row3 = "the RampParts.      ";
+			String row4 = "               ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
 			lcd.setCursor(10, 0);
-			lcd.print("RampParts");
+			lcd.print(""+row1);
 			lcd.print(" ");
 			lcd.setCursor(0, 1);
-			lcd.print("Drive straight over ");
+			lcd.print(""+row2);
 			lcd.setCursor(0, 2);
-			lcd.print("the RampParts.      ");
+			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
-			lcd.print("               ");
+			lcd.print(""+row4);
 			Robot.autonomousCommand = rp;//command
 		}
 		if (x == 6) {
+			String row1 = "Moat";
+			String row2 = "Go over the Moat    ";
+			String row3 = "                    ";
+			String row4 = "               ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
 			lcd.setCursor(10, 0);
-			lcd.print("Moat");
+			lcd.print(""+row1);
 			lcd.print("      ");
 			lcd.setCursor(0, 1);
-			lcd.print("Go over the Moat    ");
+			lcd.print(""+row2);
 			lcd.setCursor(0, 2);
-			lcd.print("                    ");
+			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
-			lcd.print("               ");
+			lcd.print(""+row4);
 			Robot.autonomousCommand = mc;//command
 		}
 		if (x == 7) {
+			String row1 = "LowBar";
+			String row2 = "Go under the        ";
+			String row3 = "LowBar.             ";
+			String row4 = "               ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
 			lcd.setCursor(10, 0);
-			lcd.print("LowBar");
+			lcd.print(""+row1);
 			lcd.print("    ");
 			lcd.setCursor(0, 1);
-			lcd.print("Drive under the     ");
+			lcd.print(""+row2);
 			lcd.setCursor(0, 2);
-			lcd.print("LowBar.             ");
+			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
-			lcd.print("               ");
+			lcd.print(""+row4);
 			Robot.autonomousCommand = lb;//command
 		}
 		if (x == 8) {
+			String row1 = "Cheval";
+			String row2 = "Drives up to the";
+			String row3 = "ChevalDeFrise & puts";
+			String row4 = "down the arm.  ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
 			lcd.setCursor(10, 0);
-			lcd.print("Cheval");
+			lcd.print(""+row1);
 			lcd.print("    ");
 			lcd.setCursor(0, 1);
-			lcd.print("Drives up to the");
+			lcd.print(""+row2);
 			lcd.setCursor(0, 2);
-			lcd.print("ChevalDeFrise & puts");
+			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
-			lcd.print("down the arm.  ");
+			lcd.print(""+row4);
 			Robot.autonomousCommand = cdf;//command
 		}
 		if (x == 9) {
+			String row1 = "Nothing";
+			String row2 = "Do nothing.         ";
+			String row3 = "                    ";
+			String row4 = "               ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
 			lcd.setCursor(10, 0);
-			lcd.print("Nothing");
+			lcd.print(""+row1);
 			lcd.print("   ");
 			lcd.setCursor(0, 1);
-			lcd.print("Do nothing.         ");
+			lcd.print(""+row2);
 			lcd.setCursor(0, 2);
-			lcd.print("                    ");
+			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
-			lcd.print("               ");
+			lcd.print(""+row4);
+			Robot.autonomousCommand = null;//command
+		}
+		if (x == 10) {
+			String row1 = ""+rf;
+			String row2 = "                    ";
+			String row3 = "                    ";
+			String row4 = "               ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
+			lcd.setCursor(10, 0);
+			lcd.print(""+rf);
+			lcd.setCursor(0, 1);
+			lcd.print(""+row2);
+			lcd.setCursor(0, 2);
+			lcd.print(""+row3);
+			lcd.setCursor(0, 3);
+			lcd.print(""+row4);
 			Robot.autonomousCommand = null;//command
 		}
 //Note: if the lcd goes out of bounds of the lcd it will send an error and disable the INTER ROBOt

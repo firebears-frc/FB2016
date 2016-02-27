@@ -5,6 +5,7 @@ import org.firebears.util.LiquidCrystal;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -32,6 +33,7 @@ public class LcdOverLay extends Command {
     	LiquidCrystal lcd = RobotMap.lcd;
     	lcd.setCursor(14, 3);
     	lcd.print(String.format("%6.2f",driverStation.getBatteryVoltage()));
+    	SmartDashboard.putNumber("BatteryV", driverStation.getBatteryVoltage());
     }
 
     // Make this return true when this Command no longer needs to run execute()
