@@ -141,6 +141,13 @@ public class OI {
 			SmartDashboard.putData("Rock Wall Auto", new RockWallCommand());
 			SmartDashboard.putData("Rough Terrain Auto", new RoughTerrainCommand());
 			SmartDashboard.putData("Ramparts Auto", new RampartsCommand());
+			SmartDashboard.putNumber("Vision Set", 0.);
+			SmartDashboard.putData("Vision Save To Hue Lo", new Vision.SaveToPref(Vision.PREF_HUE_LO));
+			SmartDashboard.putData("Vision Save To Hue Hi", new Vision.SaveToPref(Vision.PREF_HUE_HI));
+			SmartDashboard.putData("Vision Save To Sat Lo", new Vision.SaveToPref(Vision.PREF_SAT_LO));
+			SmartDashboard.putData("Vision Save To Sat Hi", new Vision.SaveToPref(Vision.PREF_SAT_HI));
+			SmartDashboard.putData("Vision Save To Val Lo", new Vision.SaveToPref(Vision.PREF_VAL_LO));
+			SmartDashboard.putData("Vision Save To Val Hi", new Vision.SaveToPref(Vision.PREF_VAL_HI));
 		}
 
 	}
