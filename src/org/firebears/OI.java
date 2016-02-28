@@ -85,19 +85,19 @@ public class OI {
 
 		servoUP = new JoystickButton(joystick1, 2);
 		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_TOGGLE));
-		
+
 		shooterSpinDown = new JoystickButton(joystick1, 3);
 		shooterSpinDown.whenPressed(new ShooterSpinCommand(0));
-		
+
 		shooterSpinUp = new JoystickButton(joystick1, 5);
 		shooterSpinUp.whenPressed(new ShooterSpinCommand(80));
-		
+
 		aimAndShoot = new JoystickButton(joystick1, 7);
 		aimAndShoot.whileHeld(new AimAndShootCommand());
-		
+
 		park = new JoystickButton(joystick1, 8);
 		park.whenPressed(new ParkCommand());
-		
+
 		celebrateButton = new JoystickButton(joystick1, 12);
 		celebrateButton.whileHeld(new CelebrateCommand());
 
@@ -148,6 +148,7 @@ public class OI {
 			SmartDashboard.putData("Vision Save To Sat Hi", new Vision.SaveToPref(Vision.PREF_SAT_HI));
 			SmartDashboard.putData("Vision Save To Val Lo", new Vision.SaveToPref(Vision.PREF_VAL_LO));
 			SmartDashboard.putData("Vision Save To Val Hi", new Vision.SaveToPref(Vision.PREF_VAL_HI));
+			SmartDashboard.putData("Rotate", new RotationCommand(90));
 		}
 
 	}

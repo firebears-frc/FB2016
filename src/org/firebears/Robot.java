@@ -10,22 +10,24 @@
 
 package org.firebears;
 
-import org.firebears.commands.*;
+import org.firebears.commands.AutonomousCommand;
+import org.firebears.commands.LcdOverLay;
+import org.firebears.commands.SelectAuto;
 import org.firebears.commands.defenses.DrawbridgeCommand;
-import org.firebears.subsystems.*;
+import org.firebears.subsystems.BallGetter;
+import org.firebears.subsystems.Chassis;
+import org.firebears.subsystems.DefenseBuster;
+import org.firebears.subsystems.DrawbridgeBuster;
+import org.firebears.subsystems.Lights;
+import org.firebears.subsystems.Shooter;
+import org.firebears.subsystems.Vision;
 
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.CANSpeedController;
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.kauailabs.navx.frc.AHRS;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -51,8 +53,6 @@ public class Robot extends IterativeRobot {
 
 	private SelectAuto selectAuto;
 	private final LcdOverLay lcdol = new LcdOverLay();
-
-	private PIDCommand rotateCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -80,12 +80,9 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = new AutonomousCommand(new DrawbridgeCommand());
 		selectAuto = new SelectAuto();
 
-		// Smart Dashboard
-		rotateCommand = new RotationCommand(90);
-
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
-		
+
 		// Set Network Tables for vision
 		vision.init();
 	}
@@ -153,31 +150,38 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 
 		if (RobotMap.DEBUG) {
-			SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
-			SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
 
-			SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
-			SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
+			CANTalon talon3 = RobotMap.chassisBackLeft;
+			SmartDashboard.putNumber("encoderLeft dist", talon3.getEncPosition());
+			SmartDashboard.putNumber("encoderLeft rate", talon3.getEncVelocity());
 
-			if (RobotMap.navXBoard != null) {
-				SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());
-				SmartDashboard.putNumber("navX pitch", RobotMap.navXBoard.getPitch());
-			}
+			CANTalon talon5 = RobotMap.chassisBackRight;
+			SmartDashboard.putNumber("encoderRight dis", talon5.getEncPosition());
+			SmartDashboard.putNumber("encoderRight rate", talon5.getEncVelocity());
 
-			SmartDashboard.putNumber("accel X", RobotMap.builtInAccelerometer.getX());
-			SmartDashboard.putNumber("accel Y", RobotMap.builtInAccelerometer.getY());
-			SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
+//			SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
+//			SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
+//
+//			SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
+//			SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
+//
+//			if (RobotMap.navXBoard != null) {
+//				SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());
+//				SmartDashboard.putNumber("navX pitch", RobotMap.navXBoard.getPitch());
+//			}
+//
+//			SmartDashboard.putNumber("accel X", RobotMap.builtInAccelerometer.getX());
+//			SmartDashboard.putNumber("accel Y", RobotMap.builtInAccelerometer.getY());
+//			SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
 
-			SmartDashboard.putData("Rotate", rotateCommand);
-
-			SmartDashboard.putNumber("defenseBusterInput", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
-			SmartDashboard.putNumber("Ballgetterpot", RobotMap.ballGetterAnalogInput.getAverageVoltage());
-			// SmartDashboard.putNumber("Ballcurrent",
-			// RobotMap.ballGetterAngleMotor.getOutputCurrent());
+			SmartDashboard.putNumber("defenseBuster pot", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
+			SmartDashboard.putNumber("Ballgetter pot", RobotMap.ballGetterAnalogInput.getAverageVoltage());
 
 			SmartDashboard.putNumber("Shooter rate", shooter.getRate());
 			SmartDashboard.putNumber("Servo angle", RobotMap.shooterServo.getAngle());
 			SmartDashboard.putNumber("Servo position", RobotMap.shooterServo.getPosition());
+
+			SmartDashboard.putNumber("Rangefinder Inches:", shooter.getRangeFinderDistance());
 		}
 	}
 

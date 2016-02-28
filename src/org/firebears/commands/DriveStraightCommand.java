@@ -16,7 +16,7 @@ public class DriveStraightCommand extends PIDCommand {
 		UNTIL_DISTANCE, // Command will finish after a certain distance
 		UNTIL_HIT_WALL, // Command will finish after distance sensor detects something
 	}
-	
+
 	final double max_speed;
 	final double distance;
 	final UNTIL untilx;
@@ -32,17 +32,17 @@ public class DriveStraightCommand extends PIDCommand {
     	untilx = UNTIL.UNTIL_DISTANCE;
     	getPIDController().setAbsoluteTolerance(2);
     }
-    
+
     public DriveStraightCommand(double z) {
     	this(z, .6);
     }
-    
+
     public DriveStraightCommand(UNTIL until, double speed) {
     	this(0., speed);
     }
 
     protected void initialize() {
-    	 timeout = System.currentTimeMillis() + 1000;
+    	 timeout = System.currentTimeMillis() + 1000 * 5;
     	targetAngle = RobotMap.navXBoard.getAngle();
     	targetLocation = distance + RobotMap.encoderLeft.getDistance();
     	setSetpoint(targetLocation);
@@ -69,7 +69,7 @@ public class DriveStraightCommand extends PIDCommand {
 
 	@Override
 	protected double returnPIDInput() {
-		return RobotMap.encoderLeft.getDistance();
+		return Robot.chassis.getDistance();
 	}
 
 	@Override

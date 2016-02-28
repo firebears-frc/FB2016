@@ -1,9 +1,9 @@
 package org.firebears.subsystems;
 
-import org.firebears.Robot;
 import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTablesJNI;
@@ -51,6 +51,8 @@ public class Vision extends Subsystem {
 	public static double dist_multiplier = DIST_MULTIPLIER;
 	public static double angle_multiplier = ANGLE_MULTIPLIER;
 	public static double target_distance = TARGET_DISTANCE;
+	
+	Relay lightRing = new Relay(1);	
 
 	@Override
 	protected void initDefaultCommand() {}
@@ -75,6 +77,7 @@ public class Vision extends Subsystem {
 	
 	public void init() {
 		readSettingsFromPreferences();
+		lightRing.set(Relay.Value.kOn);
 	}
 	
 	public double getAngle() {
