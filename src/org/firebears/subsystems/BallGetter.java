@@ -28,15 +28,17 @@ public class BallGetter extends PIDSubsystem {
 	final double MAXGET_SPEED;
 
 	/** Minimum value that the setpoint may take, measured in volts. */
-	final double MIN_VALUE;
+	public final double MIN_VALUE;
 
 	/** Maximum value that the setpoint may take, measured in volts. */
-	final double MAX_VALUE;
+	public final double MAX_VALUE;
 
 	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
 	final double MAX_SPEED;
 	
-	final double PARK_VALUE;
+	public final double PARK_VALUE;
+	
+	public int ballGetterPosition = 1;
 
 	private final CANTalon sideMotor = RobotMap.ballGetterSideMotor;
 	private final CANTalon frontMotor = RobotMap.ballGetterFrontMotor;

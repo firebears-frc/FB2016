@@ -13,7 +13,9 @@ package org.firebears;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.firebears.commands.*;
+import org.firebears.commands.defenses.LowBarCommand;
 import org.firebears.commands.defenses.MoatCommand;
+import org.firebears.commands.defenses.PortcullisCommand;
 import org.firebears.commands.defenses.RampartsCommand;
 import org.firebears.commands.defenses.RockWallCommand;
 import org.firebears.commands.defenses.RoughTerrainCommand;
@@ -60,13 +62,13 @@ public class OI {
 
 	DigitalButton But;
 	DigitalButton lazor;
-	JoystickButton ballGetterHighButton;
-	JoystickButton ballGetterLowButton;
+//	JoystickButton ballGetterHighButton;
+//	JoystickButton ballGetterLowButton;
 	JoystickButton ballGetterGrabButton;
 	JoystickButton ballGetterSpitButton;
-	JoystickButton ballGetterOffButton;
-	JoystickButton defenseBusterHighButton;
-	JoystickButton defenseBusterLowButton;
+//	JoystickButton ballGetterOffButton;
+//	JoystickButton defenseBusterHighButton;
+//	JoystickButton defenseBusterLowButton;
 	JoystickButton shootButton;
 	JoystickButton shooterSpinUp;
 	JoystickButton shooterSpinDown;
@@ -74,14 +76,20 @@ public class OI {
 	JoystickButton celebrateButton;
 	JoystickButton aimAndShoot;
 	JoystickButton park;
+	JoystickButton ballGetterChangesButton;
+	JoystickButton defenseBusterChangesButton;
+	JoystickButton portcullisAutoButton;
+	JoystickButton chevalDeFriseAutoButton;
+	JoystickButton lowBarButton;
+	JoystickButton shooterReverseButton;
 
 	public OI() {
 		joystick1 = new Joystick(0);
 		joystick2 = new Joystick(1);
 
 		// Joystick Buttons
-		shootButton = new JoystickButton(joystick1, 1);
-		shootButton.whenPressed(new Fire());
+//		shootButton = new JoystickButton(joystick1, 1);
+//		shootButton.whenPressed(new Fire());
 
 		servoUP = new JoystickButton(joystick1, 2);
 		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_TOGGLE));
@@ -98,34 +106,68 @@ public class OI {
 		park = new JoystickButton(joystick1, 8);
 		park.whenPressed(new ParkCommand());
 
-		celebrateButton = new JoystickButton(joystick1, 12);
-		celebrateButton.whileHeld(new CelebrateCommand());
+//		celebrateButton = new JoystickButton(joystick1, 12);
+//		celebrateButton.whileHeld(new CelebrateCommand());
 
-		ballGetterHighButton = new JoystickButton(joystick2, 6);
-		ballGetterHighButton.whenPressed(new BallStoping());
+		//Actual Joystick Buttons
+//		ballGetterHighButton = new JoystickButton(joystick2, 6);
+//		ballGetterHighButton.whenPressed(new BallStoping());
 //		ballGetterHighButton.whenPressed(new BallGetterSetpointCommand(2.1));
 //		ballGetterHighButton.whenPressed(new BallGetterMotorsCommand(3));
 //		ballGetterHighButton.whenPressed(new ShooterFireCommand(1));
 
-		ballGetterLowButton = new JoystickButton(joystick2, 4);
-		ballGetterLowButton.whenPressed(new BallGetting());
+//		ballGetterLowButton = new JoystickButton(joystick2, 4);
+//		ballGetterLowButton.whenPressed(new BallGetting());
 //		ballGetterLowButton.whenPressed(new ShooterFireCommand(0));
 //		ballGetterLowButton.whenPressed(new BallGetterMotorsCommand(1));
 
-		defenseBusterHighButton = new JoystickButton(joystick2, 5);
-		defenseBusterHighButton.whenPressed(new DefenseBusterSetpointCommand(Robot.defenseBuster.PARK_VALUE));
+//		defenseBusterHighButton = new JoystickButton(joystick2, 5);
+//		defenseBusterHighButton.whenPressed(new DefenseBusterSetpointCommand(Robot.defenseBuster.PARK_VALUE));
 
-		defenseBusterLowButton = new JoystickButton(joystick2, 3);
-		defenseBusterLowButton.whenPressed(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
+//		defenseBusterLowButton = new JoystickButton(joystick2, 3);
+//		defenseBusterLowButton.whenPressed(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
 
 //		ballGetterGrabButton = new JoystickButton(joystick2, 7);
 //		ballGetterGrabButton.whenPressed(new BallGetterMotorsCommand(1));
 
-		ballGetterSpitButton = new JoystickButton(joystick2, 9);
-		ballGetterSpitButton.whenPressed(new BallGetterMotorsCommand(2));
-
-		ballGetterOffButton = new JoystickButton(joystick2, 11);
-		ballGetterOffButton.whenPressed(new BallGetterMotorsCommand(3));
+//		ballGetterSpitButton = new JoystickButton(joystick2, 9);
+//		ballGetterSpitButton.whenPressed(new BallGetterMotorsCommand(2));
+//
+//		ballGetterOffButton = new JoystickButton(joystick2, 11);
+//		ballGetterOffButton.whenPressed(new BallGetterMotorsCommand(3));
+		
+		//Driver Station Buttons
+		ballGetterChangesButton = new JoystickButton(joystick2, 8);
+		ballGetterChangesButton.whenPressed(new BallGetterToggleCommand());
+		
+		ballGetterGrabButton = new JoystickButton(joystick2, 6);
+		ballGetterGrabButton.whenActive(new BallGetterMotorsCommand(1));
+		ballGetterGrabButton.whenReleased(new BallGetterMotorsCommand(3));
+		
+		ballGetterSpitButton = new JoystickButton(joystick2, 7);
+		ballGetterSpitButton.whenActive(new BallGetterMotorsCommand(2));
+		ballGetterSpitButton.whenReleased(new BallGetterMotorsCommand(3));
+		
+		shootButton = new JoystickButton(joystick2, 5);
+		shootButton.whenPressed(new Fire());
+		
+		defenseBusterChangesButton = new JoystickButton(joystick2, 3);
+		defenseBusterChangesButton.whenPressed(new DefenseBusterToggleCommand());
+		
+		portcullisAutoButton = new JoystickButton(joystick2, 2);
+		portcullisAutoButton.whenPressed(new PortcullisCommand());
+		
+		chevalDeFriseAutoButton = new JoystickButton(joystick2, 1);
+		
+		lowBarButton = new JoystickButton(joystick2, 10);
+		lowBarButton.whenPressed(new LowBarNotAutonomousCommand());
+		
+		shooterReverseButton = new JoystickButton(joystick2, 9);
+		shooterReverseButton.whenActive(new ShooterReverseCommand());
+		shooterReverseButton.whenReleased(new ShooterSpinCommand(0));
+		
+		celebrateButton = new JoystickButton(joystick2, 4);
+		celebrateButton.whileHeld(new CelebrateCommand());
 
 		But = new DigitalButton(0);
 		But.whenActive(new SelectAuto());

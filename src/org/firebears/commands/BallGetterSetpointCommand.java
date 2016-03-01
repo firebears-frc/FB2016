@@ -21,6 +21,11 @@ public class BallGetterSetpointCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if (setpoint == Robot.ballGetter.MIN_VALUE+0.1){
+    		Robot.ballGetter.ballGetterPosition = 1;
+    	}else if(setpoint  == Robot.ballGetter.MAX_VALUE-0.15) {
+    		Robot.ballGetter.ballGetterPosition = 2;
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run

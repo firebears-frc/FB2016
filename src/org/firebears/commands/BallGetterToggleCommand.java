@@ -1,35 +1,37 @@
 package org.firebears.commands;
 
 import org.firebears.Robot;
-import org.firebears.RobotMap;
+import org.firebears.subsystems.BallGetter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DefenseBusterSetpointCommand extends Command {
+public class BallGetterToggleCommand extends Command {
 	
-	private double setpoint;
-
-    public DefenseBusterSetpointCommand(double value) {//set (double value)for two button command
-        requires(Robot.defenseBuster);
-        requires(Robot.chassis);
-        setpoint = value;
+    public BallGetterToggleCommand() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.ballGetter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (setpoint == Robot.defenseBuster.PARK_VALUE){
-    		Robot.defenseBuster.defenseBusterPosition = 1;
-    	}else if (setpoint == Robot.defenseBuster.MAX_VALUE){
-    		Robot.defenseBuster.defenseBusterPosition = 2;
+    	switch(Robot.ballGetter.ballGetterPosition){
+    		case (1):
+    			Robot.ballGetter.setSetpoint(Robot.ballGetter.MAX_VALUE-0.15);
+    			Robot.ballGetter.ballGetterPosition = 2;
+    			break;
+    		case (2):
+    			Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE+0.1);
+    			Robot.ballGetter.ballGetterPosition = 1;
+    			break;
     	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.defenseBuster.setSetpoint(setpoint);
     }
 
     // Make this return true when this Command no longer needs to run execute()

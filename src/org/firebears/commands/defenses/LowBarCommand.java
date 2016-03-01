@@ -1,6 +1,8 @@
 package org.firebears.commands.defenses;
 
 import org.firebears.Robot;
+import org.firebears.commands.BallGetterSetpointCommand;
+import org.firebears.commands.DefenseBusterSetpointCommand;
 import org.firebears.commands.DriveStraightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -17,6 +19,8 @@ public class LowBarCommand extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
 
+    	addSequential(new BallGetterSetpointCommand(3.27));
+    	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
     	addSequential(new DriveStraightCommand(60., .6));
     	
         // To run multiple commands at the same time,

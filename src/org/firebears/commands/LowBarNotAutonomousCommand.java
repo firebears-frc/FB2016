@@ -3,28 +3,21 @@ package org.firebears.commands;
 import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
  */
-public class Fire extends CommandGroup {
+public class LowBarNotAutonomousCommand extends CommandGroup {
     
-    public  Fire() {
-    	addSequential(new ShooterFireCommand(0));
-    	addSequential(new WaitCommand(0.25));
-    	addSequential(new ShooterSpinCommand(80),2.0);
-    	//addSequential(new WaitCommand(.5));
-    	addSequential(new ShooterFireCommand(1));
-    	addSequential(new WaitCommand(2.0));
-    	addSequential(new ShooterSpinCommand(0),.5);
-    	addSequential(new ShooterFireCommand(0),.10);
-    	requires(Robot.shooter);
+    public  LowBarNotAutonomousCommand() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
 
+    	addSequential(new BallGetterSetpointCommand(3.27));
+    	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
+    	
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
