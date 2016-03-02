@@ -8,16 +8,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class LowBarNotAutonomousCommand extends CommandGroup {
-    
+
     public  LowBarNotAutonomousCommand() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
 
-    	addSequential(new BallGetterSetpointCommand(3.27));
+    	addSequential(new BallGetterSetpointCommand(Robot.ballGetter.MAX_VALUE - 0.15));
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
-    	
+
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

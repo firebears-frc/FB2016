@@ -57,7 +57,7 @@ public class Lights extends Subsystem {
 		setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODE);
 		setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODE);
 	}
-	
+
 	public void shootMode() {
 		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
 	}
@@ -72,6 +72,7 @@ public class Lights extends Subsystem {
 	public static final String ANIM_PULSING_RED = "ANIM_PULSING_RED";
 	public static final String ANIM_PULSING_BLUE = "ANIM_PULSING_BLUE";
 	public static final String ANIM_MOVING_BLUE = "ANIM_MOVING_BLUE";
+	public static final String ANIM_EXPLODING_R_W_B = "ANIM_EXPLODING_R_W_B";
 	public static final String ANIM_FIRE = "ANIM_FIRE";
 	public static final String ANIM_CRAZY = "ANIM_CRAZY";
 	public static final String ANIM_BINARY = "ANIM_BINARY";

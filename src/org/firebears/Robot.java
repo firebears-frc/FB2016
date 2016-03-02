@@ -54,6 +54,8 @@ public class Robot extends IterativeRobot {
 	private SelectAuto selectAuto;
 	private final LcdOverLay lcdol = new LcdOverLay();
 
+	private long count = 0;
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -141,6 +143,8 @@ public class Robot extends IterativeRobot {
 		}
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
+
+		count = 0;
 	}
 
 
@@ -149,39 +153,43 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
-		if (RobotMap.DEBUG) {
+		if ((count++) % 10 == 0) {
 
-			CANTalon talon3 = RobotMap.chassisBackLeft;
-			SmartDashboard.putNumber("encoderLeft dist", talon3.getEncPosition());
-			SmartDashboard.putNumber("encoderLeft rate", talon3.getEncVelocity());
+			if (RobotMap.DEBUG) {
 
-			CANTalon talon5 = RobotMap.chassisBackRight;
-			SmartDashboard.putNumber("encoderRight dis", talon5.getEncPosition());
-			SmartDashboard.putNumber("encoderRight rate", talon5.getEncVelocity());
+				CANTalon talon3 = RobotMap.chassisBackLeft;
+				SmartDashboard.putNumber("encoderLeft dist", talon3.getEncPosition());
+				SmartDashboard.putNumber("encoderLeft rate", talon3.getEncVelocity());
 
-//			SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
-//			SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
+				CANTalon talon5 = RobotMap.chassisBackRight;
+				SmartDashboard.putNumber("encoderRight dis", talon5.getEncPosition());
+				SmartDashboard.putNumber("encoderRight rate", talon5.getEncVelocity());
+
+//				SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
+//				SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
 //
-//			SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
-//			SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
+//				SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
+//				SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
 //
-//			if (RobotMap.navXBoard != null) {
-//				SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());
-//				SmartDashboard.putNumber("navX pitch", RobotMap.navXBoard.getPitch());
-//			}
+//				if (RobotMap.navXBoard != null) {
+//					SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());
+//					SmartDashboard.putNumber("navX pitch", RobotMap.navXBoard.getPitch());
+//				}
 //
-//			SmartDashboard.putNumber("accel X", RobotMap.builtInAccelerometer.getX());
-//			SmartDashboard.putNumber("accel Y", RobotMap.builtInAccelerometer.getY());
-//			SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
+//				SmartDashboard.putNumber("accel X", RobotMap.builtInAccelerometer.getX());
+//				SmartDashboard.putNumber("accel Y", RobotMap.builtInAccelerometer.getY());
+//				SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
 
-			SmartDashboard.putNumber("defenseBuster pot", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
+				SmartDashboard.putNumber("Shooter rate", shooter.getRate());
+				SmartDashboard.putNumber("Servo angle", RobotMap.shooterServo.getAngle());
+				SmartDashboard.putNumber("Servo position", RobotMap.shooterServo.getPosition());
+
+				SmartDashboard.putNumber("Rangefinder Inches:", shooter.getRangeFinderDistance());
+			}
+
+			SmartDashboard.putNumber("DefenseBuster pot", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
 			SmartDashboard.putNumber("Ballgetter pot", RobotMap.ballGetterAnalogInput.getAverageVoltage());
 
-			SmartDashboard.putNumber("Shooter rate", shooter.getRate());
-			SmartDashboard.putNumber("Servo angle", RobotMap.shooterServo.getAngle());
-			SmartDashboard.putNumber("Servo position", RobotMap.shooterServo.getPosition());
-
-			SmartDashboard.putNumber("Rangefinder Inches:", shooter.getRangeFinderDistance());
 		}
 	}
 
