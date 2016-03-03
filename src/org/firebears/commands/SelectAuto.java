@@ -52,7 +52,7 @@ public class SelectAuto extends Command {
 		x = x + 1;
 		lcd.home();
 
-		if (x > 10) {//number of autos + one welcome screen
+		if (x > 6) {//number of autos + one welcome screen
 			x = 2;
 		}
 		if (x > 1){
@@ -80,9 +80,9 @@ public class SelectAuto extends Command {
 			
 		}
 		if (x == 2) {
-			String row1 = "Rotate45";
-			String row2 = "Rotate the robot    ";
-			String row3 = "45 degrees.         ";
+			String row1 = "RampParts";
+			String row2 = "Drive straight over ";
+			String row3 = "the RampParts.      ";
 			String row4 = "               ";
 			SmartDashboard.putString("Row1", row1);
 			SmartDashboard.putString("Row2", row2);
@@ -98,12 +98,12 @@ public class SelectAuto extends Command {
 			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
 			lcd.print(""+row4);
-			Robot.autonomousCommand = rc45;
+			Robot.autonomousCommand = rp;
 		}
 		if (x == 3) {
-			String row1 = "Rotate90";
-			String row2 = "Rotate the robot    ";
-			String row3 = "90 degrees.         ";
+			String row1 = "Moat";
+			String row2 = "Go over the Moat    ";
+			String row3 = "                    ";
 			String row4 = "               ";
 			SmartDashboard.putString("Row1", row1);
 			SmartDashboard.putString("Row2", row2);
@@ -123,9 +123,9 @@ public class SelectAuto extends Command {
 			Robot.autonomousCommand = rc;
 		}
 		if (x == 4){
-			String row1 = "Rotate180";
-			String row2 = "Rotate the robot    ";
-			String row3 = "180 degrees.        ";
+			String row1 = "LowBar";
+			String row2 = "Go under the        ";
+			String row3 = "LowBar.             ";
 			String row4 = "               ";
 			SmartDashboard.putString("Row1", row1);
 			SmartDashboard.putString("Row2", row2);
@@ -141,13 +141,13 @@ public class SelectAuto extends Command {
 			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
 			lcd.print(""+row4);
-			Robot.autonomousCommand = rc180;
+			Robot.autonomousCommand = lb;
 		}
 		if (x == 5) {
-			String row1 = "RampParts";
-			String row2 = "Drive straight over ";
-			String row3 = "the RampParts.      ";
-			String row4 = "               ";
+			String row1 = "Cheval";
+			String row2 = "Drives up to the";
+			String row3 = "ChevalDeFrise & puts";
+			String row4 = "down the arm.  ";
 			SmartDashboard.putString("Row1", row1);
 			SmartDashboard.putString("Row2", row2);
 			SmartDashboard.putString("Row3", row3);
@@ -161,69 +161,9 @@ public class SelectAuto extends Command {
 			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
 			lcd.print(""+row4);
-			Robot.autonomousCommand = rp;//command
-		}
-		if (x == 6) {
-			String row1 = "Moat";
-			String row2 = "Go over the Moat    ";
-			String row3 = "                    ";
-			String row4 = "               ";
-			SmartDashboard.putString("Row1", row1);
-			SmartDashboard.putString("Row2", row2);
-			SmartDashboard.putString("Row3", row3);
-			SmartDashboard.putString("Row4", row4);
-			lcd.setCursor(10, 0);
-			lcd.print(""+row1);
-			lcd.print("      ");
-			lcd.setCursor(0, 1);
-			lcd.print(""+row2);
-			lcd.setCursor(0, 2);
-			lcd.print(""+row3);
-			lcd.setCursor(0, 3);
-			lcd.print(""+row4);
-			Robot.autonomousCommand = mc;//command
-		}
-		if (x == 7) {
-			String row1 = "LowBar";
-			String row2 = "Go under the        ";
-			String row3 = "LowBar.             ";
-			String row4 = "               ";
-			SmartDashboard.putString("Row1", row1);
-			SmartDashboard.putString("Row2", row2);
-			SmartDashboard.putString("Row3", row3);
-			SmartDashboard.putString("Row4", row4);
-			lcd.setCursor(10, 0);
-			lcd.print(""+row1);
-			lcd.print("    ");
-			lcd.setCursor(0, 1);
-			lcd.print(""+row2);
-			lcd.setCursor(0, 2);
-			lcd.print(""+row3);
-			lcd.setCursor(0, 3);
-			lcd.print(""+row4);
-			Robot.autonomousCommand = lb;//command
-		}
-		if (x == 8) {
-			String row1 = "Cheval";
-			String row2 = "Drives up to the";
-			String row3 = "ChevalDeFrise & puts";
-			String row4 = "down the arm.  ";
-			SmartDashboard.putString("Row1", row1);
-			SmartDashboard.putString("Row2", row2);
-			SmartDashboard.putString("Row3", row3);
-			SmartDashboard.putString("Row4", row4);
-			lcd.setCursor(10, 0);
-			lcd.print(""+row1);
-			lcd.print("    ");
-			lcd.setCursor(0, 1);
-			lcd.print(""+row2);
-			lcd.setCursor(0, 2);
-			lcd.print(""+row3);
-			lcd.setCursor(0, 3);
-			lcd.print(""+row4);
 			Robot.autonomousCommand = cdf;//command
 		}
-		if (x == 9) {
+		if (x == 6) {
 			String row1 = "Nothing";
 			String row2 = "Do nothing.         ";
 			String row3 = "                    ";
@@ -243,25 +183,25 @@ public class SelectAuto extends Command {
 			lcd.print(""+row4);
 			Robot.autonomousCommand = null;//command
 		}
-		if (x == 10) {
-			String row1 = ""+rf;
-			String row2 = "                    ";
-			String row3 = "                    ";
-			String row4 = "               ";
-			SmartDashboard.putString("Row1", row1);
-			SmartDashboard.putString("Row2", row2);
-			SmartDashboard.putString("Row3", row3);
-			SmartDashboard.putString("Row4", row4);
-			lcd.setCursor(10, 0);
-			lcd.print(""+rf);
-			lcd.setCursor(0, 1);
-			lcd.print(""+row2);
-			lcd.setCursor(0, 2);
-			lcd.print(""+row3);
-			lcd.setCursor(0, 3);
-			lcd.print(""+row4);
-			Robot.autonomousCommand = null;//command
-		}
+//		if (x == 10) {
+//			String row1 = ""+rf;
+//			String row2 = "                    ";
+//			String row3 = "                    ";
+//			String row4 = "               ";
+//			SmartDashboard.putString("Row1", row1);
+//			SmartDashboard.putString("Row2", row2);
+//			SmartDashboard.putString("Row3", row3);
+//			SmartDashboard.putString("Row4", row4);
+//			lcd.setCursor(10, 0);
+//			lcd.print(""+rf);
+//			lcd.setCursor(0, 1);
+//			lcd.print(""+row2);
+//			lcd.setCursor(0, 2);
+//			lcd.print(""+row3);
+//			lcd.setCursor(0, 3);
+//			lcd.print(""+row4);
+//			Robot.autonomousCommand = null;//command
+//		}
 //Note: if the lcd goes out of bounds of the lcd it will send an error and disable the INTER ROBOt
 //		lcd.setCursor(0, 1);//Debugging button number
 //		lcd.print("" + x);

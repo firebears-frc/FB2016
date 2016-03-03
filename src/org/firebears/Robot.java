@@ -165,20 +165,20 @@ public class Robot extends IterativeRobot {
 				SmartDashboard.putNumber("encoderRight dis", talon5.getEncPosition());
 				SmartDashboard.putNumber("encoderRight rate", talon5.getEncVelocity());
 
-//				SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
-//				SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
-//
-//				SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
-//				SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
-//
-//				if (RobotMap.navXBoard != null) {
-//					SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());
-//					SmartDashboard.putNumber("navX pitch", RobotMap.navXBoard.getPitch());
-//				}
-//
-//				SmartDashboard.putNumber("accel X", RobotMap.builtInAccelerometer.getX());
-//				SmartDashboard.putNumber("accel Y", RobotMap.builtInAccelerometer.getY());
-//				SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
+				SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
+				SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
+
+				SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
+				SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
+
+				if (RobotMap.navXBoard != null) {
+					SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());
+					SmartDashboard.putNumber("navX pitch", RobotMap.navXBoard.getPitch());
+				}
+
+				SmartDashboard.putNumber("accel X", RobotMap.builtInAccelerometer.getX());
+				SmartDashboard.putNumber("accel Y", RobotMap.builtInAccelerometer.getY());
+				SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
 
 				SmartDashboard.putNumber("Shooter rate", shooter.getRate());
 				SmartDashboard.putNumber("Servo angle", RobotMap.shooterServo.getAngle());
