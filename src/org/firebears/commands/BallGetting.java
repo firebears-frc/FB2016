@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class BallGetting extends CommandGroup {
     
     public  BallGetting() {
+    	// TODO: Change no hard code
     	addSequential(new BallGetterSetpointCommand(3.27));
     	addSequential(new WaitCommand(0.1));
     	addSequential(new ShooterFireCommand(0));

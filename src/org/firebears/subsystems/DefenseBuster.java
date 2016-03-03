@@ -14,6 +14,7 @@ import static org.firebears.RobotMap.getPreferencesDouble;
 
 import org.firebears.RobotMap;
 import org.firebears.commands.BallGetterMotorsCommand;
+import org.firebears.util.SoftFuse;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
@@ -37,6 +38,8 @@ public class DefenseBuster extends PIDSubsystem {
 	public double PARK_VALUE;
 	
 	public int defenseBusterPosition = 1;
+	
+	SoftFuse softFuse;
 
 	public DefenseBuster() {
 		super(0.5, 0, 0);
@@ -46,9 +49,13 @@ public class DefenseBuster extends PIDSubsystem {
 		MAX_VALUE = getPreferencesDouble("DefenseBuster.max_value", 3.911);
 		PARK_VALUE = getPreferencesDouble("DefenseBuster.park_value", 2.726);
 
+		softFuse = new SoftFuse(angleMotor, 40, 1, 2);
+		
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
 		setSetpoint(2.6);
+		softFuse.positionFuse(angleMotor.getOutputCurrent());
+
 		getPIDController().enable();
 		LiveWindow.addActuator("DefenseBuster", "PIDSubsystem Controller", getPIDController());
 	}
@@ -72,6 +79,7 @@ public class DefenseBuster extends PIDSubsystem {
 
 	public void park(){
 		setSetpoint(PARK_VALUE);
+		softFuse.positionFuse(angleMotor.getOutputCurrent());
 	}
 //	public void up(){ for toggle
 //		angleMotor.set(2.726);
