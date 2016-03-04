@@ -21,14 +21,14 @@ public class ChevalDeFriseCommand extends CommandGroup {
     	
     	addSequential(new DriveStraightCommand(60.,.8));
     	addSequential(new WaitCommand(1.25));
-    	addSequential(new DefenseBusterSetpointCommand(3.911));
-    	addSequential(new DriveStraightCommand(60.,.5));
-    	addSequential(new DefenseBusterSetpointCommand(2.726));
-    	addSequential(new DriveStraightCommand(60.,.7));
-    	addSequential(new DriveStraightCommand(60.,.8));
+    	addSequential(new DefenseBusterSetpointCommand(2.15));
+    	addSequential(new DriveStraightCommand(20.,.5),.25);
+    	addSequential(new DefenseBusterSetpointCommand(.7));
+    	addSequential(new DriveStraightCommand(30.,.7),.2);
+    	addSequential(new DriveStraightCommand(20.,.8),.2);
 //    	addSequential(new DriveStraightCommand(60.,.5));
-    	addSequential(new RotationCommand(90));
-    	addSequential(new DriveStraightCommand(60,.5),.5);
+//    	addSequential(new RotationCommand(90));
+//    	addSequential(new DriveStraightCommand(60,.5),.5);
     	requires(Robot.chassis);
     }
 }

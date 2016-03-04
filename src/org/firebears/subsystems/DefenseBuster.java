@@ -49,7 +49,7 @@ public class DefenseBuster extends PIDSubsystem {
 		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE, 3.911);
 		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE, 2.726);
 
-		softFuse = new SoftFuse(angleMotor, 40, 1, 2);
+		softFuse = new SoftFuse(angleMotor, 35, 1, 2);
 		
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);

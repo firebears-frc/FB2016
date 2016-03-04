@@ -157,19 +157,19 @@ public class Robot extends IterativeRobot {
 
 			if (RobotMap.DEBUG) {
 
-				CANTalon talon3 = RobotMap.chassisBackLeft;
-				SmartDashboard.putNumber("encoderLeft dist", talon3.getEncPosition());
-				SmartDashboard.putNumber("encoderLeft rate", talon3.getEncVelocity());
+				CANTalon talon2 = RobotMap.chassisFrontLeft;
+				SmartDashboard.putNumber("encoderLeft dist", talon2.getEncPosition());
+				SmartDashboard.putNumber("encoderLeft rate", talon2.getEncVelocity());
 
-				CANTalon talon5 = RobotMap.chassisBackRight;
-				SmartDashboard.putNumber("encoderRight dis", talon5.getEncPosition());
-				SmartDashboard.putNumber("encoderRight rate", talon5.getEncVelocity());
+				CANTalon talon4 = RobotMap.chassisFrontRight;
+				SmartDashboard.putNumber("encoderRight dis", talon4.getEncPosition());
+				SmartDashboard.putNumber("encoderRight rate", talon4.getEncVelocity());
 
-				SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
-				SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
-
-				SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
-				SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
+//				SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
+//				SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
+//
+//				SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
+//				SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
 
 				if (RobotMap.navXBoard != null) {
 					SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());

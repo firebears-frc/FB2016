@@ -13,7 +13,7 @@ public class RampartsCommand extends CommandGroup {
     
     public  RampartsCommand() {
     	addSequential(new GetRotation());
-        addSequential(new DriveStraightCommand(120.,.75));
+        addSequential(new DriveStraightCommand(60.,.75),5.);
     	addSequential(new AdjustRotation());
      
     	requires(Robot.chassis);

@@ -171,7 +171,7 @@ public class OI {
 
 		But = new DigitalButton(0);
 		But.whenActive(new SelectAuto());
-		lazor = new DigitalButton(9);
+		lazor = new DigitalButton(6);
 		lazor.whenActive(new ShooterFireCommand(1));
 
 		// SmartDashboard Buttons

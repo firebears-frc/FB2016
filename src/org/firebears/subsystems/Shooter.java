@@ -53,12 +53,12 @@ public class Shooter extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		//shootingMotor.set(-1 * Math.abs(output));
-		shootingMotor.set(Math.abs(output));
+		shootingMotor.set(-1 * Math.abs(output));
+//		shootingMotor.set(Math.abs(output));
 	}
 
 	public void spinnerStart() {
-		shootingMotor.set(0.2);
+		shootingMotor.set(-0.2);
 		setSetpoint(GOAL_SPEED);
 		enable();
 	}

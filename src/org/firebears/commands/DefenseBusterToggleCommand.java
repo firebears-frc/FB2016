@@ -19,11 +19,11 @@ public class DefenseBusterToggleCommand extends Command {
     protected void initialize() {
     	switch(Robot.defenseBuster.defenseBusterPosition){
     		case(1):
-    			Robot.defenseBuster.setSetpoint(Robot.defenseBuster.MAX_VALUE);
+    			Robot.defenseBuster.setSetpoint(2.15);
 				Robot.defenseBuster.defenseBusterPosition = 2;
 				break;
     		case (2):
-    			Robot.defenseBuster.setSetpoint(Robot.defenseBuster.PARK_VALUE);
+    			Robot.defenseBuster.setSetpoint(0.7);
 				Robot.defenseBuster.defenseBusterPosition = 1;
 				break;
     	}
