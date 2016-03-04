@@ -192,7 +192,23 @@ public class OI {
 			SmartDashboard.putData("Vision Save To Val Hi", new Vision.SaveToPref(Vision.PREF_VAL_HI));
 			SmartDashboard.putData("Rotate", new RotationCommand(90));
 		}
+		// Create a variable to be read for the Network Tables Variables.
+		SmartDashboard.putNumber(SetPreferences.SET_VAR, 0.0);
+		// Create buttons for each preference value to set the preferences from previous variable.
+		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MAX_SPEED);
+		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE);
+		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE);
+		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE);
+		pref_btn(RobotMap.PREF_BALL_GETTER_MAX_SPEED);
+		pref_btn(RobotMap.PREF_BALL_GETTER_MIN_VALUE);
+		pref_btn(RobotMap.PREF_BALL_GETTER_MAX_VAUE);
+		pref_btn(RobotMap.PREF_BALL_GETTER_MAXGET_SPEED);
+		pref_btn(RobotMap.PREF_BALL_GETTER_PARK_VALUE);
 
+	}
+	
+	public void pref_btn(String pref_var_name) {
+		SmartDashboard.putData("Set Preference \"" + pref_var_name + "\"", new SetPreferences(pref_var_name));
 	}
 
 	public Joystick getJoystick1() {

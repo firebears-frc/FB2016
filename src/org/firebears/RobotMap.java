@@ -91,6 +91,18 @@ public class RobotMap {
 	static double m_rampRate = 10;
 	static int m_profile = 0;
 	static int m_CountPerRev = 255;//****Magnetic
+	
+	public static final String PREF_DEFENSE_BUSTER_MAX_SPEED = "DefenseBuster.max_speed";
+	public static final String PREF_DEFENSE_BUSTER_MIN_VALUE = "DefenseBuster.min_value";
+	public static final String PREF_DEFENSE_BUSTER_MAX_VALUE = "DefenseBuster.max_value";
+	public static final String PREF_DEFENSE_BUSTER_PARK_VALUE = "DefenseBuster.park_value";
+	
+	public static final String PREF_BALL_GETTER_MAX_SPEED = "BallGetter.max_speed";
+	public static final String PREF_BALL_GETTER_MIN_VALUE = "BallGetter.min_value";
+	public static final String PREF_BALL_GETTER_MAX_VAUE = "BallGetter.max_value";
+	public static final String PREF_BALL_GETTER_MAXGET_SPEED = "BallGetter.maxget_speed";
+	public static final String PREF_BALL_GETTER_PARK_VALUE = "BallGetter.park_value";
+
 
 	public static void init() {
 

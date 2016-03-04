@@ -52,7 +52,7 @@ public class Vision extends Subsystem {
 	public static double angle_multiplier = ANGLE_MULTIPLIER;
 	public static double target_distance = TARGET_DISTANCE;
 	
-	Relay lightRing = new Relay(1);	
+	Relay lightRing;	
 
 	@Override
 	protected void initDefaultCommand() {}
@@ -77,7 +77,8 @@ public class Vision extends Subsystem {
 	
 	public void init() {
 		readSettingsFromPreferences();
-		lightRing.set(Relay.Value.kOn);
+		lightRing = new Relay(0);
+		lightRing.set(Relay.Value.kForward);
 	}
 	
 	public double getAngle() {
