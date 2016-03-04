@@ -13,7 +13,7 @@ package org.firebears;
 import org.firebears.commands.AutonomousCommand;
 import org.firebears.commands.LcdOverLay;
 import org.firebears.commands.SelectAuto;
-import org.firebears.commands.defenses.DrawbridgeCommand;
+import org.firebears.commands.defenses.MoatCommand;
 import org.firebears.subsystems.BallGetter;
 import org.firebears.subsystems.Chassis;
 import org.firebears.subsystems.DefenseBuster;
@@ -79,7 +79,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 
 		// TODO: Make it so this can be switched
-		autonomousCommand = new AutonomousCommand(new DrawbridgeCommand());
+		autonomousCommand = new AutonomousCommand(new MoatCommand());
 		selectAuto = new SelectAuto();
 
 		Robot.ballGetter.park();

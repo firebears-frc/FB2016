@@ -91,6 +91,7 @@ public class OI {
 //		shootButton = new JoystickButton(joystick1, 1);
 //		shootButton.whenPressed(new Fire());
 
+		// TODO: Remove when not needed anymore.
 		servoUP = new JoystickButton(joystick1, 2);
 		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_TOGGLE));
 

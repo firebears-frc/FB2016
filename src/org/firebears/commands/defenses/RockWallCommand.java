@@ -12,7 +12,7 @@ public class RockWallCommand extends CommandGroup {
     public  RockWallCommand() {
     	
     	addSequential(new GetRotation());
-        addSequential(new DriveStraightCommand(60.,.75),5.);
+        addSequential(new DriveStraightCommand(180.,.75));
     	addSequential(new AdjustRotation());
      
     	requires(Robot.chassis);

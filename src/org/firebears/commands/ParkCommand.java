@@ -36,7 +36,7 @@ public class ParkCommand extends CommandGroup {
 	
     public  ParkCommand() {
     	// Drive up the slope until wall is hit.
-    	addSequential(new DriveStraightCommand(DriveStraightCommand.UNTIL.UNTIL_HIT_WALL, .6));
+    	// addSequential(new DriveStraightCommand(DriveStraightCommand.UNTIL.UNTIL_HIT_WALL, .6));
     	// Turn on break as to not move.
     	addSequential(new BreakCommand());
     }

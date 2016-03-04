@@ -21,7 +21,7 @@ public class LowBarCommand extends CommandGroup {
 
     	addSequential(new BallGetterSetpointCommand(Robot.ballGetter.MAX_VALUE - 0.15));
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
-    	addSequential(new DriveStraightCommand(60., .6));
+    	addSequential(new DriveStraightCommand(180., .6));
 
         // To run multiple commands at the same time,
         // use addParallel()
