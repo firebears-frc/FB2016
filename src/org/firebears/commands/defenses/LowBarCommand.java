@@ -19,7 +19,7 @@ public class LowBarCommand extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
 
-    	addSequential(new BallGetterSetpointCommand(Robot.ballGetter.MAX_VALUE - 0.15));
+    	addSequential(new BallGetterSetpointCommand(Robot.ballGetter.MAX_VALUE));
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
     	addSequential(new DriveStraightCommand(180., .6));
 

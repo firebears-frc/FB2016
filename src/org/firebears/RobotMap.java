@@ -117,7 +117,7 @@ public class RobotMap {
 
 		chassisBackLeft = new CANTalon(3);
 		chassisBackLeft.enableBrakeMode(false);
-		chassisBackLeft.reverseSensor(true);
+//		chassisBackLeft.reverseSensor(true);
 		LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
 
 		chassisBackRight = new CANTalon(5);

@@ -82,6 +82,7 @@ public class OI {
 	JoystickButton chevalDeFriseAutoButton;
 	JoystickButton lowBarButton;
 	JoystickButton shooterReverseButton;
+	JoystickButton servoButton;
 
 	public OI() {
 		joystick1 = new Joystick(0);
@@ -93,7 +94,10 @@ public class OI {
 
 		// TODO: Remove when not needed anymore.
 		servoUP = new JoystickButton(joystick1, 2);
-		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_TOGGLE));
+		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_FIRE));
+		
+		servoButton = new JoystickButton(joystick1, 1);
+		servoButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
 
 		shooterSpinDown = new JoystickButton(joystick1, 3);
 		shooterSpinDown.whenPressed(new ShooterSpinCommand(0));
@@ -101,8 +105,8 @@ public class OI {
 		shooterSpinUp = new JoystickButton(joystick1, 5);
 		shooterSpinUp.whenPressed(new ShooterSpinCommand(80));
 
-		aimAndShoot = new JoystickButton(joystick1, 7);
-		aimAndShoot.whileHeld(new AimAndShootCommand());
+//		aimAndShoot = new JoystickButton(joystick1, 7);
+//		aimAndShoot.whileHeld(new AimAndShootCommand());
 
 		park = new JoystickButton(joystick1, 8);
 		park.whenPressed(new ParkCommand());
@@ -164,7 +168,7 @@ public class OI {
 		lowBarButton.whenPressed(new LowBarNotAutonomousCommand());
 		
 		shooterReverseButton = new JoystickButton(joystick2, 9);
-		shooterReverseButton.whenActive(new ShooterReverseCommand());
+		shooterReverseButton.whenActive(new ShooterSpinCommand(-10));
 		shooterReverseButton.whenReleased(new ShooterSpinCommand(0));
 		
 		celebrateButton = new JoystickButton(joystick2, 4);
@@ -172,8 +176,8 @@ public class OI {
 
 		But = new DigitalButton(0);
 		But.whenActive(new SelectAuto());
-		lazor = new DigitalButton(6);
-		lazor.whenActive(new ShooterFireCommand(1));
+//		lazor = new DigitalButton(6);
+//		lazor.whenActive(new LazorCommand());
 
 		// SmartDashboard Buttons
 		if (RobotMap.DEBUG)  {

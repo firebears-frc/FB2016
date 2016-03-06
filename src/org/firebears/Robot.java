@@ -22,7 +22,10 @@ import org.firebears.subsystems.Lights;
 import org.firebears.subsystems.Shooter;
 import org.firebears.subsystems.Vision;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -55,6 +58,8 @@ public class Robot extends IterativeRobot {
 	private final LcdOverLay lcdol = new LcdOverLay();
 
 	private long count = 0;
+	public static AnalogInput lazor; 
+	private boolean lazorDown = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -71,6 +76,8 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		lights = new Lights();
 		vision = new Vision();
+		lazor = new AnalogInput(3);
+
 
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
@@ -84,6 +91,7 @@ public class Robot extends IterativeRobot {
 
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
+		Robot.shooter.servoFire();
 
 		// Set Network Tables for vision
 		vision.init();
@@ -152,6 +160,21 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		double voltage = Robot.lazor.getAverageVoltage();
+		// Not broken
+		if(voltage > 1) {
+			lazorDown = true;
+		// Broken
+		}else{
+			if(lazorDown) {
+		    	if(Robot.ballGetter.mode3 == 1) {
+		    		Robot.shooter.servoReset();
+		    	}else{
+		    		Robot.shooter.servoFire();
+		    	}
+			}
+	    	lazorDown = false;
+		}
 
 		if ((count++) % 10 == 0) {
 

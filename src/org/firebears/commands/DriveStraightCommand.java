@@ -80,7 +80,7 @@ public class DriveStraightCommand extends PIDCommand {
 		double x = angleDiff * 0.1;
 		x = Math.max(-0.2, Math.min(x, 0.2));
 		double y = -1 * output;
-		Robot.chassis.drive(x, y);
+		Robot.chassis.drive(0, y);
 
 	}
 }

@@ -17,12 +17,13 @@ public class ShooterSpinCommand extends Command {
     }
 
     protected void initialize() {
-    	if (speed == 0.0) {
+    	if (speed <= 0.0) {
     		Robot.shooter.disable();
+    		Robot.shooter.shootingMotor.set(-speed);
     	} else {
     		Robot.shooter.enable();
+        	Robot.shooter.setSetpoint(speed);
     	}
-    	Robot.shooter.setSetpoint(speed);
     	Robot.lights.shootMode();
     }
 

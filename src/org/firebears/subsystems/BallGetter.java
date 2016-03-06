@@ -12,6 +12,7 @@ package org.firebears.subsystems;
 
 import static org.firebears.RobotMap.getPreferencesDouble;
 
+import org.firebears.Robot;
 import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -48,6 +49,9 @@ public class BallGetter extends PIDSubsystem {
 	public final static int GRAB = 1;
 	public final static int SPIT = 2;
 	public final static int OFF = 3;
+	
+	public int mode2 = OFF;
+	public int mode3 = 0;
 
 	public BallGetter() {
 		
@@ -55,10 +59,10 @@ public class BallGetter extends PIDSubsystem {
 		super(1.005, 0, 0);
 
 		MAX_SPEED = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAX_SPEED, 0.65);
-		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MIN_VALUE, .9);
+		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MIN_VALUE, .75);
 		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAX_VAUE, 1.9);
 		MAXGET_SPEED = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAXGET_SPEED, 0.75);
-		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_PARK_VALUE, 1.);
+		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_PARK_VALUE, .9);
 
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
@@ -95,15 +99,19 @@ public class BallGetter extends PIDSubsystem {
 //	}
 
 	public void setMotors(int mode) {
+		mode2 = mode;
 		if (mode == GRAB) {
 			frontMotor.set(-MAXGET_SPEED);
 			sideMotor.set(-MAXGET_SPEED);
+			mode3 = 0;
 		} else if (mode == OFF) {
 			frontMotor.set(0);
 			sideMotor.set(0);
 		} else if (mode == SPIT) {
+			Robot.shooter.servoReset();
 			frontMotor.set(MAXGET_SPEED);
 			sideMotor.set(0);
+			mode3 = 1;
 		}
 	}
 }

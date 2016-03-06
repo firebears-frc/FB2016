@@ -15,7 +15,7 @@ public class LowBarNotAutonomousCommand extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
 
-    	addSequential(new BallGetterSetpointCommand(Robot.ballGetter.MAX_VALUE - 0.15));
+    	addSequential(new BallGetterSetpointCommand(Robot.ballGetter.MAX_VALUE));
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
 
         // To run multiple commands at the same time,

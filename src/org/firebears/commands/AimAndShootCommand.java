@@ -17,7 +17,7 @@ public class AimAndShootCommand extends CommandGroup {
         // Command1 and Command2 will run in parallel.
 
     	// Aim the robot at the U.
-    	addSequential(new VisionAimCommand());
+    	addSequential(new VisionAimCommand(),3.0);
     	// Shoot the boulder into the castle.
     	addSequential(new Fire());
     	

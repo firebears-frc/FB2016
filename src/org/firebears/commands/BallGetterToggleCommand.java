@@ -20,11 +20,13 @@ public class BallGetterToggleCommand extends Command {
     protected void initialize() {
     	switch(Robot.ballGetter.ballGetterPosition){
     		case (1):
-    			Robot.ballGetter.setSetpoint(1.9);
+    			Robot.ballGetter.setSetpoint(Robot.ballGetter.MAX_VALUE);
     			Robot.ballGetter.ballGetterPosition = 2;
+    			Robot.shooter.servoReset();
     			break;
     		case (2):
-    			Robot.ballGetter.setSetpoint(.9);
+    			Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
+    			Robot.shooter.servoFire();
     			Robot.ballGetter.ballGetterPosition = 1;
     			break;
     	}

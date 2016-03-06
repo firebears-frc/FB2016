@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class SelectAuto extends Command {
-	RotationCommand rc = new RotationCommand(90);
-	RotationCommand rc180 = new RotationCommand(180);
-	RotationCommand rc45 = new RotationCommand(45);
+//	RotationCommand rc = new RotationCommand(90);
+//	RotationCommand rc180 = new RotationCommand(180);
+//	RotationCommand rc45 = new RotationCommand(45);
 	DriveStraightCommand ds = new DriveStraightCommand(5,.5);
 	RampartsCommand rp = new RampartsCommand();
 	MoatCommand mc = new MoatCommand();
@@ -120,7 +120,7 @@ public class SelectAuto extends Command {
 			lcd.print(""+row3);
 			lcd.setCursor(0, 3);
 			lcd.print(""+row4);
-			Robot.autonomousCommand = rc;
+			Robot.autonomousCommand = mc;
 		}
 		if (x == 4){
 			String row1 = "LowBar";

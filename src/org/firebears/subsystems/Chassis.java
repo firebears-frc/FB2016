@@ -43,9 +43,8 @@ public class Chassis extends Subsystem {
 
 
     public void drive(double x, double y){
-    	double mult = talonFuse.speedFuse(frontLeft.getOutputCurrent());
+    	double mult = 1; //talonFuse.speedFuse(frontLeft.getOutputCurrent());
     	robotDrive.arcadeDrive(-y * mult, -x * mult);
-    	backRight.disable();
     }
 
 
@@ -58,7 +57,7 @@ public class Chassis extends Subsystem {
      * @return Encoder distance measured in inches.
      */
     public double getDistance() {
-    	double distanceInTicks = RobotMap.chassisFrontRight.getEncPosition();
+    	double distanceInTicks = RobotMap.chassisFrontLeft.getEncPosition();
     	return distanceInTicks / TICKS_PER_INCH;
     }
 }

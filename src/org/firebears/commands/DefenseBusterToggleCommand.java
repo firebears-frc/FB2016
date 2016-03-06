@@ -1,6 +1,7 @@
 package org.firebears.commands;
 
 import org.firebears.Robot;
+import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,11 +20,11 @@ public class DefenseBusterToggleCommand extends Command {
     protected void initialize() {
     	switch(Robot.defenseBuster.defenseBusterPosition){
     		case(1):
-    			Robot.defenseBuster.setSetpoint(2.15);
+    			Robot.defenseBuster.setSetpoint(Robot.defenseBuster.MAX_VALUE);
 				Robot.defenseBuster.defenseBusterPosition = 2;
 				break;
     		case (2):
-    			Robot.defenseBuster.setSetpoint(0.7);
+    			Robot.defenseBuster.setSetpoint(Robot.defenseBuster.MIN_VALUE);
 				Robot.defenseBuster.defenseBusterPosition = 1;
 				break;
     	}

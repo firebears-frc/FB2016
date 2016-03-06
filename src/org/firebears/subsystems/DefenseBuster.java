@@ -45,15 +45,15 @@ public class DefenseBuster extends PIDSubsystem {
 		super(0.5, 0, 0);
 
 		MAX_SPEED = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_MAX_SPEED, 0.8);
-		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE, .7);
-		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE, 2.15);
-		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE, .7);
+		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE, 2.5);
+		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE, 3.9);
+		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE, 2.1);
 
 		softFuse = new SoftFuse(angleMotor, 40, 1, 2);
 		
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
-		setSetpoint(2.6);
+		setSetpoint(PARK_VALUE);
 		softFuse.positionFuse(angleMotor.getOutputCurrent());
 
 		getPIDController().enable();

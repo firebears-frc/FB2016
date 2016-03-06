@@ -37,7 +37,7 @@ public class ShooterFireCommand extends Command {
     			Robot.shooter.servoReset();
     			break;
     		default:
-    			Robot.shooter.servoReset();
+    			Robot.shooter.servoFire();
     			break;
     	}
     }

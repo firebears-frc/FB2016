@@ -13,7 +13,7 @@ public class ShooterReverseCommand extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
 
-    	addSequential(new ShooterSpinCommand(-40));
+    	addSequential(new ShooterSpinCommand(-10));
     	addSequential(new ShooterFireCommand(0));
     	
         // To run multiple commands at the same time,

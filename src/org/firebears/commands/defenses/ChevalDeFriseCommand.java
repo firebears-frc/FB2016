@@ -1,8 +1,10 @@
 package org.firebears.commands.defenses;
 
 import org.firebears.Robot;
+import org.firebears.commands.AdjustRotation;
 import org.firebears.commands.DefenseBusterSetpointCommand;
 import org.firebears.commands.DriveStraightCommand;
+import org.firebears.commands.GetRotation;
 import org.firebears.commands.RotationCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -19,13 +21,18 @@ public class ChevalDeFriseCommand extends CommandGroup {
     
     public  ChevalDeFriseCommand() {
     	
-    	addSequential(new DriveStraightCommand(60.,.8));
+//    	addSequential(new GetRotation());
+    	addSequential(new DriveStraightCommand(60,.8));
+//    	addSequential(new AdjustRotation());
     	addSequential(new WaitCommand(1.25));
-    	addSequential(new DefenseBusterSetpointCommand(2.15));
-    	addSequential(new DriveStraightCommand(20.,.5),.25);
-    	addSequential(new DefenseBusterSetpointCommand(.7));
-    	addSequential(new DriveStraightCommand(30.,.7),.2);
-    	addSequential(new DriveStraightCommand(20.,.8),.2);
+    	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
+    	addSequential(new WaitCommand(.25));
+    	addSequential(new DriveStraightCommand(60,.7));
+    	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MIN_VALUE));
+//    	addSequential(new AdjustRotation());
+    	addSequential(new DriveStraightCommand(60,.7));
+    	addSequential(new DriveStraightCommand(60,.8));
+//    	addSequential(new AdjustRotation());
 //    	addSequential(new DriveStraightCommand(60.,.5));
 //    	addSequential(new RotationCommand(90));
 //    	addSequential(new DriveStraightCommand(60,.5),.5);

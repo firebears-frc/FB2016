@@ -35,7 +35,7 @@ public class Shooter extends PIDSubsystem {
 		servoReset();
 	}
 
-	private final CANTalon shootingMotor = RobotMap.shooterShootingMotor;
+	public final CANTalon shootingMotor = RobotMap.shooterShootingMotor;
 	private final Servo shooterServo = RobotMap.shooterServo;
 	private final Counter shooterCounter = RobotMap.shooterCounter;
 
