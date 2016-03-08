@@ -76,12 +76,23 @@ public class DriveStraightCommand extends PIDCommand {
 	protected void usePIDOutput(double output) {
 		output = Math.max((max_speed*-1), Math.min(output, max_speed));
 		double currentAngle = RobotMap.navXBoard.getAngle();
-		double angleDiff = targetAngle - currentAngle;
+		double angleDiff = diff(targetAngle, currentAngle);
 		double x = angleDiff * 0.1;
 		x = Math.max(-0.2, Math.min(x, 0.2));
 		double y = -1 * output;
 		Robot.chassis.drive(0, y);
-
 	}
+
+	/**
+	 * Calculate angle1 - angle2.
+	 * @return angle in the range -180 to 180.
+	 */
+	protected static double diff(double angle1, double angle2) {
+		double angleDiff = angle1 - angle2;
+		while (angleDiff < -180.0) { angleDiff += 360.0; }
+		while (angleDiff > 180.0) { angleDiff -= 360.0; }
+		return angleDiff;
+	}
+
 }
 
