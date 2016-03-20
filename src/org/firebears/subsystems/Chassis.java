@@ -11,6 +11,7 @@
 
 package org.firebears.subsystems;
 
+import org.firebears.Robot;
 import org.firebears.RobotMap;
 import org.firebears.commands.*;
 import org.firebears.util.*;
@@ -40,7 +41,12 @@ public class Chassis extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-
+    public void setBrakeMode(boolean brakeMode) {
+		Robot.chassis.backLeft.enableBrakeMode(brakeMode);
+		Robot.chassis.backRight.enableBrakeMode(brakeMode);
+		Robot.chassis.frontLeft.enableBrakeMode(brakeMode);
+		Robot.chassis.frontRight.enableBrakeMode(brakeMode);
+    }
 
     public void drive(double x, double y){
     	double mult = 1; //talonFuse.speedFuse(frontLeft.getOutputCurrent());
@@ -57,7 +63,8 @@ public class Chassis extends Subsystem {
      * @return Encoder distance measured in inches.
      */
     public double getDistance() {
-    	double distanceInTicks = RobotMap.chassisFrontLeft.getEncPosition();
+//    	double distanceInTicks = RobotMap.chassisFrontLeft.getEncPosition();
+double distanceInTicks = RobotMap.chassisFrontRight.getEncPosition();   // PRACTICE ROBOT
     	return distanceInTicks / TICKS_PER_INCH;
     }
 }

@@ -13,10 +13,7 @@ public class ParkCommand extends CommandGroup {
 	class BreakCommand extends Command {
 		@Override
 		protected void initialize() {
-			Robot.chassis.backLeft.enableBrakeMode(true);
-			Robot.chassis.backRight.enableBrakeMode(true);
-			Robot.chassis.frontLeft.enableBrakeMode(true);
-			Robot.chassis.frontRight.enableBrakeMode(true);
+			Robot.chassis.setBrakeMode(true);
 		}
 
 		@Override

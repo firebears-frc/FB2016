@@ -105,8 +105,8 @@ public class OI {
 		shooterSpinUp = new JoystickButton(joystick1, 5);
 		shooterSpinUp.whenPressed(new ShooterSpinCommand(80));
 
-//		aimAndShoot = new JoystickButton(joystick1, 7);
-//		aimAndShoot.whileHeld(new AimAndShootCommand());
+		aimAndShoot = new JoystickButton(joystick1, 7);
+		aimAndShoot.whileHeld(new AimAndShootCommand());
 
 		park = new JoystickButton(joystick1, 8);
 		park.whenPressed(new ParkCommand());
@@ -146,12 +146,12 @@ public class OI {
 		ballGetterChangesButton.whenPressed(new BallGetterToggleCommand());
 		
 		ballGetterGrabButton = new JoystickButton(joystick2, 6);
-		ballGetterGrabButton.whenActive(new BallGetterMotorsCommand(1));
-		ballGetterGrabButton.whenReleased(new BallGetterMotorsCommand(3));
+		ballGetterGrabButton.whenActive(new BallGetterMotorsCommand(BallGetter.GRAB));
+		ballGetterGrabButton.whenReleased(new BallGetterMotorsCommand(BallGetter.OFF));
 		
 		ballGetterSpitButton = new JoystickButton(joystick2, 7);
-		ballGetterSpitButton.whenActive(new BallGetterMotorsCommand(2));
-		ballGetterSpitButton.whenReleased(new BallGetterMotorsCommand(3));
+		ballGetterSpitButton.whenActive(new BallGetterMotorsCommand(BallGetter.SPIT));
+		ballGetterSpitButton.whenReleased(new BallGetterMotorsCommand(BallGetter.OFF));
 		
 		shootButton = new JoystickButton(joystick2, 5);
 		shootButton.whenPressed(new Fire());
@@ -181,7 +181,7 @@ public class OI {
 
 		// SmartDashboard Buttons
 		if (RobotMap.DEBUG)  {
-			SmartDashboard.putData("DriveStraight", new DriveStraightCommand(60));
+			SmartDashboard.putData("DriveStraight", new DriveStraightCommandAndStop(180, 0.8, 45));
 			SmartDashboard.putData("Right Rotate", new RotationCommand(90));
 			SmartDashboard.putData("Left Rotate", new RotationCommand(-90));
 			SmartDashboard.putData("Moat Auto", new MoatCommand());
@@ -196,19 +196,28 @@ public class OI {
 			SmartDashboard.putData("Vision Save To Val Lo", new Vision.SaveToPref(Vision.PREF_VAL_LO));
 			SmartDashboard.putData("Vision Save To Val Hi", new Vision.SaveToPref(Vision.PREF_VAL_HI));
 			SmartDashboard.putData("Rotate", new RotationCommand(90));
+			
+			SmartDashboard.putData("ballGetter set min", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_MIN_VALUE));
+			SmartDashboard.putData("ballGetter set max", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_MAX_VAUE));
+			SmartDashboard.putData("ballGetter set park", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_PARK_VALUE));
+			SmartDashboard.putData("defenseBuster set min", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE));
+			SmartDashboard.putData("defenseBuster set max", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE));
+			SmartDashboard.putData("defenseBuster set park", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE));
+
 		}
 		// Create a variable to be read for the Network Tables Variables.
 		SmartDashboard.putNumber(SetPreferences.SET_VAR, 0.0);
 		// Create buttons for each preference value to set the preferences from previous variable.
-		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MAX_SPEED);
-		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE);
-		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE);
-		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE);
-		pref_btn(RobotMap.PREF_BALL_GETTER_MAX_SPEED);
-		pref_btn(RobotMap.PREF_BALL_GETTER_MIN_VALUE);
-		pref_btn(RobotMap.PREF_BALL_GETTER_MAX_VAUE);
-		pref_btn(RobotMap.PREF_BALL_GETTER_MAXGET_SPEED);
-		pref_btn(RobotMap.PREF_BALL_GETTER_PARK_VALUE);
+		pref_btn("Shooter.goal_speed");
+//		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MAX_SPEED);
+//		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE);
+//		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE);
+//		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE);
+//		pref_btn(RobotMap.PREF_BALL_GETTER_MAX_SPEED);
+//		pref_btn(RobotMap.PREF_BALL_GETTER_MIN_VALUE);
+//		pref_btn(RobotMap.PREF_BALL_GETTER_MAX_VAUE);
+//		pref_btn(RobotMap.PREF_BALL_GETTER_MAXGET_SPEED);
+//		pref_btn(RobotMap.PREF_BALL_GETTER_PARK_VALUE);
 
 	}
 	

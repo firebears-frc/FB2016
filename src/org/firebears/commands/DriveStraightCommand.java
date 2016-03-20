@@ -44,9 +44,10 @@ public class DriveStraightCommand extends PIDCommand {
     protected void initialize() {
     	 timeout = System.currentTimeMillis() + 1000 * 5;
     	targetAngle = RobotMap.navXBoard.getAngle();
-    	targetLocation = distance + RobotMap.encoderLeft.getDistance();
+    	targetLocation = distance + returnPIDInput();
     	setSetpoint(targetLocation);
     	getPIDController().enable();
+		Robot.chassis.setBrakeMode(true);
     }
 
     protected void execute() {
@@ -61,6 +62,7 @@ public class DriveStraightCommand extends PIDCommand {
     protected void end() {
     	getPIDController().disable();
 		Robot.chassis.drive(0, 0);
+		Robot.chassis.setBrakeMode(false);
     }
 
     protected void interrupted() {
