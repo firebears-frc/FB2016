@@ -55,8 +55,8 @@ public class BallGetter extends PIDSubsystem {
 
 	public BallGetter() {
 		
-
-		super(1.005, 0, 0);
+//		super(1.005, 0, 0);
+		super(1.75, 0.04, 2.5);
 
 		MAX_SPEED = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAX_SPEED, 0.65);
 		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MIN_VALUE, .75);
@@ -66,6 +66,7 @@ public class BallGetter extends PIDSubsystem {
 
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
+		getPIDController().setToleranceBuffer(8);
 		setSetpoint(2.1);
 		getPIDController().enable();
 		LiveWindow.addActuator("BallGetter", "PIDSubsystem Controller", getPIDController());
