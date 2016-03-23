@@ -55,8 +55,8 @@ public class BallGetter extends PIDSubsystem {
 
 	public BallGetter() {
 		
-//		super(1.005, 0, 0);
-		super(1.75, 0.04, 2.5);
+		super(1.005, 0, 0);
+//		super(1.75, 0.04, 2.5);
 
 		MAX_SPEED = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAX_SPEED, 0.65);
 		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MIN_VALUE, .75);

@@ -1,6 +1,7 @@
 package org.firebears.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import static org.firebears.commands.ShooterFireCommand.SHOOTER_RESET;
 
 /**
  *
@@ -14,7 +15,7 @@ public class ShooterReverseCommand extends CommandGroup {
         // these will run in order.
 
     	addSequential(new ShooterSpinCommand(-10));
-    	addSequential(new ShooterFireCommand(0));
+    	addSequential(new ShooterFireCommand(SHOOTER_RESET));
     	
         // To run multiple commands at the same time,
         // use addParallel()
