@@ -58,8 +58,8 @@ public class Robot extends IterativeRobot {
 	private final LcdOverLay lcdol = new LcdOverLay();
 
 	private long count = 0;
-	public static AnalogInput lazor; 
-	private boolean lazorDown = false;
+//	private boolean lazorDown = false;
+	public boolean ballAcquired = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -76,7 +76,6 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		lights = new Lights();
 		vision = new Vision();
-		lazor = new AnalogInput(3);
 
 
 		// OI must be constructed after subsystems. If the OI creates Commands
@@ -160,21 +159,29 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		double voltage = Robot.lazor.getAverageVoltage();
-		// Not broken
-		if(voltage > 1) {
-			lazorDown = true;
-		// Broken
-		}else{
-			if(lazorDown) {
-		    	if(Robot.ballGetter.mode3 == 1) {
-		    		Robot.shooter.servoReset();
-		    	}else{
-		    		Robot.shooter.servoFire();
-		    	}
-			}
-	    	lazorDown = false;
+//		double voltage = Robot.lazor.getAverageVoltage();
+		boolean voltage = RobotMap.lazor.get();
+		
+		if (voltage == false){
+			ballAcquired = true;
+		}else {
+			ballAcquired = false;
 		}
+		
+		// Not broken
+//		if(ballAcquired) {
+//			lazorDown = true;
+//		// Broken
+//		}else{
+//			if(lazorDown) {
+//		    	if(Robot.ballGetter.mode3 == 1) {
+//		    		Robot.shooter.servoReset();
+//		    	}else{
+//		    		Robot.shooter.servoFire();
+//		    	}
+//			}
+//	    	lazorDown = false;
+//		}
 
 		if ((count++) % 10 == 0) {
 
@@ -187,6 +194,9 @@ public class Robot extends IterativeRobot {
 				CANTalon talon4 = RobotMap.chassisFrontRight;
 				SmartDashboard.putNumber("encoderRight dis", talon4.getEncPosition());
 				SmartDashboard.putNumber("encoderRight rate", talon4.getEncVelocity());
+				
+				SmartDashboard.putBoolean("Ball Acquired", ballAcquired);
+//				SmartDashboard.putBoolean("Ball Acquired", lazorDown);
 
 //				SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
 //				SmartDashboard.putNumber("encoderLeft rate: ", RobotMap.encoderLeft.getRate());
