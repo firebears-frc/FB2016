@@ -83,6 +83,7 @@ public class OI {
 	JoystickButton lowBarButton;
 	JoystickButton shooterReverseButton;
 	JoystickButton servoButton;
+	JoystickButton acquireBall;
 
 	public OI() {
 		joystick1 = new Joystick(0);
