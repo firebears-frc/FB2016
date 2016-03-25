@@ -119,8 +119,3 @@ public class BallGetter extends PIDSubsystem {
 		}
 	}
 }
-			sideMotor.set(0);
-			mode3 = 1;
-		}
-	}
-}

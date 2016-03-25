@@ -6,7 +6,6 @@ import org.firebears.commands.DefenseBusterSetpointCommand;
 import org.firebears.commands.DriveStraightCommand;
 import org.firebears.commands.DriveStraightCommandAndStop;
 import org.firebears.commands.GetRotation;
-import org.firebears.commands.RangeFinderStop;
 import org.firebears.commands.RotationCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
