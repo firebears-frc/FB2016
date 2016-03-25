@@ -37,6 +37,8 @@ public class BallGetter extends PIDSubsystem {
 	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
 	final double MAX_SPEED;
 	
+	public final double SIDE_SPEED;
+	
 	public final double PARK_VALUE;
 	
 	public int ballGetterPosition = 1;
@@ -63,7 +65,8 @@ public class BallGetter extends PIDSubsystem {
 		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAX_VAUE, 1.9);
 		MAXGET_SPEED = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAXGET_SPEED, 0.75);
 		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_PARK_VALUE, .9);
-
+		SIDE_SPEED = MAXGET_SPEED * 0.5;
+		
 		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
 		getPIDController().setToleranceBuffer(8);
@@ -103,7 +106,7 @@ public class BallGetter extends PIDSubsystem {
 		mode2 = mode;
 		if (mode == GRAB) {
 			frontMotor.set(MAXGET_SPEED);
-			sideMotor.set(-MAXGET_SPEED);
+			sideMotor.set(-SIDE_SPEED);
 			mode3 = 0;
 		} else if (mode == OFF) {
 			frontMotor.set(0);
