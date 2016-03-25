@@ -4,6 +4,8 @@ import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import static org.firebears.commands.ShooterFireCommand.SHOOTER_FIRE;
+import static org.firebears.commands.ShooterFireCommand.SHOOTER_RESET;
 
 /**
  *
@@ -11,11 +13,11 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class Fire extends CommandGroup {
     
     public  Fire() {
-    	addSequential(new ShooterFireCommand(0));
+    	addSequential(new ShooterFireCommand(SHOOTER_RESET));
     	addSequential(new WaitCommand(0.25));
     	addSequential(new ShooterSpinCommand(120),2.0);
     	//addSequential(new WaitCommand(.5));
-    	addSequential(new ShooterFireCommand(1));
+    	addSequential(new ShooterFireCommand(SHOOTER_FIRE));
     	addSequential(new WaitCommand(2.0));
     	addSequential(new ShooterSpinCommand(0),.5);
 //    	addSequential(new ShooterFireCommand(1),.10);

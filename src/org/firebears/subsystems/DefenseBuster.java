@@ -42,8 +42,8 @@ public class DefenseBuster extends PIDSubsystem {
 	SoftFuse softFuse;
 
 	public DefenseBuster() {
-//		super(0.5, 0, 0);
-		super(1.50, 0.03, 5.0);
+		super(0.5, 0, 0);
+//		super(1.50, 0.03, 5.0);
 
 		MAX_SPEED = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_MAX_SPEED, 0.8);
 		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE, 2.5);

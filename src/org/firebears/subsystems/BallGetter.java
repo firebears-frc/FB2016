@@ -55,8 +55,8 @@ public class BallGetter extends PIDSubsystem {
 
 	public BallGetter() {
 		
-//		super(1.005, 0, 0);
-		super(1.75, 0.04, 2.5);
+		super(1.005, 0, 0);
+//		super(1.75, 0.04, 2.5);
 
 		MAX_SPEED = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAX_SPEED, 0.65);
 		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MIN_VALUE, 2.13);
@@ -102,7 +102,7 @@ public class BallGetter extends PIDSubsystem {
 	public void setMotors(int mode) {
 		mode2 = mode;
 		if (mode == GRAB) {
-			frontMotor.set(-MAXGET_SPEED);
+			frontMotor.set(MAXGET_SPEED);
 			sideMotor.set(-MAXGET_SPEED);
 			mode3 = 0;
 		} else if (mode == OFF) {
@@ -110,7 +110,7 @@ public class BallGetter extends PIDSubsystem {
 			sideMotor.set(0);
 		} else if (mode == SPIT) {
 			Robot.shooter.servoReset();
-			frontMotor.set(MAXGET_SPEED);
+			frontMotor.set(-MAXGET_SPEED);
 			sideMotor.set(0);
 			mode3 = 1;
 		}
