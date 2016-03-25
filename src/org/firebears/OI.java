@@ -13,7 +13,6 @@ package org.firebears;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.firebears.commands.*;
-import org.firebears.commands.defenses.ChevalDeFriseCommand;
 import org.firebears.commands.defenses.LowBarCommand;
 import org.firebears.commands.defenses.MoatCommand;
 import org.firebears.commands.defenses.PortcullisCommand;
@@ -84,8 +83,8 @@ public class OI {
 	JoystickButton lowBarButton;
 	JoystickButton shooterReverseButton;
 	JoystickButton servoButton;
-	JoystickButton idc;
 	JoystickButton acquireBall;
+
 	public OI() {
 		joystick1 = new Joystick(0);
 		joystick2 = new Joystick(1);
@@ -112,9 +111,6 @@ public class OI {
 
 		park = new JoystickButton(joystick1, 8);
 		park.whenPressed(new ParkCommand());
-		
-		idc = new JoystickButton(joystick1, 12);
-		idc.whenPressed(new AcquireBall());
 
 //		celebrateButton = new JoystickButton(joystick1, 12);
 //		celebrateButton.whileHeld(new CelebrateCommand());
@@ -151,8 +147,7 @@ public class OI {
 		ballGetterChangesButton.whenPressed(new BallGetterToggleCommand());
 		
 		ballGetterGrabButton = new JoystickButton(joystick2, 6);
-		ballGetterGrabButton.whenActive(new BallGetterMotorsCommand(BallGetter.GRAB));
-		ballGetterGrabButton.whenReleased(new BallGetterMotorsCommand(BallGetter.OFF));
+		ballGetterGrabButton.whenActive(new AcquireBall());
 		
 		ballGetterSpitButton = new JoystickButton(joystick2, 7);
 		ballGetterSpitButton.whenActive(new BallGetterMotorsCommand(BallGetter.SPIT));
@@ -193,8 +188,6 @@ public class OI {
 			SmartDashboard.putData("Rock Wall Auto", new RockWallCommand());
 			SmartDashboard.putData("Rough Terrain Auto", new RoughTerrainCommand());
 			SmartDashboard.putData("Ramparts Auto", new RampartsCommand());
-			SmartDashboard.putData("ChevalDeFrise Auto", new ChevalDeFriseCommand());
-			SmartDashboard.putData("Pc", new Pitch());
 			SmartDashboard.putNumber("Vision Set", 0.);
 			SmartDashboard.putData("Vision Save To Hue Lo", new Vision.SaveToPref(Vision.PREF_HUE_LO));
 			SmartDashboard.putData("Vision Save To Hue Hi", new Vision.SaveToPref(Vision.PREF_HUE_HI));
