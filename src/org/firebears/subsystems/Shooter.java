@@ -24,13 +24,15 @@ public class Shooter extends PIDSubsystem {
 
 	/** Rangefinder volts per inch. */
     final double VOLT_DIST_RATIO = 0.00929687; //5.084 Volts / 512 inch range 0.009929687
+    
+    final double tolerance = 5.0;
 
 	public Shooter() {
 		super(0.05, 0.0, 0.0);
 		LiveWindow.addActuator("Shooter", "PIDSubsystem Controller", getPIDController());
 		GOAL_SPEED = getPreferencesDouble("Shooter.goal_speed", 90);
 		SERVO_MAX = getPreferencesDouble("Shooter.servo_max", 90);
-		getPIDController().setAbsoluteTolerance(5.0);
+		getPIDController().setAbsoluteTolerance(tolerance);
 		spinnerStop();
 		servoReset();
 	}
@@ -56,6 +58,14 @@ public class Shooter extends PIDSubsystem {
 		shootingMotor.set(-1 * Math.abs(output));
 //		shootingMotor.set(Math.abs(output));
 	}
+	
+	@Override
+	public boolean onTarget() {
+		double setpoint = getPIDController().getSetpoint();
+		double rate = getRate();
+		return Math.abs(rate - setpoint) <= tolerance;
+	}
+
 
 	public void spinnerStart() {
 		shootingMotor.set(-0.2);

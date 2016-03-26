@@ -29,11 +29,11 @@ public class ShooterSpinCommand extends Command {
 
     protected void execute() {
     }
-
-    protected boolean isFinished() {
-//        return Robot.shooter.onTarget();
-    	return false;
-    }
+   
+	protected boolean isFinished() {
+		return Robot.shooter.onTarget();
+		// return false;
+	}
 
     protected void end() {
     }

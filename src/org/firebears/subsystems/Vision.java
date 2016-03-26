@@ -39,8 +39,7 @@ public class Vision extends Subsystem {
 	public final static String PREF_VAL_HI = "vision.val.hi";
 
 	final static double DIST_MULTIPLIER = .001;
-	final static double ANGLE_MULTIPLIER = .1;
-	final static double TARGET_DISTANCE = 40.;
+	final static double ANGLE_MULTIPLIER = .01;
 	final static double HUE_LO = 0.;
 	final static double HUE_HI = 255.;
 	final static double SAT_LO = 0.;
@@ -50,7 +49,6 @@ public class Vision extends Subsystem {
 	
 	public static double dist_multiplier = DIST_MULTIPLIER;
 	public static double angle_multiplier = ANGLE_MULTIPLIER;
-	public static double target_distance = TARGET_DISTANCE;
 	
 	Relay lightRing;	
 
@@ -61,7 +59,6 @@ public class Vision extends Subsystem {
 	public static void readSettingsFromPreferences() {
 		dist_multiplier = RobotMap.getPreferencesDouble(PREF_DIST_MULTIPLIER, DIST_MULTIPLIER);
 		angle_multiplier = RobotMap.getPreferencesDouble(PREF_ANGLE_MULTIPLIER, ANGLE_MULTIPLIER);
-		target_distance = RobotMap.getPreferencesDouble(PREF_TARGET_DISTANCE, TARGET_DISTANCE);
 		NetworkTablesJNI.putDouble(NT_HUE_LO, RobotMap.getPreferencesDouble(PREF_HUE_LO, HUE_LO));
 		NetworkTablesJNI.putDouble(NT_HUE_HI, RobotMap.getPreferencesDouble(PREF_HUE_HI, HUE_HI));
 		NetworkTablesJNI.putDouble(NT_SAT_LO, RobotMap.getPreferencesDouble(PREF_SAT_LO, SAT_LO));
@@ -82,11 +79,11 @@ public class Vision extends Subsystem {
 	}
 	
 	public double getAngle() {
-		return angle_multiplier * NetworkTablesJNI.getDouble(NT_ANGLE, 0);
+		return ANGLE_MULTIPLIER * NetworkTablesJNI.getDouble(NT_ANGLE, 0);
 	}
 	
 	public double getRemainingDistance() {
-		return dist_multiplier * (NetworkTablesJNI.getDouble(NT_DISTANCE, 0) - TARGET_DISTANCE);
+		return NetworkTablesJNI.getDouble(NT_DISTANCE, 0);
 	}
 	
 	public static class SaveToPref extends Command {
