@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class VisionAimCommand extends Command {
 
 	public double AngleTolerance = .1;
-	public double DistanceTolerance = .1;
+	final static double TARGET_DISTANCE = -60.;
+	final static double FORWARD_SPEED = .5;
 	
     public VisionAimCommand() {
     	requires(Robot.chassis);
@@ -26,9 +27,7 @@ public class VisionAimCommand extends Command {
     protected void execute() {
     	SmartDashboard.putNumber("Angle", Robot.vision.getAngle());
     	SmartDashboard.putNumber("Distance Away", Robot.vision.getRemainingDistance());
-    	Robot.chassis.drive(
-    			Robot.vision.getAngle(),
-    			Robot.vision.getRemainingDistance());
+    	Robot.chassis.drive(-1.5 * Robot.vision.getAngle(), -FORWARD_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,7 +35,14 @@ public class VisionAimCommand extends Command {
     	double angle = Robot.vision.getAngle();
     	double dist = Robot.vision.getRemainingDistance();
     	
-    	if(angle > -AngleTolerance && angle < AngleTolerance) {
+    	System.out.println("Dist = " + dist + ", Angle = " + angle);
+    	// If Remaining Distance is within tolerance, or past, then stop.
+    	if(dist <= TARGET_DISTANCE) {
+    		return true;
+    	}else{
+    		return false;
+    	}
+/*    	if(angle > -AngleTolerance && angle < AngleTolerance) {
     		// Angle is in the acceptable range.
     		if(dist > -DistanceTolerance && dist < DistanceTolerance) {
     			// Distance is in the acceptable range.
@@ -45,9 +51,9 @@ public class VisionAimCommand extends Command {
     			return false;
     		}
     	}else{
-    		// Angle needs to be adjused
+    		// Angle needs to be adjusted
     		return false;
-    	}
+    	}*/
     }
 
     // Called once after isFinished returns true

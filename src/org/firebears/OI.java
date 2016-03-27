@@ -148,14 +148,16 @@ public class OI {
 		ballGetterChangesButton.whenPressed(new BallGetterToggleCommand());
 		
 		ballGetterGrabButton = new JoystickButton(joystick2, 6);
-		ballGetterGrabButton.whenActive(new AcquireBall());
+//		ballGetterGrabButton.whenActive(new BallGetterMotorsCommand(BallGetter.GRAB));
+//		ballGetterGrabButton.whenReleased(new BallGetterMotorsCommand(BallGetter.OFF));
+		ballGetterGrabButton.whenPressed(new AcquireBall());
 		
 		ballGetterSpitButton = new JoystickButton(joystick2, 7);
 		ballGetterSpitButton.whenActive(new BallGetterMotorsCommand(BallGetter.SPIT));
 		ballGetterSpitButton.whenReleased(new BallGetterMotorsCommand(BallGetter.OFF));
 		
 		shootButton = new JoystickButton(joystick2, 5);
-		shootButton.whenPressed(new Fire());
+		shootButton.whenPressed(new Fire(120));
 		
 		defenseBusterChangesButton = new JoystickButton(joystick2, 3);
 		defenseBusterChangesButton.whenPressed(new DefenseBusterToggleCommand());
@@ -180,8 +182,10 @@ public class OI {
 //		lazor = new DigitalButton(6);
 //		lazor.whenActive(new LazorCommand());
 
+
 		// SmartDashboard Buttons
 		if (RobotMap.DEBUG)  {
+			SmartDashboard.putData("Autonomous Select", new SelectAuto());
 			SmartDashboard.putData("DriveStraight", new DriveStraightCommandAndStop(180, 0.8, 45));
 			SmartDashboard.putData("Right Rotate", new RotationCommand(90));
 			SmartDashboard.putData("Left Rotate", new RotationCommand(-90));
