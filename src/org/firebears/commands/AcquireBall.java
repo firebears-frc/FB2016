@@ -30,13 +30,12 @@ public class AcquireBall extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	boolean ballAcquired = !RobotMap.lazor.get();
-    	return ballAcquired;
+    	return Robot.shooter.hasBall();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.servoFire();
+    	Robot.shooter.servoHold();
 		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
 		Robot.ballGetter.setMotors(3);
 		Robot.ballGetter.ballGetterPosition = 1;
@@ -45,6 +44,11 @@ public class AcquireBall extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	if (Robot.shooter.hasBall()){
+    		Robot.shooter.servoHold();
+    	}else {
+    		Robot.shooter.servoFire();
+    	}
     	Robot.shooter.servoFire();
 		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
 		Robot.ballGetter.setMotors(3);

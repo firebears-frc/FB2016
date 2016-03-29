@@ -26,6 +26,10 @@ public class Shooter extends PIDSubsystem {
     final double VOLT_DIST_RATIO = 0.00929687; //5.084 Volts / 512 inch range 0.009929687
     
     final double tolerance = 5.0;
+    
+    public boolean hasBall() {
+    	return !RobotMap.lazor.get();
+    }
 
 	public Shooter() {
 		super(0.05, 0.0, 0.0);
@@ -81,6 +85,11 @@ public class Shooter extends PIDSubsystem {
 
 	public void servoFire() {
 		shooterServo.set(SERVO_MAX);
+		RobotMap.servoOn = true;
+	}
+	
+	public void servoHold() {
+		shooterServo.set(.5);
 		RobotMap.servoOn = true;
 	}
 

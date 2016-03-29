@@ -100,7 +100,7 @@ public class OI {
 		
 		servoButton = new JoystickButton(joystick1, 1);
 		servoButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
-
+		
 		shooterSpinDown = new JoystickButton(joystick1, 3);
 		shooterSpinDown.whenPressed(new ShooterSpinCommand(0));
 

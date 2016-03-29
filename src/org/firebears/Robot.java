@@ -160,13 +160,8 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 //		double voltage = Robot.lazor.getAverageVoltage();
-		boolean voltage = RobotMap.lazor.get();
 		
-		if (voltage == false){
-			ballAcquired = true;
-		}else {
-			ballAcquired = false;
-		}
+		ballAcquired = Robot.shooter.hasBall();
 		
 		// Not broken
 //		if(ballAcquired) {
@@ -195,7 +190,7 @@ public class Robot extends IterativeRobot {
 				SmartDashboard.putNumber("encoderRight dis", talon4.getEncPosition());
 				SmartDashboard.putNumber("encoderRight rate", talon4.getEncVelocity());
 				
-				SmartDashboard.putBoolean("Ball Acquired", ballAcquired);
+				SmartDashboard.putBoolean("Ball Acquired", Robot.shooter.hasBall());
 //				SmartDashboard.putBoolean("Ball Acquired", lazorDown);
 
 //				SmartDashboard.putNumber("encoderLeft dist: ", RobotMap.encoderLeft.getDistance());
