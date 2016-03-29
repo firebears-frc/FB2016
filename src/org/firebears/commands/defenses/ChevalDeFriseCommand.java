@@ -6,6 +6,7 @@ import org.firebears.commands.DefenseBusterSetpointCommand;
 import org.firebears.commands.DriveStraightCommand;
 import org.firebears.commands.DriveStraightCommandAndStop;
 import org.firebears.commands.GetRotation;
+import org.firebears.commands.Pitch;
 import org.firebears.commands.RotationCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -24,7 +25,8 @@ public class ChevalDeFriseCommand extends CommandGroup {
     	
 //    	addParallel(new DriveStraightCommand(60,.5));
     	addSequential(new GetRotation());
-    	addSequential(new DriveStraightCommandAndStop(60, .7 , 18));
+    	addSequential(new Pitch(60, .7, 3.5));
+//    	addSequential(new DriveStraightCommandAndStop(60, .7 , 18));
     	addSequential(new WaitCommand(.5));
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
     	addSequential(new WaitCommand(.45));
