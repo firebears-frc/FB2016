@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class Lights extends Subsystem {
 
 	NetworkTable table;
+	boolean isCelebrateMode = false;
 
 	public Lights() {
 		table = NetworkTable.getTable("lights");
@@ -31,19 +32,24 @@ public class Lights extends Subsystem {
 	}
 
 	public void teleopMode() {
-		if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue) {
-			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_PULSING_BLUE);
-			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_PULSING_BLUE);
-			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_PULSING_BLUE);
-		} else {
-			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_PULSING_RED);
-			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_PULSING_RED);
-			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_PULSING_RED);
+		if (isCelebrateMode) {
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODE);
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODE);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODE);
+			return;
 		}
+
+		String allianceColor = getAllianceColor();
+		setStrip(Lights.STRIP_CHASSIS_LEFT, allianceColor);
+		setStrip(Lights.STRIP_CHASSIS_RIGHT, allianceColor);
+		setStrip(Lights.STRIP_CELEBRATE, allianceColor);
+
+		// TODO: change lights if shooter has a ball
+		// TODO: change lights if shooter is spinning up
 	}
 
 	public void autonomousMode() {
-		// To do
+		// TODO: Pick animations for autonomous
 	}
 
 	public void disabledMode() {
@@ -52,15 +58,21 @@ public class Lights extends Subsystem {
 		setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
 	}
 
-	public void celebrateMode() {
-		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODE);
-		setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODE);
-		setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODE);
+	public void celebrateMode(boolean celebrate) {
+		isCelebrateMode = celebrate;
+	}
+	
+	protected String getAllianceColor() {
+		String allianceColor = Lights.ANIM_PULSING_RED;
+		if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue) {
+			allianceColor = Lights.ANIM_PULSING_BLUE;
+		}
+		return allianceColor;
 	}
 
-	public void shootMode() {
-		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
-	}
+//	public void shootMode() {
+//		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
+//	}
 
 	// Constants for pixel strips
 	public static final String STRIP_CHASSIS_LEFT = "strip_chassis_left";

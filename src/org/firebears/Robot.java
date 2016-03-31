@@ -178,7 +178,9 @@ public class Robot extends IterativeRobot {
 //	    	lazorDown = false;
 //		}
 
-		if ((count++) % 10 == 0) {
+		if ((count++) % 15 == 0) {
+			
+			lights.teleopMode();
 
 			if (RobotMap.DEBUG) {
 

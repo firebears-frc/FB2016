@@ -24,7 +24,6 @@ public class ShooterSpinCommand extends Command {
     		Robot.shooter.enable();
         	Robot.shooter.setSetpoint(speed);
     	}
-    	Robot.lights.shootMode();
     }
 
     protected void execute() {

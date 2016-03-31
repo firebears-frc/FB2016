@@ -15,7 +15,7 @@ public class CelebrateCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lights.celebrateMode();
+    	Robot.lights.celebrateMode(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,12 +29,12 @@ public class CelebrateCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.lights.teleopMode();
+    	Robot.lights.celebrateMode(false);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.lights.teleopMode();
+    	Robot.lights.celebrateMode(false);
     }
 }
