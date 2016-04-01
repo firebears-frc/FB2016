@@ -27,6 +27,10 @@ public class Shooter extends PIDSubsystem {
     
     final double tolerance = 5.0;
     
+    public boolean isSpinning() {
+    	return	getSetpoint() != 0;
+    }
+    
     public boolean hasBall() {
     	return !RobotMap.lazor.get();
     }

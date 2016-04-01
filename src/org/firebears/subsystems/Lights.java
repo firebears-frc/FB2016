@@ -1,5 +1,7 @@
 package org.firebears.subsystems;
 
+import org.firebears.Robot;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -32,20 +34,30 @@ public class Lights extends Subsystem {
 	}
 
 	public void teleopMode() {
+
+		String allianceColor = getAllianceColor();
+		setStrip(Lights.STRIP_CHASSIS_LEFT, allianceColor);
+		setStrip(Lights.STRIP_CHASSIS_RIGHT, allianceColor);
+		setStrip(Lights.STRIP_CELEBRATE, allianceColor);
+		
 		if (isCelebrateMode) {
 			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODE);
 			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODE);
 			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODE);
 			return;
 		}
+		
+		if (Robot.shooter.hasBall()) {
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_PULSING_GREEN);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_PULSING_GREEN);
+		}
+		
+		if (Robot.shooter.isSpinning()) {
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
+				
+		}
 
-		String allianceColor = getAllianceColor();
-		setStrip(Lights.STRIP_CHASSIS_LEFT, allianceColor);
-		setStrip(Lights.STRIP_CHASSIS_RIGHT, allianceColor);
-		setStrip(Lights.STRIP_CELEBRATE, allianceColor);
-
-		// TODO: change lights if shooter has a ball
-		// TODO: change lights if shooter is spinning up
+		
 	}
 
 	public void autonomousMode() {
