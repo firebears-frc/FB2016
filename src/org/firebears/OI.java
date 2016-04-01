@@ -85,6 +85,7 @@ public class OI {
 	JoystickButton shooterReverseButton;
 	JoystickButton servoButton;
 	JoystickButton acquireBall;
+	JoystickButton idc;
 
 	public OI() {
 		joystick1 = new Joystick(0);
@@ -98,8 +99,8 @@ public class OI {
 		servoUP = new JoystickButton(joystick1, 2);
 		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_FIRE));
 		
-		servoButton = new JoystickButton(joystick1, 1);
-		servoButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
+//		servoButton = new JoystickButton(joystick1, 1);
+//		servoButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
 		
 		shooterSpinDown = new JoystickButton(joystick1, 3);
 		shooterSpinDown.whenPressed(new ShooterSpinCommand(0));
@@ -112,6 +113,10 @@ public class OI {
 
 		park = new JoystickButton(joystick1, 8);
 		park.whenPressed(new ParkCommand());
+		
+		idc = new JoystickButton(joystick1, 1);
+		idc.whenPressed(new RestartServo());
+		
 
 //		celebrateButton = new JoystickButton(joystick1, 12);
 //		celebrateButton.whileHeld(new CelebrateCommand());
@@ -172,6 +177,7 @@ public class OI {
 		
 		shooterReverseButton = new JoystickButton(joystick2, 9);
 		shooterReverseButton.whenActive(new ShooterSpinCommand(-10));
+		shooterReverseButton.whenActive(new RestartServo());
 		shooterReverseButton.whenReleased(new ShooterSpinCommand(0));
 		
 		celebrateButton = new JoystickButton(joystick2, 4);
