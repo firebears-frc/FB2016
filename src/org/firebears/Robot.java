@@ -137,6 +137,9 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		if ((count++) % 15 == 0) {
+			lights.autonomousMode();
+		}
 	}
 
 
