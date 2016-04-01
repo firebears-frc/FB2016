@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Vision extends Subsystem {
 	
 	static Preferences preferences = Preferences.getInstance();
+	private double movingAvg = 0.;
 
 	final static String NT_CALIBRATION = "vision/calibrationMode";
 	final static String NT_DISTANCE = "vision/distance";
@@ -39,7 +40,7 @@ public class Vision extends Subsystem {
 	public final static String PREF_VAL_HI = "vision.val.hi";
 
 	final static double DIST_MULTIPLIER = .001;
-	final static double ANGLE_MULTIPLIER = .01;
+	final static double ANGLE_MULTIPLIER = -.9 * .01;
 	final static double HUE_LO = 0.;
 	final static double HUE_HI = 255.;
 	final static double SAT_LO = 0.;
@@ -79,7 +80,10 @@ public class Vision extends Subsystem {
 	}
 	
 	public double getAngle() {
-		return ANGLE_MULTIPLIER * NetworkTablesJNI.getDouble(NT_ANGLE, 0);
+		double offs = ( NetworkTablesJNI.getDouble(NT_ANGLE, 0) + 30);
+		double getting = ANGLE_MULTIPLIER * offs;
+		movingAvg = (movingAvg + getting) / 2.;
+		return movingAvg;
 	}
 	
 	public double getRemainingDistance() {

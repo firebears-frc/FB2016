@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class VisionAimCommand extends Command {
 
 	public double AngleTolerance = .1;
-	final static double TARGET_DISTANCE = -60.;
+	final static double TARGET_DISTANCE = -70.;
 	final static double FORWARD_SPEED = .5;
 	
     public VisionAimCommand() {
@@ -27,7 +27,8 @@ public class VisionAimCommand extends Command {
     protected void execute() {
     	SmartDashboard.putNumber("Angle", Robot.vision.getAngle());
     	SmartDashboard.putNumber("Distance Away", Robot.vision.getRemainingDistance());
-    	Robot.chassis.drive(-1.5 * Robot.vision.getAngle(), -FORWARD_SPEED);
+    	Robot.chassis.drive(.5 * (Robot.vision.getAngle() +
+    			Robot.vision.getAngle() > 0 ? FORWARD_SPEED : -FORWARD_SPEED), -FORWARD_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,9 +36,10 @@ public class VisionAimCommand extends Command {
     	double angle = Robot.vision.getAngle();
     	double dist = Robot.vision.getRemainingDistance();
     	
-    	System.out.println("Dist = " + dist + ", Angle = " + angle);
+    	System.out.println("Dist = " + dist + "/ " + TARGET_DISTANCE + ", Angle = " + angle);
     	// If Remaining Distance is within tolerance, or past, then stop.
     	if(dist <= TARGET_DISTANCE) {
+        	System.out.println("Reached Target: Dist = " + dist + ", Angle = " + angle);
     		return true;
     	}else{
     		return false;

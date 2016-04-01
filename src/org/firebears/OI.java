@@ -108,7 +108,7 @@ public class OI {
 		shooterSpinUp.whenPressed(new ShooterSpinCommand(80));
 
 		aimAndShoot = new JoystickButton(joystick1, 7);
-		aimAndShoot.whileHeld(new AimAndShootCommand());
+		aimAndShoot.whenPressed(new AimAndShootCommand());
 
 		park = new JoystickButton(joystick1, 8);
 		park.whenPressed(new ParkCommand());
