@@ -28,7 +28,7 @@ public class Shooter extends PIDSubsystem {
     final double tolerance = 5.0;
     
     public boolean isSpinning() {
-    	return	getSetpoint() != 0;
+    	return Math.abs(shootingMotor.get()) > 0.25;
     }
     
     public boolean hasBall() {
