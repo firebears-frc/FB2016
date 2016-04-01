@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class AdjustRotation extends PIDCommand {
 
     public AdjustRotation() {
-    	super(0.05, 0.1, 0.1); //PID
+    	super(1, 0, 0); //PID
     	requires(Robot.chassis);
     }
 
