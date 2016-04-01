@@ -115,7 +115,7 @@ public class OI {
 		park.whenPressed(new ParkCommand());
 		
 		idc = new JoystickButton(joystick1, 1);
-		idc.whenPressed(new RestartServo());
+		idc.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
 		
 
 //		celebrateButton = new JoystickButton(joystick1, 12);
@@ -177,7 +177,7 @@ public class OI {
 		
 		shooterReverseButton = new JoystickButton(joystick2, 9);
 		shooterReverseButton.whenActive(new ShooterSpinCommand(-10));
-		shooterReverseButton.whenActive(new RestartServo());
+		shooterReverseButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
 		shooterReverseButton.whenReleased(new ShooterSpinCommand(0));
 		
 		celebrateButton = new JoystickButton(joystick2, 4);
