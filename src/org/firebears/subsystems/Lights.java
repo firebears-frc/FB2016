@@ -39,29 +39,33 @@ public class Lights extends Subsystem {
 		setStrip(Lights.STRIP_CHASSIS_LEFT, allianceColor);
 		setStrip(Lights.STRIP_CHASSIS_RIGHT, allianceColor);
 		setStrip(Lights.STRIP_CELEBRATE, allianceColor);
-		
+
 		if (isCelebrateMode) {
 			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODE);
 			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODE);
 			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODE);
 			return;
 		}
-		
+
 		if (Robot.shooter.hasBall()) {
 			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_PULSING_GREEN);
 			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_PULSING_GREEN);
 		}
-		
+
 		if (Robot.shooter.isSpinning()) {
 			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
-				
 		}
 
-		
 	}
 
 	public void autonomousMode() {
-		// TODO: Pick animations for autonomous
+		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
+		setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_SPARK);
+		if (Robot.shooter.isSpinning()) {
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
+		} else {
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
+		}
 	}
 
 	public void disabledMode() {
@@ -73,7 +77,7 @@ public class Lights extends Subsystem {
 	public void celebrateMode(boolean celebrate) {
 		isCelebrateMode = celebrate;
 	}
-	
+
 	protected String getAllianceColor() {
 		String allianceColor = Lights.ANIM_PULSING_RED;
 		if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue) {
@@ -82,9 +86,9 @@ public class Lights extends Subsystem {
 		return allianceColor;
 	}
 
-//	public void shootMode() {
-//		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
-//	}
+	// public void shootMode() {
+	// setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
+	// }
 
 	// Constants for pixel strips
 	public static final String STRIP_CHASSIS_LEFT = "strip_chassis_left";
