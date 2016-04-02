@@ -61,7 +61,7 @@ public class OI {
 	public Joystick joystick1;
 	public Joystick joystick2;
 
-	DigitalButton But;
+	public DigitalButton autoSwichButton;
 	DigitalButton lazor;
 //	JoystickButton ballGetterHighButton;
 //	JoystickButton ballGetterLowButton;
@@ -183,8 +183,8 @@ public class OI {
 		celebrateButton = new JoystickButton(joystick2, 4);
 		celebrateButton.whileHeld(new CelebrateCommand());
 
-		But = new DigitalButton(0);
-		But.whenActive(new SelectAuto());
+		autoSwichButton = new DigitalButton(0);
+		autoSwichButton.whenActive(new SelectAuto());
 //		lazor = new DigitalButton(6);
 //		lazor.whenActive(new LazorCommand());
 

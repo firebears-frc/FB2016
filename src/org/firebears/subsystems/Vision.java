@@ -51,6 +51,8 @@ public class Vision extends Subsystem {
 	public static double dist_multiplier = DIST_MULTIPLIER;
 	public static double angle_multiplier = ANGLE_MULTIPLIER;
 	
+	public double which_defense = 0;
+	
 	Relay lightRing;	
 
 	@Override

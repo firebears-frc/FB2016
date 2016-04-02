@@ -13,7 +13,8 @@ public class VisionAimCommand extends Command {
 	public double AngleTolerance = .1;
 	private boolean goBack;
 	final static double TARGET_DISTANCE = -70.;
-	final static double FORWARD_SPEED = .5;
+	final static double FORWARD_SPEED = .6;
+	final static double TURN_SPEED = .5;
 	
     public VisionAimCommand(boolean backward) {
     	requires(Robot.chassis);
@@ -30,7 +31,7 @@ public class VisionAimCommand extends Command {
     	SmartDashboard.putNumber("Angle", Robot.vision.getAngle());
     	SmartDashboard.putNumber("Distance Away", Robot.vision.getRemainingDistance());
     	Robot.chassis.drive((goBack ? -2: 1) * (.4 * Robot.vision.getAngle()) +
-    			(.6 * (Robot.vision.getAngle() > 0 ? FORWARD_SPEED : -FORWARD_SPEED)),
+    			(.6 * (Robot.vision.getAngle() > 0 ? TURN_SPEED : -TURN_SPEED)),
     			goBack ? FORWARD_SPEED : -FORWARD_SPEED);
     }
 
