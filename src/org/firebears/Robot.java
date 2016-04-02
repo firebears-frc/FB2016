@@ -213,7 +213,7 @@ public class Robot extends IterativeRobot {
 				SmartDashboard.putNumber("accel Y", RobotMap.builtInAccelerometer.getY());
 				SmartDashboard.putNumber("accel Z", RobotMap.builtInAccelerometer.getZ());
 
-				SmartDashboard.putNumber("Shooter rate", shooter.getRate());
+				SmartDashboard.putNumber("Shooter rate RPS", shooter.getRate());
 				SmartDashboard.putNumber("Servo angle", RobotMap.shooterServo.getAngle());
 				SmartDashboard.putNumber("Servo position", RobotMap.shooterServo.getPosition());
 

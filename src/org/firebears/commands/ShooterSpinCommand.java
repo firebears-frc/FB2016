@@ -22,7 +22,7 @@ public class ShooterSpinCommand extends Command {
     		Robot.shooter.shootingMotor.set(-speed);
     	} else {
     		Robot.shooter.enable();
-        	Robot.shooter.setSetpoint(speed);
+        	Robot.shooter.spinnerStart();
     	}
     }
 

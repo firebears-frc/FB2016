@@ -36,7 +36,7 @@ public class Shooter extends PIDSubsystem {
     }
 
 	public Shooter() {
-		super(0.05, 0.0, 0.0);
+		super(0.10, 0.0, 0.0);
 		LiveWindow.addActuator("Shooter", "PIDSubsystem Controller", getPIDController());
 		GOAL_SPEED = getPreferencesDouble("Shooter.goal_speed", 90);
 		SERVO_MAX = getPreferencesDouble("Shooter.servo_max", 90);
@@ -52,6 +52,9 @@ public class Shooter extends PIDSubsystem {
 	public void initDefaultCommand() {
 	}
 
+	/**
+	 * @return revolutions per second.
+	 */
 	public double getRate() {
 		return 1.0 / shooterCounter.getPeriod();
 	}
