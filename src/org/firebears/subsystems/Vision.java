@@ -82,7 +82,7 @@ public class Vision extends Subsystem {
 	}
 	
 	public double getAngle() {
-		double offs = ( NetworkTablesJNI.getDouble(NT_ANGLE, 0) + 30);
+		double offs = ( NetworkTablesJNI.getDouble(NT_ANGLE, 0) + 35);
 		double getting = ANGLE_MULTIPLIER * offs;
 		movingAvg = (movingAvg + getting) / 2.;
 		return movingAvg;
