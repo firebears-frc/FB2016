@@ -2,6 +2,7 @@ package org.firebears.commands.defenses;
 
 import org.firebears.Robot;
 import org.firebears.commands.AdjustRotation;
+import org.firebears.commands.AimAndShootCommand;
 import org.firebears.commands.DriveStraightCommand;
 import org.firebears.commands.GetRotation;
 import org.firebears.commands.RotationCommand;
@@ -16,14 +17,13 @@ public class MoatCommand extends CommandGroup {
     
     public  MoatCommand() {
  
-//    	addSequential(new GetRotation());
-        addSequential(new DriveStraightCommand(120,.80));
-//        addSequential(new DriveStraightCommand(60,0.0));
-//        addSequential(new DriveStraightCommand(60,.75));
-//        addSequential(new DriveStraightCommand(60,.75));
-//    	addSequential(new AdjustRotation());
-//    	addSequential(new RotationCommand(180));
-//    	addSequential(new RotationCommand(180));
+    	// Get over defense
+    	addSequential(new GetRotation());
+        addSequential(new DriveStraightCommand(180.,.85));
+        // Point to target
+    	addSequential(new AdjustRotation(-30.));
+    	// Vision take over.
+    	addSequential(new AimAndShootCommand());
      
     	requires(Robot.chassis);
     }
