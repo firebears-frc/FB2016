@@ -35,4 +35,8 @@ public class ChevalDeFriseCommand extends AbstractDefenseCommand {
     	requires(Robot.chassis);
     	requires(Robot.defenseBuster);
     }
+    
+    public ChevalDeFriseCommand() {
+    	this(true);
+    }
 }
