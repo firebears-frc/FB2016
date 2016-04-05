@@ -15,12 +15,12 @@ public class AdjustRotation extends PIDCommand {
 	double offset = 0.;
 
     public AdjustRotation() {
-    	super(1, 0, 0); //PID
+    	super(.009, 0.00001, 0.00); //PID
     	requires(Robot.chassis);
     }
     
     public AdjustRotation(double degree_offset) {
-    	super(1, 0, 0); //PID
+    	super(.009, 0.00001, 0.0); //PID
     	requires(Robot.chassis);
     	offset = degree_offset;
     }

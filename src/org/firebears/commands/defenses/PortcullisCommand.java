@@ -1,6 +1,12 @@
 package org.firebears.commands.defenses;
 
+import org.firebears.Robot;
+import org.firebears.commands.DefenseBusterSetpointCommand;
+import org.firebears.commands.DriveStraightCommand;
+import org.firebears.commands.DriveStraightCommandAndStop;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  * The Portcullis is an arched gateway with a door that opens when lifted up. The gateway is 3 ft. 8 in. 
@@ -11,21 +17,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class PortcullisCommand extends CommandGroup {
     
     public  PortcullisCommand() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
+    	addSequential(new WaitCommand(.25));
+    	addSequential(new DriveStraightCommandAndStop(60, .65, 15));
+    	addSequential(new WaitCommand(.125));
+    	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MIN_VALUE));
+    	addSequential(new DriveStraightCommand(40));
+    	requires(Robot.chassis);
+    	
     }
 }
