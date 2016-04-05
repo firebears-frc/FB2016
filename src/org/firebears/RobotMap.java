@@ -247,9 +247,13 @@ public class RobotMap {
 		encoderRight.setDistancePerPulse(0.05639);
 		encoderRight.setPIDSourceType(PIDSourceType.kRate);
 
-		usbCamera = CameraServer.getInstance();
-		usbCamera.setQuality(50);
-		usbCamera.startAutomaticCapture("cam0");
+		try {
+			usbCamera = CameraServer.getInstance();
+			usbCamera.setQuality(50);
+			usbCamera.startAutomaticCapture("cam0");
+		}catch(Error e) {
+			System.err.println("Couldn't Open Camera");
+		}
 
 		shooterrangeFinder = new AnalogInput(2);
         LiveWindow.addSensor("Shooter", "rangeFinder", shooterrangeFinder);

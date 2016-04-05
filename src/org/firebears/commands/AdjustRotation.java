@@ -11,10 +11,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class AdjustRotation extends PIDCommand {
+	
+	double offset = 0.;
 
     public AdjustRotation() {
     	super(1, 0, 0); //PID
     	requires(Robot.chassis);
+    }
+    
+    public AdjustRotation(double degree_offset) {
+    	super(1, 0, 0); //PID
+    	requires(Robot.chassis);
+    	offset = degree_offset;
     }
 
 	@Override
@@ -31,6 +39,16 @@ public class AdjustRotation extends PIDCommand {
 		}
 		Robot.chassis.drive(output, 0);
 	}
+	
+	private double bound(double which) {
+		if(which >= 360.) {
+			return which - 360;
+		}else if(which < 0){
+			return which + 360;
+		}else{
+			return which;
+		}
+	}
 
 	@Override
 	protected void initialize() {
@@ -38,7 +56,7 @@ public class AdjustRotation extends PIDCommand {
     	getPIDController().setInputRange(0, 359);
     	getPIDController().setAbsoluteTolerance(2);
     	getPIDController().enable();
-		setSetpoint(RobotMap.rotation);
+		setSetpoint(bound(RobotMap.rotation + offset));
 		setTimeout(5);
 	}
 

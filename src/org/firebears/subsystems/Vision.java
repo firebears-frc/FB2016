@@ -17,11 +17,9 @@ public class Vision extends Subsystem {
 	static Preferences preferences = Preferences.getInstance();
 	private double movingAvg = 0.;
 
-	final static String NT_CALIBRATION = "vision/calibrationMode";
 	final static String NT_DISTANCE = "vision/distance";
 	final static String NT_ANGLE = "vision/angle";
 	final static String NT_FPS = "vision/fps";
-	final static String NT_IMG = "vision/image";
 	final static String NT_HUE_LO = "vision/hue.lo";
 	final static String NT_HUE_HI = "vision/hue.hi";
 	final static String NT_SAT_LO = "vision/sat.lo";
@@ -62,12 +60,12 @@ public class Vision extends Subsystem {
 	public static void readSettingsFromPreferences() {
 		dist_multiplier = RobotMap.getPreferencesDouble(PREF_DIST_MULTIPLIER, DIST_MULTIPLIER);
 		angle_multiplier = RobotMap.getPreferencesDouble(PREF_ANGLE_MULTIPLIER, ANGLE_MULTIPLIER);
-		NetworkTablesJNI.putDouble(NT_HUE_LO, RobotMap.getPreferencesDouble(PREF_HUE_LO, HUE_LO));
-		NetworkTablesJNI.putDouble(NT_HUE_HI, RobotMap.getPreferencesDouble(PREF_HUE_HI, HUE_HI));
-		NetworkTablesJNI.putDouble(NT_SAT_LO, RobotMap.getPreferencesDouble(PREF_SAT_LO, SAT_LO));
-		NetworkTablesJNI.putDouble(NT_SAT_HI, RobotMap.getPreferencesDouble(PREF_SAT_HI, SAT_HI));
-		NetworkTablesJNI.putDouble(NT_VAL_LO, RobotMap.getPreferencesDouble(PREF_VAL_LO, VAL_LO));
-		NetworkTablesJNI.putDouble(NT_VAL_HI, RobotMap.getPreferencesDouble(PREF_VAL_HI, VAL_HI));
+//		NetworkTablesJNI.putDouble(NT_HUE_LO, RobotMap.getPreferencesDouble(PREF_HUE_LO, HUE_LO));
+//		NetworkTablesJNI.putDouble(NT_HUE_HI, RobotMap.getPreferencesDouble(PREF_HUE_HI, HUE_HI));
+//		NetworkTablesJNI.putDouble(NT_SAT_LO, RobotMap.getPreferencesDouble(PREF_SAT_LO, SAT_LO));
+//		NetworkTablesJNI.putDouble(NT_SAT_HI, RobotMap.getPreferencesDouble(PREF_SAT_HI, SAT_HI));
+//		NetworkTablesJNI.putDouble(NT_VAL_LO, RobotMap.getPreferencesDouble(PREF_VAL_LO, VAL_LO));
+//		NetworkTablesJNI.putDouble(NT_VAL_HI, RobotMap.getPreferencesDouble(PREF_VAL_HI, VAL_HI));
 	}
 	
 	// Save vison calibration
@@ -109,11 +107,11 @@ public class Vision extends Subsystem {
 			// Preferences -> Network Tables
 			readSettingsFromPreferences();
 			// Notify
-			SmartDashboard.putString("Vision Calib", "Set " + whatpref + " to " + setTo);
-			SmartDashboard.putString("Vision Settings",
-					"Hue [ " + preferences.getDouble(PREF_HUE_LO, 0.) +  "," + preferences.getDouble(PREF_HUE_HI, 255.) + " ] \n" +
-					"Sat [ " + preferences.getDouble(PREF_SAT_LO, 0.) +  "," + preferences.getDouble(PREF_SAT_HI, 255.) + " ] \n" +
-					"Val [ " + preferences.getDouble(PREF_VAL_LO, 0.) +  "," + preferences.getDouble(PREF_VAL_HI, 255.) + " ] \n");
+//			SmartDashboard.putString("Vision Calib", "Set " + whatpref + " to " + setTo);
+//			SmartDashboard.putString("Vision Settings",
+//					"Hue [ " + preferences.getDouble(PREF_HUE_LO, 0.) +  "," + preferences.getDouble(PREF_HUE_HI, 255.) + " ] \n" +
+//					"Sat [ " + preferences.getDouble(PREF_SAT_LO, 0.) +  "," + preferences.getDouble(PREF_SAT_HI, 255.) + " ] \n" +
+//					"Val [ " + preferences.getDouble(PREF_VAL_LO, 0.) +  "," + preferences.getDouble(PREF_VAL_HI, 255.) + " ] \n");
 		}
 
 		@Override
