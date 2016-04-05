@@ -200,6 +200,7 @@ public class OI {
 			SmartDashboard.putData("Rough Terrain Auto", new RoughTerrainCommand());
 			SmartDashboard.putData("Ramparts Auto", new RampartsCommand());
 			SmartDashboard.putData("ChevalDeFrise Auto", new ChevalDeFriseCommand());
+			SmartDashboard.putData("TestAutoCommamnd", new TestAutoCommand());
 			SmartDashboard.putNumber("Vision Set", 0.);
 			SmartDashboard.putData("Vision Save To Hue Lo", new Vision.SaveToPref(Vision.PREF_HUE_LO));
 			SmartDashboard.putData("Vision Save To Hue Hi", new Vision.SaveToPref(Vision.PREF_HUE_HI));
