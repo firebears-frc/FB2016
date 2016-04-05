@@ -4,35 +4,33 @@ import org.firebears.Robot;
 import org.firebears.commands.BallGetterSetpointCommand;
 import org.firebears.commands.DefenseBusterSetpointCommand;
 import org.firebears.commands.DriveStraightCommand;
-
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.firebears.commands.GetRotation;
 
 /**
  *
  */
-public class LowBarCommand extends CommandGroup {
+public class LowBarCommand extends AbstractDefenseCommand {
 
-    public  LowBarCommand() {
+    public  LowBarCommand(boolean shoot) {
     	requires(Robot.chassis);
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
 
+    	addSequential(new GetRotation());
     	addSequential(new BallGetterSetpointCommand(Robot.ballGetter.MAX_VALUE));
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
     	addSequential(new DriveStraightCommand(180., .6));
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+        // Do vision if shooting.
+        finishAuto(shoot);
+        
+    	requires(Robot.chassis);
+    	requires(Robot.defenseBuster);
+    	requires(Robot.ballGetter);
+    }
+    
+    public LowBarCommand() {
+    	this(true);
     }
 }
