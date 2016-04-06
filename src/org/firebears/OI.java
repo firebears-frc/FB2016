@@ -200,6 +200,7 @@ public class OI {
 			SmartDashboard.putData("Rough Terrain Auto", new RoughTerrainCommand());
 			SmartDashboard.putData("Ramparts Auto", new RampartsCommand());
 			SmartDashboard.putData("ChevalDeFrise Auto", new ChevalDeFriseCommand());
+			SmartDashboard.putData("Low Bar", new LowBarCommand());
 			SmartDashboard.putData("TestAutoCommamnd", new TestAutoCommand());
 			SmartDashboard.putNumber("Vision Set", 0.);
 			SmartDashboard.putData("Vision Save To Hue Lo", new Vision.SaveToPref(Vision.PREF_HUE_LO));
@@ -208,6 +209,11 @@ public class OI {
 			SmartDashboard.putData("Vision Save To Sat Hi", new Vision.SaveToPref(Vision.PREF_SAT_HI));
 			SmartDashboard.putData("Vision Save To Val Lo", new Vision.SaveToPref(Vision.PREF_VAL_LO));
 			SmartDashboard.putData("Vision Save To Val Hi", new Vision.SaveToPref(Vision.PREF_VAL_HI));
+			SmartDashboard.putData("Location 1", new PrepareVisionCommand(1));
+			SmartDashboard.putData("Location 2", new PrepareVisionCommand(2));
+			SmartDashboard.putData("Location 3", new PrepareVisionCommand(3));
+			SmartDashboard.putData("Location 4", new PrepareVisionCommand(4));
+			SmartDashboard.putData("Location 5", new PrepareVisionCommand(5));
 			SmartDashboard.putData("Rotate", new RotationCommand(90));
 			
 			SmartDashboard.putData("ballGetter set min", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_MIN_VALUE));

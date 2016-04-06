@@ -12,16 +12,12 @@ public class PrepareVisionCommand extends CommandGroup {
     		default:
     			break;
     		case 1:
-    			// Drive forward
-    	        addSequential(new DriveStraightCommand(119.,.85));
     	        // Turn toward target.
-    	    	addSequential(new GetRotation());
+ //   	    	addSequential(new GetRotation());
     	    	addSequential(new AdjustRotation(85.));
     	    	break;
     		case 2:
-    			// Drive forward
-    	        addSequential(new DriveStraightCommand(119.,.85));
-    	        // Turn toward target.
+    			// Turn toward target.
     	    	addSequential(new GetRotation());
     	    	addSequential(new AdjustRotation(45.));
     	    	break;
@@ -41,8 +37,6 @@ public class PrepareVisionCommand extends CommandGroup {
     	    	addSequential(new AdjustRotation(-30.));
     	    	break;
     		case 5:
-    			// Drive forward
-    	        addSequential(new DriveStraightCommand(155.5,.85));
     	        // Turn toward target.
     	    	addSequential(new GetRotation());
     	    	addSequential(new AdjustRotation(-60.));

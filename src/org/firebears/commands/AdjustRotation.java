@@ -32,10 +32,10 @@ public class AdjustRotation extends PIDCommand {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		if (output > 0.6){
-			output = 0.6;
-		} else if (output < -0.6){
-			output = -0.6;
+		if (output > 0.9){
+			output = 0.9;
+		} else if (output < -0.9){
+			output = -0.9;
 		}
 		Robot.chassis.drive(output, 0);
 	}
