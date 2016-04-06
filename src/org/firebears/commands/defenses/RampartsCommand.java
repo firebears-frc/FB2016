@@ -13,7 +13,7 @@ public class RampartsCommand extends AbstractDefenseCommand {
     
     public  RampartsCommand(boolean shoot) {
     	addSequential(new GetRotation());
-        addSequential(new DriveStraightCommand(210.,.85));
+        addSequential(new DriveStraightCommand(165.,.85));
         // Do vision if shooting.
         finishAuto(shoot);
     	requires(Robot.chassis);

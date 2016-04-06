@@ -3,6 +3,7 @@ package org.firebears.commands.defenses;
 import org.firebears.Robot;
 import org.firebears.commands.DefenseBusterSetpointCommand;
 import org.firebears.commands.DriveStraightCommand;
+import org.firebears.commands.DriveStraightCommandAndStop;
 import org.firebears.commands.GetRotation;
 import org.firebears.commands.Pitch;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -19,15 +20,15 @@ public class ChevalDeFriseCommand extends AbstractDefenseCommand {
     public  ChevalDeFriseCommand(boolean shoot) {
     	
 //    	addParallel(new DriveStraightCommand(60,.5));
-    	addSequential(new GetRotation());
-    	addSequential(new Pitch(60, .7, 5));
-//    	addSequential(new DriveStraightCommandAndStop(60, .7 , 18));
+//    	addSequential(new GetRotation());
+//    	addSequential(new Pitch(60, .7, 5));
+    	addSequential(new DriveStraightCommandAndStop(60, .7 , 18));
     	addSequential(new WaitCommand(.5));
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
     	addSequential(new WaitCommand(.45));
     	addSequential(new DriveStraightCommand(30,.8));
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MIN_VALUE));
-    	addSequential(new DriveStraightCommand(30,.8));
+    	addSequential(new DriveStraightCommand(75,.8));
         // Do vision if shooting.
         finishAuto(shoot);
         //addSequential(new DriveStraightCommand(30,.9));

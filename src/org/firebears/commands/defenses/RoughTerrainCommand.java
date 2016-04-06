@@ -8,7 +8,7 @@ public class RoughTerrainCommand extends AbstractDefenseCommand {
     
     public  RoughTerrainCommand(boolean shoot) {
     	addSequential(new GetRotation());
-        addSequential(new DriveStraightCommand(180.,.75));
+        addSequential(new DriveStraightCommand(165.,.75));
         // Do vision if shooting.
         finishAuto(shoot);     
     	requires(Robot.chassis);
