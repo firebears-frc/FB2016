@@ -12,7 +12,7 @@ public class VisionAimCommand extends Command {
 
 	public double AngleTolerance = .1;
 	private boolean goBack;
-	final static double TARGET_DISTANCE = -70.;
+	final static double TARGET_DISTANCE = -65.;
 	final static double FORWARD_SPEED = .6;
 	final static double TURN_SPEED = .5;
 	

@@ -71,6 +71,7 @@ public class BallGetter extends PIDSubsystem {
 		getPIDController().setAbsoluteTolerance(0.01);
 		getPIDController().setToleranceBuffer(8);
 		setSetpoint(2.1);
+//		Robot.ballGetter.ballGetterPosition = 1;
 		getPIDController().enable();
 		LiveWindow.addActuator("BallGetter", "PIDSubsystem Controller", getPIDController());
 		LiveWindow.addSensor("BallGetter", "current", RobotMap.ballGetterAngleMotor);
@@ -94,6 +95,7 @@ public class BallGetter extends PIDSubsystem {
 	
 	public void park(){
 		setSetpoint(PARK_VALUE);
+		Robot.ballGetter.ballGetterPosition = 1;
 	}
 //	public void up(){//for toggle
 //		angleMotor.set(2.1);
@@ -101,7 +103,14 @@ public class BallGetter extends PIDSubsystem {
 //	public void down(){
 //		angleMotor.set(3.33);
 //	}
-
+	public void goup(){
+		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
+    	Robot.ballGetter.ballGetterPosition = 1;
+	}
+	public void godown(){
+    	Robot.ballGetter.setSetpoint(Robot.ballGetter.MAX_VALUE);
+    	Robot.ballGetter.ballGetterPosition = 2;
+	}
 	public void setMotors(int mode) {
 		mode2 = mode;
 		if (mode == GRAB) {

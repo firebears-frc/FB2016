@@ -1,6 +1,7 @@
 package org.firebears.commands.defenses;
 
 import org.firebears.commands.AdjustRotation;
+import org.firebears.commands.AdjustRotation1;
 import org.firebears.commands.AimAndShootCommand;
 import org.firebears.commands.PrepareVisionCommand;
 
@@ -18,6 +19,10 @@ public abstract class AbstractDefenseCommand extends CommandGroup {
 	    }else{
 	    	addSequential(new AdjustRotation());
 	    }
+	}
+	void finishAuto(double degrees){
+    	addSequential(new AdjustRotation1(degrees));
+    	addSequential(new AimAndShootCommand());
 	}
 	
 }

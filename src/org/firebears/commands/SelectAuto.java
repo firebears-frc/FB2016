@@ -4,6 +4,8 @@ package org.firebears.commands;
 import org.firebears.Robot;
 import org.firebears.RobotMap;
 import org.firebears.commands.defenses.ChevalDeFriseCommand;
+import org.firebears.commands.defenses.FlatCommand;
+import org.firebears.commands.defenses.FlatfiveCommand;
 import org.firebears.commands.defenses.LowBarCommand;
 import org.firebears.commands.defenses.MoatCommand;
 import org.firebears.commands.defenses.PortcullisCommand;
@@ -27,7 +29,10 @@ public class SelectAuto extends Command {
 	RampartsCommand rp = new RampartsCommand(); 				//6
 	RockWallCommand rw = new RockWallCommand(); 				//7
 	RoughTerrainCommand rt = new RoughTerrainCommand(); 		//8
-	// Do nothing 												//9
+	RampartsCommand rpnv = new RampartsCommand(false);			//9
+	FlatCommand fc = new FlatCommand();							//10
+	FlatfiveCommand ffc = new FlatfiveCommand();				//11
+	// Do nothing 												//12
 
 	int x = 0;
 	// double rf = Robot.shooter.getRangeFinderDistance();
@@ -46,7 +51,7 @@ public class SelectAuto extends Command {
 		x = x + 1;
 		lcd.home();
 
-		if (x > 9) {// number of autos + one welcome screen
+		if (x > 12) {// number of autos + one welcome screen
 			x = 2;
 		}
 		if (x > 1) {
@@ -208,6 +213,63 @@ public class SelectAuto extends Command {
 			Robot.autonomousCommand = rt;
 		}
 		if (x == 9) {
+			String row1 = "DriveSNV";
+			String row2 = "Drive straight with ";
+			String row3 = "no Vision           ";
+			String row4 = "               ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
+			lcd.setCursor(10, 0);
+			lcd.print("" + row1);
+			lcd.setCursor(0, 1);
+			lcd.print("" + row2);
+			lcd.setCursor(0, 2);
+			lcd.print("" + row3);
+			lcd.setCursor(0, 3);
+			lcd.print("" + row4);
+			Robot.autonomousCommand = rpnv;
+		}
+		if (x == 10) {
+			String row1 = "Flat";
+			String row2 = "Drive straight over ";
+			String row3 = "the flat defenses.  ";
+			String row4 = "               ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
+			lcd.setCursor(10, 0);
+			lcd.print("" + row1);
+			lcd.setCursor(0, 1);
+			lcd.print("" + row2);
+			lcd.setCursor(0, 2);
+			lcd.print("" + row3);
+			lcd.setCursor(0, 3);
+			lcd.print("" + row4);
+			Robot.autonomousCommand = fc;
+		}
+		if (x == 11) {
+			String row1 = "Flat5";
+			String row2 = "Drive straight over ";
+			String row3 = "the flat defenses if";
+			String row4 = "its in row 5.  ";
+			SmartDashboard.putString("Row1", row1);
+			SmartDashboard.putString("Row2", row2);
+			SmartDashboard.putString("Row3", row3);
+			SmartDashboard.putString("Row4", row4);
+			lcd.setCursor(10, 0);
+			lcd.print("" + row1);
+			lcd.setCursor(0, 1);
+			lcd.print("" + row2);
+			lcd.setCursor(0, 2);
+			lcd.print("" + row3);
+			lcd.setCursor(0, 3);
+			lcd.print("" + row4);
+			Robot.autonomousCommand = rpnv;
+		}
+		if (x == 12) {
 			String row1 = "Nothing";
 			String row2 = "Do nothing.         ";
 			String row3 = "                    ";

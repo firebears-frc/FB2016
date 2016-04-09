@@ -17,11 +17,12 @@ public class AcquireBall extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ballGetter.setSetpoint(Robot.ballGetter.MAX_VALUE);
+//    	Robot.ballGetter.setSetpoint(Robot.ballGetter.MAX_VALUE);
+//    	Robot.ballGetter.ballGetterPosition = 2;
+    	Robot.ballGetter.godown();
     	Robot.ballGetter.setMotors(1);
     	Robot.shooter.servoReset();
     	Robot.shooter.spinnerStop();
-    	Robot.ballGetter.ballGetterPosition = 2;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,9 +37,10 @@ public class AcquireBall extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.shooter.servoHold();
-		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
+//		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
+//		Robot.ballGetter.ballGetterPosition = 1;
+		Robot.ballGetter.goup();
 		Robot.ballGetter.setMotors(3);
-		Robot.ballGetter.ballGetterPosition = 1;
     }
 
     // Called when another command which requires one or more of the same
@@ -50,7 +52,9 @@ public class AcquireBall extends Command {
     		Robot.shooter.servoFire();
     	}
     	Robot.shooter.servoFire();
-		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
+//		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
+//		Robot.ballGetter.ballGetterPosition = 1;
+//    	Robot.ballGetter.goup();
 		Robot.ballGetter.setMotors(3);
     }
 }

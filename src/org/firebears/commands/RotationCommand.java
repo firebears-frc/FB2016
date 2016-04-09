@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class RotationCommand extends PIDCommand {
 
 	protected final double turnValue;
-	protected final double SPEED = 0.9;
+	protected final double SPEED = 0.5;
 	protected double angleTolerance = 5.0;
 	protected double targetAngle;
 
 	public RotationCommand(double degrees) {
-		super(0.1, 0.00001, 0.0); // PID
+		super(1., 0.0, 0.0); // PID
 		requires(Robot.chassis);
 		turnValue = degrees;
 		
@@ -38,9 +38,9 @@ public class RotationCommand extends PIDCommand {
 	 * @return the angle folded into the range -180 to 180.
 	 */
 	protected static double bound(double angle) {
-		while (angle >= 360) angle -= 360;
-		while (angle < 0) angle += 360;
-		if (angle > 180) angle = angle - 360;
+		while (angle >= 180) angle -= 360;
+		while (angle < -180) angle += 360;
+//		if (angle > 180) angle = angle - 360;
 		return angle;
 	}
 
@@ -66,6 +66,7 @@ public class RotationCommand extends PIDCommand {
 	 */
 	protected boolean isFinished() {
 		double difference = getAngleDifference();
+		System.out.println("Target + " + targetAngle + ", Turn" + turnValue + ", Now" + RobotMap.navXBoard.getAngle() + ", Diff" + difference);
 //		SmartDashboard.putNumber("Difference", difference);
 		return Math.abs(difference) < angleTolerance;
 	}
@@ -89,7 +90,7 @@ public class RotationCommand extends PIDCommand {
 	@Override
 	protected void usePIDOutput(double output) {
 		output = Math.max(-SPEED, Math.min(output, SPEED));
-		Robot.chassis.drive(output, 0.0);
+		Robot.chassis.drive(-output, 0.0);
 	}
 
 	// Unit tests.

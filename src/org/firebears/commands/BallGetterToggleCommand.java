@@ -14,20 +14,23 @@ public class BallGetterToggleCommand extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.ballGetter);
+    	requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	switch(Robot.ballGetter.ballGetterPosition){
     		case (1):
-    			Robot.ballGetter.setSetpoint(Robot.ballGetter.MAX_VALUE);
-    			Robot.ballGetter.ballGetterPosition = 2;
+//    			Robot.ballGetter.setSetpoint(Robot.ballGetter.MAX_VALUE);
+//    			Robot.ballGetter.ballGetterPosition = 2;
+    			Robot.ballGetter.godown();
     			Robot.shooter.servoReset();
     			break;
     		case (2):
-    			Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
+//    			Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
+//    			Robot.ballGetter.ballGetterPosition = 1;
+    			Robot.ballGetter.goup();
     			Robot.shooter.servoFire();
-    			Robot.ballGetter.ballGetterPosition = 1;
     			break;
     	}
     }

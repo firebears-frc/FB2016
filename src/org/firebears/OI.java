@@ -108,9 +108,6 @@ public class OI {
 		shooterSpinUp = new JoystickButton(joystick1, 5);
 		shooterSpinUp.whenPressed(new ShooterSpinCommand(80));
 
-		aimAndShoot = new JoystickButton(joystick1, 7);
-		aimAndShoot.whenPressed(new AimAndShootCommand());
-
 		park = new JoystickButton(joystick1, 8);
 		park.whenPressed(new ParkCommand());
 		
@@ -167,15 +164,18 @@ public class OI {
 		defenseBusterChangesButton = new JoystickButton(joystick2, 3);
 		defenseBusterChangesButton.whenPressed(new DefenseBusterToggleCommand());
 		
-		portcullisAutoButton = new JoystickButton(joystick2, 2);
-		portcullisAutoButton.whenPressed(new PortcullisCommand());
+		aimAndShoot = new JoystickButton(joystick2, 11);
+		aimAndShoot.whenPressed(new AimAndShootCommand());
 		
-		chevalDeFriseAutoButton = new JoystickButton(joystick2, 1);
+//		portcullisAutoButton = new JoystickButton(joystick2, 2);
+//		portcullisAutoButton.whenPressed(new PortcullisCommand());
 		
-		lowBarButton = new JoystickButton(joystick2, 10);
+//		chevalDeFriseAutoButton = new JoystickButton(joystick2, 1);
+		
+		lowBarButton = new JoystickButton(joystick2, 1);
 		lowBarButton.whenPressed(new LowBarNotAutonomousCommand());
 		
-		shooterReverseButton = new JoystickButton(joystick2, 9);
+		shooterReverseButton = new JoystickButton(joystick2, 2);
 		shooterReverseButton.whenActive(new ShooterSpinCommand(-10));
 		shooterReverseButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
 		shooterReverseButton.whenReleased(new ShooterSpinCommand(0));
@@ -214,7 +214,9 @@ public class OI {
 			SmartDashboard.putData("Location 3", new PrepareVisionCommand(3));
 			SmartDashboard.putData("Location 4", new PrepareVisionCommand(4));
 			SmartDashboard.putData("Location 5", new PrepareVisionCommand(5));
-			SmartDashboard.putData("Rotate", new RotationCommand(90));
+			SmartDashboard.putData("Rotate30", new RotationCommand(30));
+			SmartDashboard.putData("Rotate45", new RotationCommand(45));
+			SmartDashboard.putData("Rotate90", new RotationCommand(90));
 			
 			SmartDashboard.putData("ballGetter set min", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_MIN_VALUE));
 			SmartDashboard.putData("ballGetter set max", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_MAX_VAUE));

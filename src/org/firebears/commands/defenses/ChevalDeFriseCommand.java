@@ -22,7 +22,7 @@ public class ChevalDeFriseCommand extends AbstractDefenseCommand {
 //    	addParallel(new DriveStraightCommand(60,.5));
 //    	addSequential(new GetRotation());
 //    	addSequential(new Pitch(60, .7, 5));
-    	addSequential(new DriveStraightCommandAndStop(60, .7 , 18));
+    	addSequential(new DriveStraightCommandAndStop(60, .7 , 20));
     	addSequential(new WaitCommand(.5));
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
     	addSequential(new WaitCommand(.45));

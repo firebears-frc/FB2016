@@ -18,7 +18,7 @@ public class MoatCommand extends AbstractDefenseCommand {
     public  MoatCommand(boolean shoot) {
     	// Get over defense
     	addSequential(new GetRotation());
-        addSequential(new DriveStraightCommand(180.,.85));
+        addSequential(new DriveStraightCommand(165.,.85));
         // Do vision if shooting.
         finishAuto(shoot);
     	requires(Robot.chassis);

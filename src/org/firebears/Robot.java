@@ -26,6 +26,8 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -58,8 +60,10 @@ public class Robot extends IterativeRobot {
 	private final LcdOverLay lcdol = new LcdOverLay();
 
 	private long count = 0;
-//	private boolean lazorDown = false;
+	private boolean lazorDown = false;
 	public boolean ballAcquired = false;
+
+//	private static AnalogInput lazor;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -76,6 +80,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		lights = new Lights();
 		vision = new Vision();
+//		lazor = new AnalogInput(3);
 
 
 		// OI must be constructed after subsystems. If the OI creates Commands
@@ -104,7 +109,6 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
-		lights.disabledMode();
 		selectAuto.initialize();
 		lcdol.initialize();
 	}
@@ -113,6 +117,7 @@ public class Robot extends IterativeRobot {
 
 
 	public void disabledPeriodic() {
+		lights.disabledMode();
 		Scheduler.getInstance().run();
 		lcdol.execute();
 		if (Robot.oi.autoSwichButton.valueChanged()) {
@@ -162,24 +167,27 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-//		double voltage = Robot.lazor.getAverageVoltage();
-		
-		ballAcquired = Robot.shooter.hasBall();
-		
+		double voltage = RobotMap.lazor.getAverageVoltage();
 		// Not broken
-//		if(ballAcquired) {
-//			lazorDown = true;
-//		// Broken
-//		}else{
-//			if(lazorDown) {
-//		    	if(Robot.ballGetter.mode3 == 1) {
-//		    		Robot.shooter.servoReset();
-//		    	}else{
-//		    		Robot.shooter.servoFire();
-//		    	}
-//			}
-//	    	lazorDown = false;
-//		}
+		if(voltage > 1) {
+			lazorDown = true;
+		// Broken
+		}else{
+			if(lazorDown) {
+		    	if(Robot.ballGetter.mode3 == 1) {
+		    		Robot.shooter.servoReset();
+		    		
+		    	}else{
+		    		Robot.shooter.servoFire();
+//		    		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
+//	    			Robot.ballGetter.ballGetterPosition = 1;
+	    			Robot.ballGetter.goup();
+		    		Robot.ballGetter.setMotors(3);
+		    		Robot.shooter.hasBall();
+		    	}
+			}
+	    	lazorDown = false;
+		}
 
 		if ((count++) % 15 == 0) {
 			
@@ -222,7 +230,7 @@ public class Robot extends IterativeRobot {
 
 			SmartDashboard.putNumber("DefenseBuster pot", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
 			SmartDashboard.putNumber("Ballgetter pot", RobotMap.ballGetterAnalogInput.getAverageVoltage());
-
+			SmartDashboard.putNumber("Ball Getter Position", Robot.ballGetter.ballGetterPosition);
 		}
 	}
 

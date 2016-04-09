@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  */
 public class Lights extends Subsystem {
 
-	NetworkTable table;
+	static NetworkTable table;
 	boolean isCelebrateMode = false;
 
 	public Lights() {
@@ -25,7 +25,7 @@ public class Lights extends Subsystem {
 	public void initDefaultCommand() {
 	}
 
-	public void setStrip(String stripName, String animationName) {
+	public static void setStrip(String stripName, String animationName) {
 		table.putString(stripName, animationName);
 	}
 
@@ -36,26 +36,27 @@ public class Lights extends Subsystem {
 	public void teleopMode() {
 
 		String allianceColor = getAllianceColor();
-		setStrip(Lights.STRIP_CHASSIS_LEFT, allianceColor);
-		setStrip(Lights.STRIP_CHASSIS_RIGHT, allianceColor);
-		setStrip(Lights.STRIP_CELEBRATE, allianceColor);
 
 		if (isCelebrateMode) {
 			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODE);
 			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODE);
 			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODE);
 			return;
+		}else if(Robot.shooter.hasBall()) {
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_SPARK);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_SPARK);
+			if(Robot.shooter.isSpinning()) {
+				setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
+			}
+		}else if(Robot.shooter.isSpinning()) {
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
+		}else{
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
 		}
-
-		if (Robot.shooter.hasBall()) {
-			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_PULSING_GREEN);
-			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_PULSING_GREEN);
-		}
-
-		if (Robot.shooter.isSpinning()) {
-			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
-		}
-
 	}
 
 	public void autonomousMode() {
@@ -69,9 +70,10 @@ public class Lights extends Subsystem {
 	}
 
 	public void disabledMode() {
-		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
-		setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
-		setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
+		String anim = getAllianceColor();
+		setStrip(Lights.STRIP_CELEBRATE, anim);
+		setStrip(Lights.STRIP_CHASSIS_LEFT, anim);
+		setStrip(Lights.STRIP_CHASSIS_RIGHT, anim);
 	}
 
 	public void celebrateMode(boolean celebrate) {
@@ -79,11 +81,11 @@ public class Lights extends Subsystem {
 	}
 
 	protected String getAllianceColor() {
-		String allianceColor = Lights.ANIM_PULSING_RED;
 		if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue) {
-			allianceColor = Lights.ANIM_PULSING_BLUE;
+			return Lights.ANIM_PULSING_BLUE;
+		}else{
+			return Lights.ANIM_PULSING_RED;
 		}
-		return allianceColor;
 	}
 
 	// public void shootMode() {

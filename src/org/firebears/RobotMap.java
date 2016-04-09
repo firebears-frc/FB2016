@@ -71,8 +71,8 @@ public class RobotMap {
 	public static AnalogInput ballGetterAnalogInput;
 	public static AnalogPotentiometer ballGetterAnglePotentiometer;
 	
-	public static DigitalInput lazor;
-//	public static AnalogInput lazor;
+//	public static DigitalInput lazor;
+	public static AnalogInput lazor;
 
 	public static Encoder encoderLeft;
 	public static Encoder encoderRight;
@@ -203,8 +203,8 @@ public class RobotMap {
 		shooterCounter.reset();
 		LiveWindow.addActuator("Shooter", "ShootingCounter", shooterCounter);
 		
-//		lazor = new AnalogInput(3);
-		lazor = new DigitalInput(6);
+		lazor = new AnalogInput(3);
+//		lazor = new DigitalInput(6);
 
 		// button
 		// internalDigitalInput1 = new DigitalInput(0);
