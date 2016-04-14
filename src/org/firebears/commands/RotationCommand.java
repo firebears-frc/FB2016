@@ -38,9 +38,8 @@ public class RotationCommand extends PIDCommand {
 	 * @return the angle folded into the range -180 to 180.
 	 */
 	protected static double bound(double angle) {
-		while (angle >= 180) angle -= 360;
+		while (angle > 180) angle -= 360;
 		while (angle < -180) angle += 360;
-//		if (angle > 180) angle = angle - 360;
 		return angle;
 	}
 
@@ -72,7 +71,7 @@ public class RotationCommand extends PIDCommand {
 	}
 
 	protected void end() {
-		Robot.chassis.drive(0.0, 0.0);
+		Robot.chassis.stopDriving();
 	}
 
 	protected void interrupted() {
@@ -104,6 +103,12 @@ public class RotationCommand extends PIDCommand {
 //		System.out.println("-110,110 = -140; " + getAngleDifference(-110, 110));
 //		System.out.println("110,250 = 140; " + getAngleDifference(110, 250));
 //		System.out.println("250,110 = -140; " + getAngleDifference(250, 110));
+//		
+//		for (int angle = -200 ; angle < 400; angle+=45) {
+//			System.out.println("bound(" + angle + ") = " + bound(angle));
+//		}
+//		System.out.println("bound(" + 180 + ") = " + bound(180));
+//		System.out.println("bound(" + -180 + ") = " + bound(-180));
 //	}
 	
 }

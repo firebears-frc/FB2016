@@ -48,9 +48,26 @@ public class Chassis extends Subsystem {
 		Robot.chassis.frontRight.enableBrakeMode(brakeMode);
     }
 
-    public void drive(double x, double y){
+    public void drive(double rotateValue, double moveValue){
     	double mult = 1; //talonFuse.speedFuse(frontLeft.getOutputCurrent());
-    	robotDrive.arcadeDrive(-y * mult, -x * mult);
+    	robotDrive.arcadeDrive(-moveValue * mult, -rotateValue * mult);
+    }
+    
+	/**
+	 * @param outputMagnitude
+	 *            The speed setting for the outside wheel in a turn, forward or
+	 *            backwards, in the range from -1.0 to 1.0.
+	 * @param curve
+	 *            The rate of turn, constant for different forward speeds, in
+	 *            the range from -1.0 to 1.0. Negative turns left. Positive
+	 *            turns right.
+	 */
+	public void driveCurve(double outputMagnitude, double curve) {
+		robotDrive.drive(outputMagnitude, curve);
+	}
+    
+    public void stopDriving() {
+    	drive(0.0, 0.0);
     }
 
 
