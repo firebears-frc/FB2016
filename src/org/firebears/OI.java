@@ -225,6 +225,13 @@ public class OI {
 			SmartDashboard.putData("defenseBuster set max", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE));
 			SmartDashboard.putData("defenseBuster set park", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE));
 
+			SmartDashboard.putData("S-curves", new SCurvesCommand());
+			SmartDashboard.putData("GetRotation", new GetRotation());
+			SmartDashboard.putData("AdjustRotation", new AdjustRotation());
+			
+			SmartDashboard.putData("RotateCurve " + -90, new RotateCurveCommand(-90));
+			SmartDashboard.putData("RotateCurve " + 90, new RotateCurveCommand(90));
+	
 		}
 		// Create a variable to be read for the Network Tables Variables.
 		SmartDashboard.putNumber(SetPreferences.SET_VAR, 0.0);

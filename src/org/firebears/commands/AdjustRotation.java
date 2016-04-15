@@ -13,14 +13,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class AdjustRotation extends PIDCommand {
 	
 	double offset = 0.;
+	public static final double MAX_SPEED = 0.5;
 
     public AdjustRotation() {
-    	super(.009, 0.00001, 0.00); //PID
+    	super(.020, 0.00001, 0.00); //PID
     	requires(Robot.chassis);
     }
     
     public AdjustRotation(double degree_offset) {
-    	super(.009, 0.00001, 0.0); //PID
+    	super(.020, 0.00001, 0.00); //PID
     	requires(Robot.chassis);
     	offset = degree_offset;
     }
@@ -32,10 +33,10 @@ public class AdjustRotation extends PIDCommand {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		if (output > 0.9){
-			output = 0.9;
-		} else if (output < -0.9){
-			output = -0.9;
+		if (output > MAX_SPEED){
+			output = MAX_SPEED;
+		} else if (output < -1 * MAX_SPEED){
+			output = -1 * MAX_SPEED;
 		}
 		Robot.chassis.drive(output, 0);
 	}
@@ -57,6 +58,7 @@ public class AdjustRotation extends PIDCommand {
     	getPIDController().setAbsoluteTolerance(2);
     	getPIDController().enable();
 		setSetpoint(bound(RobotMap.rotation + offset));
+		Robot.chassis.setBrakeMode(true);
 		setTimeout(5);
 	}
 
@@ -76,11 +78,13 @@ public class AdjustRotation extends PIDCommand {
 	@Override
 	protected void end() {
 		Robot.chassis.drive(0, 0);
+		Robot.chassis.setBrakeMode(false);
 	}
 
 	@Override
 	protected void interrupted() {
 		Robot.chassis.drive(0, 0);
+		Robot.chassis.setBrakeMode(false);
 	}
 
 }

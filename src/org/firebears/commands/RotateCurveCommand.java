@@ -19,15 +19,15 @@ public class RotateCurveCommand extends PIDCommand {
 	protected double targetAngle;
 
 	public RotateCurveCommand(double degrees) {
-		this(degrees, 0.5, 0.5);
+		this(degrees, 0.3, 0.5);
 	}
 
 	public RotateCurveCommand(double degrees, double maxCurve) {
-		this(degrees, maxCurve, 0.5);
+		this(degrees, maxCurve, 0.4);
 	}
 
 	public RotateCurveCommand(double degrees, double maxCurve, double maxForward) {
-		super(1.0, 0.0, 0.0); // PID
+		super(0.0275, 0.0, 0.0); // PID
 		TURN_VALUE = degrees;
 		MAX_CURVE = maxCurve;
 		MAX_FORWARD = maxForward;
@@ -61,12 +61,13 @@ public class RotateCurveCommand extends PIDCommand {
 	 *         angle, in the range -180 to 180.
 	 */
 	private double getAngleDifference() {
-		return getAngleDifference(RobotMap.navXBoard.getAngle(), targetAngle);
+		return getAngleDifference(targetAngle, RobotMap.navXBoard.getAngle());
 	}
 
 	protected void initialize() {
 		targetAngle = bound(RobotMap.navXBoard.getAngle() + TURN_VALUE);
 		getPIDController().setSetpoint(0.0);
+		setTimeout(Math.round(Math.abs(TURN_VALUE/20.0)));
 	}
 
 	protected void execute() { }
@@ -75,6 +76,7 @@ public class RotateCurveCommand extends PIDCommand {
 	 * @return true when the angle difference gets close to zero.
 	 */
 	protected boolean isFinished() {
+		if (isTimedOut()) { return true; }
 		double difference = getAngleDifference();
 		return Math.abs(difference) < angleTolerance;
 	}
