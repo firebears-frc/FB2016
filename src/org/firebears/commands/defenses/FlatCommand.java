@@ -4,6 +4,10 @@ import org.firebears.Robot;
 import org.firebears.commands.DriveStraightCommand;
 import org.firebears.commands.GetRotation;
 
+/**
+ * Drive forward and shoot.
+ * Useful for rock wall, rough terrain, moat, etc.
+ */
 public class FlatCommand extends AbstractDefenseCommand {
 	
 	final boolean shoot;

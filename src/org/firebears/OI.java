@@ -227,11 +227,11 @@ public class OI {
 //			SmartDashboard.putData("defenseBuster set max", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE));
 //			SmartDashboard.putData("defenseBuster set park", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE));
 //
-			SmartDashboard.putData("Curve - Defense 1", new SCurvesCommand(DEFENSE_1));
-			SmartDashboard.putData("Curve - Defense 2", new SCurvesCommand(DEFENSE_2));
-			SmartDashboard.putData("Curve - Defense 3", new SCurvesCommand(DEFENSE_3));
-			SmartDashboard.putData("Curve - Defense 4", new SCurvesCommand(DEFENSE_4, false));
-			SmartDashboard.putData("Curve - Defense 5", new SCurvesCommand(DEFENSE_5, false));
+			SmartDashboard.putData("Defense 1", new PrepareVisionCommand(1, false));
+			SmartDashboard.putData("Defense 2", new PrepareVisionCommand(2, false));
+			SmartDashboard.putData("Defense 3", new PrepareVisionCommand(3, false));
+			SmartDashboard.putData("Defense 4", new PrepareVisionCommand(4, false));
+			SmartDashboard.putData("Defense 5", new PrepareVisionCommand(5, false));
 			
 			SmartDashboard.putData("GetRotation", new GetRotation());
 			SmartDashboard.putData("AdjustRotation", new AdjustRotation());

@@ -26,7 +26,7 @@ public class LowBarCommand extends AbstractDefenseCommand {
     	addSequential(new GetRotation());
     	addSequential(new BallGetterSetpointCommand(Robot.ballGetter.MAX_VALUE));
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MAX_VALUE));
-    	addSequential(new DriveStraightCommand(216., .6));
+    	addSequential(new DriveStraightCommand(216, 0.75));
     	// Vision take over.
     	addSequential(new AdjustRotation());
     	//addSequential(new RotationCommand(65));
