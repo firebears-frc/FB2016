@@ -25,6 +25,8 @@ import org.firebears.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import static org.firebears.commands.SCurvesCommand.*;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -191,41 +193,46 @@ public class OI {
 
 		// SmartDashboard Buttons
 		if (RobotMap.DEBUG)  {
-			SmartDashboard.putData("Autonomous Select", new SelectAuto());
-			SmartDashboard.putData("DriveStraight", new DriveStraightCommandAndStop(180, 0.8, 45));
-			SmartDashboard.putData("Right Rotate", new RotationCommand(90));
-			SmartDashboard.putData("Left Rotate", new RotationCommand(-90));
-			SmartDashboard.putData("Moat Auto", new MoatCommand());
-			SmartDashboard.putData("Rock Wall Auto", new RockWallCommand());
-			SmartDashboard.putData("Rough Terrain Auto", new RoughTerrainCommand());
-			SmartDashboard.putData("Ramparts Auto", new RampartsCommand());
-			SmartDashboard.putData("ChevalDeFrise Auto", new ChevalDeFriseCommand());
-			SmartDashboard.putData("Low Bar", new LowBarCommand());
-			SmartDashboard.putData("TestAutoCommamnd", new TestAutoCommand());
-			SmartDashboard.putNumber("Vision Set", 0.);
-			SmartDashboard.putData("Vision Save To Hue Lo", new Vision.SaveToPref(Vision.PREF_HUE_LO));
-			SmartDashboard.putData("Vision Save To Hue Hi", new Vision.SaveToPref(Vision.PREF_HUE_HI));
-			SmartDashboard.putData("Vision Save To Sat Lo", new Vision.SaveToPref(Vision.PREF_SAT_LO));
-			SmartDashboard.putData("Vision Save To Sat Hi", new Vision.SaveToPref(Vision.PREF_SAT_HI));
-			SmartDashboard.putData("Vision Save To Val Lo", new Vision.SaveToPref(Vision.PREF_VAL_LO));
-			SmartDashboard.putData("Vision Save To Val Hi", new Vision.SaveToPref(Vision.PREF_VAL_HI));
-			SmartDashboard.putData("Location 1", new PrepareVisionCommand(1));
-			SmartDashboard.putData("Location 2", new PrepareVisionCommand(2));
-			SmartDashboard.putData("Location 3", new PrepareVisionCommand(3));
-			SmartDashboard.putData("Location 4", new PrepareVisionCommand(4));
-			SmartDashboard.putData("Location 5", new PrepareVisionCommand(5));
-			SmartDashboard.putData("Rotate30", new RotationCommand(30));
-			SmartDashboard.putData("Rotate45", new RotationCommand(45));
-			SmartDashboard.putData("Rotate90", new RotationCommand(90));
+//			SmartDashboard.putData("Autonomous Select", new SelectAuto());
+//			SmartDashboard.putData("DriveStraight", new DriveStraightCommandAndStop(180, 0.8, 45));
+//			SmartDashboard.putData("Right Rotate", new RotationCommand(90));
+//			SmartDashboard.putData("Left Rotate", new RotationCommand(-90));
+//			SmartDashboard.putData("Moat Auto", new MoatCommand());
+//			SmartDashboard.putData("Rock Wall Auto", new RockWallCommand());
+//			SmartDashboard.putData("Rough Terrain Auto", new RoughTerrainCommand());
+//			SmartDashboard.putData("Ramparts Auto", new RampartsCommand());
+//			SmartDashboard.putData("ChevalDeFrise Auto", new ChevalDeFriseCommand());
+//			SmartDashboard.putData("Low Bar", new LowBarCommand());
+//			SmartDashboard.putData("TestAutoCommamnd", new TestAutoCommand());
+//			SmartDashboard.putNumber("Vision Set", 0.);
+//			SmartDashboard.putData("Vision Save To Hue Lo", new Vision.SaveToPref(Vision.PREF_HUE_LO));
+//			SmartDashboard.putData("Vision Save To Hue Hi", new Vision.SaveToPref(Vision.PREF_HUE_HI));
+//			SmartDashboard.putData("Vision Save To Sat Lo", new Vision.SaveToPref(Vision.PREF_SAT_LO));
+//			SmartDashboard.putData("Vision Save To Sat Hi", new Vision.SaveToPref(Vision.PREF_SAT_HI));
+//			SmartDashboard.putData("Vision Save To Val Lo", new Vision.SaveToPref(Vision.PREF_VAL_LO));
+//			SmartDashboard.putData("Vision Save To Val Hi", new Vision.SaveToPref(Vision.PREF_VAL_HI));
+//			SmartDashboard.putData("Location 1", new PrepareVisionCommand(1));
+//			SmartDashboard.putData("Location 2", new PrepareVisionCommand(2));
+//			SmartDashboard.putData("Location 3", new PrepareVisionCommand(3));
+//			SmartDashboard.putData("Location 4", new PrepareVisionCommand(4));
+//			SmartDashboard.putData("Location 5", new PrepareVisionCommand(5));
+//			SmartDashboard.putData("Rotate30", new RotationCommand(30));
+//			SmartDashboard.putData("Rotate45", new RotationCommand(45));
+//			SmartDashboard.putData("Rotate90", new RotationCommand(90));
+//			
+//			SmartDashboard.putData("ballGetter set min", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_MIN_VALUE));
+//			SmartDashboard.putData("ballGetter set max", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_MAX_VAUE));
+//			SmartDashboard.putData("ballGetter set park", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_PARK_VALUE));
+//			SmartDashboard.putData("defenseBuster set min", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE));
+//			SmartDashboard.putData("defenseBuster set max", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE));
+//			SmartDashboard.putData("defenseBuster set park", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE));
+//
+			SmartDashboard.putData("Curve - Defense 1", new SCurvesCommand(DEFENSE_1));
+			SmartDashboard.putData("Curve - Defense 2", new SCurvesCommand(DEFENSE_2));
+			SmartDashboard.putData("Curve - Defense 3", new SCurvesCommand(DEFENSE_3));
+			SmartDashboard.putData("Curve - Defense 4", new SCurvesCommand(DEFENSE_4, false));
+			SmartDashboard.putData("Curve - Defense 5", new SCurvesCommand(DEFENSE_5, false));
 			
-			SmartDashboard.putData("ballGetter set min", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_MIN_VALUE));
-			SmartDashboard.putData("ballGetter set max", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_MAX_VAUE));
-			SmartDashboard.putData("ballGetter set park", new SetPreferencesBallGetter(RobotMap.PREF_BALL_GETTER_PARK_VALUE));
-			SmartDashboard.putData("defenseBuster set min", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE));
-			SmartDashboard.putData("defenseBuster set max", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE));
-			SmartDashboard.putData("defenseBuster set park", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE));
-
-			SmartDashboard.putData("S-curves", new SCurvesCommand());
 			SmartDashboard.putData("GetRotation", new GetRotation());
 			SmartDashboard.putData("AdjustRotation", new AdjustRotation());
 			

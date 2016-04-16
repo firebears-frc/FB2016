@@ -132,6 +132,7 @@ public class Robot extends IterativeRobot {
 		lights.autonomousMode();
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
+			System.out.println("Autonomous: " + autonomousCommand);
 		}
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();

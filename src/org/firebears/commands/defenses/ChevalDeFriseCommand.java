@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class ChevalDeFriseCommand extends AbstractDefenseCommand {
     
+	final boolean shoot;
+	
     public  ChevalDeFriseCommand(boolean shoot) {
     	
 //    	addParallel(new DriveStraightCommand(60,.5));
@@ -35,9 +37,14 @@ public class ChevalDeFriseCommand extends AbstractDefenseCommand {
 
     	requires(Robot.chassis);
     	requires(Robot.defenseBuster);
+    	this.shoot = shoot;
     }
     
     public ChevalDeFriseCommand() {
     	this(true);
+    }
+    
+    public String toString() {
+    	return "ChevalDeFris" + (shoot?"-shoot":"");
     }
 }

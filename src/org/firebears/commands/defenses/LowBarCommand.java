@@ -14,6 +14,8 @@ import org.firebears.commands.RotationCommand;
  */
 public class LowBarCommand extends AbstractDefenseCommand {
 
+	final boolean shoot;
+	
     public  LowBarCommand(boolean shoot) {
     	requires(Robot.chassis);
         // Add Commands here:
@@ -33,9 +35,14 @@ public class LowBarCommand extends AbstractDefenseCommand {
     	requires(Robot.chassis);
     	requires(Robot.defenseBuster);
     	requires(Robot.ballGetter);
+    	this.shoot = shoot;
     }
     
     public LowBarCommand() {
     	this(true);
+    }
+    
+    public String toString() {
+    	return "LowBar" + (shoot?"-shoot":"");
     }
 }
