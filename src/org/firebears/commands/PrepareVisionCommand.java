@@ -6,8 +6,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class PrepareVisionCommand extends CommandGroup {
+	
+	final int position;
     	
     public  PrepareVisionCommand(int position) {
+    	this.position = position;
     	switch(position) {
     		default:
     			break;
@@ -58,5 +61,9 @@ public class PrepareVisionCommand extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    }
+    
+    public String toString() {
+    	return "PrepareVision=" + this.position);
     }
 }
