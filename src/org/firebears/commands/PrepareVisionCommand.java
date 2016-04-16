@@ -64,6 +64,6 @@ public class PrepareVisionCommand extends CommandGroup {
     }
     
     public String toString() {
-    	return "PrepareVision=" + this.position);
+    	return "PrepareVision=" + this.position;
     }
 }
