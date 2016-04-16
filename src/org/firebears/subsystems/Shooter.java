@@ -32,7 +32,7 @@ public class Shooter extends PIDSubsystem {
     }
     
     public boolean hasBall() {
-    	return RobotMap.lazor.getAverageVoltage() <= 1;
+    	return !RobotMap.lazor.get();
     }
 
 	public Shooter() {
@@ -101,7 +101,7 @@ public class Shooter extends PIDSubsystem {
 	}
 
 	public void servoReset() {
-		shooterServo.set(.3);
+		shooterServo.set(0);
 		RobotMap.servoOn = false;
 	}
 

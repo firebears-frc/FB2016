@@ -17,6 +17,7 @@ import org.firebears.commands.defenses.MoatCommand;
 import org.firebears.subsystems.BallGetter;
 import org.firebears.subsystems.Chassis;
 import org.firebears.subsystems.DefenseBuster;
+import org.firebears.subsystems.Bail;
 import org.firebears.subsystems.DrawbridgeBuster;
 import org.firebears.subsystems.Lights;
 import org.firebears.subsystems.Shooter;
@@ -56,11 +57,13 @@ public class Robot extends IterativeRobot {
 	public static Lights lights;
 	public static Vision vision;
 
+	public static Bail bail;
+
 	private SelectAuto selectAuto;
 	private final LcdOverLay lcdol = new LcdOverLay();
 
 	private long count = 0;
-	private boolean lazorDown = false;
+//	private boolean lazorDown = false;
 	public boolean ballAcquired = false;
 
 //	private static AnalogInput lazor;
@@ -167,27 +170,30 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		double voltage = RobotMap.lazor.getAverageVoltage();
+//		double voltage = Robot.lazor.getAverageVoltage();
+		
+		ballAcquired = Robot.shooter.hasBall();
+		
 		// Not broken
-		if(voltage > 1) {
-			lazorDown = true;
-		// Broken
-		}else{
-			if(lazorDown) {
-		    	if(Robot.ballGetter.mode3 == 1) {
-		    		Robot.shooter.servoReset();
-		    		
-		    	}else{
-		    		Robot.shooter.servoFire();
+//		if(ballAcquired) {
+//			lazorDown = true;
+//		// Broken
+//		}else{
+//			if(lazorDown) {
+//		    	if(Robot.ballGetter.mode3 == 1) {
+//		    		Robot.shooter.servoReset();
+//		    		
+//		    	}else{
+//		    		Robot.shooter.servoFire();
 //		    		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
 //	    			Robot.ballGetter.ballGetterPosition = 1;
-	    			Robot.ballGetter.goup();
-		    		Robot.ballGetter.setMotors(3);
-		    		Robot.shooter.hasBall();
-		    	}
-			}
-	    	lazorDown = false;
-		}
+//	    			Robot.ballGetter.goup();
+//		    		Robot.ballGetter.setMotors(3);
+//		    		Robot.shooter.hasBall();
+//		    	}
+//			}
+//	    	lazorDown = false;
+//		}
 
 		if ((count++) % 15 == 0) {
 			
