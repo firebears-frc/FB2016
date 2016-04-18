@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Rotate the robot to the previously saved gyro direction.
  */
 public class AdjustRotation extends PIDCommand {
 	
@@ -16,14 +16,16 @@ public class AdjustRotation extends PIDCommand {
 	public static final double MAX_SPEED = 0.5;
 
     public AdjustRotation() {
-    	super(.020, 0.00001, 0.00); //PID
+    	super(.050, 0.00005, 0.00); //PID
     	requires(Robot.chassis);
+    	getPIDController().setToleranceBuffer(6);
     }
     
     public AdjustRotation(double degree_offset) {
-    	super(.020, 0.00001, 0.00); //PID
+    	super(.050, 0.00001, 0.00); //PID
     	requires(Robot.chassis);
     	offset = degree_offset;
+    	getPIDController().setToleranceBuffer(6);
     }
 
 	@Override
@@ -60,6 +62,7 @@ public class AdjustRotation extends PIDCommand {
 		setSetpoint(bound(RobotMap.rotation + offset));
 		Robot.chassis.setBrakeMode(true);
 		setTimeout(5);
+		if (RobotMap.DEBUG) { System.out.println("::: AdjustRotation"); }
 	}
 
 	@Override
@@ -72,7 +75,7 @@ public class AdjustRotation extends PIDCommand {
 		if (isTimedOut()){
 			return true;
 		}
-		return Math.abs(RobotMap.navXBoard.getAngle() - RobotMap.rotation)< 2;
+		return Math.abs(RobotMap.navXBoard.getAngle() - RobotMap.rotation)< 4;
 	}
 
 	@Override

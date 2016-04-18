@@ -11,15 +11,22 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class RampartsCommand extends AbstractDefenseCommand {
     
+	final boolean shoot;
+	
     public  RampartsCommand(boolean shoot) {
     	addSequential(new GetRotation());
         addSequential(new DriveStraightCommand(165.,.85));
         // Do vision if shooting.
         finishAuto(shoot);
     	requires(Robot.chassis);
+    	this.shoot = shoot;
     }
     
     public RampartsCommand() {
     	this(true);
+    }
+    
+    public String toString() {
+    	return "Ramparts" + (shoot?"-shoot":"");
     }
 }

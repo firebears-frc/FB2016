@@ -1,62 +1,93 @@
 package org.firebears.commands;
 
+import org.firebears.commands.defenses.FlatCommand;
+import org.firebears.commands.defenses.LowBarCommand;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Drive forward, turn, and shoot.  Specific to one of the defense positions.
  */
 public class PrepareVisionCommand extends CommandGroup {
-    	
+	
+	final int position;
+	final boolean shoot;
+   
     public  PrepareVisionCommand(int position) {
+    	this(position, true);
+    }
+	
+    public  PrepareVisionCommand(int position, boolean shoot) {
+    	this.position = position;
+    	this.shoot = shoot;
     	switch(position) {
-    		default:
-    			break;
+
     		case 1:
-    	        // Turn toward target.
- //   	    	addSequential(new GetRotation());
-    	    	addSequential(new AdjustRotation(85.));
+    	        // Go though low bar, on the far left defense position
+    	    	addSequential(new LowBarCommand(false));
+    	    	addSequential(new RotationCommand(50));
+       	        addSequential(new DriveStraightCommand(36, 0.75));
+    	    	if (shoot) { addSequential(new AimAndShootCommand());  }
     	    	break;
     		case 2:
-    			// Turn toward target.
+    			// Go through defense position 2, on the second from the left position.
     	    	addSequential(new GetRotation());
-    	    	addSequential(new AdjustRotation(45.));
+    	        addSequential(new DriveStraightCommand(200,0.75));
+    	        addSequential(new AdjustRotation());
+    	    	addSequential(new RotationCommand(30));
+    	    	if (shoot) { addSequential(new AimAndShootCommand());  }
     	    	break;
     		case 3:
-    			// Turn Right
+    			//  Go through defense position 3, near the middle
     	    	addSequential(new GetRotation());
-    	    	addSequential(new AdjustRotation(90.));
-    	    	// 3 Feet to the right
-    	        addSequential(new DriveStraightCommand(3.,.85));
-    	    	// Turn Left toward target
-    	    	addSequential(new GetRotation());
-    	    	addSequential(new AdjustRotation(-120.));
+    	        addSequential(new DriveStraightCommand(180, 0.75));
+    	        addSequential(new AdjustRotation());
+    	    	addSequential(new RotationCommand(20));
+    	    	if (shoot) { addSequential(new AimAndShootCommand());  }
     	    	break;
     		case 4:
-    			// Point toward target
+    			//  Go through defense position 4; to the right of the middle
     	    	addSequential(new GetRotation());
-    	    	addSequential(new AdjustRotation(-30.));
+    	        addSequential(new DriveStraightCommand(180, 0.75));
+    	        addSequential(new AdjustRotation());
+    	    	addSequential(new RotationCommand(-20));
+    	    	if (shoot) { addSequential(new AimAndShootCommand());  }
     	    	break;
     		case 5:
-    	        // Turn toward target.
+    			//  Go through defense position 2; closest to secret passage
     	    	addSequential(new GetRotation());
-    	    	addSequential(new AdjustRotation(-60.));
+    	        addSequential(new DriveStraightCommand(250, 0.75));
+    	        addSequential(new AdjustRotation());
+    	    	addSequential(new RotationCommand(-50));
+    	    	if (shoot) { addSequential(new AimAndShootCommand());  }
     	    	break;
+//    		case 3:
+//    			// Turn Right
+//    	    	addSequential(new GetRotation());
+//    	    	addSequential(new AdjustRotation(90.));
+//    	    	// 3 Feet to the right
+//    	        addSequential(new DriveStraightCommand(3.,.85));
+//    	    	// Turn Left toward target
+//    	    	addSequential(new GetRotation());
+//    	    	addSequential(new AdjustRotation(-120.));
+//    	    	break;
+//    		case 4:
+//    			// Point toward target
+//    	    	addSequential(new GetRotation());
+//    	    	addSequential(new AdjustRotation(-30.));
+//    	    	break;
+//    		case 5:
+//    	        // Turn toward target.
+//    	    	addSequential(new GetRotation());
+//    	    	addSequential(new AdjustRotation(-60.));
+//    	    	break;
+    		default:
+    			break;
     	}
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
 
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    }
+    
+    public String toString() {
+    	return "Defense=" + this.position + (shoot?"-shoot":"");
     }
 }

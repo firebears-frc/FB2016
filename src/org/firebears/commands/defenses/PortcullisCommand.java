@@ -24,6 +24,9 @@ public class PortcullisCommand extends CommandGroup {
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MIN_VALUE));
     	addSequential(new DriveStraightCommand(40));
     	requires(Robot.chassis);
-    	
+    }
+    
+    public String toString() {
+    	return "Portcullis";
     }
 }

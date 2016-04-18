@@ -6,7 +6,7 @@ import org.firebears.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Store the current gyro direction, taken from the NavX board.
  */
 public class GetRotation extends Command {
 
