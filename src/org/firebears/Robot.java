@@ -80,6 +80,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		lights = new Lights();
 		vision = new Vision();
+		bail = new Bail();
 //		lazor = new AnalogInput(3);
 
 

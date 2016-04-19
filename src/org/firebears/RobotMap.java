@@ -136,7 +136,7 @@ public class RobotMap {
 		defenseBusterAngleMotor.enableBrakeMode(true);
 		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);
 		
-		bail = new CANTalon(2);
+		bail = new CANTalon(17);
 		bail.enableBrakeMode(true);
 		LiveWindow.addActuator("bail", "Motor", bail);
 		//*/*/*/*/*/END Open Loop /*/*/*/*/*/

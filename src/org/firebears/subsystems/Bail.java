@@ -10,10 +10,8 @@
 
 package org.firebears.subsystems;
 
-import static org.firebears.RobotMap.getPreferencesDouble;
 
 import org.firebears.RobotMap;
-import org.firebears.commands.BallGetterMotorsCommand;
 import org.firebears.util.SoftFuse;
 
 import edu.wpi.first.wpilibj.AnalogInput;

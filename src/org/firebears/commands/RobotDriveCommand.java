@@ -39,12 +39,34 @@ public class RobotDriveCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     }
-
+    double x3;
+	double y3;
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double y = Robot.oi.getJoystick1().getY();
     	double x = Robot.oi.getJoystick1().getX();
-    	Robot.chassis.drive(x, y);
+    	double sens = 2.1;
+    	
+    	
+    	if (x < 0){
+    		double x2 = x * -1;
+    		x3 = -Math.pow(x2, sens);
+    	}
+    	if (y < 0){
+    		double y2 = y * -1;
+    		y3 = -Math.pow(y2, sens);
+    	}
+    	if (x > 0){
+    		x3 = Math.pow(x, sens);
+    	}
+    	if (y > 0){
+    		y3 = Math.pow(y, sens);
+    	}
+    	
+//    	double x2 = Math.pow(x, .5);
+//    	double y2 = Math.pow(y, .5);
+    	
+    	Robot.chassis.drive(x3, y3);
     	
     }
 

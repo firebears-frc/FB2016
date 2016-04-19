@@ -238,6 +238,8 @@ public class OI {
 			
 			SmartDashboard.putData("RotateCurve " + -90, new RotateCurveCommand(-90));
 			SmartDashboard.putData("RotateCurve " + 90, new RotateCurveCommand(90));
+			
+			SmartDashboard.putData("Bail@1", new BailSetpointCommand(.5));
 	
 		}
 		// Create a variable to be read for the Network Tables Variables.
