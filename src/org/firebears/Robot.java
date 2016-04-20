@@ -74,13 +74,13 @@ public class Robot extends IterativeRobot {
 		RobotMap.init();
 
 		// Initialize Subsystems
+		bail = new Bail();
 		chassis = new Chassis();
 		defenseBuster = new DefenseBuster();
 		ballGetter = new BallGetter();
 		shooter = new Shooter();
 		lights = new Lights();
 		vision = new Vision();
-		bail = new Bail();
 //		lazor = new AnalogInput(3);
 
 

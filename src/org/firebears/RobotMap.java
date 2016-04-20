@@ -269,7 +269,7 @@ public class RobotMap {
         LiveWindow.addSensor("Shooter", "rangeFinder", shooterrangeFinder);
         
         bailPos = new AnalogInput(3);
-        LiveWindow.addSensor("bail", "Moter", bailPos);
+        LiveWindow.addSensor("bail", "Pot", bailPos);
 
 	}
 

@@ -2,6 +2,7 @@ package org.firebears.subsystems;
 
 import static org.firebears.RobotMap.getPreferencesDouble;
 
+import org.firebears.Robot;
 import org.firebears.RobotMap;
 import org.firebears.commands.ShooterTesterCommand;
 
@@ -91,17 +92,26 @@ public class Shooter extends PIDSubsystem {
 	}
 
 	public void servoFire() {
-		shooterServo.set(SERVO_MAX);
+//		shooterServo.set(SERVO_MAX);
+		Robot.bail.fire();
 		RobotMap.servoOn = true;
 	}
 	
 	public void servoHold() {
-		shooterServo.set(.5);
+//		shooterServo.set(.5);
+		Robot.bail.hold();
 		RobotMap.servoOn = true;
 	}
 
 	public void servoReset() {
-		shooterServo.set(.3);
+//		shooterServo.set(.3);
+		Robot.bail.reset();
+		RobotMap.servoOn = false;
+	}
+	
+	public void servoPreShoot() {
+//		shooterServo.set(.4);
+		Robot.bail.preShoot();
 		RobotMap.servoOn = false;
 	}
 

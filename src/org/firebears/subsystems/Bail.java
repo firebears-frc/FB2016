@@ -29,11 +29,14 @@ public class Bail extends PIDSubsystem {
 
 	/** Maximum value that the setpoint may take, measured in volts. */
 	public double MAX_VALUE;
+	
+	public double PRE_SHOOT_VALUE;
+
+	public double PARK_VALUE;	
 
 	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
 	public double MAX_SPEED;
-
-	public double PARK_VALUE;	
+	
 	SoftFuse softFuse;
 	
 	public Bail() {
@@ -41,20 +44,22 @@ public class Bail extends PIDSubsystem {
 //		super(1.50, 0.03, 5.0);
 
 		MAX_SPEED = 1.;
-		MIN_VALUE = 0.;
-		MAX_VALUE = 0.;
-		PARK_VALUE = 0.;
+		MIN_VALUE = 2.6;  // Pot value to reset bail onto the floor
+		PRE_SHOOT_VALUE = 2.2;  // Pot value to hold ball before shooting
+		PARK_VALUE = 1.8; // Pot value to hold onto the ball while driving
+		MAX_VALUE = 1.4;  // Pot value to fire the ball
+
 		
 		softFuse = new SoftFuse(bail, 40, 1, 2);
 
-		getPIDController().setInputRange(MIN_VALUE, MAX_VALUE);
+		getPIDController().setInputRange(MAX_SPEED, MIN_VALUE);
 		getPIDController().setAbsoluteTolerance(0.01);
 		getPIDController().setToleranceBuffer(8);
 		setSetpoint(PARK_VALUE);
 		getPIDController().enable();
 		softFuse.positionFuse(bail.getOutputCurrent());
 
-		LiveWindow.addActuator("Bail", "PIDSubsystem Controller", getPIDController());
+		LiveWindow.addActuator("bail", "PIDSubsystem Controller", getPIDController());
 	}
 
 	private final CANTalon bail = RobotMap.bail;
@@ -71,14 +76,31 @@ public class Bail extends PIDSubsystem {
 	@Override
 	protected void usePIDOutput(double output) {
 		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
-		CANTalon bailPos;
-		bail.set(output);
+		bail.set(-1 * output);
 	}
 
-	public void park(){
+	/** Lower the bail so we can pick up the ball. */
+	public void reset(){
+		setSetpoint(MIN_VALUE);
+		softFuse.positionFuse(bail.getOutputCurrent());
+	}
+	
+	/** Raise the bail slightly to hold onto the ball. */
+	public void hold(){
 		setSetpoint(PARK_VALUE);
 		softFuse.positionFuse(bail.getOutputCurrent());
-
+	}
+	
+	/** Lower ball just before shooting */
+	public void preShoot(){
+		setSetpoint(PRE_SHOOT_VALUE);
+		softFuse.positionFuse(bail.getOutputCurrent());
+	}
+	
+	/** Raise the bail to fire the shooter. */
+	public void fire(){
+		setSetpoint(MAX_VALUE);
+		softFuse.positionFuse(bail.getOutputCurrent());
 	}
 
 }
