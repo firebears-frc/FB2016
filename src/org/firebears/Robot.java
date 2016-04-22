@@ -13,7 +13,6 @@ package org.firebears;
 import org.firebears.commands.AutonomousCommand;
 import org.firebears.commands.LcdOverLay;
 import org.firebears.commands.SelectAuto;
-import org.firebears.commands.SelectAuto2;
 import org.firebears.commands.defenses.MoatCommand;
 import org.firebears.subsystems.BallGetter;
 import org.firebears.subsystems.Chassis;
@@ -229,7 +228,9 @@ public class Robot extends IterativeRobot {
 				SmartDashboard.putNumber("Shooter rate RPS", shooter.getRate());
 				SmartDashboard.putNumber("Servo angle", RobotMap.shooterServo.getAngle());
 				SmartDashboard.putNumber("Servo position", RobotMap.shooterServo.getPosition());
-
+				
+				SmartDashboard.putBoolean("isOnTarget", vision.isOnTarget());
+				
 				SmartDashboard.putNumber("Rangefinder Inches:", shooter.getRangeFinderDistance());
 			}
 

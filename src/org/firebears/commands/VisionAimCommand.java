@@ -13,9 +13,9 @@ public class VisionAimCommand extends Command {
 	final public double AngleTolerance = .1;
 	final public double DistanceTolerance = 5;
 	final private boolean goBack;
-	final static double TARGET_DISTANCE = -65.;
-	final static double FORWARD_SPEED = .6;
-	final static double TURN_SPEED = .5;
+	final public static double TARGET_DISTANCE = -65.;
+	final public static double FORWARD_SPEED = .6;
+	final public static double TURN_SPEED = .5;
 
 	public VisionAimCommand(boolean backward) {
 		requires(Robot.chassis);
