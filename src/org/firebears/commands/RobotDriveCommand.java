@@ -45,7 +45,7 @@ public class RobotDriveCommand extends Command {
     protected void execute() {
     	double y = Robot.oi.getJoystick1().getY();
     	double x = Robot.oi.getJoystick1().getX();
-    	double sens = 2.1;
+    	double sens = 1.5;
     	
     	
     	if (x < 0){
