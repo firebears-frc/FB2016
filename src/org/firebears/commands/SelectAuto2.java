@@ -3,6 +3,7 @@ package org.firebears.commands;
 import org.firebears.Robot;
 import org.firebears.RobotMap;
 import org.firebears.commands.defenses.ChevalDeFriseCommand;
+import org.firebears.commands.defenses.PortcullisCommand;
 import org.firebears.util.LiquidCrystal;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,6 +22,7 @@ public class SelectAuto2 extends Command {
 			new PrepareVisionCommand(4),
 			new PrepareVisionCommand(5),
 			new ChevalDeFriseCommand(),
+			new PortcullisCommand(),
 	};
 
     public SelectAuto2() {
