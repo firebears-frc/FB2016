@@ -37,36 +37,49 @@ public class Lights extends Subsystem {
 
 		String allianceColor = getAllianceColor();
 
+		if (Robot.vision.isOnTarget()) {
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODING_R_W_B);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODING_R_W_B);
+			return;
+		}
 		if (isCelebrateMode) {
 			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODE);
 			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODE);
 			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODE);
 			return;
-		}else if(Robot.shooter.hasBall()) {
-			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_SPARK);
-			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_SPARK);
-			if(Robot.shooter.isSpinning()) {
-				setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
-			}
-		}else if(Robot.shooter.isSpinning()) {
+		}
+		if (Robot.shooter.hasBall()) {
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_PULSING_GREEN);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_PULSING_GREEN);
+			if (Robot.shooter.isSpinning()) {
+				setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
+			} else
+				setStrip(Lights.STRIP_CELEBRATE, allianceColor);
+		} else if (Robot.shooter.isSpinning()) {
 			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
 			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
 			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
-		}else{
-			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_FIRE);
-			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_FIRE);
-			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
+		} else {
+			setStrip(Lights.STRIP_CHASSIS_LEFT, allianceColor);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, allianceColor);
+			setStrip(Lights.STRIP_CELEBRATE, allianceColor);
 		}
 	}
 
 	public void autonomousMode() {
-		setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
-		setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_SPARK);
-		if (Robot.shooter.isSpinning()) {
-			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
+		if (Robot.vision.isOnTarget()) {
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODING_R_W_B);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODING_R_W_B);
+			if (Robot.shooter.isSpinning()) {
+				setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
+			}
 		} else {
-			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_FIRE);
+			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
+			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_SPARK);
+			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_SPARK);
 		}
+
 	}
 
 	public void disabledMode() {
@@ -83,7 +96,7 @@ public class Lights extends Subsystem {
 	protected String getAllianceColor() {
 		if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue) {
 			return Lights.ANIM_PULSING_BLUE;
-		}else{
+		} else {
 			return Lights.ANIM_PULSING_RED;
 		}
 	}

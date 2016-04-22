@@ -186,7 +186,7 @@ public class OI {
 		celebrateButton.whileHeld(new CelebrateCommand());
 
 		autoSwichButton = new DigitalButton(0);
-		autoSwichButton.whenActive(new SelectAuto());
+		autoSwichButton.whenActive(new SelectAuto2());
 //		lazor = new DigitalButton(6);
 //		lazor.whenActive(new LazorCommand());
 
