@@ -17,6 +17,9 @@ public class Vision extends Subsystem {
 	static Preferences preferences = Preferences.getInstance();
 	private double movingAvg = 0.;
 
+	final static public double ANGLE_TOLERANCE = 0.1;
+	final static public double DIST_TOLERANCE = 6;
+	
 	final static String NT_DISTANCE = "vision/distance";
 	final static String NT_ANGLE = "vision/angle";
 	final static String NT_FPS = "vision/fps";
@@ -98,11 +101,9 @@ public class Vision extends Subsystem {
 	}
 
 	public boolean isOnTarget() {
-		double AngleTolerance = .1; // todo fix this soon
-		double DistanceTolerance = 5; // todo fix this soon
 		double TARGET_DISTANCE = -65.;
-		return (Math.abs(getAngle()) < AngleTolerance)
-				&& (Math.abs(TARGET_DISTANCE - getRemainingDistance()) < DistanceTolerance);
+		return (Math.abs(getAngle()) < ANGLE_TOLERANCE)
+				&& (Math.abs(TARGET_DISTANCE - getRemainingDistance()) < DIST_TOLERANCE);
 
 	}
 

@@ -1,5 +1,8 @@
 package org.firebears.commands;
 
+import static org.firebears.subsystems.Vision.ANGLE_TOLERANCE;
+import static org.firebears.subsystems.Vision.DIST_TOLERANCE;
+
 import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,12 +13,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class VisionAimCommand extends Command {
 
-	final public double AngleTolerance = .1;
-	final public double DistanceTolerance = 5;
 	final private boolean goBack;
-	final public static double TARGET_DISTANCE = -65.;
-	final public static double FORWARD_SPEED = .6;
-	final public static double TURN_SPEED = .5;
+	final public static double TARGET_DISTANCE = -65.0;
+	final public static double FORWARD_SPEED = 0.8;
+	final public static double TURN_SPEED = 0.5;
 
 	public VisionAimCommand(boolean backward) {
 		requires(Robot.chassis);
@@ -42,34 +43,23 @@ public class VisionAimCommand extends Command {
 	protected boolean isFinished() {
 		double angle = Robot.vision.getAngle();
 		double dist = Robot.vision.getRemainingDistance();
-		System.out.printf("Dist = %8.1f / %8.1f, Angle = %8.4f   : \n)", dist, TARGET_DISTANCE, angle);
+		boolean onTarget = Robot.vision.isOnTarget();
+		System.out.printf("\t %c   Dist = %6.1f / %6.1f,   Angle = %8.4f,   onTarget = %b : \n", (goBack ? '<' : '>'),
+				Math.abs(dist), Math.abs(TARGET_DISTANCE), angle, onTarget);
 
-		// If going forwards and remaining distance is within tolerance, or past, then stop.
-		if ((goBack == false) && (dist <= TARGET_DISTANCE) ) {
+		// If going forwards and remaining distance is within tolerance, or
+		// past, then stop.
+		if ((goBack == false) && (dist <= TARGET_DISTANCE)) {
 			System.out.println("Reached Target: Dist = " + dist + ", Angle = " + angle);
 			return true;
 		}
-		
+
 		// If both distance and angle are within tolerance, then stop
-		if ((Math.abs(dist - TARGET_DISTANCE) <= DistanceTolerance) 
-				&& (Math.abs(angle) <= AngleTolerance)) {
+		if ((Math.abs(dist - TARGET_DISTANCE) <= DIST_TOLERANCE) && (Math.abs(angle) <= ANGLE_TOLERANCE)) {
 			return true;
 		}
-		
-		return false;
 
-		// if (angle > -AngleTolerance && angle < AngleTolerance) {
-		// // Angle is in the acceptable range.
-		// if (dist > -DistanceTolerance && dist < DistanceTolerance) {
-		// // Distance is in the acceptable range.
-		// return true;
-		// } else {
-		// return false;
-		// }
-		// } else {
-		// // Angle needs to be adjusted
-		// return false;
-		// }
+		return false;
 
 	}
 
@@ -78,7 +68,7 @@ public class VisionAimCommand extends Command {
 		Robot.chassis.stopDriving();
 	}
 
-	// Called when another command which requires one or more of the same 
+	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		Robot.chassis.stopDriving();
