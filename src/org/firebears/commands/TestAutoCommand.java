@@ -28,7 +28,7 @@ public class TestAutoCommand extends CommandGroup {
 //    	addSequential(new WaitCommand(.5));
 //    	addSequential(new DriveStraightCommand(25,.7));
     	
-    	addSequential(new BatterDetetion(3.));
+    	addSequential(new BatterDetetion(5.));
     	addSequential(new WaitCommand(1.25));
     	addSequential(new Fire());
 //    	

@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
 
 	public static Bail bail;
 
-	private SelectAuto2 selectAuto;
+	private SelectAuto selectAuto;
 	private final LcdOverLay lcdol = new LcdOverLay();
 
 	private long count = 0;
@@ -92,7 +92,7 @@ public class Robot extends IterativeRobot {
 
 		// TODO: Make it so this can be switched
 		autonomousCommand = new AutonomousCommand(new MoatCommand());
-		selectAuto = new SelectAuto2();
+		selectAuto = new SelectAuto();
 
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
@@ -110,7 +110,7 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
-		selectAuto.initialize();
+//		selectAuto.initialize();
 		lcdol.initialize();
 	}
 
