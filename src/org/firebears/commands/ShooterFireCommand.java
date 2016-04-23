@@ -13,6 +13,7 @@ public class ShooterFireCommand extends Command {
 	public static final int SHOOTER_RESET = 0;
 	public static final int SHOOTER_FIRE = 1;
 	public static final int SHOOTER_TOGGLE = 2;
+	public static final int SHOOTER_PARK = 3;
 	public int shooter_mode;
 	
     public ShooterFireCommand(int mode) {
@@ -22,6 +23,7 @@ public class ShooterFireCommand extends Command {
 
     protected void initialize() {
 //    	setTimeout(100);
+		if (RobotMap.DEBUG) System.out.println("\t # " + this);
     	switch(shooter_mode) {
     		case SHOOTER_TOGGLE:
 		    	if(RobotMap.servoOn) {
@@ -35,6 +37,9 @@ public class ShooterFireCommand extends Command {
     			break;
     		case SHOOTER_RESET:
     			Robot.shooter.servoReset();
+    			break;
+    		case SHOOTER_PARK:
+    			Robot.shooter.servoHold();
     			break;
     		default:
     			Robot.shooter.servoFire();
@@ -54,4 +59,13 @@ public class ShooterFireCommand extends Command {
 
     protected void interrupted() {
     }
+    
+    @Override
+	public String toString() {
+		return "ShooterFireCommand("
+				+ (shooter_mode == SHOOTER_RESET ? "RESET" 
+						: (shooter_mode == SHOOTER_FIRE ? "FIRE" 
+								: (shooter_mode == SHOOTER_PARK ? "PARK" 
+										: "TOGGLE"))) + ")";
+	}
 }

@@ -1,6 +1,7 @@
 package org.firebears.commands.defenses;
 
 import org.firebears.Robot;
+import org.firebears.RobotMap;
 import org.firebears.commands.AdjustRotation;
 import org.firebears.commands.AimAndShootCommand;
 import org.firebears.commands.BallGetterSetpointCommand;
@@ -32,6 +33,8 @@ public class LowBarCommand extends AbstractDefenseCommand {
     	//addSequential(new RotationCommand(65));
     	//addSequential(new AimAndShootCommand());
     	//
+    	addSequential(new BallGetterSetpointCommand(Robot.ballGetter.MIN_VALUE));
+    	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MIN_VALUE));
     	requires(Robot.chassis);
     	requires(Robot.defenseBuster);
     	requires(Robot.ballGetter);
@@ -41,6 +44,10 @@ public class LowBarCommand extends AbstractDefenseCommand {
     public LowBarCommand() {
     	this(true);
     }
+    
+	protected void initialize() {
+		if (RobotMap.DEBUG) System.out.println("\t # " + this);
+	}
     
     public String toString() {
     	return "LowBar" + (shoot?"-shoot":"");

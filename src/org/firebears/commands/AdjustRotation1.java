@@ -20,6 +20,12 @@ public class AdjustRotation1 extends RotationCommand {
 	protected void initialize() {
 		targetAngle = bound(RobotMap.rotation + offset);
 		getPIDController().setSetpoint(0.0);
+		if (RobotMap.DEBUG) System.out.println("\t # " + this);
 
 	}
+    
+    @Override
+    public String toString() {
+    	return "AdjustRotation1()";
+    }
 }

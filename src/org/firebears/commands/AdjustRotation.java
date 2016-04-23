@@ -61,8 +61,8 @@ public class AdjustRotation extends PIDCommand {
     	getPIDController().enable();
 		setSetpoint(bound(RobotMap.rotation + offset));
 		Robot.chassis.setBrakeMode(true);
-		setTimeout(5);
-		if (RobotMap.DEBUG) { System.out.println("::: AdjustRotation"); }
+		setTimeout(3);
+		if (RobotMap.DEBUG) System.out.println("\t # " + this);
 	}
 
 	@Override
@@ -89,5 +89,9 @@ public class AdjustRotation extends PIDCommand {
 		Robot.chassis.drive(0, 0);
 		Robot.chassis.setBrakeMode(false);
 	}
-
+	
+    @Override
+    public String toString() {
+    	return "AdjustRotation()";
+    }
 }

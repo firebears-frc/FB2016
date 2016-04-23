@@ -230,6 +230,7 @@ public class Robot extends IterativeRobot {
 				SmartDashboard.putNumber("Servo position", RobotMap.shooterServo.getPosition());
 				
 				SmartDashboard.putBoolean("isOnTarget", vision.isOnTarget());
+//				SmartDashboard.putNumber("Bail Pot", RobotMap.bailPos.getAverageVoltage());
 				
 				SmartDashboard.putNumber("Rangefinder Inches:", shooter.getRangeFinderDistance());
 			}

@@ -40,13 +40,13 @@ public class Bail extends PIDSubsystem {
 	SoftFuse softFuse;
 	
 	public Bail() {
-		super(0.5, 0, 0);
-//		super(1.50, 0.03, 5.0);
+//		super(0.5, 0, 0);
+		super(1.50, 0.03, 5.0);
 
 		MAX_SPEED = 1.;
 		MIN_VALUE = 2.6;  // Pot value to reset bail onto the floor
-		PRE_SHOOT_VALUE = 2.2;  // Pot value to hold ball before shooting
-		PARK_VALUE = 1.8; // Pot value to hold onto the ball while driving
+		PRE_SHOOT_VALUE = 2.4;  // Pot value to hold ball before shooting
+		PARK_VALUE = 2.2; // Pot value to hold onto the ball while driving
 		MAX_VALUE = 1.4;  // Pot value to fire the ball
 
 		

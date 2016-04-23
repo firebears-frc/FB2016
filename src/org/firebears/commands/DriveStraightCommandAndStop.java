@@ -23,7 +23,7 @@ public class DriveStraightCommandAndStop extends DriveStraightCommand {
     @Override
     protected boolean isFinished() {
     	double dist = Robot.shooter.getRangeFinderDistance();
-    	System.out.println("Dist =" + dist + ",  " + stop_distance);
+//    	System.out.println("Dist =" + dist + ",  " + stop_distance);
     	if (dist < stop_distance) {
     		return true;
     	}
@@ -31,4 +31,8 @@ public class DriveStraightCommandAndStop extends DriveStraightCommand {
 
     }
 	
+    @Override
+    public String toString() {
+    	return "DriveStraight2(" + this.distance + "," + max_speed + ")";
+    }
 }

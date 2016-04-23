@@ -1,6 +1,7 @@
 package org.firebears.commands;
 
 import org.firebears.Robot;
+import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,6 +18,7 @@ public class ShooterSpinCommand extends Command {
     }
 
     protected void initialize() {
+		if (RobotMap.DEBUG) System.out.println("\t # " + this);
     	if (speed <= 0.0) {
     		Robot.shooter.disable();
     		Robot.shooter.shootingMotor.set(-speed);
@@ -39,5 +41,10 @@ public class ShooterSpinCommand extends Command {
 
     protected void interrupted() {
     	Robot.lights.teleopMode();
+    }
+    
+    @Override
+    public String toString() {
+    	return "ShooterSpinCommand(" + this.speed + ")";
     }
 }

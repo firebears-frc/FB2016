@@ -48,6 +48,7 @@ public class DriveStraightCommand extends PIDCommand {
     	setSetpoint(targetLocation);
     	getPIDController().enable();
 		Robot.chassis.setBrakeMode(true);
+		if (RobotMap.DEBUG) System.out.println("\t # " + this);
     }
 
     protected void execute() {
@@ -96,5 +97,9 @@ public class DriveStraightCommand extends PIDCommand {
 		return angleDiff;
 	}
 
+    @Override
+    public String toString() {
+    	return "DriveStraight(" + this.distance + "," + max_speed + ")";
+    }
 }
 

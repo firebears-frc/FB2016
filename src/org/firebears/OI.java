@@ -99,7 +99,7 @@ public class OI {
 
 		// TODO: Remove when not needed anymore.
 		servoUP = new JoystickButton(joystick1, 2);
-		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_FIRE));
+		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_PARK));
 		
 //		servoButton = new JoystickButton(joystick1, 1);
 //		servoButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));

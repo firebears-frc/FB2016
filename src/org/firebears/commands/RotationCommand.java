@@ -54,7 +54,7 @@ public class RotationCommand extends PIDCommand {
 	protected void initialize() {
 		targetAngle = bound(RobotMap.navXBoard.getAngle() + turnValue);
 		getPIDController().setSetpoint(0.0);
-
+		if (RobotMap.DEBUG) System.out.println("\t # " + this);
 	}
 
 	protected void execute() {
@@ -65,7 +65,7 @@ public class RotationCommand extends PIDCommand {
 	 */
 	protected boolean isFinished() {
 		double difference = getAngleDifference();
-		System.out.println("Target + " + targetAngle + ", Turn" + turnValue + ", Now" + RobotMap.navXBoard.getAngle() + ", Diff" + difference);
+//		System.out.println("Target + " + targetAngle + ", Turn" + turnValue + ", Now" + RobotMap.navXBoard.getAngle() + ", Diff" + difference);
 //		SmartDashboard.putNumber("Difference", difference);
 		return Math.abs(difference) < angleTolerance;
 	}
@@ -111,4 +111,9 @@ public class RotationCommand extends PIDCommand {
 //		System.out.println("bound(" + -180 + ") = " + bound(-180));
 //	}
 	
+    
+    @Override
+    public String toString() {
+    	return "RotationCommand(" + this.turnValue + ")";
+    }
 }
