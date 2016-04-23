@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
 
 	public static Bail bail;
 
-	private SelectAuto selectAuto;
+	private SelectAuto2 selectAuto;
 	private final LcdOverLay lcdol = new LcdOverLay();
 
 	private long count = 0;
@@ -92,7 +92,7 @@ public class Robot extends IterativeRobot {
 
 		// TODO: Make it so this can be switched
 		autonomousCommand = new AutonomousCommand(new MoatCommand());
-		selectAuto = new SelectAuto();
+		selectAuto = new SelectAuto2();
 
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
