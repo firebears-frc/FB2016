@@ -242,6 +242,8 @@ public class OI {
 			SmartDashboard.putData("Bail@1", new BailSetpointCommand(.5));
 			
 			SmartDashboard.putData("BatterCommand", new BatterCommand());
+			
+			SmartDashboard.putNumber("Sense", 1.);
 	
 		}
 		// Create a variable to be read for the Network Tables Variables.

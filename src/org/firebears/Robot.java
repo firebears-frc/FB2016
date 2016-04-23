@@ -110,7 +110,7 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
-		selectAuto.initialize();
+//		selectAuto.initialize();
 		lcdol.initialize();
 	}
 
