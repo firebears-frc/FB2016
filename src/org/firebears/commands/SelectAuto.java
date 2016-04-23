@@ -296,6 +296,7 @@ public class SelectAuto extends Command {
 	}
 
 	protected void end() {
+		System.out.println("hey");
 	}
 
 	protected void interrupted() {

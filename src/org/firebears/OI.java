@@ -64,7 +64,7 @@ public class OI {
 	public Joystick joystick2;
 
 	public DigitalButton autoSwichButton;
-	DigitalButton lazor;
+//	DigitalButton lazor;
 //	JoystickButton ballGetterHighButton;
 //	JoystickButton ballGetterLowButton;
 	JoystickButton ballGetterGrabButton;
@@ -244,6 +244,8 @@ public class OI {
 			SmartDashboard.putData("BatterCommand", new BatterCommand());
 			
 			SmartDashboard.putNumber("Sense", 1.);
+	
+//			SmartDashboard.putData("Bailup", new BailSetpointCommand(4.));
 	
 		}
 		// Create a variable to be read for the Network Tables Variables.

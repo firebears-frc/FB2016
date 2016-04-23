@@ -271,6 +271,7 @@ public class RobotMap {
         bailPos = new AnalogInput(3);
         LiveWindow.addSensor("bail", "Pot", bailPos);
 
+
 	}
 
 	/**
