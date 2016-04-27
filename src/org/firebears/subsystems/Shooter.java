@@ -33,7 +33,7 @@ public class Shooter extends PIDSubsystem {
     }
     
     public boolean hasBall() {
-    	return !RobotMap.lazor.get();
+    	return RobotMap.lazor.getAverageVoltage() <= 1;
     }
 
 	public Shooter() {

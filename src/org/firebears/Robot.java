@@ -61,10 +61,10 @@ public class Robot extends IterativeRobot {
 	private final LcdOverLay lcdol = new LcdOverLay();
 
 	private long count = 0;
-//	private boolean lazorDown = false;
+	private boolean lazorDown = false;
 	public boolean ballAcquired = false;
 
-//	private static AnalogInput lazor;
+	private static AnalogInput lazor;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -81,7 +81,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		lights = new Lights();
 		vision = new Vision();
-//		lazor = new AnalogInput(3);
+		lazor = new AnalogInput(3);
 
 
 		// OI must be constructed after subsystems. If the OI creates Commands
@@ -168,30 +168,30 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-//		double voltage = Robot.lazor.getAverageVoltage();
+		double voltage = Robot.lazor.getAverageVoltage();
 		
 		ballAcquired = Robot.shooter.hasBall();
 		
 		// Not broken
-//		if(ballAcquired) {
-//			lazorDown = true;
-//		// Broken
-//		}else{
-//			if(lazorDown) {
-//		    	if(Robot.ballGetter.mode3 == 1) {
-//		    		Robot.shooter.servoReset();
-//		    		
-//		    	}else{
-//		    		Robot.shooter.servoFire();
-//		    		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
-//	    			Robot.ballGetter.ballGetterPosition = 1;
-//	    			Robot.ballGetter.goup();
-//		    		Robot.ballGetter.setMotors(3);
-//		    		Robot.shooter.hasBall();
-//		    	}
-//			}
-//	    	lazorDown = false;
-//		}
+		if(ballAcquired) {
+			lazorDown = true;
+		// Broken
+		}else{
+			if(lazorDown) {
+		    	if(Robot.ballGetter.mode3 == 1) {
+		    		Robot.shooter.servoReset();
+		    		
+		    	}else{
+		    		Robot.shooter.servoFire();
+		    		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
+	    			Robot.ballGetter.ballGetterPosition = 1;
+	    			Robot.ballGetter.goup();
+		    		Robot.ballGetter.setMotors(3);
+		    		Robot.shooter.hasBall();
+		    	}
+			}
+	    	lazorDown = false;
+		}
 
 		if ((count++) % 15 == 0) {
 			
