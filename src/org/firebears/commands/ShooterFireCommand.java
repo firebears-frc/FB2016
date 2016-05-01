@@ -45,13 +45,14 @@ public class ShooterFireCommand extends Command {
     			Robot.shooter.servoFire();
     			break;
     	}
+    	setTimeout(1);
     }
 
     protected void execute() {
     }
 
     protected boolean isFinished() {
-        return true;
+    	return Robot.bail.onTarget() || isTimedOut();
     }
 
     protected void end() {

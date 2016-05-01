@@ -27,13 +27,13 @@ public class TestAutoCommand extends CommandGroup {
 //    	addSequential(new BallGetterSetpointCommand(Robot.ballGetter.MIN_VALUE));
 //    	addSequential(new WaitCommand(.5));
 //    	addSequential(new DriveStraightCommand(25,.7));
-    	
-    	addSequential(new BatterDetetion(5.));
-    	addSequential(new WaitCommand(1.25));
-    	addSequential(new Fire());
+    	//auto fire
+//    	addSequential(new BatterDetetion(5.));
+//    	addSequential(new WaitCommand(1.25));
+//    	addSequential(new Fire());
 //    	
-    	
-//    	requires(Robot.chassis);
+    	addSequential(new DriveStraightCommand(12, .6));
+    	requires(Robot.chassis);
     	
     }
 }

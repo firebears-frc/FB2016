@@ -23,6 +23,7 @@ public class SelectAuto2 extends Command {
 			new PrepareVisionCommand(5),
 			new ChevalDeFriseCommand(),
 			new PortcullisCommand(),
+			new Donothing(),
 	};
 
     public SelectAuto2() {

@@ -64,7 +64,7 @@ public class Robot extends IterativeRobot {
 	private boolean lazorDown = false;
 	public boolean ballAcquired = false;
 
-	private static AnalogInput lazor;
+//	private static AnalogInput lazor;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -81,7 +81,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		lights = new Lights();
 		vision = new Vision();
-		lazor = new AnalogInput(3);
+//		lazor = new AnalogInput(3);
 
 
 		// OI must be constructed after subsystems. If the OI creates Commands
@@ -96,7 +96,7 @@ public class Robot extends IterativeRobot {
 
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
-		Robot.shooter.servoFire();
+		Robot.shooter.servoHold();
 
 		// Set Network Tables for vision
 		vision.init();
@@ -111,6 +111,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void disabledInit() {
 //		selectAuto.initialize();
+		bail.hold();
 		lcdol.initialize();
 	}
 
@@ -136,6 +137,7 @@ public class Robot extends IterativeRobot {
 		}
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
+		bail.hold();
 	}
 
 
@@ -153,6 +155,8 @@ public class Robot extends IterativeRobot {
 
 	public void teleopInit() {
 		lights.teleopMode();
+		Robot.shooter.spinnerStop();
+		Robot.bail.hold();
 
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
@@ -168,7 +172,7 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		double voltage = Robot.lazor.getAverageVoltage();
+		double voltage = RobotMap.lazor.getAverageVoltage();
 		
 		ballAcquired = Robot.shooter.hasBall();
 		
@@ -182,7 +186,7 @@ public class Robot extends IterativeRobot {
 		    		Robot.shooter.servoReset();
 		    		
 		    	}else{
-		    		Robot.shooter.servoFire();
+		    		Robot.shooter.servoHold();
 		    		Robot.ballGetter.setSetpoint(Robot.ballGetter.MIN_VALUE);
 	    			Robot.ballGetter.ballGetterPosition = 1;
 	    			Robot.ballGetter.goup();
@@ -216,6 +220,9 @@ public class Robot extends IterativeRobot {
 //				SmartDashboard.putNumber("encoderRight dist: ", RobotMap.encoderRight.getDistance());
 //				SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
 
+				SmartDashboard.putNumber("Chassis distance", Robot.chassis.getDistance()); 
+				SmartDashboard.putNumber("Chassis encoder", RobotMap.chassisFrontLeft.getEncPosition());
+				
 				if (RobotMap.navXBoard != null) {
 					SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());
 					SmartDashboard.putNumber("navX pitch", RobotMap.navXBoard.getPitch());
@@ -238,6 +245,7 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("DefenseBuster pot", RobotMap.defenseBusterAnalogInput.getAverageVoltage());
 			SmartDashboard.putNumber("Ballgetter pot", RobotMap.ballGetterAnalogInput.getAverageVoltage());
 			SmartDashboard.putNumber("Ball Getter Position", Robot.ballGetter.ballGetterPosition);
+			SmartDashboard.putNumber("Bail Pos", RobotMap.bailPos.getAverageVoltage());
 		}
 	}
 

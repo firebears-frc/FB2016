@@ -11,6 +11,8 @@
 package org.firebears.subsystems;
 
 
+import static org.firebears.RobotMap.getPreferencesDouble;
+
 import org.firebears.RobotMap;
 import org.firebears.util.SoftFuse;
 
@@ -41,13 +43,13 @@ public class Bail extends PIDSubsystem {
 	
 	public Bail() {
 //		super(0.5, 0, 0);
-		super(1.50, 0.03, 5.0);
+		super(1.5, 0.03, 5.0);
 
 		MAX_SPEED = 1.;
-		MIN_VALUE = 2.6;  // Pot value to reset bail onto the floor
-		PRE_SHOOT_VALUE = 2.4;  // Pot value to hold ball before shooting
-		PARK_VALUE = 2.2; // Pot value to hold onto the ball while driving
-		MAX_VALUE = 1.4;  // Pot value to fire the ball
+		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MIN_VALUE,1.6);  // Pot value to reset bail onto the floor
+		PRE_SHOOT_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PRESHOOT_VALUE,1.35);  // Pot value to hold ball before shooting
+		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PARK_VALUE,1.2); // Pot value to hold onto the ball while driving
+		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MAX_VALUE,1.2);  // Pot value to fire the ball
 
 		
 		softFuse = new SoftFuse(bail, 40, 1, 2);
@@ -76,31 +78,40 @@ public class Bail extends PIDSubsystem {
 	@Override
 	protected void usePIDOutput(double output) {
 		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
-		bail.set(-1 * output);
+		bail.set(-2 * output);
 	}
 
 	/** Lower the bail so we can pick up the ball. */
 	public void reset(){
+		System.out.println("Bail.Reset");
 		setSetpoint(MIN_VALUE);
 		softFuse.positionFuse(bail.getOutputCurrent());
 	}
 	
 	/** Raise the bail slightly to hold onto the ball. */
 	public void hold(){
+		System.out.println("Bail.hold");
 		setSetpoint(PARK_VALUE);
 		softFuse.positionFuse(bail.getOutputCurrent());
 	}
 	
 	/** Lower ball just before shooting */
 	public void preShoot(){
+		System.out.println("Bail.preshoot");
 		setSetpoint(PRE_SHOOT_VALUE);
 		softFuse.positionFuse(bail.getOutputCurrent());
 	}
 	
 	/** Raise the bail to fire the shooter. */
 	public void fire(){
+		System.out.println("Bail.fire/max");
 		setSetpoint(MAX_VALUE);
 		softFuse.positionFuse(bail.getOutputCurrent());
+	}
+	
+	@Override
+	public boolean onTarget() {
+		return (returnPIDInput() - getPIDController().getSetpoint() < .05);
 	}
 
 }

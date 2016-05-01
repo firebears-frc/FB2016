@@ -15,6 +15,7 @@ public class RotationCommand extends PIDCommand {
 	protected final double SPEED = 0.5;
 	protected double angleTolerance = 5.0;
 	protected double targetAngle;
+	long timeout;
 
 	public RotationCommand(double degrees) {
 		super(1., 0.0, 0.0); // PID
@@ -52,9 +53,11 @@ public class RotationCommand extends PIDCommand {
 	}
 
 	protected void initialize() {
+		timeout = System.currentTimeMillis() + 1000 * 2;
 		targetAngle = bound(RobotMap.navXBoard.getAngle() + turnValue);
 		getPIDController().setSetpoint(0.0);
 		if (RobotMap.DEBUG) System.out.println("\t # " + this);
+		
 	}
 
 	protected void execute() {
@@ -67,7 +70,8 @@ public class RotationCommand extends PIDCommand {
 		double difference = getAngleDifference();
 //		System.out.println("Target + " + targetAngle + ", Turn" + turnValue + ", Now" + RobotMap.navXBoard.getAngle() + ", Diff" + difference);
 //		SmartDashboard.putNumber("Difference", difference);
-		return Math.abs(difference) < angleTolerance;
+		
+		return Math.abs(difference) < angleTolerance ||System.currentTimeMillis() >= timeout;
 	}
 
 	protected void end() {

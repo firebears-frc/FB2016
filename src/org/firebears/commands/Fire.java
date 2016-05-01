@@ -22,7 +22,7 @@ public class Fire extends CommandGroup {
      */
     public  Fire(final double speed) {
     	addSequential(new ShooterFireCommand(SHOOTER_RESET));
-    	addSequential(new WaitCommand(0.50));
+    	addSequential(new WaitCommand(.5));
     	addSequential(new ShooterSpinCommand(speed),3);
     	addSequential(new WaitCommand(0.50));
     	addSequential(new ShooterFireCommand(SHOOTER_FIRE));

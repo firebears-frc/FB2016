@@ -80,8 +80,8 @@ public class Chassis extends Subsystem {
      * @return Encoder distance measured in inches.
      */
     public double getDistance() {
-//    	double distanceInTicks = RobotMap.chassisFrontLeft.getEncPosition();
-double distanceInTicks = RobotMap.chassisFrontRight.getEncPosition();   // PRACTICE ROBOT
+    	double distanceInTicks = RobotMap.chassisFrontLeft.getEncPosition();
+//    	double distanceInTicks = RobotMap.chassisFrontRight.getEncPosition();   // PRACTICE ROBOT
     	return distanceInTicks / TICKS_PER_INCH;
     }
 }

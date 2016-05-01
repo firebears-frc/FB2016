@@ -110,6 +110,15 @@ public class RobotMap {
 	public static final String PREF_BALL_GETTER_MAX_VAUE = "BallGetter.max_value";
 	public static final String PREF_BALL_GETTER_MAXGET_SPEED = "BallGetter.maxget_speed";
 	public static final String PREF_BALL_GETTER_PARK_VALUE = "BallGetter.park_value";
+	
+	public static final String PREF_BAIL_MAX_VALUE = "Bail.max_value";
+	public static final String PREF_BAIL_MIN_VALUE = "Bail.min_value";
+	public static final String PREF_BAIL_PARK_VALUE = "Bail.park_value";
+	public static final String PREF_BAIL_PRESHOOT_VALUE = "Bail.preshoot_value";
+
+
+
+
 
 
 	public static void init() {
