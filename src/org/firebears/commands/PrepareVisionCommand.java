@@ -88,6 +88,6 @@ public class PrepareVisionCommand extends CommandGroup {
 	}
 
 	public String toString() {
-		return "Defense=" + this.position + (shoot ? "-shoot" : "");
+		return "Defense=" + this.position + (shoot ? "-shoot" : "-no");
 	}
 }

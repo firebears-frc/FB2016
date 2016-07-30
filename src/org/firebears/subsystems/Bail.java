@@ -30,7 +30,7 @@ public class Bail extends PIDSubsystem {
 	public double MIN_VALUE;
 
 	/** Maximum value that the setpoint may take, measured in volts. */
-	public double MAX_VALUE;
+	public final double MAX_VALUE = .4;
 	
 	public double PRE_SHOOT_VALUE;
 
@@ -40,16 +40,17 @@ public class Bail extends PIDSubsystem {
 	public double MAX_SPEED;
 	
 	SoftFuse softFuse;
+	long updatetimer = 1000;
 	
 	public Bail() {
 //		super(0.5, 0, 0);
 		super(1.5, 0.03, 5.0);
 
 		MAX_SPEED = 1.;
-		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MIN_VALUE,1.6);  // Pot value to reset bail onto the floor
-		PRE_SHOOT_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PRESHOOT_VALUE,1.35);  // Pot value to hold ball before shooting
-		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PARK_VALUE,1.2); // Pot value to hold onto the ball while driving
-		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MAX_VALUE,1.2);  // Pot value to fire the ball
+		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MIN_VALUE,1.5);  // Pot value to reset bail onto the floor
+		PRE_SHOOT_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PRESHOOT_VALUE,1.0);  // Pot value to hold ball before shooting
+		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PARK_VALUE,1.0); // Pot value to hold onto the ball while driving
+//		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MAX_VALUE,0.4);  // Pot value to fire the ball
 
 		
 		softFuse = new SoftFuse(bail, 40, 1, 2);
@@ -62,6 +63,8 @@ public class Bail extends PIDSubsystem {
 		softFuse.positionFuse(bail.getOutputCurrent());
 
 		LiveWindow.addActuator("bail", "PIDSubsystem Controller", getPIDController());
+		
+		setInputRange(-100., 100.);
 	}
 
 	private final CANTalon bail = RobotMap.bail;
@@ -79,6 +82,10 @@ public class Bail extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
 		bail.set(-2 * output);
+		if(System.currentTimeMillis() > updatetimer) {
+			updatetimer = System.currentTimeMillis() + 1000;
+			System.out.println("PID setpoint = " + getSetpoint() + "input = " + returnPIDInput());
+		}
 	}
 
 	/** Lower the bail so we can pick up the ball. */
@@ -98,14 +105,14 @@ public class Bail extends PIDSubsystem {
 	/** Lower ball just before shooting */
 	public void preShoot(){
 		System.out.println("Bail.preshoot");
-		setSetpoint(PRE_SHOOT_VALUE);
+		setSetpoint(PRE_SHOOT_VALUE);//PRE_SHOOT_VALUE
 		softFuse.positionFuse(bail.getOutputCurrent());
 	}
 	
 	/** Raise the bail to fire the shooter. */
 	public void fire(){
-		System.out.println("Bail.fire/max");
-		setSetpoint(MAX_VALUE);
+		setSetpoint(MAX_VALUE);//MAX_VALUE
+		System.out.println("Bail.fire/max: " + MAX_VALUE + " " + getSetpoint());
 		softFuse.positionFuse(bail.getOutputCurrent());
 	}
 	

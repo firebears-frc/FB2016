@@ -17,10 +17,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class ChevalDeFriseCommand extends AbstractDefenseCommand {
     
-	final boolean shoot;
+	final boolean shoot = false;
 	
-    public  ChevalDeFriseCommand(boolean shoot) {
-    	
+    public  ChevalDeFriseCommand() { //boolean shoot    	
 //    	addParallel(new DriveStraightCommand(60,.5));
 //    	addSequential(new GetRotation());
 //    	addSequential(new Pitch(60, .7, 5));
@@ -32,17 +31,17 @@ public class ChevalDeFriseCommand extends AbstractDefenseCommand {
     	addSequential(new DefenseBusterSetpointCommand(Robot.defenseBuster.MIN_VALUE));
     	addSequential(new DriveStraightCommand(75,.8));
         // Do vision if shooting.
-        finishAuto(shoot);
+        //finishAuto(shoot);
         //addSequential(new DriveStraightCommand(30,.9));
 
     	requires(Robot.chassis);
     	requires(Robot.defenseBuster);
-    	this.shoot = shoot;
+    	//this.shoot = shoot;
     }
     
-    public ChevalDeFriseCommand() {
-    	this(true);
-    }
+//    public ChevalDeFriseCommand() {
+//    	this(true);
+//    }
     
     public String toString() {
     	return "ChevalDeFris" + (shoot?"-shoot":"");

@@ -3,6 +3,7 @@ package org.firebears.commands;
 import org.firebears.Robot;
 import org.firebears.RobotMap;
 import org.firebears.commands.defenses.ChevalDeFriseCommand;
+import org.firebears.commands.defenses.MoatCommand;
 import org.firebears.commands.defenses.PortcullisCommand;
 import org.firebears.util.LiquidCrystal;
 
@@ -23,6 +24,7 @@ public class SelectAuto2 extends Command {
 			new PrepareVisionCommand(5),
 			new ChevalDeFriseCommand(),
 			new PortcullisCommand(),
+			new MoatCommand(),
 			new Donothing(),
 	};
 

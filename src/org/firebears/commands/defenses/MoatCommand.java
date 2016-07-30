@@ -15,21 +15,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class MoatCommand extends AbstractDefenseCommand {
 	
-	final boolean shoot;
+	final boolean shoot = false;
 	
-    public  MoatCommand(boolean shoot) {
+    public  MoatCommand() {//boolean shoot
     	// Get over defense
     	addSequential(new GetRotation());
-        addSequential(new DriveStraightCommand(165.,.85));
+        addSequential(new DriveStraightCommand(135.,.75),7.0);
         // Do vision if shooting.
-        finishAuto(shoot);
+        //finishAuto(shoot);
     	requires(Robot.chassis);
-    	this.shoot = shoot;
+    	//this.shoot = shoot;
     }
     
-    public MoatCommand() {
-    	this(true);
-    }
+//    public MoatCommand() {
+//    	this(true);
+//    }
     
     public String toString() {
     	return "Moat" + (shoot?"-shoot":"");
