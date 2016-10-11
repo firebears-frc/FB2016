@@ -211,7 +211,7 @@ public class RobotMap {
 		ballGetterAnglePotentiometer = new AnalogPotentiometer(ballGetterAnalogInput);
 		LiveWindow.addActuator("BallGetter", "Pot", ballGetterAnalogInput);
 
-		shooterServo = new Servo(1);
+		shooterServo = new Servo(0);
 		LiveWindow.addActuator("Shooter", "ShootingServo", shooterServo);
 
 		shouterCounterDigitalInput = new DigitalInput(1);
@@ -254,14 +254,14 @@ public class RobotMap {
 		DigitalInput encoderLeftInputA = new DigitalInput(2);
 		DigitalInput encoderLeftInputB = new DigitalInput(3);
 		encoderLeft = new Encoder(encoderLeftInputA, encoderLeftInputB, false, EncodingType.k4X);
-//		LiveWindow.addSensor("Chassis", "encoder", encoderLeft);
+		LiveWindow.addSensor("Chassis", "encoder", encoderLeft);
 		encoderLeft.setDistancePerPulse(0.05639);
 		encoderLeft.setPIDSourceType(PIDSourceType.kRate);
 
 		DigitalInput encoderRightInputA = new DigitalInput(4);
 		DigitalInput encoderRightInputB = new DigitalInput(5);
 		encoderRight = new Encoder(encoderRightInputA, encoderRightInputB, true, EncodingType.k4X);
-//		LiveWindow.addSensor("Chassis", "encoder", encoderRight);
+		LiveWindow.addSensor("Chassis", "encoder", encoderRight);
 		encoderRight.setDistancePerPulse(0.05639);
 		encoderRight.setPIDSourceType(PIDSourceType.kRate);
 
