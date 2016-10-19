@@ -30,7 +30,7 @@ public class Bail extends PIDSubsystem {
 	public double MIN_VALUE;
 
 	/** Maximum value that the setpoint may take, measured in volts. */
-	public final double MAX_VALUE = .4;
+	public final double MAX_VALUE;
 	
 	public double PRE_SHOOT_VALUE;
 
@@ -50,7 +50,7 @@ public class Bail extends PIDSubsystem {
 		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MIN_VALUE,1.5);  // Pot value to reset bail onto the floor
 		PRE_SHOOT_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PRESHOOT_VALUE,1.0);  // Pot value to hold ball before shooting
 		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PARK_VALUE,1.0); // Pot value to hold onto the ball while driving
-//		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MAX_VALUE,0.4);  // Pot value to fire the ball
+		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MAX_VALUE,0.4);  // Pot value to fire the ball
 
 		
 		softFuse = new SoftFuse(bail, 40, 1, 2);

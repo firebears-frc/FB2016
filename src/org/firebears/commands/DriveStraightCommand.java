@@ -42,7 +42,7 @@ public class DriveStraightCommand extends PIDCommand {
     }
 
     protected void initialize() {
-    	 timeout = System.currentTimeMillis() + 1000 * 7;
+    	 timeout = System.currentTimeMillis() + 1000 * 6;
     	targetAngle = RobotMap.navXBoard.getAngle();
     	targetLocation = distance + returnPIDInput();
     	setSetpoint(targetLocation);

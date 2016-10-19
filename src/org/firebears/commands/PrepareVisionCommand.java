@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class PrepareVisionCommand extends CommandGroup {
 
 	final int position;
-	final boolean shoot;
+//	final boolean shoot;
 
 	public PrepareVisionCommand(int position) {
 		this(position, true);
@@ -21,61 +21,61 @@ public class PrepareVisionCommand extends CommandGroup {
 
 	public PrepareVisionCommand(int position, boolean shoot) {
 		this.position = position;
-		this.shoot = shoot;
+//		this.shoot = shoot;
 		switch (position) {
 
 		case 1:
 			// Go though low bar, on the far left defense position
 			addSequential(new LowBarCommand(false));
 			addSequential(new RotationCommand(50));
-			addSequential(new DriveStraightCommand(36, 0.75));
-			if (shoot) {
-				addSequential(new AimAndShootCommand());
-			}
+//			addSequential(new DriveStraightCommand(36, 0.75));
+//			if (shoot) {
+//				addSequential(new AimAndShootCommand());
+//			}
 			break;
 		case 2:
 			// Go through defense position 2, on the second from the left position.
 			addSequential(new GetRotation());
-			addSequential(new DriveStraightCommand(220, 0.75));
-			addSequential(new AdjustRotation1());
+			addSequential(new DriveStraightCommand(220, 0.85));
+//			addSequential(new AdjustRotation1());
 			addSequential(new RotationCommand(40));
-			if (shoot) {
-				addSequential(new AimAndShootCommand());
-			}
+//			if (shoot) {
+//				addSequential(new AimAndShootCommand());
+//			}
 			break;
 		case 3:
 			// Go through defense position 3, near the middle
 			addSequential(new GetRotation());
-			addSequential(new DriveStraightCommand(140, 0.75));
-			addSequential(new AdjustRotation1());
+			addSequential(new DriveStraightCommand(140, 0.85));
+//			addSequential(new AdjustRotation1());
 			addSequential(new RotationCommand(30));
-			addSequential(new DriveStraightCommand(40, 0.75));
-			addSequential(new AdjustRotation1());
-			if (shoot) {
-				addSequential(new AimAndShootCommand());
-			}
+			addSequential(new DriveStraightCommand(40, 0.85));
+//			addSequential(new AdjustRotation1());
+//			if (shoot) {
+//				addSequential(new AimAndShootCommand());
+//			}
 			break;
 		case 4:
 			// Go through defense position 4; to the right of the middle
 			addSequential(new GetRotation());
-			addSequential(new DriveStraightCommand(180, 0.75));
-			addSequential(new AdjustRotation1());
+			addSequential(new DriveStraightCommand(180, 0.85));
+//			addSequential(new AdjustRotation1());
 			addSequential(new RotationCommand(-20));
-			if (shoot) {
-				addSequential(new AimAndShootCommand());
-			}
+//			if (shoot) {
+//				addSequential(new AimAndShootCommand());
+//			}
 			break;
 		case 5:
 			// Go through defense position 2; closest to secret passage
 			addSequential(new GetRotation());
-			addSequential(new DriveStraightCommand(140, 0.75));
-			addSequential(new AdjustRotation1());
+			addSequential(new DriveStraightCommand(140, 0.85));
+//			addSequential(new AdjustRotation1());
 			addSequential(new RotationCommand(-40));
-			addSequential(new DriveStraightCommand(60, 0.75));
-			addSequential(new AdjustRotation1());
-			if (shoot) {
-				addSequential(new AimAndShootCommand());
-			}
+			addSequential(new DriveStraightCommand(60, 0.85));
+//			addSequential(new AdjustRotation1());
+//			if (shoot) {
+//				addSequential(new AimAndShootCommand());
+//			}
 			break;
 		default:
 			break;
@@ -88,6 +88,6 @@ public class PrepareVisionCommand extends CommandGroup {
 	}
 
 	public String toString() {
-		return "Defense=" + this.position + (shoot ? "-shoot" : "-no");
+		return "Defense=" + this.position ;//+ (shoot ? "-shoot" : "-no");
 	}
 }
