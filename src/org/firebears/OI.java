@@ -252,10 +252,10 @@ public class OI {
 		SmartDashboard.putNumber(SetPreferences.SET_VAR, 0.0);
 		// Create buttons for each preference value to set the preferences from previous variable.
 		pref_btn("Shooter.goal_speed");
-//		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MAX_SPEED);
-//		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE);
-//		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE);
-//		pref_btn(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE);
+//		pref_btn(RobotMap.PREF_BAIL_MAX_VALUE);
+//		pref_btn(RobotMap.PREF_BAIL_PARK_VALUE);
+//		pref_btn(RobotMap.PREF_BAIL_MIN_VALUE);
+//		pref_btn(RobotMap.PREF_BAIL_PRESHOOT_VALUE);
 //		pref_btn(RobotMap.PREF_BALL_GETTER_MAX_SPEED);
 //		pref_btn(RobotMap.PREF_BALL_GETTER_MIN_VALUE);
 //		pref_btn(RobotMap.PREF_BALL_GETTER_MAX_VAUE);

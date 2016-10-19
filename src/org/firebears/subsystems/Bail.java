@@ -30,7 +30,11 @@ public class Bail extends PIDSubsystem {
 	public double MIN_VALUE;
 
 	/** Maximum value that the setpoint may take, measured in volts. */
+//<<<<<<< HEAD
 	public final double MAX_VALUE;
+//=======
+//	public double MAX_VALUE;
+//>>>>>>> branch 'master' of https://github.com/firebears-frc/FB2016.git
 	
 	public double PRE_SHOOT_VALUE;
 
@@ -44,14 +48,25 @@ public class Bail extends PIDSubsystem {
 	
 	public Bail() {
 //		super(0.5, 0, 0);
-		super(1.5, 0.03, 5.0);
+		super(1.5, 0.00, 0.0);
 
 		MAX_SPEED = 1.;
+//<<<<<<< HEAD
 		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MIN_VALUE,1.5);  // Pot value to reset bail onto the floor
 		PRE_SHOOT_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PRESHOOT_VALUE,1.0);  // Pot value to hold ball before shooting
 		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PARK_VALUE,1.0); // Pot value to hold onto the ball while driving
 		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MAX_VALUE,0.4);  // Pot value to fire the ball
 
+//=======
+//		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MIN_VALUE,1.5);  // Pot value to reset bail onto the floor
+////		PRE_SHOOT_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PRESHOOT_VALUE,1.0);  // Pot value to hold ball before shooting
+////		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PARK_VALUE,1.0); // Pot value to hold onto the ball while driving
+////		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MAX_VALUE,0.4);  // Pot value to fire the ball
+//		PARK_VALUE = 2.60; // Pot value to hold onto the ball while driving
+//		PRE_SHOOT_VALUE = 2.91; // Pot value to hold ball before shooting
+//		MIN_VALUE = 3.00; // Pot value to reset bail onto the floor
+//		MAX_VALUE = 2.25; // Pot value to fire the ball
+//>>>>>>> branch 'master' of https://github.com/firebears-frc/FB2016.git
 		
 		softFuse = new SoftFuse(bail, 40, 1, 2);
 
