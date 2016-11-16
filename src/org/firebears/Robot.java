@@ -19,8 +19,10 @@ import org.firebears.subsystems.Chassis;
 import org.firebears.subsystems.DefenseBuster;
 import org.firebears.subsystems.Bail;
 import org.firebears.subsystems.Lights;
+import org.firebears.subsystems.SRX_PID;
 import org.firebears.subsystems.Shooter;
 import org.firebears.subsystems.Vision;
+//import org.usfirst.frc2846.TalonPID.subsystems.SRX_PID; donot import this one
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
@@ -46,6 +48,8 @@ public class Robot extends IterativeRobot {
 	public static Command autonomousCommand;
 
 	public static OI oi;
+	
+	public static SRX_PID sRX_PID;
 
 	// Subsystems
 	public static Chassis chassis;
@@ -63,6 +67,7 @@ public class Robot extends IterativeRobot {
 	private long count = 0;
 	private boolean lazorDown = false;
 	public boolean ballAcquired = false;
+	
 
 //	private static AnalogInput lazor;
 
@@ -74,6 +79,7 @@ public class Robot extends IterativeRobot {
 		RobotMap.init();
 
 		// Initialize Subsystems
+		sRX_PID = new SRX_PID();
 		bail = new Bail();
 		chassis = new Chassis();
 		defenseBuster = new DefenseBuster();

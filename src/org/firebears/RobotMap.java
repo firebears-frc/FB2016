@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -115,6 +116,7 @@ public class RobotMap {
 	public static final String PREF_BAIL_MIN_VALUE = "Bail.min_value";
 	public static final String PREF_BAIL_PARK_VALUE = "Bail.park_value";
 	public static final String PREF_BAIL_PRESHOOT_VALUE = "Bail.preshoot_value";
+	
 
 
 
@@ -124,70 +126,73 @@ public class RobotMap {
 	public static void init() {
 
 		//*/*/*/*/*/Begin Open Loop /*/*/*/*/*/
-		chassisFrontLeft = new CANTalon(2);
-		chassisFrontLeft.enableBrakeMode(false);
-		LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
-
-		chassisFrontRight = new CANTalon(4);
-		chassisFrontRight.enableBrakeMode(false);
-		LiveWindow.addActuator("Chassis", "FrontRight", chassisFrontRight);
-
-		chassisBackLeft = new CANTalon(3);
-		chassisBackLeft.enableBrakeMode(false);
-//		chassisBackLeft.reverseSensor(true);
-		LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
-
-		chassisBackRight = new CANTalon(5);
-		chassisBackRight.enableBrakeMode(false);
-		LiveWindow.addActuator("Chassis", "BackRight", chassisBackRight);
-
-		defenseBusterAngleMotor = new CANTalon(11);
-		defenseBusterAngleMotor.enableBrakeMode(true);
-		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);
-		
-		bail = new CANTalon(17);
-		bail.enableBrakeMode(true);
-		LiveWindow.addActuator("bail", "Motor", bail);
-		//*/*/*/*/*/END Open Loop /*/*/*/*/*/
-
-
-
-
-		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
+//		chassisFrontLeft = new CANTalon(2);
+//		chassisFrontLeft.enableBrakeMode(false);
+//		LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
+//
 //		chassisFrontRight = new CANTalon(4);
-//		chassisFrontRight.changeControlMode(CANTalon.TalonControlMode.Speed);
-//		chassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
-//		chassisFrontRight.reverseSensor(false);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
-//		chassisFrontRight.configNominalOutputVoltage(+0.0d, -0.0d);//Forward/reverse threshold
-//		chassisFrontRight.configPeakOutputVoltage(+12.0d, -12.0d);
-//		chassisFrontRight.setPID(m_P, m_I, m_D, m_ff, m_izone, m_rampRate, m_profile );
-//		chassisFrontRight.configEncoderCodesPerRev(m_CountPerRev);//
 //		chassisFrontRight.enableBrakeMode(false);
-//		chassisFrontRight.enable();
 //		LiveWindow.addActuator("Chassis", "FrontRight", chassisFrontRight);
 //
 //		chassisBackLeft = new CANTalon(3);
-//		chassisBackLeft.changeControlMode(CANTalon.TalonControlMode.Follower);
-//		chassisBackLeft.set(chassisFrontLeft.getDeviceID());
 //		chassisBackLeft.enableBrakeMode(false);
+////		chassisBackLeft.reverseSensor(true);
 //		LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
 //
 //		chassisBackRight = new CANTalon(5);
-//		chassisBackRight.changeControlMode(CANTalon.TalonControlMode.Follower);
-//		chassisBackRight.set(chassisFrontRight.getDeviceID());
 //		chassisBackRight.enableBrakeMode(false);
 //		LiveWindow.addActuator("Chassis", "BackRight", chassisBackRight);
 //
 //		defenseBusterAngleMotor = new CANTalon(11);
 //		defenseBusterAngleMotor.enableBrakeMode(true);
 //		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);
+//		
+//		bail = new CANTalon(17);
+//		bail.enableBrakeMode(true);
+//		LiveWindow.addActuator("bail", "Motor", bail);
+		//*/*/*/*/*/END Open Loop /*/*/*/*/*/
+
+
+
+
+		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
+		
+		
+		
+		chassisFrontRight = new CANTalon(4);
+		chassisFrontRight.changeControlMode(CANTalon.TalonControlMode.Speed);
+		chassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
+		chassisFrontRight.reverseSensor(false);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
+		chassisFrontRight.configNominalOutputVoltage(+0.0d, -0.0d);//Forward/reverse threshold
+		chassisFrontRight.configPeakOutputVoltage(+12.0d, -12.0d);
+		chassisFrontRight.setPID(m_P, m_I, m_D, m_ff, m_izone, m_rampRate, m_profile );
+		chassisFrontRight.configEncoderCodesPerRev(m_CountPerRev);//
+		chassisFrontRight.enableBrakeMode(false);
+		chassisFrontRight.enable();
+		LiveWindow.addActuator("Chassis", "FrontRight", chassisFrontRight);
+
+		chassisBackLeft = new CANTalon(3);
+		chassisBackLeft.changeControlMode(CANTalon.TalonControlMode.Follower);
+		chassisBackLeft.set(chassisFrontLeft.getDeviceID());
+		chassisBackLeft.enableBrakeMode(false);
+		LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
+
+		chassisBackRight = new CANTalon(5);
+		chassisBackRight.changeControlMode(CANTalon.TalonControlMode.Follower);
+		chassisBackRight.set(chassisFrontRight.getDeviceID());
+		chassisBackRight.enableBrakeMode(false);
+		LiveWindow.addActuator("Chassis", "BackRight", chassisBackRight);
+
+		defenseBusterAngleMotor = new CANTalon(11);
+		defenseBusterAngleMotor.enableBrakeMode(true);
+		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);
 		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
 
 		chassisRobotDrive = new RobotDrive(chassisBackRight, chassisFrontRight, chassisBackLeft, chassisFrontLeft);
 
 		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
 
-		//chassisRobotDrive.setMaxOutput(500);
+		chassisRobotDrive.setMaxOutput(500);
 
 		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
 
