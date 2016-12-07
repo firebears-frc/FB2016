@@ -44,13 +44,44 @@ public class RobotDriveCommand extends Command {
     }
     double x3;
 	double y3;
+	
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double y = Robot.oi.getJoystick1().getY();
     	double x = Robot.oi.getJoystick1().getX();
     	double sens = 1 / SmartDashboard.getNumber("Sense");
+    	double robotded = .27;
+    	double Joyded = 0.01;
+    	
+    	SmartDashboard.putNumber("JoyY", y3);
+    	SmartDashboard.putNumber("JoyX", x3);
+
+    	double y2 = y * (1 - robotded)/1;
+    	double x2 = x * (1 - robotded)/1;
+    		
     	
     	
+    	if (y > Joyded){
+    		y3 = y2 + robotded;
+    	}
+    	
+    	else if (y < -Joyded){
+    		y3 = y2 - robotded;
+    	}
+    	else if (y < Joyded && y > -Joyded)
+    		y3 = 0.0;
+    	
+    	if (x > Joyded){
+    		x3 = (x2 + robotded) ;
+    	}
+    	
+    	else if (x < -Joyded){
+    		x3 = x2 - robotded;
+    	}
+    	else if (x < Joyded && x > -Joyded)
+    		x3 = 0.0;
+    	
+    	/*
     	if (x < 0){
     		double x2 = x * -1;
     		x3 = -Math.pow(x2, sens);
@@ -65,7 +96,7 @@ public class RobotDriveCommand extends Command {
     	if (y > 0){
     		y3 = Math.pow(y, sens);
     	}
-    	
+    */	
 //    	double x2 = Math.pow(x, .5);
 //    	double y2 = Math.pow(y, .5);
     	

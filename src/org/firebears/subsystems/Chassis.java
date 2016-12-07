@@ -50,7 +50,7 @@ public class Chassis extends Subsystem {
 
     public void drive(double rotateValue, double moveValue){
     	double mult = 1; //talonFuse.speedFuse(frontLeft.getOutputCurrent());
-    	robotDrive.arcadeDrive(-moveValue * mult, -rotateValue * mult);
+    	robotDrive.arcadeDrive(-moveValue * mult, -rotateValue * mult, true);
     }
     
 	/**
