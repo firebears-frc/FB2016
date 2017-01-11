@@ -178,7 +178,7 @@ public class RobotMap {
 		chassisFrontLeft.setPID(m_P, m_I, m_D, m_ff, m_izone, m_rampRate, m_profile );
 		chassisFrontLeft.configEncoderCodesPerRev(m_CountPerRev);//
 		chassisFrontLeft.enableBrakeMode(false);
-		chassisFrontLeft.enable();
+		chassisFrontLeft.disable();
 		LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
 						
 		chassisBackLeft = new CANTalon(3);
@@ -198,7 +198,7 @@ public class RobotMap {
 
 		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
 
-		chassisRobotDrive.setMaxOutput(500);
+		chassisRobotDrive.setMaxOutput(650);
 
 		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
 
