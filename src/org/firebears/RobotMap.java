@@ -19,8 +19,8 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -278,8 +278,8 @@ public class RobotMap {
 
 		try {
 			usbCamera = CameraServer.getInstance();
-			usbCamera.setQuality(50);
-			usbCamera.setSize(2);
+//			usbCamera.setQuality(50);
+//			usbCamera.setSize(2);
 //			usbCamera.startAutomaticCapture("cam0");
 		}catch(Error e) {
 			System.err.println("Couldn't Open Camera");

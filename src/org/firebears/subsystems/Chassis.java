@@ -15,7 +15,7 @@ import org.firebears.Robot;
 import org.firebears.RobotMap;
 import org.firebears.commands.*;
 import org.firebears.util.*;
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

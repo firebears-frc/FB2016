@@ -25,7 +25,7 @@ import org.firebears.subsystems.Vision;
 //import org.usfirst.frc2846.TalonPID.subsystems.SRX_PID; donot import this one
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;

@@ -6,7 +6,7 @@ import org.firebears.Robot;
 import org.firebears.RobotMap;
 import org.firebears.commands.ShooterTesterCommand;
 
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
