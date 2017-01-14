@@ -16,7 +16,7 @@ import org.firebears.Robot;
 import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 

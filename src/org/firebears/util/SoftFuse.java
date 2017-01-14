@@ -2,7 +2,7 @@ package org.firebears.util;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SoftFuse {
