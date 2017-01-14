@@ -92,7 +92,7 @@ public class RobotMap {
 	public static double rotation = 0;
 	public static boolean servoOn = false;
 
-	static double m_P = 2.5;
+	static double m_P = 1;
 	static double m_I = 0;
 	static double m_D = 0;
 	static double m_ff = 0;
@@ -178,7 +178,7 @@ public class RobotMap {
 		chassisFrontLeft.setPID(m_P, m_I, m_D, m_ff, m_izone, m_rampRate, m_profile );
 		chassisFrontLeft.configEncoderCodesPerRev(m_CountPerRev);//
 		chassisFrontLeft.enableBrakeMode(false);
-		chassisFrontLeft.disable();
+		chassisFrontLeft.enable();
 		LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
 						
 		chassisBackLeft = new CANTalon(3);
@@ -198,9 +198,16 @@ public class RobotMap {
 
 		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
 
-		chassisRobotDrive.setMaxOutput(650);
+		chassisRobotDrive.setMaxOutput(650);//650
 
 		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
+		//chassisRobotDrive.setMaxOutput(1.0);
+		
+		
+		chassisRobotDrive.setSafetyEnabled(true);
+		chassisRobotDrive.setExpiration(0.1);
+		chassisRobotDrive.setSensitivity(0.5);
+		
 
 		lcd = new LiquidCrystal_roboRio(0x27);
 		lcd.begin(20, 4);
@@ -240,10 +247,7 @@ public class RobotMap {
 		// LiveWindow.addSensor("Subsystem 1", "Digital Input 1",
 		// internalDigitalInput1);
 
-		chassisRobotDrive.setSafetyEnabled(true);
-		chassisRobotDrive.setExpiration(0.1);
-		chassisRobotDrive.setSensitivity(0.5);
-		chassisRobotDrive.setMaxOutput(1.0);
+		
 
 		ballGetterAngleMotor = new CANTalon(12);
 		LiveWindow.addActuator("BallGetter", "AngleMotor", ballGetterAngleMotor);
