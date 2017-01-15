@@ -9,5 +9,7 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/TalonSRXLibJava.jar"/>
 	<classpathentry kind="var" path="talon"/>
 	<classpathentry kind="var" path="navx"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/CANJaguar.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

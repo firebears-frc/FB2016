@@ -269,7 +269,7 @@ public class RobotMap {
 			usbCamera = CameraServer.getInstance();
 		//	usbCamera.setQuality(50);
 			usbCamera.setSize(2);
-//			usbCamera.startAutomaticCapture("cam0");
+			usbCamera.startAutomaticCapture();
 		}catch(Error e) {
 			System.err.println("Couldn't Open Camera");
 		}
