@@ -92,7 +92,7 @@ public class RobotMap {
 	public static double rotation = 0;
 	public static boolean servoOn = false;
 
-	static double m_P = 1;
+	static double m_P = 1.25;
 	static double m_I = 0;
 	static double m_D = 0;
 	static double m_ff = 0;
@@ -123,8 +123,13 @@ public class RobotMap {
 
 
 	public static void init() {
+		
 
-		//*/*/*/*/*/Begin Open Loop /*/*/*/*/*/
+		
+		
+		
+
+		//*/*/*/*/*/Begin Open Loop /*/*/*/*/*/		
 //		chassisFrontLeft = new CANTalon(2);
 //		chassisFrontLeft.enableBrakeMode(false);
 //		LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
@@ -142,32 +147,16 @@ public class RobotMap {
 //		chassisBackRight.enableBrakeMode(false);
 //		LiveWindow.addActuator("Chassis", "BackRight", chassisBackRight);
 		
+//		chassisRobotDrive = new RobotDrive(chassisBackRight, chassisFrontRight, chassisBackLeft, chassisFrontLeft);	
+//		chassisRobotDrive.setSafetyEnabled(true);
+//		chassisRobotDrive.setExpiration(0.1);
+//		chassisRobotDrive.setSensitivity(0.5);		
+//		chassisRobotDrive.setMaxOutput(1.0);
+		
 		//*/*/*/*/*/END Open Loop /*/*/*/*/*/
 
-		defenseBusterAngleMotor = new CANTalon(11);
-		defenseBusterAngleMotor.enableBrakeMode(true);
-		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);		
-				
-		bail = new CANTalon(17);
-		bail.enableBrakeMode(true);
-		LiveWindow.addActuator("bail", "Motor", bail);
 		
-
-
-
-
-		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
-		chassisFrontRight = new CANTalon(4);
-		chassisFrontRight.changeControlMode(CANTalon.TalonControlMode.Speed);
-		chassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
-		chassisFrontRight.reverseSensor(false);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
-		chassisFrontRight.configNominalOutputVoltage(+0.0d, -0.0d);//Forward/reverse threshold
-		chassisFrontRight.configPeakOutputVoltage(+12.0d, -12.0d);
-		chassisFrontRight.setPID(m_P, m_I, m_D, m_ff, m_izone, m_rampRate, m_profile );
-		chassisFrontRight.configEncoderCodesPerRev(m_CountPerRev);//
-		chassisFrontRight.enableBrakeMode(false);
-		chassisFrontRight.enable();
-		LiveWindow.addActuator("Chassis", "FrontRight", chassisFrontRight);
+		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/		
 		
 		chassisFrontLeft = new CANTalon(2);
 		chassisFrontLeft.changeControlMode(CANTalon.TalonControlMode.Speed);
@@ -180,6 +169,21 @@ public class RobotMap {
 		chassisFrontLeft.enableBrakeMode(false);
 		chassisFrontLeft.enable();
 		LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
+		
+		
+		chassisFrontRight = new CANTalon(4);
+		chassisFrontRight.changeControlMode(CANTalon.TalonControlMode.Speed);
+		chassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
+		chassisFrontRight.reverseSensor(false);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
+		chassisFrontRight.configNominalOutputVoltage(+0.0d, -0.0d);//Forward/reverse threshold
+		chassisFrontRight.configPeakOutputVoltage(+12.0d, -12.0d);
+		chassisFrontRight.setPID(m_P, m_I, m_D, m_ff, m_izone, m_rampRate, m_profile );
+		chassisFrontRight.configEncoderCodesPerRev(m_CountPerRev);//
+		chassisFrontRight.enableBrakeMode(false);
+		chassisFrontRight.enable();
+		LiveWindow.addActuator("Chassis", "FrontRight", chassisFrontRight);
+		
+	
 						
 		chassisBackLeft = new CANTalon(3);
 		chassisBackLeft.changeControlMode(CANTalon.TalonControlMode.Follower);
@@ -192,46 +196,45 @@ public class RobotMap {
 		chassisBackRight.set(chassisFrontRight.getDeviceID());
 		chassisBackRight.enableBrakeMode(false);
 		LiveWindow.addActuator("Chassis", "BackRight", chassisBackRight);
-		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
-
-		chassisRobotDrive = new RobotDrive(chassisBackRight, chassisFrontRight, chassisBackLeft, chassisFrontLeft);
-
-		//*/*/*/*/*/Begin SRX PID Loop /*/*/*/*/*/
-
-		chassisRobotDrive.setMaxOutput(650);//650
-
-		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
-		//chassisRobotDrive.setMaxOutput(1.0);
 		
-		
+		chassisRobotDrive = new RobotDrive(chassisBackRight, chassisFrontRight, chassisBackLeft, chassisFrontLeft);	
 		chassisRobotDrive.setSafetyEnabled(true);
 		chassisRobotDrive.setExpiration(0.1);
 		chassisRobotDrive.setSensitivity(0.5);
 		
+		chassisRobotDrive.setMaxOutput(650);//650
+		
+		//*/*/*/*/*/END SRX PID Loop /*/*/*/*/*/
+		
+		
+		
+		
+		
+		
+		
+		
+		defenseBusterAngleMotor = new CANTalon(11);
+		defenseBusterAngleMotor.enableBrakeMode(true);
+		LiveWindow.addActuator("DefenseBuster", "Motor", defenseBusterAngleMotor);		
+				
+		ballGetterAngleMotor = new CANTalon(12);
+		LiveWindow.addActuator("BallGetter", "AngleMotor", ballGetterAngleMotor);		
 
-		lcd = new LiquidCrystal_roboRio(0x27);
-		lcd.begin(20, 4);
-		lcd.clear();
+		ballGetterFrontMotor = new CANTalon(13);
+		LiveWindow.addActuator("BallGetter", "FrontMotor", ballGetterFrontMotor);
+		
+		ballGetterSideMotor = new CANTalon(14);
+		LiveWindow.addActuator("BallGetter", "SideMotor", ballGetterSideMotor);
 
-		try {
-			navXBoard = new AHRS(SPI.Port.kMXP);
-		} catch (RuntimeException ex) {
-			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
-		}
-
-		builtInAccelerometer = new BuiltInAccelerometer();
-
-		defenseBusterAnalogInput = new AnalogInput(0);
-		defenseBusterAnglePotentiometer = new AnalogPotentiometer(defenseBusterAnalogInput);
-		LiveWindow.addActuator("DefenseBuster", "Pot", defenseBusterAnalogInput);
-
-		ballGetterAnalogInput = new AnalogInput(1);
-		ballGetterAnglePotentiometer = new AnalogPotentiometer(ballGetterAnalogInput);
-		LiveWindow.addActuator("BallGetter", "Pot", ballGetterAnalogInput);
-
-		shooterServo = new Servo(0);
-		LiveWindow.addActuator("Shooter", "ShootingServo", shooterServo);
-
+		shooterShootingMotor = new CANTalon(16);
+		shooterShootingMotor.enableBrakeMode(false);
+		LiveWindow.addActuator("Shooter", "ShootingMotor", shooterShootingMotor);
+		
+		bail = new CANTalon(17);
+		bail.enableBrakeMode(true);
+		LiveWindow.addActuator("bail", "Motor", bail);
+		
+		
 		shouterCounterDigitalInput = new DigitalInput(1);
 		shooterCounter = new Counter(shouterCounterDigitalInput);
 		shooterCounter.setUpDownCounterMode();
@@ -239,29 +242,7 @@ public class RobotMap {
 		shooterCounter.reset();
 		LiveWindow.addActuator("Shooter", "ShootingCounter", shooterCounter);
 		
-		lazor = new AnalogInput(3);
-//		lazor = new DigitalInput(6);
-
-		// button
-		// internalDigitalInput1 = new DigitalInput(0);
-		// LiveWindow.addSensor("Subsystem 1", "Digital Input 1",
-		// internalDigitalInput1);
-
 		
-
-		ballGetterAngleMotor = new CANTalon(12);
-		LiveWindow.addActuator("BallGetter", "AngleMotor", ballGetterAngleMotor);
-
-		ballGetterSideMotor = new CANTalon(14);
-		LiveWindow.addActuator("BallGetter", "SideMotor", ballGetterSideMotor);
-
-		ballGetterFrontMotor = new CANTalon(13);
-		LiveWindow.addActuator("BallGetter", "FrontMotor", ballGetterFrontMotor);
-
-		shooterShootingMotor = new CANTalon(16);
-		shooterShootingMotor.enableBrakeMode(false);
-		LiveWindow.addActuator("Shooter", "ShootingMotor", shooterShootingMotor);
-
 		/*
 		 * Quadrature encoders read 0.05639 inches per pulse Talon encoder
 		 * distance is 0.0245 inches per pulse
@@ -280,6 +261,52 @@ public class RobotMap {
 		encoderRight.setDistancePerPulse(0.05639);
 		encoderRight.setPIDSourceType(PIDSourceType.kRate);
 
+		
+
+		defenseBusterAnalogInput = new AnalogInput(0);
+		defenseBusterAnglePotentiometer = new AnalogPotentiometer(defenseBusterAnalogInput);
+		LiveWindow.addActuator("DefenseBuster", "Pot", defenseBusterAnalogInput);
+
+		ballGetterAnalogInput = new AnalogInput(1);
+		ballGetterAnglePotentiometer = new AnalogPotentiometer(ballGetterAnalogInput);
+		LiveWindow.addActuator("BallGetter", "Pot", ballGetterAnalogInput);
+		
+		shooterrangeFinder = new AnalogInput(2);
+        LiveWindow.addSensor("Shooter", "rangeFinder", shooterrangeFinder);
+        
+        lazor = new AnalogInput(3);
+        
+        
+        //lazor = new DigitalInput(6);
+		// button
+		// internalDigitalInput1 = new DigitalInput(0);
+		// LiveWindow.addSensor("Subsystem 1", "Digital Input 1",
+		// internalDigitalInput1);
+        
+        bailPos = new AnalogInput(4);
+        LiveWindow.addSensor("bail", "Pot", bailPos);
+        
+        
+        shooterServo = new Servo(0);
+		LiveWindow.addActuator("Shooter", "ShootingServo", shooterServo);
+		
+		
+
+		lcd = new LiquidCrystal_roboRio(0x27);
+		lcd.begin(20, 4);
+		lcd.clear();
+		
+		
+
+		try {
+			navXBoard = new AHRS(SPI.Port.kMXP);
+		} catch (RuntimeException ex) {
+			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+		}
+
+		builtInAccelerometer = new BuiltInAccelerometer();
+		
+	
 		try {
 			usbCamera = CameraServer.getInstance();
 //			usbCamera.setQuality(50);
@@ -288,12 +315,6 @@ public class RobotMap {
 		}catch(Error e) {
 			System.err.println("Couldn't Open Camera");
 		}
-
-		shooterrangeFinder = new AnalogInput(2);
-        LiveWindow.addSensor("Shooter", "rangeFinder", shooterrangeFinder);
-        
-        bailPos = new AnalogInput(4);
-        LiveWindow.addSensor("bail", "Pot", bailPos);
 
 
 	}

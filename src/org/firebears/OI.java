@@ -94,15 +94,18 @@ public class OI {
 		joystick2 = new Joystick(1);
 
 		// Joystick Buttons
-//		shootButton = new JoystickButton(joystick1, 1);
-//		shootButton.whenPressed(new Fire());
+		
+		
+//		//	servoButton = new JoystickButton(joystick1, 1);
+//			servoButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
+		
+		
+		idc = new JoystickButton(joystick1, 1);
+		idc.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
 
 		// TODO: Remove when not needed anymore.
 		servoUP = new JoystickButton(joystick1, 2);
 		servoUP.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_PARK));
-		
-//		servoButton = new JoystickButton(joystick1, 1);
-//		servoButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
 		
 		shooterSpinDown = new JoystickButton(joystick1, 3);
 		shooterSpinDown.whenPressed(new ShooterSpinCommand(0));
@@ -113,8 +116,7 @@ public class OI {
 		park = new JoystickButton(joystick1, 8);
 		park.whenPressed(new ParkCommand());
 		
-		idc = new JoystickButton(joystick1, 1);
-		idc.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
+		
 		
 
 //		celebrateButton = new JoystickButton(joystick1, 12);
@@ -147,9 +149,28 @@ public class OI {
 //		ballGetterOffButton = new JoystickButton(joystick2, 11);
 //		ballGetterOffButton.whenPressed(new BallGetterMotorsCommand(3));
 		
-		//Driver Station Buttons
-		ballGetterChangesButton = new JoystickButton(joystick2, 8);
-		ballGetterChangesButton.whenPressed(new BallGetterToggleCommand());
+//		portcullisAutoButton = new JoystickButton(joystick2, 2);
+//		portcullisAutoButton.whenPressed(new PortcullisCommand());
+		
+//		chevalDeFriseAutoButton = new JoystickButton(joystick2, 1);
+		
+		
+		lowBarButton = new JoystickButton(joystick2, 1);
+		lowBarButton.whenPressed(new LowBarNotAutonomousCommand());
+		
+		shooterReverseButton = new JoystickButton(joystick2, 2);
+		shooterReverseButton.whenActive(new ShooterSpinCommand(-10));
+		shooterReverseButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
+		shooterReverseButton.whenReleased(new ShooterSpinCommand(0));
+		
+		defenseBusterChangesButton = new JoystickButton(joystick2, 3);
+		defenseBusterChangesButton.whenPressed(new DefenseBusterToggleCommand());
+		
+		celebrateButton = new JoystickButton(joystick2, 4);
+		celebrateButton.whileHeld(new CelebrateCommand());
+		
+		shootButton = new JoystickButton(joystick2, 5);
+		shootButton.whenPressed(new Fire(120));
 		
 		ballGetterGrabButton = new JoystickButton(joystick2, 6);
 //		ballGetterGrabButton.whenActive(new BallGetterMotorsCommand(BallGetter.GRAB));
@@ -160,30 +181,12 @@ public class OI {
 		ballGetterSpitButton.whenActive(new BallGetterMotorsCommand(BallGetter.SPIT));
 		ballGetterSpitButton.whenReleased(new BallGetterMotorsCommand(BallGetter.OFF));
 		
-		shootButton = new JoystickButton(joystick2, 5);
-		shootButton.whenPressed(new Fire(120));
-		
-		defenseBusterChangesButton = new JoystickButton(joystick2, 3);
-		defenseBusterChangesButton.whenPressed(new DefenseBusterToggleCommand());
+		//Driver Station Buttons
+		ballGetterChangesButton = new JoystickButton(joystick2, 8);
+		ballGetterChangesButton.whenPressed(new BallGetterToggleCommand());
 		
 		aimAndShoot = new JoystickButton(joystick2, 11);
 		aimAndShoot.whenPressed(new AimAndShootCommand());
-		
-//		portcullisAutoButton = new JoystickButton(joystick2, 2);
-//		portcullisAutoButton.whenPressed(new PortcullisCommand());
-		
-//		chevalDeFriseAutoButton = new JoystickButton(joystick2, 1);
-		
-		lowBarButton = new JoystickButton(joystick2, 1);
-		lowBarButton.whenPressed(new LowBarNotAutonomousCommand());
-		
-		shooterReverseButton = new JoystickButton(joystick2, 2);
-		shooterReverseButton.whenActive(new ShooterSpinCommand(-10));
-		shooterReverseButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
-		shooterReverseButton.whenReleased(new ShooterSpinCommand(0));
-		
-		celebrateButton = new JoystickButton(joystick2, 4);
-		celebrateButton.whileHeld(new CelebrateCommand());
 
 		autoSwichButton = new DigitalButton(0);
 		autoSwichButton.whenActive(new SelectAuto2());
@@ -203,7 +206,7 @@ public class OI {
 //			SmartDashboard.putData("Ramparts Auto", new RampartsCommand());
 //			SmartDashboard.putData("ChevalDeFrise Auto", new ChevalDeFriseCommand());
 //			SmartDashboard.putData("Low Bar", new LowBarCommand());
-			SmartDashboard.putData("TestAutoCommamnd", new TestAutoCommand());
+			
 //			SmartDashboard.putNumber("Vision Set", 0.);
 //			SmartDashboard.putData("Vision Save To Hue Lo", new Vision.SaveToPref(Vision.PREF_HUE_LO));
 //			SmartDashboard.putData("Vision Save To Hue Hi", new Vision.SaveToPref(Vision.PREF_HUE_HI));
@@ -226,6 +229,8 @@ public class OI {
 //			SmartDashboard.putData("defenseBuster set min", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_MIN_VALUE));
 //			SmartDashboard.putData("defenseBuster set max", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_MAX_VALUE));
 //			SmartDashboard.putData("defenseBuster set park", new SetPreferencesDefenseBuster(RobotMap.PREF_DEFENSE_BUSTER_PARK_VALUE));
+			
+			SmartDashboard.putData("TestAutoCommamnd", new TestAutoCommand());
 //
 			SmartDashboard.putData("Defense 1", new PrepareVisionCommand(1, true));
 			SmartDashboard.putData("Defense 2", new PrepareVisionCommand(2, true));
@@ -250,8 +255,12 @@ public class OI {
 		}
 		// Create a variable to be read for the Network Tables Variables.
 		SmartDashboard.putNumber(SetPreferences.SET_VAR, 0.0);
+		
+		
 		// Create buttons for each preference value to set the preferences from previous variable.
 		pref_btn("Shooter.goal_speed");
+		
+		
 //		pref_btn(RobotMap.PREF_BAIL_MAX_VALUE);
 //		pref_btn(RobotMap.PREF_BAIL_PARK_VALUE);
 //		pref_btn(RobotMap.PREF_BAIL_MIN_VALUE);
