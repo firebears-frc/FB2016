@@ -133,15 +133,14 @@ public class RobotMap {
 //		chassisFrontLeft = new CANTalon(2);
 //		chassisFrontLeft.enableBrakeMode(false);
 //		LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
+		
+//		chassisBackLeft = new CANTalon(3);
+//		chassisBackLeft.enableBrakeMode(false);
+//		LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
 //
 //		chassisFrontRight = new CANTalon(4);
 //		chassisFrontRight.enableBrakeMode(false);
 //		LiveWindow.addActuator("Chassis", "FrontRight", chassisFrontRight);
-//
-//		chassisBackLeft = new CANTalon(3);
-//		chassisBackLeft.enableBrakeMode(false);
-////		chassisBackLeft.reverseSensor(true);
-//		LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
 //
 //		chassisBackRight = new CANTalon(5);
 //		chassisBackRight.enableBrakeMode(false);
@@ -170,6 +169,18 @@ public class RobotMap {
 		chassisFrontLeft.enable();
 		LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
 		
+		chassisBackLeft = new CANTalon(3);
+		chassisBackLeft.changeControlMode(CANTalon.TalonControlMode.Speed);
+		chassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
+		chassisBackLeft.reverseSensor(false);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
+		chassisBackLeft.configNominalOutputVoltage(+0.0d, -0.0d);//Forward/reverse threshold
+		chassisBackLeft.configPeakOutputVoltage(+12.0d, -12.0d);
+		chassisBackLeft.setPID(m_P, m_I, m_D, m_ff, m_izone, m_rampRate, m_profile );
+		chassisBackLeft.configEncoderCodesPerRev(m_CountPerRev);//
+		chassisBackLeft.enableBrakeMode(false);
+		chassisBackLeft.enable();
+		LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
+		
 		
 		chassisFrontRight = new CANTalon(4);
 		chassisFrontRight.changeControlMode(CANTalon.TalonControlMode.Speed);
@@ -183,19 +194,34 @@ public class RobotMap {
 		chassisFrontRight.enable();
 		LiveWindow.addActuator("Chassis", "FrontRight", chassisFrontRight);
 		
-	
-						
-		chassisBackLeft = new CANTalon(3);
-		chassisBackLeft.changeControlMode(CANTalon.TalonControlMode.Follower);
-		chassisBackLeft.set(chassisFrontLeft.getDeviceID());
-		chassisBackLeft.enableBrakeMode(false);
-		LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
-
+				
 		chassisBackRight = new CANTalon(5);
-		chassisBackRight.changeControlMode(CANTalon.TalonControlMode.Follower);
-		chassisBackRight.set(chassisFrontRight.getDeviceID());
+		chassisBackRight.changeControlMode(CANTalon.TalonControlMode.Speed);
+		chassisBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
+		chassisBackRight.reverseSensor(false);//is this covered above with the sRX_PIDQuadratureEncoder1   ?????
+		chassisBackRight.configNominalOutputVoltage(+0.0d, -0.0d);//Forward/reverse threshold
+		chassisBackRight.configPeakOutputVoltage(+12.0d, -12.0d);
+		chassisBackRight.setPID(m_P, m_I, m_D, m_ff, m_izone, m_rampRate, m_profile );
+		chassisBackRight.configEncoderCodesPerRev(m_CountPerRev);//
 		chassisBackRight.enableBrakeMode(false);
+		chassisBackRight.enable();
 		LiveWindow.addActuator("Chassis", "BackRight", chassisBackRight);
+		
+	
+//  This "follower" logic doesn't work.  Maybe could figure out how to fix it.  Was quicker to put PID directly on all 4 motors 						
+//		chassisBackLeft = new CANTalon(3);
+//		chassisBackLeft.changeControlMode(CANTalon.TalonControlMode.Follower);
+//		chassisBackLeft.set(chassisFrontLeft.getDeviceID());
+//		chassisBackLeft.enableBrakeMode(false);
+//		chassisBackLeft.enable();
+//		LiveWindow.addActuator("Chassis", "BackLeft", chassisBackLeft);
+//
+//		chassisBackRight = new CANTalon(5);
+//		chassisBackRight.changeControlMode(CANTalon.TalonControlMode.Follower);
+//		chassisBackRight.set(chassisFrontRight.getDeviceID());
+//		chassisBackRight.enableBrakeMode(false);
+//		chassisBackRight.enable();
+//		LiveWindow.addActuator("Chassis", "BackRight", chassisBackRight);
 		
 		chassisRobotDrive = new RobotDrive(chassisBackRight, chassisFrontRight, chassisBackLeft, chassisFrontLeft);	
 		chassisRobotDrive.setSafetyEnabled(true);
