@@ -182,8 +182,8 @@ public class OI {
 		shooterReverseButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
 		shooterReverseButton.whenReleased(new ShooterSpinCommand(0));
 		
-		celebrateButton = new JoystickButton(joystick2, 4);
-		celebrateButton.whileHeld(new CelebrateCommand());
+//		celebrateButton = new JoystickButton(joystick2, 4);
+//		celebrateButton.whileHeld(new CelebrateCommand());
 
 		autoSwichButton = new DigitalButton(0);
 		autoSwichButton.whenActive(new SelectAuto2());

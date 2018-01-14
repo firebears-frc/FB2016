@@ -4,7 +4,9 @@ import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableType;
+import edu.wpi.first.networktables.NetworkTableValue;
 
 /**
  * Subsystem interface to the lights running on the Raspberry Pi. Communicates
@@ -16,7 +18,7 @@ public class Lights extends Subsystem {
 	boolean isCelebrateMode = false;
 
 	public Lights() {
-		table = NetworkTable.getTable("lights");
+		table = table.getSubTable("lights");
 		setStrip(STRIP_CHASSIS_LEFT, ANIM_FIRE);
 		setStrip(STRIP_CHASSIS_RIGHT, ANIM_FIRE);
 		setStrip(STRIP_CELEBRATE, ANIM_FIRE);
@@ -26,23 +28,25 @@ public class Lights extends Subsystem {
 	}
 
 	public static void setStrip(String stripName, String animationName) {
-		table.putString(stripName, animationName);
+//		table.putValue(stripName, NetworkTableValue.makeString(animationName));
+		table.getEntry(stripName).setValue(NetworkTableValue.makeString(animationName));
 	}
 
 	public void setValue(String stripName, double value) {
-		table.putNumber(stripName + ".value", value);
+//		table.putNumber(stripName + ".value", value);
+		table.getEntry(stripName).setValue(NetworkTableValue.makeDouble(value));
 	}
 
 	public void teleopMode() {
 
 		String allianceColor = getAllianceColor();
 
-		if (Robot.vision.isOnTarget()) {
-			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
-			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODING_R_W_B);
-			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODING_R_W_B);
-			return;
-		}
+//		if (Robot.vision.isOnTarget()) {
+//			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
+//			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODING_R_W_B);
+//			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODING_R_W_B);
+//			return;
+//		}
 		if (isCelebrateMode) {
 			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODE);
 			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODE);
@@ -68,18 +72,18 @@ public class Lights extends Subsystem {
 	}
 
 	public void autonomousMode() {
-		if (Robot.vision.isOnTarget()) {
-			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODING_R_W_B);
-			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODING_R_W_B);
-			if (Robot.shooter.isSpinning()) {
-				setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
-			}
-		} else {
-			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
-			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_SPARK);
-			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_SPARK);
-		}
-
+//		if (Robot.vision.isOnTarget()) {
+//			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_EXPLODING_R_W_B);
+//			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_EXPLODING_R_W_B);
+//			if (Robot.shooter.isSpinning()) {
+//				setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_EXPLODING_R_W_B);
+//			}
+//		} else {
+//			setStrip(Lights.STRIP_CELEBRATE, Lights.ANIM_SPARK);
+//			setStrip(Lights.STRIP_CHASSIS_LEFT, Lights.ANIM_SPARK);
+//			setStrip(Lights.STRIP_CHASSIS_RIGHT, Lights.ANIM_SPARK);
+//		}
+//
 	}
 
 	public void disabledMode() {

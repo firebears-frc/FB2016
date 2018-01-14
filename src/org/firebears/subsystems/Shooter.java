@@ -7,6 +7,8 @@ import org.firebears.RobotMap;
 import org.firebears.commands.ShooterTesterCommand;
 
 import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -46,7 +48,7 @@ public class Shooter extends PIDSubsystem {
 		servoReset();
 	}
 
-	public final CANTalon shootingMotor = RobotMap.shooterShootingMotor;
+	public final WPI_TalonSRX shootingMotor = RobotMap.shooterShootingMotor;
 	private final Servo shooterServo = RobotMap.shooterServo;
 	private final Counter shooterCounter = RobotMap.shooterCounter;
 

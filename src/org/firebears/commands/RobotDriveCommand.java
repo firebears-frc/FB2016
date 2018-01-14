@@ -49,7 +49,7 @@ public class RobotDriveCommand extends Command {
     protected void execute() {
     	double y = Robot.oi.getJoystick1().getY();
     	double x = Robot.oi.getJoystick1().getX();
-    	double sens = 1 / SmartDashboard.getNumber("Sense");
+    	double sens = 1 / SmartDashboard.getNumber("Sense", 1);
     	double robotded = .27;
     	double Joyded = 0.01;
     	

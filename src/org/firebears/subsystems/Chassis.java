@@ -16,8 +16,12 @@ import org.firebears.RobotMap;
 import org.firebears.commands.*;
 import org.firebears.util.*;
 import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -29,11 +33,11 @@ public class Chassis extends Subsystem {
 	/** Encoder ticks per inch. */
 	public static final double TICKS_PER_INCH = 69.5;
 
-    public final CANTalon frontLeft = RobotMap.chassisFrontLeft;
-    public final CANTalon frontRight = RobotMap.chassisFrontRight;
-    public final CANTalon backLeft = RobotMap.chassisBackLeft;
-    public final CANTalon backRight = RobotMap.chassisBackRight;
-    private final RobotDrive robotDrive = RobotMap.chassisRobotDrive;
+    public final WPI_TalonSRX frontLeft = RobotMap.chassisFrontLeft;
+    public final WPI_TalonSRX frontRight = RobotMap.chassisFrontRight;
+    public final WPI_TalonSRX backLeft = RobotMap.chassisBackLeft;
+    public final WPI_TalonSRX backRight = RobotMap.chassisBackRight;
+    private final DifferentialDrive robotDrive = RobotMap.chassisRobotDrive;
     private final SoftFuse talonFuse = new SoftFuse(90,1,2);//Amp limit, holdOff time, duration time
 
 
@@ -42,15 +46,15 @@ public class Chassis extends Subsystem {
     // here. Call these from Commands.
 
     public void setBrakeMode(boolean brakeMode) {
-		Robot.chassis.backLeft.enableBrakeMode(brakeMode);
-		Robot.chassis.backRight.enableBrakeMode(brakeMode);
-		Robot.chassis.frontLeft.enableBrakeMode(brakeMode);
-		Robot.chassis.frontRight.enableBrakeMode(brakeMode);
+		Robot.chassis.backLeft.setNeutralMode(NeutralMode.Brake);
+		Robot.chassis.backRight.setNeutralMode(NeutralMode.Brake);
+		Robot.chassis.frontLeft.setNeutralMode(NeutralMode.Brake);
+		Robot.chassis.frontRight.setNeutralMode(NeutralMode.Brake);
     }
 
     public void drive(double rotateValue, double moveValue){
     	double mult = 1; //talonFuse.speedFuse(frontLeft.getOutputCurrent());
-    	robotDrive.arcadeDrive(-moveValue * mult, -rotateValue * mult, true);
+    	robotDrive.arcadeDrive(-moveValue * mult, -rotateValue * -mult, true);
     }
     
 	/**
@@ -63,7 +67,7 @@ public class Chassis extends Subsystem {
 	 *            turns right.
 	 */
 	public void driveCurve(double outputMagnitude, double curve) {
-		robotDrive.drive(outputMagnitude, curve);
+		robotDrive.curvatureDrive(outputMagnitude, curve, true);
 	}
     
     public void stopDriving() {
@@ -72,7 +76,7 @@ public class Chassis extends Subsystem {
 
 
     public void initDefaultCommand() {
-        setDefaultCommand(new RobotDriveCommand());
+        setDefaultCommand(new DriveCommand());
     }
 
 
@@ -80,7 +84,7 @@ public class Chassis extends Subsystem {
      * @return Encoder distance measured in inches.
      */
     public double getDistance() {
-    	double distanceInTicks = RobotMap.chassisFrontLeft.getEncPosition();
+    	double distanceInTicks = RobotMap.encoderLeft.getDistance();
 //    	double distanceInTicks = RobotMap.chassisFrontRight.getEncPosition();   // PRACTICE ROBOT
     	return distanceInTicks / TICKS_PER_INCH;
     }

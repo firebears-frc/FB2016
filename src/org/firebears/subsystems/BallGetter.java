@@ -17,6 +17,8 @@ import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -43,9 +45,9 @@ public class BallGetter extends PIDSubsystem {
 	
 	public int ballGetterPosition = 1;
 
-	private final CANTalon sideMotor = RobotMap.ballGetterSideMotor;
-	private final CANTalon frontMotor = RobotMap.ballGetterFrontMotor;
-	private final CANTalon angleMotor = RobotMap.ballGetterAngleMotor;
+	private final WPI_TalonSRX sideMotor = RobotMap.ballGetterSideMotor;
+	private final WPI_TalonSRX frontMotor = RobotMap.ballGetterFrontMotor;
+	private final WPI_TalonSRX angleMotor = RobotMap.ballGetterAngleMotor;
 	private final AnalogInput pot = RobotMap.ballGetterAnalogInput;
 
 	public final static int GRAB = 1;
@@ -57,12 +59,13 @@ public class BallGetter extends PIDSubsystem {
 
 	public BallGetter() {
 		
-		super(1.005, 0, 0);
+		super(.65, 0, 1.75);
+//		super(1.005, 0, 0);
 //		super(1.75, 0.04, 2.5);
 
 		MAX_SPEED = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAX_SPEED, 0.65);
 		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MIN_VALUE, .75);
-		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAX_VAUE, 2.2);
+		MAX_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAX_VAUE, 1.5);
 		MAXGET_SPEED = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_MAXGET_SPEED, 0.75);
 		PARK_VALUE = getPreferencesDouble(RobotMap.PREF_BALL_GETTER_PARK_VALUE, .9);
 		SIDE_SPEED = MAXGET_SPEED * 0.5;

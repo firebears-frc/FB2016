@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.networktables.NetworkTablesJNI;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -90,22 +90,22 @@ public class Vision extends Subsystem {
 		lightRing.set(Relay.Value.kForward);
 	}
 
-	public double getAngle() {
-		double offs = (NetworkTablesJNI.getDouble(NT_ANGLE, 0) + 30);
-		double getting = ANGLE_MULTIPLIER * offs;
-		movingAvg = (movingAvg + getting) / 2.;
-		return movingAvg;
-	}
+//	public double getAngle() {
+//		double offs = (NetworkTable.getNumber(NT_ANGLE, 0.0) + 30);
+//		double getting = ANGLE_MULTIPLIER * offs;
+//		movingAvg = (movingAvg + getting) / 2.;
+//		return movingAvg;
+//	}
 
-	public double getRemainingDistance() {
-		return NetworkTablesJNI.getDouble(NT_DISTANCE, 0);
-	}
+//	public double getRemainingDistance() {
+//		return NetworkTable.getDouble(NT_DISTANCE, 0);
+//	}
 
-	public boolean isOnTarget() {
-		return (Math.abs(getAngle()) < ANGLE_TOLERANCE)
-				&& (Math.abs(TARGET_DISTANCE - getRemainingDistance()) < DIST_TOLERANCE);
-
-	}
+//	public boolean isOnTarget() {
+//		return (Math.abs(getAngle()) < ANGLE_TOLERANCE)
+//				&& (Math.abs(TARGET_DISTANCE - getRemainingDistance()) < DIST_TOLERANCE);
+//
+//	}
 
 	public static class SaveToPref extends Command {
 
@@ -117,7 +117,7 @@ public class Vision extends Subsystem {
 
 		@Override
 		protected void initialize() {
-			double setTo = SmartDashboard.getNumber("Vision Set");
+			double setTo = SmartDashboard.getNumber("Vision Set", 1);
 
 			// Smart Dashboard -> Preferences
 			saveCalibration(whatpref, setTo);
