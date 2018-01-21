@@ -22,8 +22,8 @@ public class RotationCommand extends PIDCommand {
 		requires(Robot.chassis);
 		turnValue = degrees;
 		
-		getPIDController().setContinuous(true);
 		getPIDController().setInputRange(-180, 180);
+		getPIDController().setContinuous(true);
 		getPIDController().setAbsoluteTolerance(angleTolerance);
 	}
 

@@ -5,6 +5,7 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.NetworkTableType;
 import edu.wpi.first.networktables.NetworkTableValue;
 
@@ -18,8 +19,9 @@ public class Lights extends Subsystem {
 	boolean isCelebrateMode = false;
 
 	public Lights() {
-		table = table.getSubTable("lights");
+		table = NetworkTableInstance.getDefault().getTable("lights");
 		setStrip(STRIP_CHASSIS_LEFT, ANIM_FIRE);
+		
 		setStrip(STRIP_CHASSIS_RIGHT, ANIM_FIRE);
 		setStrip(STRIP_CELEBRATE, ANIM_FIRE);
 	}

@@ -34,8 +34,8 @@ public class RotateCurveCommand extends PIDCommand {
 
 		requires(Robot.chassis);
 		
-		getPIDController().setContinuous(true);
 		getPIDController().setInputRange(-180, 180);
+		getPIDController().setContinuous(true);
 		getPIDController().setAbsoluteTolerance(angleTolerance);
 	}
 

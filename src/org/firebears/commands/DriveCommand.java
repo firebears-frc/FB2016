@@ -164,7 +164,7 @@ public class DriveCommand extends Command {
 //    	SmartDashboard.putNumber("JoyY", forward);
 
     	
-    	Robot.chassis.drive(strafe3, forward3);
+    	Robot.chassis.drive(strafe3, forward3 * -1);
     	
     }
 

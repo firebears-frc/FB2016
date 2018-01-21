@@ -40,7 +40,7 @@ public class ShooterSpinCommand extends Command {
     }
 
     protected void interrupted() {
-    	Robot.lights.teleopMode();
+//    	Robot.lights.teleopMode();
     }
     
     @Override

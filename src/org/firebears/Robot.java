@@ -22,6 +22,8 @@ import org.firebears.subsystems.Lights;
 import org.firebears.subsystems.Shooter;
 import org.firebears.subsystems.Vision;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import com.ctre.CANTalon;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -167,12 +169,12 @@ public class Robot extends IterativeRobot {
 		Robot.defenseBuster.park();
 
 		count = 0;
+		
 	}
 
 
-
-
 	public void teleopPeriodic() {
+		
 		Scheduler.getInstance().run();
 		double voltage = RobotMap.lazor.getAverageVoltage();
 		
