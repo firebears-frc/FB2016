@@ -29,6 +29,9 @@ import edu.wpi.first.wpilibj.Timer;
  *
  */
 public class Chassis extends Subsystem {
+	
+	private double driveMove;
+	private double driveRotate;
 
 	/** Encoder ticks per inch. */
 	public static final double TICKS_PER_INCH = 69.5;
@@ -40,7 +43,13 @@ public class Chassis extends Subsystem {
     private final DifferentialDrive robotDrive = RobotMap.chassisRobotDrive;
     private final SoftFuse talonFuse = new SoftFuse(90,1,2);//Amp limit, holdOff time, duration time
 
-
+    public double getDriveMove() {
+    	return driveMove;
+    }
+    
+    public double getDriveRotate() {
+    	return driveRotate;
+    }
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -55,6 +64,8 @@ public class Chassis extends Subsystem {
     public void drive(double rotateValue, double moveValue){
     	double mult = 1; //talonFuse.speedFuse(frontLeft.getOutputCurrent());
     	robotDrive.arcadeDrive(-moveValue * mult, -rotateValue * -mult, true);
+    	driveMove = moveValue;
+    	driveRotate = rotateValue;
     }
     
 	/**

@@ -204,6 +204,9 @@ public class OI {
 //			SmartDashboard.putData("ChevalDeFrise Auto", new ChevalDeFriseCommand());
 //			SmartDashboard.putData("Low Bar", new LowBarCommand());
 			SmartDashboard.putData("TestAutoCommamnd", new TestAutoCommand());
+			SmartDashboard.putData("StartRecording", new StartMotionRecordCommand());
+			SmartDashboard.putData("StopRecording", new StopMotionRecordCommand());
+			SmartDashboard.putData("PlayRecording", new PlayRecordingCommand());
 //			SmartDashboard.putNumber("Vision Set", 0.);
 //			SmartDashboard.putData("Vision Save To Hue Lo", new Vision.SaveToPref(Vision.PREF_HUE_LO));
 //			SmartDashboard.putData("Vision Save To Hue Hi", new Vision.SaveToPref(Vision.PREF_HUE_HI));
