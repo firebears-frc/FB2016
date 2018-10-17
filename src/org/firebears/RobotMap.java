@@ -139,6 +139,7 @@ public class RobotMap {
 		chassisFrontLeft.setNeutralMode(NeutralMode.Brake);
 //		LiveWindow.addActuator("Chassis", "FrontLeft", chassisFrontLeft);
 
+		
 		chassisFrontRight = new CANTalon(4);
 		chassisFrontRight.setName("Chassis", "FrontRight");
 		chassisFrontRight.setNeutralMode(NeutralMode.Brake);
