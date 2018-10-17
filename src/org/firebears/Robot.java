@@ -83,7 +83,7 @@ public class Robot extends IterativeRobot {
 		defenseBuster = new DefenseBuster();
 		ballGetter = new BallGetter();
 		shooter = new Shooter();
-//		lights = new Lights();
+		lights = new Lights();
 		vision = new Vision();
 //		lazor = new AnalogInput(3);
 

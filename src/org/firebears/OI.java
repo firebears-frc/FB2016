@@ -148,25 +148,25 @@ public class OI {
 //		ballGetterOffButton.whenPressed(new BallGetterMotorsCommand(3));
 		
 		//Driver Station Buttons
-		ballGetterChangesButton = new JoystickButton(joystick2, 8);
+		ballGetterChangesButton = new JoystickButton(joystick1, 11);
 		ballGetterChangesButton.whenPressed(new BallGetterToggleCommand());
 		
-		ballGetterGrabButton = new JoystickButton(joystick2, 6);
+		ballGetterGrabButton = new JoystickButton(joystick1, 10);
 //		ballGetterGrabButton.whenActive(new BallGetterMotorsCommand(BallGetter.GRAB));
 //		ballGetterGrabButton.whenReleased(new BallGetterMotorsCommand(BallGetter.OFF));
 		ballGetterGrabButton.whenPressed(new AcquireBall());
 		
-		ballGetterSpitButton = new JoystickButton(joystick2, 7);
+		ballGetterSpitButton = new JoystickButton(joystick1, 9);
 		ballGetterSpitButton.whenActive(new BallGetterMotorsCommand(BallGetter.SPIT));
 		ballGetterSpitButton.whenReleased(new BallGetterMotorsCommand(BallGetter.OFF));
 		
-		shootButton = new JoystickButton(joystick2, 5);
+		shootButton = new JoystickButton(joystick1, 7);
 		shootButton.whenPressed(new Fire(120));
 		
-		defenseBusterChangesButton = new JoystickButton(joystick2, 3);
+		defenseBusterChangesButton = new JoystickButton(joystick1, 6);
 		defenseBusterChangesButton.whenPressed(new DefenseBusterToggleCommand());
 		
-		aimAndShoot = new JoystickButton(joystick2, 11);
+		aimAndShoot = new JoystickButton(joystick1, 12);
 		aimAndShoot.whenPressed(new AimAndShootCommand());
 		
 //		portcullisAutoButton = new JoystickButton(joystick2, 2);
@@ -177,13 +177,13 @@ public class OI {
 		lowBarButton = new JoystickButton(joystick2, 1);
 		lowBarButton.whenPressed(new LowBarNotAutonomousCommand());
 		
-		shooterReverseButton = new JoystickButton(joystick2, 2);
+		shooterReverseButton = new JoystickButton(joystick1, 4);
 		shooterReverseButton.whenActive(new ShooterSpinCommand(-10));
 		shooterReverseButton.whenPressed(new ShooterFireCommand(ShooterFireCommand.SHOOTER_RESET));
 		shooterReverseButton.whenReleased(new ShooterSpinCommand(0));
 		
-//		celebrateButton = new JoystickButton(joystick2, 4);
-//		celebrateButton.whileHeld(new CelebrateCommand());
+		celebrateButton = new JoystickButton(joystick2, 4);
+		celebrateButton.whileHeld(new CelebrateCommand());
 
 		autoSwichButton = new DigitalButton(0);
 		autoSwichButton.whenActive(new SelectAuto2());
@@ -204,9 +204,6 @@ public class OI {
 //			SmartDashboard.putData("ChevalDeFrise Auto", new ChevalDeFriseCommand());
 //			SmartDashboard.putData("Low Bar", new LowBarCommand());
 			SmartDashboard.putData("TestAutoCommamnd", new TestAutoCommand());
-			SmartDashboard.putData("StartRecording", new StartMotionRecordCommand());
-			SmartDashboard.putData("StopRecording", new StopMotionRecordCommand());
-			SmartDashboard.putData("PlayRecording", new PlayRecordingCommand());
 //			SmartDashboard.putNumber("Vision Set", 0.);
 //			SmartDashboard.putData("Vision Save To Hue Lo", new Vision.SaveToPref(Vision.PREF_HUE_LO));
 //			SmartDashboard.putData("Vision Save To Hue Hi", new Vision.SaveToPref(Vision.PREF_HUE_HI));
