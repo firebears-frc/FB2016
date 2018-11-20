@@ -19,7 +19,20 @@
             "version": "5.9.2"
         }
     ],
-    "jniDependencies": [],
+    "jniDependencies": [
+        {
+            "groupId": "com.ctre.frcbeta.phoenix",
+            "artifactId": "cci",
+            "version": "5.9.2",
+            "skipOnUnknownClassifier": false,
+            "isJar": false,
+            "validClassifiers": [
+                "linuxathena",
+                "windowsx86-64",
+                "linuxx86-64"
+            ]
+        }
+    ],
     "cppDependencies": [
         {
             "groupId": "com.ctre.frcbeta.phoenix",
