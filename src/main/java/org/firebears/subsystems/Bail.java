@@ -17,7 +17,7 @@ import org.firebears.RobotMap;
 import org.firebears.util.SoftFuse;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -82,7 +82,7 @@ public class Bail extends PIDSubsystem {
 		setInputRange(-100., 100.);
 	}
 
-	private final CANTalon bail = RobotMap.bail;
+	private final WPI_TalonSRX bail = RobotMap.bail;
 	private final AnalogInput pot = RobotMap.bailPos;
 
 	public void initDefaultCommand() {

@@ -21,9 +21,8 @@ import org.firebears.subsystems.Bail;
 import org.firebears.subsystems.Lights;
 import org.firebears.subsystems.Shooter;
 import org.firebears.subsystems.Vision;
-
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.AnalogInput;
-import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -33,6 +32,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -203,11 +203,11 @@ public class Robot extends IterativeRobot {
 
 			if (RobotMap.DEBUG) {
 
-				CANTalon talon2 = RobotMap.chassisFrontLeft;
+				WPI_TalonSRX talon2 = RobotMap.chassisFrontLeft;
 				SmartDashboard.putNumber("encoderLeft dist", talon2.getEncPosition());
 				SmartDashboard.putNumber("encoderLeft rate", talon2.getEncVelocity());
 
-				CANTalon talon4 = RobotMap.chassisFrontRight;
+				WPI_TalonSRX talon4 = RobotMap.chassisFrontRight;
 				SmartDashboard.putNumber("encoderRight dis", talon4.getEncPosition());
 				SmartDashboard.putNumber("encoderRight rate", talon4.getEncVelocity());
 				
@@ -221,7 +221,7 @@ public class Robot extends IterativeRobot {
 //				SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
 
 				SmartDashboard.putNumber("Chassis distance", Robot.chassis.getDistance()); 
-				SmartDashboard.putNumber("Chassis encoder", RobotMap.chassisFrontLeft.getEncPosition());
+				SmartDashboard.putNumber("Chassis encoder", RobotMap.chassisFrontLeft.getSelectedSensorPosition(RobotMap.PID_IDX););
 				
 				if (RobotMap.navXBoard != null) {
 					SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());

@@ -2,7 +2,7 @@ package org.firebears.util;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive;
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SoftFuse {
@@ -10,7 +10,7 @@ public class SoftFuse {
 	    private double m_fuseAmps;
 	    private double m_holdOffLim;//sec
 	    private double m_durationLim;//sec
-	    private CANTalon m_motor;
+	    private WPI_TalonSRX m_motor;
 	    private double m_setPointMultiplier = 1;
 	    private Timer holdOff = new Timer();
 	    private Timer duration = new Timer();
@@ -25,7 +25,7 @@ public class SoftFuse {
 		m_durationLim = durationLim;	
 	}
 	//Use this fuse constructor for single motor position PID loops
-	public SoftFuse(CANTalon motor,double Amps,double holdOffLim,double durationLim )
+	public SoftFuse(WPI_TalonSRX motor,double Amps,double holdOffLim,double durationLim )
 	{
 		m_fuseAmps = Amps;
 		m_holdOffLim = holdOffLim;

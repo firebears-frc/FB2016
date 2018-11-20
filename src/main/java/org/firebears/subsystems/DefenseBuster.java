@@ -17,7 +17,7 @@ import org.firebears.commands.BallGetterMotorsCommand;
 import org.firebears.util.SoftFuse;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -62,7 +62,7 @@ public class DefenseBuster extends PIDSubsystem {
 		LiveWindow.addActuator("DefenseBuster", "PIDSubsystem Controller", getPIDController());
 	}
 
-	private final CANTalon angleMotor = RobotMap.defenseBusterAngleMotor;
+	private final WPI_TalonSRX angleMotor = RobotMap.defenseBusterAngleMotor;
 	private final AnalogInput pot = RobotMap.defenseBusterAnalogInput;
 
 	public void initDefaultCommand() {

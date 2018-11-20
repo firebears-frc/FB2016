@@ -15,11 +15,12 @@ import org.firebears.Robot;
 import org.firebears.RobotMap;
 import org.firebears.commands.*;
 import org.firebears.util.*;
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 /**
  *
@@ -29,10 +30,10 @@ public class Chassis extends Subsystem {
 	/** Encoder ticks per inch. */
 	public static final double TICKS_PER_INCH = 69.5;
 
-    public final CANTalon frontLeft = RobotMap.chassisFrontLeft;
-    public final CANTalon frontRight = RobotMap.chassisFrontRight;
-    public final CANTalon backLeft = RobotMap.chassisBackLeft;
-    public final CANTalon backRight = RobotMap.chassisBackRight;
+    public final WPI_TalonSRX frontLeft = RobotMap.chassisFrontLeft;
+    public final WPI_TalonSRX frontRight = RobotMap.chassisFrontRight;
+    public final WPI_TalonSRX backLeft = RobotMap.chassisBackLeft;
+    public final WPI_TalonSRX backRight = RobotMap.chassisBackRight;
     private final RobotDrive robotDrive = RobotMap.chassisRobotDrive;
     private final SoftFuse talonFuse = new SoftFuse(90,1,2);//Amp limit, holdOff time, duration time
 
@@ -42,10 +43,10 @@ public class Chassis extends Subsystem {
     // here. Call these from Commands.
 
     public void setBrakeMode(boolean brakeMode) {
-		Robot.chassis.backLeft.enableBrakeMode(brakeMode);
-		Robot.chassis.backRight.enableBrakeMode(brakeMode);
-		Robot.chassis.frontLeft.enableBrakeMode(brakeMode);
-		Robot.chassis.frontRight.enableBrakeMode(brakeMode);
+		Robot.chassis.backLeft.setNeutralMode(brakeMode ? NeutralMode.Brake : NeutralMode.Coast);
+		Robot.chassis.backRight.setNeutralMode(brakeMode ? NeutralMode.Brake : NeutralMode.Coast);
+		Robot.chassis.frontLeft.setNeutralMode(brakeMode ? NeutralMode.Brake : NeutralMode.Coast);
+		Robot.chassis.frontRight.setNeutralMode(brakeMode ? NeutralMode.Brake : NeutralMode.Coast);
     }
 
     public void drive(double rotateValue, double moveValue){

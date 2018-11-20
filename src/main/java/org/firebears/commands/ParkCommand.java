@@ -4,6 +4,7 @@ import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 /**
  *
@@ -13,7 +14,7 @@ public class ParkCommand extends CommandGroup {
 	class BreakCommand extends Command {
 		@Override
 		protected void initialize() {
-			Robot.chassis.setBrakeMode(true);
+			Robot.chassis.setNeutralMode(NeutralMode.Brake);
 		}
 
 		@Override
