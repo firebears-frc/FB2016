@@ -14,7 +14,7 @@ public class ParkCommand extends CommandGroup {
 	class BreakCommand extends Command {
 		@Override
 		protected void initialize() {
-			Robot.chassis.setNeutralMode(NeutralMode.Brake);
+			Robot.chassis.setBrakeMode(true);
 		}
 
 		@Override

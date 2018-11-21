@@ -2,11 +2,12 @@ package org.firebears.subsystems;
 
 import org.firebears.RobotMap;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.networktables.NetworkTablesJNI;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -21,15 +22,15 @@ public class Vision extends Subsystem {
 	final static public double DIST_TOLERANCE = 2;
 	final static public double TARGET_DISTANCE = -65.0;
 	
-	final static String NT_DISTANCE = "vision/distance";
-	final static String NT_ANGLE = "vision/angle";
-	final static String NT_FPS = "vision/fps";
-	final static String NT_HUE_LO = "vision/hue.lo";
-	final static String NT_HUE_HI = "vision/hue.hi";
-	final static String NT_SAT_LO = "vision/sat.lo";
-	final static String NT_SAT_HI = "vision/sat.hi";
-	final static String NT_VAL_LO = "vision/val.lo";
-	final static String NT_VAL_HI = "vision/val.hi";
+	final static String NT_DISTANCE = "distance";
+	final static String NT_ANGLE = "angle";
+	final static String NT_FPS = "fps";
+	final static String NT_HUE_LO = "hue.lo";
+	final static String NT_HUE_HI = "hue.hi";
+	final static String NT_SAT_LO = "sat.lo";
+	final static String NT_SAT_HI = "sat.hi";
+	final static String NT_VAL_LO = "val.lo";
+	final static String NT_VAL_HI = "val.hi";
 
 	public final static String PREF_DIST_MULTIPLIER = "vision.dist_multiplier";
 	public final static String PREF_ANGLE_MULTIPLIER = "vision.angle_multiplier";
@@ -56,6 +57,8 @@ public class Vision extends Subsystem {
 	public double which_defense = 0;
 
 	Relay lightRing;
+
+	NetworkTable networkTable = null;
 
 	@Override
 	protected void initDefaultCommand() {
@@ -88,17 +91,19 @@ public class Vision extends Subsystem {
 		readSettingsFromPreferences();
 		lightRing = new Relay(0);
 		lightRing.set(Relay.Value.kForward);
+		networkTable = NetworkTableInstance.getDefault().getTable("vision");
 	}
 
 	public double getAngle() {
-		double offs = (NetworkTablesJNI.getDouble(NT_ANGLE, 0) + 30);
+		
+		double offs = (networkTable.getEntry(NT_ANGLE).getDouble(0) + 30);
 		double getting = ANGLE_MULTIPLIER * offs;
 		movingAvg = (movingAvg + getting) / 2.;
 		return movingAvg;
 	}
 
 	public double getRemainingDistance() {
-		return NetworkTablesJNI.getDouble(NT_DISTANCE, 0);
+		return networkTable.getEntry(NT_DISTANCE).getDouble(0);
 	}
 
 	public boolean isOnTarget() {
@@ -117,7 +122,7 @@ public class Vision extends Subsystem {
 
 		@Override
 		protected void initialize() {
-			double setTo = SmartDashboard.getNumber("Vision Set");
+			double setTo = SmartDashboard.getNumber("Vision Set", 0);
 
 			// Smart Dashboard -> Preferences
 			saveCalibration(whatpref, setTo);

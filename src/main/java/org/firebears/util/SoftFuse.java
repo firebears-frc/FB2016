@@ -2,8 +2,11 @@ package org.firebears.util;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.firebears.RobotMap;
 
 public class SoftFuse {
 	 	private int m_state = 0;
@@ -115,7 +118,7 @@ public class SoftFuse {
 		    		holdOff.reset();
 		    		if(Amps > m_fuseAmps)
 			    	{	    			    		
-			    		m_motor.disableControl();
+			    		m_motor.disable();
 			    		duration.start();
 			    		m_state = 2;
 			    	}
@@ -130,7 +133,7 @@ public class SoftFuse {
 	        	{
 	        		duration.stop();
 		    		duration.reset();
-		    		m_motor.enableControl();
+		    		m_motor.set(ControlMode.PercentOutput, RobotMap.PID_IDX);
 		    		m_state = 0;
 	    	    }   	    	
 	        

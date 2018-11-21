@@ -204,12 +204,12 @@ public class Robot extends IterativeRobot {
 			if (RobotMap.DEBUG) {
 
 				WPI_TalonSRX talon2 = RobotMap.chassisFrontLeft;
-				SmartDashboard.putNumber("encoderLeft dist", talon2.getEncPosition());
-				SmartDashboard.putNumber("encoderLeft rate", talon2.getEncVelocity());
+				SmartDashboard.putNumber("encoderLeft dist", talon2.getSelectedSensorPosition(RobotMap.PID_IDX));
+				SmartDashboard.putNumber("encoderLeft rate", talon2.getSelectedSensorVelocity(RobotMap.PID_IDX) );
 
 				WPI_TalonSRX talon4 = RobotMap.chassisFrontRight;
-				SmartDashboard.putNumber("encoderRight dis", talon4.getEncPosition());
-				SmartDashboard.putNumber("encoderRight rate", talon4.getEncVelocity());
+				SmartDashboard.putNumber("encoderRight dis", talon4.getSelectedSensorPosition(RobotMap.PID_IDX));
+				SmartDashboard.putNumber("encoderRight rate", talon4.getSelectedSensorVelocity(RobotMap.PID_IDX) );
 				
 				SmartDashboard.putBoolean("Ball Acquired", Robot.shooter.hasBall());
 //				SmartDashboard.putBoolean("Ball Acquired", lazorDown);
@@ -221,7 +221,7 @@ public class Robot extends IterativeRobot {
 //				SmartDashboard.putNumber("encoderRight rate: ", RobotMap.encoderRight.getRate());
 
 				SmartDashboard.putNumber("Chassis distance", Robot.chassis.getDistance()); 
-				SmartDashboard.putNumber("Chassis encoder", RobotMap.chassisFrontLeft.getSelectedSensorPosition(RobotMap.PID_IDX););
+				SmartDashboard.putNumber("Chassis encoder", RobotMap.chassisFrontLeft.getSelectedSensorPosition(RobotMap.PID_IDX));
 				
 				if (RobotMap.navXBoard != null) {
 					SmartDashboard.putNumber("navX yaw", RobotMap.navXBoard.getAngle());

@@ -25,7 +25,7 @@ public class SetPreferences extends Command {
 	}
 
 	protected double getValue() {
-		return SmartDashboard.getNumber(SET_VAR);
+		return SmartDashboard.getNumber(SET_VAR, 0);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
