@@ -56,8 +56,8 @@ public class AdjustRotation extends PIDCommand {
 
 	@Override
 	protected void initialize() {
+		getPIDController().setInputRange(0, 359);
 		getPIDController().setContinuous(true);
-    	getPIDController().setInputRange(0, 359);
     	getPIDController().setAbsoluteTolerance(2);
     	getPIDController().enable();
 		setSetpoint(bound(RobotMap.rotation + offset));

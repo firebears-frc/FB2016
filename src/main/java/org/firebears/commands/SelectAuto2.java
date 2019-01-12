@@ -17,7 +17,7 @@ public class SelectAuto2 extends Command {
 	
 	int x = 0;
 	Command[] commandlist = {
-			new PrepareVisionCommand(1), //vision is no beuno atm so is disabled
+			new PrepareVisionCommand(1), //vision is no bueno atm so is disabled
 			new PrepareVisionCommand(2),
 			new PrepareVisionCommand(3),
 			new PrepareVisionCommand(4),
