@@ -52,7 +52,7 @@ public class ShooterFireCommand extends Command {
     }
 
     protected boolean isFinished() {
-    	return Robot.bail.onTarget() || isTimedOut();
+    	return true;
     }
 
     protected void end() {

@@ -17,14 +17,16 @@ import org.firebears.RobotMap;
 import org.firebears.util.SoftFuse;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Servo;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
  */
-public class Bail extends PIDSubsystem {
+public class Bail extends Subsystem {
 
 	/** Minimum value that the setpoint may take, measured in volts. */
 	public double MIN_VALUE;
@@ -40,17 +42,15 @@ public class Bail extends PIDSubsystem {
 
 	public double PARK_VALUE;	
 
-	/** Maximum speed that the motor can turn, in the range 0.0 to 1.0. */
-	public double MAX_SPEED;
+	private Servo bailServo;
 	
-	SoftFuse softFuse;
-	long updatetimer = 1000;
+	
+	
 	
 	public Bail() {
-//		super(0.5, 0, 0);
-		super(1.5, 0.00, 0.0);
+//		
 
-		MAX_SPEED = 1.;
+		
 //<<<<<<< HEAD
 		MIN_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_MIN_VALUE,1.5);  // Pot value to reset bail onto the floor
 		PRE_SHOOT_VALUE = getPreferencesDouble(RobotMap.PREF_BAIL_PRESHOOT_VALUE,1.0);  // Pot value to hold ball before shooting
@@ -67,73 +67,46 @@ public class Bail extends PIDSubsystem {
 //		MIN_VALUE = 3.00; // Pot value to reset bail onto the floor
 //		MAX_VALUE = 2.25; // Pot value to fire the ball
 //>>>>>>> branch 'master' of https://github.com/firebears-frc/FB2016.git
-		
-		softFuse = new SoftFuse(bail, 40, 1, 2);
-
-		getPIDController().setInputRange(MAX_SPEED, MIN_VALUE);
-		getPIDController().setAbsoluteTolerance(0.01);
-		getPIDController().setToleranceBuffer(8);
-		setSetpoint(PARK_VALUE);
-		getPIDController().enable();
-		softFuse.positionFuse(bail.getOutputCurrent());
-
-		LiveWindow.addActuator("bail", "PIDSubsystem Controller", getPIDController());
-		
-		setInputRange(-100., 100.);
+		bailServo = RobotMap.shooterServo;
+		addChild("Servo", bailServo);
 	}
 
-	private final WPI_TalonSRX bail = RobotMap.bail;
-	private final AnalogInput pot = RobotMap.bailPos;
+	
 
 	public void initDefaultCommand() {
 	}
 
-	@Override
-	protected double returnPIDInput() {
-		return pot.getAverageVoltage();
-	}
 
-	@Override
-	protected void usePIDOutput(double output) {
-		output = Math.max((MAX_SPEED * -1), Math.min(output, MAX_SPEED));
-		bail.set(-2 * output);
-		if(System.currentTimeMillis() > updatetimer) {
-			updatetimer = System.currentTimeMillis() + 1000;
-			System.out.println("PID setpoint = " + getSetpoint() + "input = " + returnPIDInput());
-		}
-	}
+
+	
 
 	/** Lower the bail so we can pick up the ball. */
 	public void reset(){
 		System.out.println("Bail.Reset");
-		setSetpoint(MIN_VALUE);
-		softFuse.positionFuse(bail.getOutputCurrent());
+		//setSetpoint(MIN_VALUE);
+		
 	}
 	
 	/** Raise the bail slightly to hold onto the ball. */
 	public void hold(){
 		System.out.println("Bail.hold");
-		setSetpoint(PARK_VALUE);
-		softFuse.positionFuse(bail.getOutputCurrent());
+		//setSetpoint(PARK_VALUE);
+		 
 	}
 	
 	/** Lower ball just before shooting */
 	public void preShoot(){
 		System.out.println("Bail.preshoot");
-		setSetpoint(PRE_SHOOT_VALUE);//PRE_SHOOT_VALUE
-		softFuse.positionFuse(bail.getOutputCurrent());
+		//setSetpoint(PRE_SHOOT_VALUE);//PRE_SHOOT_VALUE
+		 
 	}
 	
 	/** Raise the bail to fire the shooter. */
 	public void fire(){
-		setSetpoint(MAX_VALUE);//MAX_VALUE
-		System.out.println("Bail.fire/max: " + MAX_VALUE + " " + getSetpoint());
-		softFuse.positionFuse(bail.getOutputCurrent());
+		//setSetpoint(MAX_VALUE);//MAX_VALUE
+		System.out.println("Bail.fire/max: " + MAX_VALUE);
+		 
 	}
 	
-	@Override
-	public boolean onTarget() {
-		return (returnPIDInput() - getPIDController().getSetpoint() < .05);
-	}
 
 }

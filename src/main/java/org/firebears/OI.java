@@ -239,7 +239,7 @@ public class OI {
 			SmartDashboard.putData("RotateCurve " + -90, new RotateCurveCommand(-90));
 			SmartDashboard.putData("RotateCurve " + 90, new RotateCurveCommand(90));
 			
-			SmartDashboard.putData("Bail@1", new BailSetpointCommand(.5));
+			
 			
 			SmartDashboard.putData("BatterCommand", new BatterCommand());
 			

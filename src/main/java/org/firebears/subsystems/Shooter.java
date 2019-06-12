@@ -92,26 +92,26 @@ public class Shooter extends PIDSubsystem {
 	}
 
 	public void servoFire() {
-//		shooterServo.set(SERVO_MAX);
-		Robot.bail.fire();
+		shooterServo.set(SERVO_MAX);
+		//Robot.bail.fire();
 		RobotMap.servoOn = true;
 	}
 	
 	public void servoHold() {
-//		shooterServo.set(.5);
-		Robot.bail.hold();
+		shooterServo.set(.5);
+		//Robot.bail.hold();
 		RobotMap.servoOn = true;
 	}
 
 	public void servoReset() {
-//		shooterServo.set(.3);
-		Robot.bail.reset();
+		shooterServo.set(.3);
+		//Robot.bail.reset();
 		RobotMap.servoOn = false;
 	}
 	
 	public void servoPreShoot() {
-//		shooterServo.set(.4);
-		Robot.bail.preShoot();
+		shooterServo.set(.4);
+		//Robot.bail.preShoot();
 		RobotMap.servoOn = false;
 	}
 

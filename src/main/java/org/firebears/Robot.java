@@ -17,7 +17,7 @@ import org.firebears.commands.defenses.MoatCommand;
 import org.firebears.subsystems.BallGetter;
 import org.firebears.subsystems.Chassis;
 import org.firebears.subsystems.DefenseBuster;
-import org.firebears.subsystems.Bail;
+//import org.firebears.subsystems.Bail;
 import org.firebears.subsystems.Lights;
 import org.firebears.subsystems.Shooter;
 import org.firebears.subsystems.Vision;
@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
 	public static Lights lights;
 	public static Vision vision;
 
-	public static Bail bail;
+	//public static Bail bail;
 
 	private SelectAuto2 selectAuto;
 	private final LcdOverLay lcdol = new LcdOverLay();
@@ -74,7 +74,7 @@ public class Robot extends IterativeRobot {
 		RobotMap.init();
 
 		// Initialize Subsystems
-		bail = new Bail();
+		//bail = new Bail();
 		chassis = new Chassis();
 		defenseBuster = new DefenseBuster();
 		ballGetter = new BallGetter();
@@ -111,7 +111,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void disabledInit() {
 //		selectAuto.initialize();
-		bail.hold();
+		//bail.hold();
 		lcdol.initialize();
 	}
 
@@ -137,7 +137,7 @@ public class Robot extends IterativeRobot {
 		}
 		Robot.ballGetter.park();
 		Robot.defenseBuster.park();
-		bail.hold();
+		//bail.hold();
 	}
 
 
@@ -156,7 +156,7 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		lights.teleopMode();
 		Robot.shooter.spinnerStop();
-		Robot.bail.hold();
+		//Robot.bail.hold();
 
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
