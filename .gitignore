@@ -8,3 +8,6 @@
 FRCUserProgram.jar
 sysProps.xml
 .DS_Store
+
+# IntelliJ
+.idea/
