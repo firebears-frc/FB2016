@@ -1,16 +1,17 @@
 # FB2016 / Steve
-Helpful git commands:
 
-git clone   // Clone a repository into a new directory
+## Helpful git commands:
 
-git branch  // Gets a list of all local branches
+**git clone**: *Clone a repository into a new directory*
 
-git branch -r   // Gets a list of all remote branches
+**git branch**: *Gets a list of all local branches*
 
-git branch "branch_name"    // Creates a new branch with a specified name
+**git branch -r**: *Gets a list of all remote branches*
 
-git checkout <branch_name>      // Goes to the specified branch
+**git branch _<branch_name>_**: *Creates a new branch with a specified name*
 
-git push    // Push changes to remote repository
+**git checkout _<branch_name>_**: *Goes to the specified branch*
 
-git pull    // Get changes from remote repository
+**git push**: *Push changes to remote repository*
+
+**git pull**: *Get changes from remote repository*
