@@ -28,15 +28,17 @@ public class Chassis extends SubsystemBase {
 
     public Chassis() {
         frontleft = new WPI_TalonSRX(2);
-
+        frontleft.setNeutralMode(NeutralMode.Brake);
         backleft = new WPI_TalonSRX(3);
+        backleft.setNeutralMode(NeutralMode.Brake);
 
         leftMotors = new MotorControllerGroup(frontleft, backleft);
         addChild("leftMotors", leftMotors);
 
         frontright = new WPI_TalonSRX(4);
-
+        frontright.setNeutralMode(NeutralMode.Brake);
         backright = new WPI_TalonSRX(5);
+        backright.setNeutralMode(NeutralMode.Brake);
 
         rightMotors = new MotorControllerGroup(frontright, backright);
         addChild("rightMotors", rightMotors);
