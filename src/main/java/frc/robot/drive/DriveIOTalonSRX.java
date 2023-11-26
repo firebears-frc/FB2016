@@ -1,39 +1,18 @@
-package frc.robot.subsystems;
-
-import java.util.function.Supplier;
-
-import org.littletonrobotics.junction.AutoLogOutput;
+package frc.robot.drive;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Chassis extends SubsystemBase {
-    private static final class Constants {
-        private static final int FRONT_LEFT_CAN_ID = 2;
-        private static final int REAR_LEFT_CAN_ID = 3;
-        private static final int FRONT_RIGHT_CAN_ID = 4;
-        private static final int REAR_RIGHT_CAN_ID = 5;
-
-        public static final int PEAK_CURRENT_LIMIT = 60;
-        public static final int PEAK_CURRENT_DURATION = 1000;
-        public static final int CONTINUOUS_CURRENT_LIMIT = 40;
-    }
-
+public class DriveIOTalonSRX implements DriveIO {
     private final WPI_TalonSRX frontLeft, rearLeft, frontRight, rearRight;
     private final MotorControllerGroup left, right;
-    private final DifferentialDrive drive;
 
-    @AutoLogOutput(key = "Chassis/Target")
-    private ChassisSpeeds targetSpeeds;
+    private double leftAppliedVolts, rightAppliedVolts;
 
-    public Chassis() {
+    public DriveIOTalonSRX() {
         frontLeft = new WPI_TalonSRX(Constants.FRONT_LEFT_CAN_ID);
         frontLeft.configFactoryDefault();
         frontLeft.setInverted(false);
@@ -68,7 +47,6 @@ public class Chassis extends SubsystemBase {
 
         left = new MotorControllerGroup(frontLeft, rearLeft);
         right = new MotorControllerGroup(frontRight, rearRight);
-        drive = new DifferentialDrive(left, right);
 
         // https://v5.docs.ctr-electronics.com/en/stable/ch18_CommonAPI.html#setting-status-frame-periods
         frontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
@@ -112,15 +90,24 @@ public class Chassis extends SubsystemBase {
         rearRight.setStatusFramePeriod(StatusFrameEnhanced.Status_14_Turn_PIDF1, 1000);
         rearRight.setStatusFramePeriod(StatusFrameEnhanced.Status_21_FeedbackIntegrated, 1000);
 
-        targetSpeeds = new ChassisSpeeds();
-    }
-
-    public Command defaultCommand(Supplier<ChassisSpeeds> supplier) {
-        return run(() -> targetSpeeds = supplier.get());
+        leftAppliedVolts = 0.0;
+        rightAppliedVolts = 0.0;
     }
 
     @Override
-    public void periodic() {
-        drive.arcadeDrive(targetSpeeds.vxMetersPerSecond, targetSpeeds.omegaRadiansPerSecond, false);
+    public void updateInputs(DriveIOInputs inputs) {
+        inputs.leftAppliedVolts = leftAppliedVolts;
+        inputs.leftCurrentAmps = new double[] { frontLeft.getStatorCurrent(), rearLeft.getStatorCurrent() };
+        inputs.rightAppliedVolts = rightAppliedVolts;
+        inputs.rightCurrentAmps = new double[] { frontRight.getStatorCurrent(), rearRight.getStatorCurrent() };
+    }
+
+    @Override
+    public void setVoltage(double leftVolts, double rightVolts) {
+        leftAppliedVolts = leftVolts;
+        rightAppliedVolts = rightVolts;
+
+        left.setVoltage(leftVolts);
+        right.setVoltage(rightVolts);
     }
 }
