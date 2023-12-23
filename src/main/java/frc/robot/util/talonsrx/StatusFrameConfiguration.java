@@ -32,7 +32,11 @@ public interface StatusFrameConfiguration {
 
     private static void apply(WPI_TalonSRX motor, Map<StatusFrameEnhanced, Integer> periods) {
         for (Map.Entry<StatusFrameEnhanced, Integer> entry : periods.entrySet()) {
-            motor.setStatusFramePeriod(entry.getKey(), entry.getValue());
+            Util.configureCheckAndVerify(
+                    setting -> motor.setStatusFramePeriod(entry.getKey(), setting),
+                    () -> motor.getStatusFramePeriod(entry.getKey()),
+                    entry.getValue(),
+                    entry.getKey().name());
         }
     }
 }
