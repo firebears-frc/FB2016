@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.talonsrx.CurrentLimitConfiguration;
 import frc.robot.util.talonsrx.StatusFrameConfiguration;
+import frc.robot.util.talonsrx.TalonSRXConfiguration;
 
 public class Chassis extends SubsystemBase {
     private static final class Constants {
@@ -21,11 +23,11 @@ public class Chassis extends SubsystemBase {
         private static final int FRONT_RIGHT_CAN_ID = 4;
         private static final int REAR_RIGHT_CAN_ID = 5;
 
-        public static final int PEAK_CURRENT_LIMIT = 60;
-        public static final int PEAK_CURRENT_DURATION = 1000;
-        public static final int CONTINUOUS_CURRENT_LIMIT = 40;
-
-        public static final StatusFrameConfiguration STATUS_CONFIG = StatusFrameConfiguration.normal();
+        public static final TalonSRXConfiguration CONFIG = new TalonSRXConfiguration(
+                false,
+                NeutralMode.Coast,
+                CurrentLimitConfiguration.complex(40, 60, 1000),
+                StatusFrameConfiguration.normal());
     }
 
     private final WPI_TalonSRX frontLeft, rearLeft, frontRight, rearRight;
@@ -37,45 +39,18 @@ public class Chassis extends SubsystemBase {
 
     public Chassis() {
         frontLeft = new WPI_TalonSRX(Constants.FRONT_LEFT_CAN_ID);
-        frontLeft.configFactoryDefault();
-        frontLeft.setInverted(false);
-        frontLeft.setNeutralMode(NeutralMode.Coast);
-        frontLeft.configPeakCurrentLimit(Constants.PEAK_CURRENT_LIMIT);
-        frontLeft.configPeakCurrentDuration(Constants.PEAK_CURRENT_DURATION);
-        frontLeft.configContinuousCurrentLimit(Constants.CONTINUOUS_CURRENT_LIMIT);
-
         rearLeft = new WPI_TalonSRX(Constants.REAR_LEFT_CAN_ID);
-        rearLeft.configFactoryDefault();
-        rearLeft.setInverted(false);
-        rearLeft.setNeutralMode(NeutralMode.Coast);
-        rearLeft.configPeakCurrentLimit(Constants.PEAK_CURRENT_LIMIT);
-        rearLeft.configPeakCurrentDuration(Constants.PEAK_CURRENT_DURATION);
-        rearLeft.configContinuousCurrentLimit(Constants.CONTINUOUS_CURRENT_LIMIT);
-
         frontRight = new WPI_TalonSRX(Constants.FRONT_RIGHT_CAN_ID);
-        frontRight.configFactoryDefault();
-        frontRight.setInverted(false);
-        frontRight.setNeutralMode(NeutralMode.Coast);
-        frontRight.configPeakCurrentLimit(Constants.PEAK_CURRENT_LIMIT);
-        frontRight.configPeakCurrentDuration(Constants.PEAK_CURRENT_DURATION);
-        frontRight.configContinuousCurrentLimit(Constants.CONTINUOUS_CURRENT_LIMIT);
-
         rearRight = new WPI_TalonSRX(Constants.REAR_RIGHT_CAN_ID);
-        rearRight.configFactoryDefault();
-        rearRight.setInverted(false);
-        rearRight.setNeutralMode(NeutralMode.Coast);
-        rearRight.configPeakCurrentLimit(Constants.PEAK_CURRENT_LIMIT);
-        rearRight.configPeakCurrentDuration(Constants.PEAK_CURRENT_DURATION);
-        rearRight.configContinuousCurrentLimit(Constants.CONTINUOUS_CURRENT_LIMIT);
+
+        Constants.CONFIG.apply(frontLeft);
+        Constants.CONFIG.apply(rearLeft);
+        Constants.CONFIG.apply(frontRight);
+        Constants.CONFIG.apply(rearRight);
 
         left = new MotorControllerGroup(frontLeft, rearLeft);
         right = new MotorControllerGroup(frontRight, rearRight);
         drive = new DifferentialDrive(left, right);
-
-        Constants.STATUS_CONFIG.apply(frontLeft);
-        Constants.STATUS_CONFIG.apply(rearLeft);
-        Constants.STATUS_CONFIG.apply(frontRight);
-        Constants.STATUS_CONFIG.apply(rearRight);
 
         targetSpeeds = new ChassisSpeeds();
     }
