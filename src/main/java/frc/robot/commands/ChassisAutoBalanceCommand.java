@@ -6,10 +6,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Chassis;
 
-public class ChassisAutoBalanceCommand extends CommandBase {
+public class ChassisAutoBalanceCommand extends Command {
   Chassis m_chassis;
   Timer timer;
   double lastPitch;

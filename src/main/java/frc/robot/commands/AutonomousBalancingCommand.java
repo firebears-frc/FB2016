@@ -1,10 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.Chassis;
 
-public class AutonomousBalancingCommand extends CommandBase {
+public class AutonomousBalancingCommand extends Command {
   private final Chassis m_chassis;
 
   public AutonomousBalancingCommand(Chassis subsystem) {
