@@ -16,15 +16,12 @@ package frc.robot.subsystems.drive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import org.littletonrobotics.junction.AutoLogOutput;
+import java.util.function.DoubleSupplier;
 import org.littletonrobotics.junction.Logger;
 
 public class Drive extends SubsystemBase {
   private final DriveIO io;
   private final DriveIOInputsAutoLogged inputs = new DriveIOInputsAutoLogged();
-
-  @AutoLogOutput(key = "Drive/IsEnabled")
-  private boolean isEnabled = true;
 
   /** Creates a new Drive. */
   public Drive(DriveIO io) {
@@ -38,28 +35,26 @@ public class Drive extends SubsystemBase {
   }
 
   /** Run open loop at the specified voltage. */
-  public void driveVolts(double leftVolts, double rightVolts) {
+  private void driveVolts(double leftVolts, double rightVolts) {
     io.setVoltage(leftVolts, rightVolts);
   }
 
   /** Run open loop based on stick positions. */
-  public void driveArcade(double xSpeed, double zRotation) {
-    if (!isEnabled) return;
-
+  private void driveArcade(double xSpeed, double zRotation) {
     var speeds = DifferentialDrive.arcadeDriveIK(xSpeed, zRotation, true);
-    io.setVoltage(speeds.left * 12.0, speeds.right * 12.0);
+    driveVolts(speeds.left * 12.0, speeds.right * 12.0);
   }
 
   /** Stops the drive. */
-  public void stop() {
+  private void driveStop() {
     io.setVoltage(0.0, 0.0);
   }
 
-  public Command toggleDisabled() {
-    return runOnce(
-        () -> {
-          isEnabled = !isEnabled;
-          if (!isEnabled) stop();
-        });
+  public Command arcade(DoubleSupplier xSpeed, DoubleSupplier zRotation) {
+    return run(() -> driveArcade(xSpeed.getAsDouble(), zRotation.getAsDouble()));
+  }
+
+  public Command stop() {
+    return run(this::driveStop);
   }
 }
