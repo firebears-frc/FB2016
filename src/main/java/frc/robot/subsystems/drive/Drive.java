@@ -56,6 +56,9 @@ public class Drive extends SubsystemBase {
   private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(KS, KV);
   private final SysIdRoutine sysId;
 
+  @AutoLogOutput(key = "Drive/IsEnabled")
+  private boolean isEnabled = true;
+
   /** Creates a new Drive. */
   public Drive(DriveIO io) {
     this.io = io;
@@ -116,6 +119,8 @@ public class Drive extends SubsystemBase {
 
   /** Run closed loop at the specified voltage. */
   public void driveVelocity(double leftMetersPerSec, double rightMetersPerSec) {
+    if (!isEnabled) return;
+
     Logger.recordOutput("Drive/LeftVelocitySetpointMetersPerSec", leftMetersPerSec);
     Logger.recordOutput("Drive/RightVelocitySetpointMetersPerSec", rightMetersPerSec);
     double leftRadPerSec = leftMetersPerSec / WHEEL_RADIUS;
@@ -129,6 +134,8 @@ public class Drive extends SubsystemBase {
 
   /** Run open loop based on stick positions. */
   public void driveArcade(double xSpeed, double zRotation) {
+    if (!isEnabled) return;
+
     var speeds = DifferentialDrive.arcadeDriveIK(xSpeed, zRotation, true);
     io.setVoltage(speeds.left * 12.0, speeds.right * 12.0);
   }
@@ -186,5 +193,13 @@ public class Drive extends SubsystemBase {
   /** Returns the average velocity in radians/second. */
   public double getCharacterizationVelocity() {
     return (inputs.leftVelocityRadPerSec + inputs.rightVelocityRadPerSec) / 2.0;
+  }
+
+  public Command toggleDisabled() {
+    return runOnce(
+        () -> {
+          isEnabled = !isEnabled;
+          if (!isEnabled) stop();
+        });
   }
 }
