@@ -66,7 +66,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     controller
         .b()
-        .whileTrue(drive.arcade(() -> -controller.getLeftY(), controller::getLeftX))
+        .whileTrue(drive.arcade(() -> -controller.getLeftY(), () -> -controller.getLeftX()))
         .onFalse(drive.stop());
   }
 }

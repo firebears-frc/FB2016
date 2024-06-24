@@ -14,12 +14,16 @@ public class DriveIOTalonSRXNavX implements DriveIO {
   public DriveIOTalonSRXNavX() {
     frontleft = new WPI_TalonSRX(2);
     frontleft.setNeutralMode(NeutralMode.Brake);
+    frontleft.setInverted(false);
     backleft = new WPI_TalonSRX(3);
     backleft.setNeutralMode(NeutralMode.Brake);
+    backleft.setInverted(false);
     frontright = new WPI_TalonSRX(4);
     frontright.setNeutralMode(NeutralMode.Brake);
+    frontright.setInverted(true);
     backright = new WPI_TalonSRX(5);
     backright.setNeutralMode(NeutralMode.Brake);
+    backright.setInverted(true);
 
     try {
       navx = new AHRS(I2C.Port.kMXP);
