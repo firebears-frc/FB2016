@@ -14,8 +14,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.DriveIO;
 import frc.robot.subsystems.drive.DriveIOSim;
@@ -33,6 +37,9 @@ public class RobotContainer {
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
+
+  // Power distribution
+  private final PowerDistribution powerDistribution = new PowerDistribution();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -64,9 +71,38 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    // Only drive while B button is pressed
     controller
         .b()
         .whileTrue(drive.arcade(() -> -controller.getLeftY(), () -> -controller.getLeftX()))
         .onFalse(drive.stop());
+
+    // Strong longer rumble for low RIO voltage
+    new Trigger(() -> RobotController.getBatteryVoltage() < RobotController.getBrownoutVoltage())
+        .whileTrue(
+            Commands.repeatingSequence(
+                Commands.runOnce(
+                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 1.0)),
+                Commands.waitSeconds(0.5),
+                Commands.runOnce(
+                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)),
+                Commands.waitSeconds(0.5)));
+
+    // Weaker double rumble for low PDP voltage
+    new Trigger(() -> powerDistribution.getVoltage() < RobotController.getBrownoutVoltage())
+        .whileTrue(
+            Commands.repeatingSequence(
+                Commands.runOnce(
+                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.5)),
+                Commands.waitSeconds(0.125),
+                Commands.runOnce(
+                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)),
+                Commands.waitSeconds(0.25),
+                Commands.runOnce(
+                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.5)),
+                Commands.waitSeconds(0.125),
+                Commands.runOnce(
+                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)),
+                Commands.waitSeconds(0.25)));
   }
 }
