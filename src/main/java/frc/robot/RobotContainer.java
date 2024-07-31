@@ -24,6 +24,7 @@ import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.DriveIO;
 import frc.robot.subsystems.drive.DriveIOSim;
 import frc.robot.subsystems.drive.DriveIOTalonSRXNavX;
+import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -40,6 +41,12 @@ public class RobotContainer {
 
   // Power distribution
   private final PowerDistribution powerDistribution = new PowerDistribution();
+
+  // Dashboard inputs
+  private final LoggedDashboardNumber rioThreshold =
+      new LoggedDashboardNumber("RIO Warning Voltage");
+  private final LoggedDashboardNumber pdpThreshold =
+      new LoggedDashboardNumber("PDP Warning Voltage");
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -76,11 +83,14 @@ public class RobotContainer {
         .b()
         .whileTrue(drive.arcade(() -> -controller.getLeftY(), () -> -controller.getLeftX()))
         .onFalse(drive.stop());
+    controller.a().onTrue(Commands.runOnce(() -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 1.0))).onFalse(Commands.runOnce(
+        () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)));
 
     // Strong longer rumble for low RIO voltage
-    new Trigger(() -> RobotController.getBatteryVoltage() < RobotController.getBrownoutVoltage())
+    new Trigger(() -> RobotController.getBatteryVoltage() < rioThreshold.get())
         .whileTrue(
             Commands.repeatingSequence(
+                Commands.print("RIO!"),
                 Commands.runOnce(
                     () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 1.0)),
                 Commands.waitSeconds(0.5),
@@ -89,9 +99,10 @@ public class RobotContainer {
                 Commands.waitSeconds(0.5)));
 
     // Weaker double rumble for low PDP voltage
-    new Trigger(() -> powerDistribution.getVoltage() < RobotController.getBrownoutVoltage())
+    new Trigger(() -> powerDistribution.getVoltage() < pdpThreshold.get())
         .whileTrue(
             Commands.repeatingSequence(
+                Commands.print("PDP!"),
                 Commands.runOnce(
                     () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.5)),
                 Commands.waitSeconds(0.125),
