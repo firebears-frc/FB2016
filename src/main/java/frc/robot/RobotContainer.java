@@ -83,37 +83,39 @@ public class RobotContainer {
         .b()
         .whileTrue(drive.arcade(() -> -controller.getLeftY(), () -> -controller.getLeftX()))
         .onFalse(drive.stop());
-    controller.a().onTrue(Commands.runOnce(() -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 1.0))).onFalse(Commands.runOnce(
-        () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)));
 
-    // Strong longer rumble for low RIO voltage
+    // Longer rumble for low RIO voltage
     new Trigger(() -> RobotController.getBatteryVoltage() < rioThreshold.get())
         .whileTrue(
             Commands.repeatingSequence(
-                Commands.print("RIO!"),
                 Commands.runOnce(
                     () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 1.0)),
                 Commands.waitSeconds(0.5),
                 Commands.runOnce(
                     () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)),
-                Commands.waitSeconds(0.5)));
+                Commands.waitSeconds(0.5)))
+        .onFalse(
+            Commands.runOnce(
+                () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)));
 
-    // Weaker double rumble for low PDP voltage
+    // Double rumble for low PDP voltage
     new Trigger(() -> powerDistribution.getVoltage() < pdpThreshold.get())
         .whileTrue(
             Commands.repeatingSequence(
-                Commands.print("PDP!"),
                 Commands.runOnce(
-                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.5)),
+                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 1.0)),
                 Commands.waitSeconds(0.125),
                 Commands.runOnce(
                     () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)),
                 Commands.waitSeconds(0.25),
                 Commands.runOnce(
-                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.5)),
+                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 1.0)),
                 Commands.waitSeconds(0.125),
                 Commands.runOnce(
                     () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)),
-                Commands.waitSeconds(0.25)));
+                Commands.waitSeconds(0.5)))
+        .onFalse(
+            Commands.runOnce(
+                () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)));
   }
 }
