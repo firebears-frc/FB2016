@@ -2,10 +2,10 @@ package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.kauailabs.navx.frc.AHRS;
+import com.studica.frc.AHRS;
+import com.studica.frc.AHRS.NavXComType;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.I2C;
 
 public class DriveIOTalonSRXNavX implements DriveIO {
   private final WPI_TalonSRX frontleft, backleft, frontright, backright;
@@ -26,7 +26,7 @@ public class DriveIOTalonSRXNavX implements DriveIO {
     backright.setInverted(true);
 
     try {
-      navx = new AHRS(I2C.Port.kMXP);
+      navx = new AHRS(NavXComType.kMXP_SPI);
     } catch (RuntimeException ex) {
       DriverStation.reportError(ex.getMessage(), true);
     }
