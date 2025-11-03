@@ -24,7 +24,7 @@ import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.DriveIO;
 import frc.robot.subsystems.drive.DriveIOSim;
 import frc.robot.subsystems.drive.DriveIOTalonSRXNavX;
-import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
+import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -43,10 +43,10 @@ public class RobotContainer {
   private final PowerDistribution powerDistribution = new PowerDistribution();
 
   // Dashboard inputs
-  private final LoggedDashboardNumber rioThreshold =
-      new LoggedDashboardNumber("RIO Warning Voltage");
-  private final LoggedDashboardNumber pdpThreshold =
-      new LoggedDashboardNumber("PDP Warning Voltage");
+  private final LoggedNetworkNumber rioThreshold =
+      new LoggedNetworkNumber("RIO Warning Voltage", 9.0);
+  private final LoggedNetworkNumber pdpThreshold =
+      new LoggedNetworkNumber("PDP Warning Voltage", 7.0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
