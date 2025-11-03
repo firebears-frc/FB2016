@@ -14,8 +14,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.PowerDistribution;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -24,7 +22,9 @@ import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.DriveIO;
 import frc.robot.subsystems.drive.DriveIOSim;
 import frc.robot.subsystems.drive.DriveIOTalonSRXNavX;
-import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
+import frc.robot.subsystems.power.Power;
+import frc.robot.subsystems.power.PowerIO;
+import frc.robot.subsystems.power.PowerIOPowerDistribution;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,18 +35,10 @@ import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
+  private final Power power;
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
-
-  // Power distribution
-  private final PowerDistribution powerDistribution = new PowerDistribution();
-
-  // Dashboard inputs
-  private final LoggedNetworkNumber rioThreshold =
-      new LoggedNetworkNumber("RIO Warning Voltage", 9.0);
-  private final LoggedNetworkNumber pdpThreshold =
-      new LoggedNetworkNumber("PDP Warning Voltage", 7.0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -54,16 +46,19 @@ public class RobotContainer {
       case REAL:
         // Real robot, instantiate hardware IO implementations
         drive = new Drive(new DriveIOTalonSRXNavX());
+        power = new Power(new PowerIOPowerDistribution());
         break;
 
       case SIM:
         // Sim robot, instantiate physics sim IO implementations
         drive = new Drive(new DriveIOSim());
+        power = new Power(new PowerIO() {});
         break;
 
       default:
         // Replayed robot, disable IO implementations
         drive = new Drive(new DriveIO() {});
+        power = new Power(new PowerIO() {});
         break;
     }
 
@@ -81,25 +76,12 @@ public class RobotContainer {
     // Only drive while B button is pressed
     controller
         .b()
+        .and(() -> !power.shutdown())
         .whileTrue(drive.arcade(() -> -controller.getLeftY(), () -> -controller.getLeftX()))
         .onFalse(drive.stop());
 
-    // Longer rumble for low RIO voltage
-    new Trigger(() -> RobotController.getBatteryVoltage() < rioThreshold.get())
-        .whileTrue(
-            Commands.repeatingSequence(
-                Commands.runOnce(
-                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 1.0)),
-                Commands.waitSeconds(0.5),
-                Commands.runOnce(
-                    () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)),
-                Commands.waitSeconds(0.5)))
-        .onFalse(
-            Commands.runOnce(
-                () -> controller.getHID().setRumble(GenericHID.RumbleType.kBothRumble, 0.0)));
-
-    // Double rumble for low PDP voltage
-    new Trigger(() -> powerDistribution.getVoltage() < pdpThreshold.get())
+    // Double rumble for low voltage
+    new Trigger(() -> power.warning())
         .whileTrue(
             Commands.repeatingSequence(
                 Commands.runOnce(
